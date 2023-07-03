@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <img id="avatar" src="img/avatar.png">
+        <h1>Weekly Car Checks</h1>
+        <div class="entry-field">
+            <p>Date: </p>
+            <input id="date-field" type="date">
+        </div>
+        <div class="entry-field">
+            <p>Odometer: </p>
+            <input type="number">
+        </div>
+        <h2>Servicing Jobs</h2>
+        <div class="entry-field">
+            <input type="text">
+            <button id="service-btn">Submit</button>
+        </div>
+        <ul id="jobs-list">
+            <li>Placeholder 1</li>
+            <li>Placeholder 2</li>
+            <li>Placeholder 3</li>
+        </ul>
+        <h2>Weekly Jobs</h2>
+        <ul id="weeklies">
+            <li>Task 1</li>
+            <li>Task 2</li>
+            <li>Task 3</li>
+        </ul>
+        <button id="submit-btn">Submit</button>
+        <ul id="history">
+            <li class="hist-list">
+                    <p>2023-07-03</p>
+                    <p>90000</p>
+                    <p>Jobs Done: 100%</p>
+                    <button>X</button>
+            </li>
+        </ul>
+        <script src="index.js"  type="module"></script>
+    </body>
+</html>
