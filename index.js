@@ -13,9 +13,12 @@ const database = getDatabase(app)
 const weeklyChecksInDB = ref(database, "weeklyCarChecks")
 
 // DOM Elements
-const dateField = document.getElementById("date-field")
-
-console.log(dateField)
+const dateFieldEl = document.getElementById("date-field")
+const odoFieldEl = document.getElementById("odo-field")
+const serviceJobEl = document.getElementById("sj-field")
+const serviceBtnEl = document.getElementById("sj-btn")
+const weeklyJobListEl = document.getElementById("weeklies")
+const weeklyCheckBtnEl = document.getElementById("submit-btn")
 
 // Retrieve snapshot from DB
 onValue(weeklyChecksInDB, function(snapshot) {
@@ -26,7 +29,35 @@ onValue(weeklyChecksInDB, function(snapshot) {
 
 // Event Listeners
 
+serviceBtnEl.addEventListener("click", function() {
+    console.log(`New Job Added: ${serviceJobEl.value}`)
+})
+
+weeklyCheckBtnEl.addEventListener("click", function() {
+    console.log(`Weekly Job Submitted on ${dateFieldEl.value} at ${odoFieldEl.value} miles.`)
+})
+
 // Example Arrays for Testing
 
+const weeklyJobs = [
+    "Tyre Pressure",
+    "Tyre Condition",
+    "Engine Oil Level",
+    "Coolant Level",
+    "Brake Fluid Level",
+    "Screenwash Level",
+    "Power Steering Fluid Level",
+    "Battery Contacts",
+    "Wiper Blade Condition",
+    "Electrical Systems"
+]
+weeklyJobList()
+
 // Functions
+
+function weeklyJobList() {
+    for (let i = 0; i < weeklyJobs.length; i++) {
+        console.log(weeklyJobs[i])
+    }
+}
 
