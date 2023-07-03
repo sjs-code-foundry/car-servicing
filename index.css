@@ -1,0 +1,35 @@
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 450px;
+    user-select: none;
+    text-align: center;
+}
+
+img {
+    width: 150px;
+    margin: 0 auto;
+}
+
+.entry-field {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.hist-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* Editing Borders */
+
+body {
+    border: 1px solid red;
+}
