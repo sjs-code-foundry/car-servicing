@@ -18,6 +18,16 @@ img {
     justify-content: space-between;
 }
 
+.service-job {
+    margin: 10px;
+    border: 1px solid black;
+}
+
+.weekly-job {
+    margin: 10px;
+    border: 1px solid black;
+}
+
 ul {
     list-style-type: none;
 }
