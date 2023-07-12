@@ -20,6 +20,7 @@ const serviceBtnEl = document.getElementById("sj-btn")
 const serviceTasksEl = document.getElementById("jobs-list")
 const weeklyJobListEl = document.getElementById("weeklies")
 const weeklyCheckBtnEl = document.getElementById("submit-btn")
+const historyEl = document.getElementById("history")
 
 // Retrieve snapshot from DB
 // onValue(weeklyChecksInDB, function(snapshot) {
@@ -35,7 +36,7 @@ serviceBtnEl.addEventListener("click", function() {
 })
 
 weeklyCheckBtnEl.addEventListener("click", function() {
-    console.log(`Weekly Job Submitted on ${dateFieldEl.value} at ${odoFieldEl.value} miles.`)
+    recordAdd()
 })
 
 // Example Arrays for Testing - to be refactored for Firebase DB
@@ -61,6 +62,7 @@ const weeklyJobs = [
     "Wiper Blade Condition",
     "Electrical Systems"
 ]
+weeklyJobsStatus = {}
 weeklyJobList()
 
 // Functions
@@ -69,6 +71,7 @@ function serviceJobAdd(job) {
     let newEl = document.createElement("li")
 
     newEl.setAttribute("class", "service-job")
+    newEl.setAttribute("id", `sJ-${job}`)
 
     newEl.textContent = job
 
@@ -84,14 +87,53 @@ function weeklyJobList() {
         let newEl = document.createElement("li")
 
         newEl.setAttribute("class", "weekly-job")
+        newEl.setAttribute("id", `wJ-${weeklyJobs[i]}`)
 
         newEl.textContent = weeklyJobs[i]
 
+        weeklyJobsStatus[`${weeklyJobs[i]}`] = false
+
         newEl.addEventListener("click", function() {
-            console.log(`"${weeklyJobs[i]}" Checked.`)
+            document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "green"
+            document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "white"
+            weeklyJobsStatus[`${weeklyJobs[i]}`] = true
         })
 
         weeklyJobListEl.append(newEl)
     }
+}
+
+function weeklyJobPercent() {
+    console.log(weeklyJobsStatus)
+    let wJTotal = 0
+    for (let key in weeklyJobsStatus) {
+        wJTotal++
+    }
+
+    let wJDone = 0
+    for (let key in weeklyJobsStatus) {
+        if (weeklyJobsStatus.hasOwnProperty(key) && weeklyJobsStatus[key] === true) {
+            wJDone++
+        }
+    }
+
+    let wJP = (wJDone / wJTotal) * 100
+
+    return wJP
+}
+
+function recordAdd() {
+    let newEl = document.createElement("li")
+
+    newEl.setAttribute("class", "hist-list")
+
+    newEl.innerHTML = `
+        <p>${dateFieldEl.value}</p>
+        <p>${odoFieldEl.value}</p>
+        <p>Jobs Done: ${weeklyJobPercent()}%</p>
+        <button>X</button>
+        `
+
+    historyEl.append(newEl)
 }
 
