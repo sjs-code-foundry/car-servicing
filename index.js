@@ -1,16 +1,27 @@
 // Imports
-// import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
-// import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
-
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
+import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 
 // Initialize firebase
-// const appSettings = {
-//     databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/"
-// }
+const emulatorDB = true // Toggle use of local DB emulator
 
-// const app = initializeApp(appSettings)
-// const database = getDatabase(app)
-// const weeklyChecksInDB = ref(database, "weeklyCarChecks")
+if (emulatorDB) {
+    const database = getDatabase()
+    if (location.hostname === "localhost") {
+        connectDatabaseEmulator(database, "127.0.0.1", 9000)
+    }
+} else {
+    const appSettings = {
+        databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/"
+    }
+
+    const app = initializeApp(appSettings)
+    const database = getDatabase(app)
+}
+
+const serviceJobsInDB = ref(database, "weeklyCarChecks/serviceJobs")
+const recordsInDB = ref(database, "weeklyCarChecks/checkRecords")
 
 // DOM Elements
 const dateFieldEl = document.getElementById("date-field")
@@ -23,7 +34,7 @@ const weeklyCheckBtnEl = document.getElementById("submit-btn")
 const historyEl = document.getElementById("history")
 
 // Retrieve snapshot from DB
-// onValue(weeklyChecksInDB, function(snapshot) {
+// onValue(carInfoInDB, function(snapshot) {
 //     if (snapshot.exists()) {
 //         let weeklyArray = Object.entries(snapshot.val())
 //     }
@@ -33,6 +44,10 @@ const historyEl = document.getElementById("history")
 
 serviceBtnEl.addEventListener("click", function() {
     serviceJobAdd(serviceJobEl.value)
+
+    push(serviceJobsInDB, serviceJobEl.value)
+
+    clearFieldEl(serviceJobEl)
 })
 
 weeklyCheckBtnEl.addEventListener("click", function() {
@@ -135,5 +150,13 @@ function recordAdd() {
         `
 
     historyEl.append(newEl)
+}
+
+function clearListEl(list) {
+    list.innerHTML = ""
+}
+
+function clearFieldEl(field) {
+    field.value = ""
 }
 
