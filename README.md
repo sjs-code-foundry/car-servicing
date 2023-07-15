@@ -8,9 +8,12 @@ This is a replacement for my current practice of recording my weekly car checks 
 - v0.1.0 - Initial Release
 ## Planned Features
 ### Entries
-- [ ] Date of check
-- [ ] Odometer reading
-- [ ] Weekly Checklist
+- [x] Date of check
+- [x] Odometer reading
+- [x] Weekly Checklist
 ### Data Readouts
 - [ ] Miles Travelled between checks
-- [ ] Servicing tasks
+- [x] Servicing tasks
+- [ ] Ability to delete weekly check records
+### Formatting
+- [ ] Centralise li items in both lists
