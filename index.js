@@ -3,22 +3,21 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebas
 import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 
-// Initialize firebase
-const emulatorDB = true // Toggle use of local DB emulator
+// Initialize firebase - 1st code block = DB emulator; 2nd code block = online DB
 
-if (emulatorDB) {
-    const database = getDatabase()
-    if (location.hostname === "localhost") {
-        connectDatabaseEmulator(database, "127.0.0.1", 9000)
-    }
-} else {
-    const appSettings = {
-        databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/"
-    }
 
-    const app = initializeApp(appSettings)
-    const database = getDatabase(app)
+const app = initializeApp({ projectId: "playground-62567" })
+const database = getDatabase(app)
+if (location.hostname === "localhost") {
+    connectDatabaseEmulator(database, "127.0.0.1", 9000)
 }
+
+// const appSettings = {
+//     databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/"
+// }
+// const app = initializeApp(appSettings)
+// const database = getDatabase(app)
+
 
 const serviceJobsInDB = ref(database, "weeklyCarChecks/serviceJobs")
 const recordsInDB = ref(database, "weeklyCarChecks/checkRecords")
@@ -34,17 +33,27 @@ const weeklyCheckBtnEl = document.getElementById("submit-btn")
 const historyEl = document.getElementById("history")
 
 // Retrieve snapshot from DB
-// onValue(carInfoInDB, function(snapshot) {
-//     if (snapshot.exists()) {
-//         let weeklyArray = Object.entries(snapshot.val())
-//     }
-// })
+onValue(serviceJobsInDB, function(snapshot) {
+    if (snapshot.exists()) {
+        let serviceArray = Object.entries(snapshot.val())
+    
+        clearFieldEl(serviceJobEl)
+
+        for (let i = 0; i < serviceArray.length; i++) {
+            let currentItem = serviceArray[i]
+            let currentItemID = currentItem[0]
+            let currentItemValue = currentItem[1]
+
+            serviceJobAppend(currentItem)
+        }
+    } else {
+        serviceTasksEl.innerHTML = "All tasks complete!"
+    }
+})
 
 // Event Listeners
 
 serviceBtnEl.addEventListener("click", function() {
-    serviceJobAdd(serviceJobEl.value)
-
     push(serviceJobsInDB, serviceJobEl.value)
 
     clearFieldEl(serviceJobEl)
@@ -55,15 +64,6 @@ weeklyCheckBtnEl.addEventListener("click", function() {
 })
 
 // Example Arrays for Testing - to be refactored for Firebase DB
-
-let serviceJobs = [
-    "Fill Screenwash",
-    "Wash Car",
-    "Hoover Carpets"
-]
-for (let i = 0; i < serviceJobs.length; i++) {
-    serviceJobAdd(serviceJobs[i])
-}
 
 const weeklyJobs = [
     "Tyre Pressure",
@@ -77,21 +77,25 @@ const weeklyJobs = [
     "Wiper Blade Condition",
     "Electrical Systems"
 ]
-weeklyJobsStatus = {}
+let weeklyJobsStatus = {}
 weeklyJobList()
 
 // Functions
 
-function serviceJobAdd(job) {
+function serviceJobAppend(job) {
+    let itemID = job[0]
+    let itemValue = job[1]
+
     let newEl = document.createElement("li")
 
     newEl.setAttribute("class", "service-job")
-    newEl.setAttribute("id", `sJ-${job}`)
 
-    newEl.textContent = job
+    newEl.textContent = itemValue
 
     newEl.addEventListener("click", function() {
-        console.log(`"${job}" Deleted`)
+        let exactLocationInDB = ref(database, `weeklyCarChecks/serviceJobs/${itemID}`)
+
+        remove(exactLocationInDB)
     })
 
     serviceTasksEl.append(newEl)
