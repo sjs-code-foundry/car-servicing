@@ -41,10 +41,29 @@ onValue(serviceJobsInDB, function(snapshot) {
 
         for (let i = 0; i < serviceArray.length; i++) {
             let currentItem = serviceArray[i]
-            let currentItemID = currentItem[0]
-            let currentItemValue = currentItem[1]
 
             serviceJobAppend(currentItem)
+        }
+    } else {
+        serviceTasksEl.innerHTML = "All tasks complete!"
+    }
+})
+
+onValue(recordsInDB, function(snapshot) {
+    if (snapshot.exists()) {
+        let recordArray = Object.entries(snapshot.val())
+    
+        clearFieldEl(historyEl)
+
+        for (let i = 0; i < recordArray.length; i++) {
+            let currentRecord = recordArray[i]
+            let currentRecordID = currentRecord[0]
+            let currentRecordDate = currentRecord[1]
+            let currentRecordMiles = currentRecord[2]
+            let currentRecordWeeklies = currentRecord[3]
+
+
+            recordAdd(currentRecord)
         }
     } else {
         serviceTasksEl.innerHTML = "All tasks complete!"
@@ -60,6 +79,16 @@ serviceBtnEl.addEventListener("click", function() {
 })
 
 weeklyCheckBtnEl.addEventListener("click", function() {
+    let weeklyArray = {
+        date:dateFieldEl.value,
+        miles:odoFieldEl.value,
+        weeklies:weeklyJobsStatus
+    }
+
+    // Clear fields
+
+    push(recordsInDB, weeklyArray)
+    
     recordAdd()
 })
 
@@ -122,16 +151,16 @@ function weeklyJobList() {
     }
 }
 
-function weeklyJobPercent() {
-    console.log(weeklyJobsStatus)
+function weeklyJobPercent(weeklies) {
+    console.log(weeklies)
     let wJTotal = 0
-    for (let key in weeklyJobsStatus) {
+    for (let key in weeklies) {
         wJTotal++
     }
 
     let wJDone = 0
-    for (let key in weeklyJobsStatus) {
-        if (weeklyJobsStatus.hasOwnProperty(key) && weeklyJobsStatus[key] === true) {
+    for (let key in weeklies) {
+        if (weeklies.hasOwnProperty(key) && weeklies[key] === true) {
             wJDone++
         }
     }
@@ -141,17 +170,24 @@ function weeklyJobPercent() {
     return wJP
 }
 
-function recordAdd() {
+function recordAdd(record) {
+    let recordID = record[0]
+    let recordDate = record[1].date
+    let recordMiles = record[1].miles
+    let recordWeeklies = record[1].weeklies
+
     let newEl = document.createElement("li")
 
     newEl.setAttribute("class", "hist-list")
 
     newEl.innerHTML = `
-        <p>${dateFieldEl.value}</p>
-        <p>${odoFieldEl.value}</p>
-        <p>Jobs Done: ${weeklyJobPercent()}%</p>
-        <button>X</button>
+        <p>${recordDate}</p>
+        <p>${recordMiles}</p>
+        <p>Jobs Done: ${weeklyJobPercent(recordWeeklies)}%</p>
+        <button id="${recordID}-del">X</button>
         `
+
+    // Add event listener for button to delete record using clearRecord() function.
 
     historyEl.append(newEl)
 }
@@ -162,5 +198,12 @@ function clearListEl(list) {
 
 function clearFieldEl(field) {
     field.value = ""
+}
+
+function clearRecord() {
+    console.log("Record Cleared.")
+    //let exactLocationInDB = ref(database, `weeklyCarChecks/checkRecords/${ID}`)
+
+    //remove(exactLocationInDB)
 }
 
