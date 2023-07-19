@@ -37,7 +37,7 @@ onValue(serviceJobsInDB, function(snapshot) {
     if (snapshot.exists()) {
         let serviceArray = Object.entries(snapshot.val())
     
-        clearFieldEl(serviceJobEl)
+        clearListEl(serviceJobEl)
 
         for (let i = 0; i < serviceArray.length; i++) {
             let currentItem = serviceArray[i]
@@ -53,22 +53,18 @@ onValue(recordsInDB, function(snapshot) {
     if (snapshot.exists()) {
         let recordArray = Object.entries(snapshot.val())
     
-        clearFieldEl(historyEl)
+        clearListEl(historyEl)
 
         for (let i = 0; i < recordArray.length; i++) {
             let currentRecord = recordArray[i]
-            let currentRecordID = currentRecord[0]
-            let currentRecordDate = currentRecord[1]
-            let currentRecordMiles = currentRecord[2]
-            let currentRecordWeeklies = currentRecord[3]
-
 
             recordAdd(currentRecord)
         }
     } else {
-        serviceTasksEl.innerHTML = "All tasks complete!"
+        serviceTasksEl.innerHTML = "No Records!"
     }
 })
+
 
 // Event Listeners
 
@@ -85,11 +81,24 @@ weeklyCheckBtnEl.addEventListener("click", function() {
         weeklies:weeklyJobsStatus
     }
 
-    // Clear fields
+    clearFieldEl(dateFieldEl)
+    clearFieldEl(odoFieldEl)
 
     push(recordsInDB, weeklyArray)
     
     recordAdd()
+})
+
+historyEl.addEventListener("click", (event) => {
+    const isButton = event.target.nodeName === "BUTTON"
+    if (!isButton) {
+        return
+    }
+    
+    let recordToClear = `${event.target.id}`
+    recordToClear = recordToClear.substring(4)
+    console.log(recordToClear)
+    clearRecord(recordToClear)
 })
 
 // Example Arrays for Testing - to be refactored for Firebase DB
@@ -152,7 +161,6 @@ function weeklyJobList() {
 }
 
 function weeklyJobPercent(weeklies) {
-    console.log(weeklies)
     let wJTotal = 0
     for (let key in weeklies) {
         wJTotal++
@@ -184,10 +192,9 @@ function recordAdd(record) {
         <p>${recordDate}</p>
         <p>${recordMiles}</p>
         <p>Jobs Done: ${weeklyJobPercent(recordWeeklies)}%</p>
-        <button id="${recordID}-del">X</button>
-        `
+        <button id="del-${recordID}">X</button>`
 
-    // Add event listener for button to delete record using clearRecord() function.
+    console.log(newEl.innerHTML)
 
     historyEl.append(newEl)
 }
@@ -200,10 +207,9 @@ function clearFieldEl(field) {
     field.value = ""
 }
 
-function clearRecord() {
-    console.log("Record Cleared.")
-    //let exactLocationInDB = ref(database, `weeklyCarChecks/checkRecords/${ID}`)
+function clearRecord(rec) {
+    let exactLocationInDB = ref(database, `weeklyCarChecks/checkRecords/${rec}`)
 
-    //remove(exactLocationInDB)
+    remove(exactLocationInDB)
 }
 
