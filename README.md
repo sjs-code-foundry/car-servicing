@@ -14,6 +14,6 @@ This is a replacement for my current practice of recording my weekly car checks 
 ### Data Readouts
 - [ ] Miles Travelled between checks
 - [x] Servicing tasks
-- [ ] Ability to delete weekly check records
+- [x] Ability to delete weekly check records
 ### Formatting
 - [ ] Centralise li items in both lists
