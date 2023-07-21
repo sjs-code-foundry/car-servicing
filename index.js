@@ -37,7 +37,7 @@ onValue(serviceJobsInDB, function(snapshot) {
     if (snapshot.exists()) {
         let serviceArray = Object.entries(snapshot.val())
     
-        clearListEl(serviceJobEl)
+        clearListEl(serviceTasksEl)
 
         for (let i = 0; i < serviceArray.length; i++) {
             let currentItem = serviceArray[i]
@@ -60,8 +60,10 @@ onValue(recordsInDB, function(snapshot) {
 
             recordAdd(currentRecord)
         }
+
+        sortList(historyEl)
     } else {
-        serviceTasksEl.innerHTML = "No Records!"
+        historyEl.innerHTML = "No Records!"
     }
 })
 
@@ -75,9 +77,11 @@ serviceBtnEl.addEventListener("click", function() {
 })
 
 weeklyCheckBtnEl.addEventListener("click", function() {
+    console.log(weeklyJobsStatus)
+
     let weeklyArray = {
-        date:dateFieldEl.value,
-        miles:odoFieldEl.value,
+        date:fieldPlaceholder(dateFieldEl, "0000-00-00"),
+        miles:fieldPlaceholder(odoFieldEl, "00000"),
         weeklies:weeklyJobsStatus
     }
 
@@ -97,11 +101,10 @@ historyEl.addEventListener("click", (event) => {
     
     let recordToClear = `${event.target.id}`
     recordToClear = recordToClear.substring(4)
-    console.log(recordToClear)
     clearRecord(recordToClear)
 })
 
-// Example Arrays for Testing - to be refactored for Firebase DB
+// Weekly Jobs List
 
 const weeklyJobs = [
     "Tyre Pressure",
@@ -147,13 +150,19 @@ function weeklyJobList() {
         newEl.setAttribute("id", `wJ-${weeklyJobs[i]}`)
 
         newEl.textContent = weeklyJobs[i]
-
+        
         weeklyJobsStatus[`${weeklyJobs[i]}`] = false
 
         newEl.addEventListener("click", function() {
-            document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "green"
-            document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "white"
-            weeklyJobsStatus[`${weeklyJobs[i]}`] = true
+            if (weeklyJobsStatus[`${weeklyJobs[i]}`] === false) {
+                document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "green"
+                document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "white"
+                weeklyJobsStatus[`${weeklyJobs[i]}`] = true
+            } else if (weeklyJobsStatus[`${weeklyJobs[i]}`] === true) {
+                document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "white"
+                document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "black"
+                weeklyJobsStatus[`${weeklyJobs[i]}`] = false
+            }
         })
 
         weeklyJobListEl.append(newEl)
@@ -194,10 +203,42 @@ function recordAdd(record) {
         <p>Jobs Done: ${weeklyJobPercent(recordWeeklies)}%</p>
         <button id="del-${recordID}">X</button>`
 
-    console.log(newEl.innerHTML)
-
     historyEl.append(newEl)
 }
+
+function fieldPlaceholder(field, placeholder) {
+    if (field.value != "") {
+        return field.value
+    } else {
+        return placeholder
+    }
+}
+
+function sortList(listEl) { // Add option to alter sorting order, and allow for sorting strings.
+    let shouldSwitch, i, listItems
+    let switching = true
+    
+
+    while (switching) {
+        switching = false
+        listItems = listEl.getElementsByTagName("LI")
+
+        for (i = 0; i < (listItems.length - 1); i++) {
+            shouldSwitch = false
+
+            if (listItems[i].innerHTML > listItems[i+1].innerHTML) {
+                shouldSwitch = true
+                break
+            }
+        }
+
+        if (shouldSwitch) {
+            listItems[i].parentNode.insertBefore(listItems[i+1], listItems[i])
+            switching = true
+        }
+    }
+}
+// https://www.w3schools.com/howto/howto_js_sort_list.asp
 
 function clearListEl(list) {
     list.innerHTML = ""
