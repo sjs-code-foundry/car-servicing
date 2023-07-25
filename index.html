@@ -23,20 +23,31 @@
         <h2>Servicing Jobs</h2>
         <div class="entry-field">
             <input id="sj-field" type="text">
-            <button id="sj-btn">Submit</button>
+            <button id="sj-btn">Submit Service Job</button>
         </div>
         <ul id="jobs-list">
         </ul>
         <h2>Weekly Jobs</h2>
         <ul id="weeklies">
         </ul>
-        <button id="submit-btn">Submit</button>
+        <button id="submit-btn">Submit Weekly Check</button>
+        <hr>
+        <h2>Weekly Check History</h2>
+        <div id="hist-headers">
+            <h4>Date</h4>
+            <h4>Odo Miles</h4>
+            <h4>Weekly Jobs</h4>
+            <h4>Delete?</h4>
+        </div>
         <ul id="history">
             <li class="hist-list">
             </li>
         </ul>
+        <hr>
         <script src="index.js" type="module"></script>
-        <!-- CORS is blocked - FIX!!! -->
-        
     </body>
+    <footer>
+        <p>sjs-code-foundry</p>
+        <p>v0.1.0</p>
+    </footer>
 </html>

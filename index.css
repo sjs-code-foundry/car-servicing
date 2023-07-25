@@ -12,34 +12,70 @@ img {
     margin: 0 auto;
 }
 
+hr {
+    width: 450px;
+    border-color: black;
+}
+
 .entry-field {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
+#sj-field {
+    padding: 10px 0;
+}
+
+#sj-btn {
+    padding: 10px 10px;
+}
+
 .service-job {
     margin: 10px;
     border: 1px solid black;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px 0;
 }
 
 .weekly-job {
     margin: 10px;
     border: 1px solid black;
+    padding: 10px 0;
 }
 
 ul {
     list-style-type: none;
+    padding: 0;
+}
+
+#submit-btn {
+    padding: 10px 0;
+}
+
+#hist-headers {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+    text-align: center;
 }
 
 .hist-list {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding: 5px;
+}
+
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 /* Editing Borders */
 
-body {
+/* body {
     border: 1px solid red;
-}
+} */

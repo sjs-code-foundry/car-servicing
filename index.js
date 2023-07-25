@@ -6,17 +6,17 @@ import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/9.15
 // Initialize firebase - 1st code block = DB emulator; 2nd code block = online DB
 
 
-const app = initializeApp({ projectId: "playground-62567" })
-const database = getDatabase(app)
-if (location.hostname === "localhost") {
-    connectDatabaseEmulator(database, "127.0.0.1", 9000)
-}
-
-// const appSettings = {
-//     databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/"
-// }
-// const app = initializeApp(appSettings)
+// const app = initializeApp({ projectId: "playground-62567" })
 // const database = getDatabase(app)
+// if (location.hostname === "localhost") {
+//     connectDatabaseEmulator(database, "127.0.0.1", 9000)
+// }
+
+const appSettings = {
+    databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/"
+}
+const app = initializeApp(appSettings)
+const database = getDatabase(app)
 
 
 const serviceJobsInDB = ref(database, "weeklyCarChecks/serviceJobs")
@@ -44,6 +44,9 @@ onValue(serviceJobsInDB, function(snapshot) {
 
             serviceJobAppend(currentItem)
         }
+
+        sortList(serviceTasksEl, false)
+
     } else {
         serviceTasksEl.innerHTML = "All tasks complete!"
     }
@@ -61,7 +64,8 @@ onValue(recordsInDB, function(snapshot) {
             recordAdd(currentRecord)
         }
 
-        sortList(historyEl)
+        sortList(historyEl, true)
+
     } else {
         historyEl.innerHTML = "No Records!"
     }
@@ -214,7 +218,7 @@ function fieldPlaceholder(field, placeholder) {
     }
 }
 
-function sortList(listEl) { // Add option to alter sorting order, and allow for sorting strings.
+function sortList(listEl, descOrd) {
     let shouldSwitch, i, listItems
     let switching = true
     
@@ -226,7 +230,14 @@ function sortList(listEl) { // Add option to alter sorting order, and allow for 
         for (i = 0; i < (listItems.length - 1); i++) {
             shouldSwitch = false
 
-            if (listItems[i].innerHTML > listItems[i+1].innerHTML) {
+            let switchCond
+            if (descOrd === true) {
+                switchCond = (listItems[i].innerHTML < listItems[i+1].innerHTML)
+            } else {
+                switchCond = (listItems[i].innerHTML > listItems[i+1].innerHTML)
+            }
+
+            if (switchCond) {
                 shouldSwitch = true
                 break
             }
@@ -238,7 +249,6 @@ function sortList(listEl) { // Add option to alter sorting order, and allow for 
         }
     }
 }
-// https://www.w3schools.com/howto/howto_js_sort_list.asp
 
 function clearListEl(list) {
     list.innerHTML = ""
