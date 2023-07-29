@@ -1,20 +1,46 @@
-body {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
+/* General Layout */
+
+body, hr {
     width: 450px;
+}
+
+body, img {
+    margin: 0 auto;
+}
+
+body, footer {
+    display: flex;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+    flex-direction: column;
     user-select: none;
     text-align: center;
 }
 
 img {
     width: 150px;
-    margin: 0 auto;
 }
 
 hr {
-    width: 450px;
     border-color: black;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+footer {
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+/* Fields */
+
+.entry-field, #sj-field {
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .entry-field {
@@ -27,51 +53,41 @@ hr {
     padding: 10px 0;
 }
 
+/* Buttons */
+
+#sj-btn, #submit-btn {
+    font-family: 'Ubuntu', sans-serif;
+}
+
 #sj-btn {
     padding: 10px 10px;
-}
-
-.service-job {
-    margin: 10px;
-    border: 1px solid black;
-    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
-    padding: 10px 0;
-}
-
-.weekly-job {
-    margin: 10px;
-    border: 1px solid black;
-    padding: 10px 0;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
 }
 
 #submit-btn {
     padding: 10px 0;
 }
 
+/* Record Lists */
+
+.service-job, .weekly-job {
+    margin: 10px;
+    border: 1px solid black;
+    padding: 10px 0;
+}
+
+#hist-headers, .hist-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.service-job {
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+}
+
 #hist-headers {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 5px;
     text-align: center;
-}
-
-.hist-list {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 5px;
-}
-
-footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
 }
 
 /* Editing Borders */

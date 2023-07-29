@@ -9,5 +9,15 @@ v0.1.0
 ## Changelog
 - v0.1.0 - Initial Release
 ## Planned Features
+### Usability
+- [ ] Auto set width for device being used
+- [ ] Add prompts for deletion of jobs
 ### Data Readouts
 - [ ] Miles Travelled between checks
+### Presentation
+- [x] Get white background for logos
+- [ ] Space out items better for phone use
+### Code Readability
+- [x] Add sections to CSS code for better readability (Text Properties, sections, links, etc.)
+- [x] Refactor CSS using comma-separated selectors for better concision (more DRY code)
+- [x] Compound Selectors to reduce number of classes
