@@ -17,7 +17,8 @@ v0.1.0
 ### Presentation
 - [x] Get white background for logos
 - [ ] Space out items better for phone use
+- [ ] Reduce text size of Weekly Check Values
 ### Code Readability
 - [x] Add sections to CSS code for better readability (Text Properties, sections, links, etc.)
 - [x] Refactor CSS using comma-separated selectors for better concision (more DRY code)
-- [x] Compound Selectors to reduce number of classes
+- [ ] Compound Selectors to reduce number of classes
