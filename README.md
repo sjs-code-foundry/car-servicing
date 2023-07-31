@@ -5,7 +5,7 @@ This is a replacement for my current practice of recording my weekly car checks 
 ## Current Version
 v0.1.0
 ## Dependencies
-- Firebase
+- Firebase 9.15.0
 ## Changelog
 - v0.1.0 - Initial Release
 ## Planned Features

@@ -77,6 +77,8 @@ onValue(recordsInDB, function(snapshot) {
 serviceBtnEl.addEventListener("click", function() {
     push(serviceJobsInDB, serviceJobEl.value)
 
+    alert(`${serviceJobEl.value} added!`)
+
     clearFieldEl(serviceJobEl)
 })
 
@@ -95,6 +97,8 @@ weeklyCheckBtnEl.addEventListener("click", function() {
     push(recordsInDB, weeklyArray)
     
     recordAdd()
+
+    alert(`Weekly Check for ${weeklyArray.date} added!`)
 })
 
 historyEl.addEventListener("click", (event) => {
