@@ -260,6 +260,8 @@ function clearFieldEl(field) {
 function clearRecord(list, rec) {
     let exactLocationInDB = ref(database, `weeklyCarChecks/${list}/${rec}`)
 
+    console.log(exactLocationInDB.orderByKey().once('value' (data)))
+
     remove(exactLocationInDB)
 }
 
