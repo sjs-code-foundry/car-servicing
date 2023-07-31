@@ -24,7 +24,6 @@ const recordsInDB = ref(database, "weeklyCarChecks/checkRecords")
 
 let siteWidth = window.innerWidth
 let scale = screen.width / siteWidth
-console.log(`Site Width: ${siteWidth}, Screen Width: ${screen.width}, Scale: ${scale}`)
 
 document.querySelector('meta[name="viewport"]').setAttribute('content', `width=${siteWidth}, initial-scale=${scale}`)
 

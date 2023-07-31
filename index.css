@@ -17,6 +17,7 @@ body {
     flex-direction: column;
     user-select: none;
     text-align: center;
+    padding: 25px;
 }
 
 img {
