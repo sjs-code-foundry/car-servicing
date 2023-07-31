@@ -83,7 +83,6 @@ serviceBtnEl.addEventListener("click", function() {
 })
 
 weeklyCheckBtnEl.addEventListener("click", function() {
-    console.log(weeklyJobsStatus)
 
     let weeklyArray = {
         date:fieldPlaceholder(dateFieldEl, "0000-00-00"),
@@ -91,14 +90,12 @@ weeklyCheckBtnEl.addEventListener("click", function() {
         weeklies:weeklyJobsStatus
     }
 
+    push(recordsInDB, weeklyArray)
+
+    alert(`Weekly Check for ${weeklyArray.date} added!`)
+
     clearFieldEl(dateFieldEl)
     clearFieldEl(odoFieldEl)
-
-    push(recordsInDB, weeklyArray)
-    
-    recordAdd()
-
-    alert(`Weekly Check for [placeholder] added!`)
 })
 
 historyEl.addEventListener("click", (event) => {
