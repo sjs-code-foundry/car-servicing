@@ -106,7 +106,7 @@ historyEl.addEventListener("click", (event) => {
     
     let recordToClear = `${event.target.id}`
     recordToClear = recordToClear.substring(4)
-    clearRecord('checkRecords', recordToClear)
+    clearRecord('checkRecords', true, recordToClear)
 })
 
 // Weekly Jobs List
@@ -139,7 +139,7 @@ function serviceJobAppend(job) {
     newEl.textContent = itemValue
 
     newEl.addEventListener("click", function() {
-        clearRecord('serviceJobs', itemID)
+        clearRecord('serviceJobs', false, itemID)
     })
 
     serviceTasksEl.append(newEl)
@@ -257,11 +257,19 @@ function clearFieldEl(field) {
     field.value = ""
 }
 
-function clearRecord(list, rec) {
+function clearRecord(list, askDel, rec) {
     let exactLocationInDB = ref(database, `weeklyCarChecks/${list}/${rec}`)
+    let delAns
 
-    console.log(exactLocationInDB.once('value' (data)))
+    if (askDel) {
+        delAns = confirm("Delete this record?")
+    } else {
+        delAns = true
+    }
 
-    remove(exactLocationInDB)
+    if (delAns) {
+        remove(exactLocationInDB)
+    }
+    // console.log(exactLocationInDB.once('value' (data))) // Fetch data value from DB
 }
 
