@@ -98,7 +98,7 @@ weeklyCheckBtnEl.addEventListener("click", function() {
     
     recordAdd()
 
-    alert(`Weekly Check for ${weeklyArray.date} added!`)
+    alert(`Weekly Check for [placeholder] added!`)
 })
 
 historyEl.addEventListener("click", (event) => {
