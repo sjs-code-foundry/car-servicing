@@ -103,7 +103,7 @@ weeklyCheckBtnEl.addEventListener("click", function() {
     clearFieldEl(odoFieldEl)
 })
 
-historyEl.addEventListener("click", (event) => {
+historyEl.addEventListener("dblclick", (event) => {
     const isButton = event.target.nodeName === "BUTTON"
     if (!isButton) {
         return
