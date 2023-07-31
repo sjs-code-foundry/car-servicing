@@ -22,7 +22,7 @@ const recordsInDB = ref(database, "weeklyCarChecks/checkRecords")
 
 // Cross-platform scaling
 
-let siteWidth = 450 // Alter in accordance with CSS values
+let siteWidth = window.innerWidth
 let scale = screen.width / siteWidth
 console.log(`Site Width: ${siteWidth}, Screen Width: ${screen.width}, Scale: ${scale}`)
 
