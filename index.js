@@ -5,7 +5,6 @@ import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/9.15
 
 // Initialize firebase - 1st code block = DB emulator; 2nd code block = online DB
 
-
 // const app = initializeApp({ projectId: "playground-62567" })
 // const database = getDatabase(app)
 // if (location.hostname === "localhost") {
@@ -18,9 +17,15 @@ const appSettings = {
 const app = initializeApp(appSettings)
 const database = getDatabase(app)
 
-
 const serviceJobsInDB = ref(database, "weeklyCarChecks/serviceJobs")
 const recordsInDB = ref(database, "weeklyCarChecks/checkRecords")
+
+// Cross-platform scaling
+
+let siteWidth = 450 // Alter in accordance with CSS values
+let scale = screen.width / siteWidth
+
+document.querySelector('meta[name="viewport"]').setAttribute('content', `width="${siteWidth}", initial-scale="${scale}"`)
 
 // DOM Elements
 const dateFieldEl = document.getElementById("date-field")

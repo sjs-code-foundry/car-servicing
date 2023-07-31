@@ -11,7 +11,7 @@ v0.1.0
 ## Planned Features
 ### Usability
 - [ ] Auto set width for device being used
-- [ ] Add prompts for deletion of jobs
+- [x] Add prompts for deletion of records
 ### Data Readouts
 - [ ] Miles Travelled between checks
 ### Presentation
@@ -21,4 +21,4 @@ v0.1.0
 ### Code Readability
 - [x] Add sections to CSS code for better readability (Text Properties, sections, links, etc.)
 - [x] Refactor CSS using comma-separated selectors for better concision (more DRY code)
-- [ ] Compound Selectors to reduce number of classes
+- [x] Compound Selectors to reduce number of classes
