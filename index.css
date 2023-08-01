@@ -18,6 +18,8 @@ body {
     user-select: none;
     text-align: center;
     padding: 25px;
+
+    font-size: 150%;
 }
 
 img {
