@@ -53,6 +53,11 @@ footer {
     justify-content: space-between;
 }
 
+input {
+    width: 200px;
+    font-size: 100%;
+}
+
 .date-field, .odo-field {
     font-size: 100%;
 }
@@ -97,6 +102,10 @@ footer {
 
 #hist-headers {
     text-align: center;
+}
+
+.hist-list {
+    font-size: 100%;
 }
 
 /* Editing Borders */
