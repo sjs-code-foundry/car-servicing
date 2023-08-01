@@ -84,7 +84,7 @@ input {
 /* Record Lists */
 
 .service-job, .weekly-job {
-    margin: 10px;
+    margin: 30px;
     border: 1px solid black;
     padding: 10px 0;
 }
