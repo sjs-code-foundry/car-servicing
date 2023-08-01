@@ -1,7 +1,7 @@
 /* General Layout */
 
 body, hr {
-    width: 450px;
+    width: 640px;
 }
 
 body, img {
@@ -23,7 +23,7 @@ body {
 }
 
 img {
-    width: 150px;
+    width: 160px;
 }
 
 hr {
@@ -44,12 +44,17 @@ footer {
 
 .entry-field, #sj-field {
     font-family: 'Ubuntu', sans-serif;
+    font-size: 100%;
 }
 
 .entry-field {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.date-field, .odo-field {
+    font-size: 100%;
 }
 
 #sj-field {
@@ -60,6 +65,7 @@ footer {
 
 #sj-btn, #submit-btn {
     font-family: 'Ubuntu', sans-serif;
+    font-size: 100%;
 }
 
 #sj-btn {
