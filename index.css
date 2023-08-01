@@ -63,6 +63,7 @@ input {
 }
 
 #sj-field {
+    width: 400px;
     padding: 10px 0;
 }
 
@@ -74,11 +75,11 @@ input {
 }
 
 #sj-btn {
-    padding: 10px 10px;
+    padding: 30px 10px;
 }
 
 #submit-btn {
-    padding: 10px 0;
+    padding: 30px 0;
 }
 
 /* Record Lists */
