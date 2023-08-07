@@ -263,10 +263,12 @@ function clearFieldEl(field) {
 }
 
 function clearRecord(list, askDel, rec) {
+    let listInDB = ref(database, `weeklyCarChecks/${list}`)
     let exactLocationInDB = ref(database, `weeklyCarChecks/${list}/${rec}`)
     let delAns
 
-    console.log(query(exactLocationInDB, orderByKey(rec)))
+    let delVal = query(listInDB, orderByKey(rec))
+    console.log(delVal)
 
     if (askDel) {
         delAns = confirm("Delete this record?")
