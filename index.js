@@ -266,6 +266,10 @@ function clearRecord(list, askDel, rec) {
     let exactLocationInDB = ref(database, `weeklyCarChecks/${list}/${rec}`)
     let delAns
 
+    exactLocationInDB.once('value', (data) => {
+        console.log(data)
+    })
+
     if (askDel) {
         delAns = confirm("Delete this record?")
     } else {
@@ -275,9 +279,5 @@ function clearRecord(list, askDel, rec) {
     if (delAns) {
         remove(exactLocationInDB)
     }
-
-    exactLocationInDB.once('value', (data) => {
-        console.log(data)
-    })
 }
 
