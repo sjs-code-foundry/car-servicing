@@ -1,6 +1,6 @@
 // Imports
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
-import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import { getDatabase, ref, push, onValue, remove, query } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 
 // Initialize firebase - 1st code block = DB emulator; 2nd code block = online DB
