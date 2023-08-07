@@ -263,12 +263,28 @@ function clearFieldEl(field) {
 }
 
 function clearRecord(list, askDel, rec) {
+    let listInDB = ref(database, `weeklyCarChecks/${list}`)
     let exactLocationInDB = ref(database, `weeklyCarChecks/${list}/${rec}`)
     let delAns
 
-    exactLocationInDB.once('value', (data) => {
-        console.log(data)
+    listInDB.orderByChild(rec).limitToLast(1).once("value").then((querySnapshot) => {
+        if (!querySnapshot.numChildren()) {
+            throw new Error("At least one result expected.  None Found.")
+        }
+
+        let dataSnapshot
+        querySnapshot.forEach((snap) => dataSnapshot = snap)
+
+        if (!dataSnapshot.exists()) {
+            throw new Error(`Entry ${rec} not found.`)
+        }
+
+        console.log(`Entry ${rec} data: ${dataSnapshot.val()}`)
     })
+
+    // listInDB.once('value', (data) => {
+    //     console.log(data)
+    // })
 
     if (askDel) {
         delAns = confirm("Delete this record?")
