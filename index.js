@@ -275,6 +275,9 @@ function clearRecord(list, askDel, rec) {
     if (delAns) {
         remove(exactLocationInDB)
     }
-    // console.log(exactLocationInDB.once('value' (data))) // Fetch data value from DB
+
+    exactLocationInDB.once('value', (data) => {
+        console.log(data)
+    })
 }
 

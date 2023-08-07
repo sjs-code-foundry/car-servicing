@@ -7,7 +7,13 @@ v0.1.0
 ## Dependencies
 - Firebase 9.15.0
 ## Changelog
-- v0.1.0 - Initial Release
+### v0.1.0
+- Initial Release
+### v0.1.1
+- Auto set viewport width for device being used
+- Prompts for deletion of records
+- White background for logos
+- Items spaced out for better UI
 ## Planned Features
 ### Usability
 - [x] Auto set width for device being used
@@ -16,8 +22,9 @@ v0.1.0
 - [ ] Miles Travelled between checks
 ### Presentation
 - [x] Get white background for logos
-- [ ] Space out items better for phone use
+- [x] Space out items better for phone use
 - [ ] Reduce text size of Weekly Check Values
+- [ ] Use vars in CSS for color scheme (v0.1.2)
 ### Code Readability
 - [x] Add sections to CSS code for better readability (Text Properties, sections, links, etc.)
 - [x] Refactor CSS using comma-separated selectors for better concision (more DRY code)
