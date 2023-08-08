@@ -268,7 +268,7 @@ function clearRecord(list, askDel, rec) {
     let delAns
 
     let delVal = query(listInDB, orderByKey(rec))
-    console.log(delVal.value) // Returns object data, not actual value
+    console.log(delVal[1]) // Returns object data, not actual value
 
     if (askDel) {
         delAns = confirm("Delete this record?")
