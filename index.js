@@ -192,7 +192,9 @@ function weeklyJobList() {
 // Breaks the .style.element parts of the function
 
 function weeklyJobBtnReset() {
-    console.log(`Weekly Jobs List = ${weeklyJobsStatus}`)
+    for (let i = 0; i < weeklyJobsStatus.length; i++) {
+        console.log(`Weekly Jobs List #${i} = ${weeklyJobsStatus}`)
+    }
     for (let i = 0; i < weeklyJobsStatus.length; i++) {
         console.log(`i = ${i}`)
         console.log(`weeklyJobs[i] = ${weeklyJobs[i]}`)
