@@ -162,25 +162,27 @@ function weeklyJobList() {
         
         weeklyJobsStatus[`${weeklyJobs[i]}`] = false
 
-        newEl.addEventListener("click", function() {
-            if (weeklyJobsStatus[`${weeklyJobs[i]}`] === false) {
-                document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "green"
-                document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "white"
-                weeklyJobsStatus[`${weeklyJobs[i]}`] = true
-            } else if (weeklyJobsStatus[`${weeklyJobs[i]}`] === true) {
-                document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "white"
-                document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "black"
-                weeklyJobsStatus[`${weeklyJobs[i]}`] = false
-            }
-        })
+        newEl.addEventListener("click", weeklyJobBtnSwitch())
 
         weeklyJobListEl.append(newEl)
     }
 }
 
+function weeklyJobBtnSwitch() {
+    if (weeklyJobsStatus[`${weeklyJobs[i]}`] === false) {
+        document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "green"
+        document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "white"
+        weeklyJobsStatus[`${weeklyJobs[i]}`] = true
+    } else if (weeklyJobsStatus[`${weeklyJobs[i]}`] === true) {
+        document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "white"
+        document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "black"
+        weeklyJobsStatus[`${weeklyJobs[i]}`] = false
+    }
+}
+
 function weeklyJobBtnReset() {
     console.log(`Weekly Jobs List = ${weeklyJobsStatus}`)
-    for (let i=0; i < weeklyJobsStatus.length; i++) {
+    for (let i = 0; i < weeklyJobsStatus.length; i++) {
         document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "white"
         document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "black"
         weeklyJobsStatus[`${weeklyJobs[i]}`] = false
