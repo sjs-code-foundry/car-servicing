@@ -162,27 +162,40 @@ function weeklyJobList() {
         
         weeklyJobsStatus[`${weeklyJobs[i]}`] = false
 
-        newEl.addEventListener("click", weeklyJobBtnSwitch(weeklyJobs[i]))
+        newEl.addEventListener("click", function() {
+            if (weeklyJobsStatus[`${weeklyJobs[i]}`] === false) {
+                document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "green"
+                document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "white"
+                weeklyJobsStatus[`${weeklyJobs[i]}`] = true
+            } else if (weeklyJobsStatus[`${weeklyJobs[i]}`] === true) {
+                document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "white"
+                document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "black"
+                weeklyJobsStatus[`${weeklyJobs[i]}`] = false
+            }
+        })
 
         weeklyJobListEl.append(newEl)
     }
 }
 
-function weeklyJobBtnSwitch(jobID) {
-    if (weeklyJobsStatus[`${jobID}`] === false) {
-        document.getElementById(`wJ-${jobID}`).style.backgroundColor = "green"
-        document.getElementById(`wJ-${jobID}`).style.color = "white"
-        weeklyJobsStatus[`${jobID}`] = true
-    } else if (weeklyJobsStatus[`${jobID}`] === true) {
-        document.getElementById(`wJ-${jobID}`).style.backgroundColor = "white"
-        document.getElementById(`wJ-${jobID}`).style.color = "black"
-        weeklyJobsStatus[`${jobID}`] = false
-    }
-}
+// function weeklyJobBtnSwitch(jobID) {
+//     if (weeklyJobsStatus[`${jobID}`] === false) {
+//         document.getElementById(`wJ-${jobID}`).style.backgroundColor = "green"
+//         document.getElementById(`wJ-${jobID}`).style.color = "white"
+//         weeklyJobsStatus[`${jobID}`] = true
+//     } else if (weeklyJobsStatus[`${jobID}`] === true) {
+//         document.getElementById(`wJ-${jobID}`).style.backgroundColor = "white"
+//         document.getElementById(`wJ-${jobID}`).style.color = "black"
+//         weeklyJobsStatus[`${jobID}`] = false
+//     }
+// }
+// Breaks the .style.element parts of the function
 
 function weeklyJobBtnReset() {
     console.log(`Weekly Jobs List = ${weeklyJobsStatus}`)
     for (let i = 0; i < weeklyJobsStatus.length; i++) {
+        console.log(`i = ${i}`)
+        console.log(`weeklyJobs[i] = ${weeklyJobs[i]}`)
         document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "white"
         document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "black"
         weeklyJobsStatus[`${weeklyJobs[i]}`] = false
