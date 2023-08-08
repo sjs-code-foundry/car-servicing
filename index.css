@@ -94,6 +94,7 @@ input {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    text-align: center;
     padding: 5px;
 }
 
@@ -101,12 +102,12 @@ input {
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
 }
 
-#hist-headers {
-    text-align: center;
-}
+/* #hist-headers {
+    
+} */
 
 .hist-list {
-    font-size: 100%;
+    font-size: 90%;
 }
 
 /* Editing Borders */

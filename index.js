@@ -1,6 +1,6 @@
 // Imports
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
-import { getDatabase, ref, push, onValue, remove, query, orderByKey } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import { getDatabase, ref, push, onValue, remove, query, orderByKey, get } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 
 // Initialize firebase - 1st code block = DB emulator; 2nd code block = online DB
@@ -268,7 +268,10 @@ function clearRecord(list, askDel, rec) {
     let delAns
 
     let delVal = query(listInDB, orderByKey(rec))
-    console.log(delVal[1]) // Returns object data, not actual value
+    get(delVal).then((snapshot) => {
+        console.log(snapshot.val)
+    })
+    console.log(delVal) // Returns object data, not actual value
 
     if (askDel) {
         delAns = confirm("Delete this record?")
