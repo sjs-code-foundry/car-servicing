@@ -14,18 +14,13 @@ v0.1.0
 - Prompts for deletion of records
 - White background for logos
 - Items spaced out for better UI
+- Reduced Text Size of Weekly Check Records
+### v0.1.2
+- 
 ## Planned Features
 ### Usability
-- [x] Auto set width for device being used
-- [x] Add prompts for deletion of records
+- [ ] Auto-reset weekly check buttons
 ### Data Readouts
 - [ ] Miles Travelled between checks
 ### Presentation
-- [x] Get white background for logos
-- [x] Space out items better for phone use
-- [ ] Reduce text size of Weekly Check Values
-- [ ] Use vars in CSS for color scheme (v0.1.2)
-### Code Readability
-- [x] Add sections to CSS code for better readability (Text Properties, sections, links, etc.)
-- [x] Refactor CSS using comma-separated selectors for better concision (more DRY code)
-- [x] Compound Selectors to reduce number of classes
+- [ ] Use vars in CSS for color scheme
