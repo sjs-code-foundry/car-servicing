@@ -179,10 +179,12 @@ function weeklyJobList() {
 }
 
 function weeklyJobBtnReset() {
+    console.log(`Weekly Jobs List = ${weeklyJobsStatus}`)
     for (let i=0; i < weeklyJobsStatus.length; i++) {
         document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "white"
         document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "black"
         weeklyJobsStatus[`${weeklyJobs[i]}`] = false
+        console.log(`${weeklyJobs[i]} = ${weeklyJobsStatus[`${weeklyJobs[i]}`]}`)
     }
 }
 
