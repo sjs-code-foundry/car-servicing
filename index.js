@@ -180,11 +180,9 @@ function weeklyJobList() {
 
 function weeklyJobBtnReset() {
     for (let i=0; i < weeklyJobsStatus.length; i++) {
-        if (weeklyJobsStatus[`${weeklyJobs[i]}`] === true) {
-            document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "white"
-            document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "black"
-            weeklyJobsStatus[`${weeklyJobs[i]}`] = false
-        }
+        document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "white"
+        document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "black"
+        weeklyJobsStatus[`${weeklyJobs[i]}`] = false
     }
 }
 
@@ -280,7 +278,7 @@ function clearRecord(list, askDel, rec) {
 
     let delVal = query(listInDB, orderByKey(rec))
     get(delVal).then((snapshot) => {
-        console.log(snapshot.val[1])
+        console.log(snapshot.val)
     })
     // console.log(delVal) // Returns object data, not actual value
 
