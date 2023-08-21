@@ -1,3 +1,5 @@
+/* Styling Variables */
+
 /* General Layout */
 
 body, hr {
@@ -38,6 +40,30 @@ ul {
 footer {
     flex-direction: row;
     justify-content: space-around;
+}
+
+/* Navbar */
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: lightgray;
+}
+
+.navbar button {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 100%;
+    padding: 30px;
+    border: none;
+}
+
+.navbar button:hover {
+    background-color: gray;
+}
+
+.tabcontent {
+    display: none;
 }
 
 /* Fields */

@@ -5,17 +5,17 @@ import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/9.15
 
 // Initialize firebase - 1st code block = DB emulator; 2nd code block = online DB
 
-// const app = initializeApp({ projectId: "playground-62567" })
-// const database = getDatabase(app)
-// if (location.hostname === "localhost") {
-//     connectDatabaseEmulator(database, "127.0.0.1", 9000)
-// }
-
-const appSettings = {
-    databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/"
-}
-const app = initializeApp(appSettings)
+const app = initializeApp({ projectId: "playground-62567" })
 const database = getDatabase(app)
+if (location.hostname === "localhost") {
+    connectDatabaseEmulator(database, "127.0.0.1", 9000)
+}
+
+// const appSettings = {
+//     databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/"
+// }
+// const app = initializeApp(appSettings)
+// const database = getDatabase(app)
 
 const serviceJobsInDB = ref(database, "weeklyCarChecks/serviceJobs")
 const recordsInDB = ref(database, "weeklyCarChecks/checkRecords")
@@ -28,6 +28,8 @@ let scale = screen.width / siteWidth
 document.querySelector('meta[name="viewport"]').setAttribute('content', `width=${siteWidth}, initial-scale=${scale}`)
 
 // DOM Elements
+const wcTabEl = document.getElementById("nav-wc")
+const sjTabEl = document.getElementById("nav-sj")
 const dateFieldEl = document.getElementById("date-field")
 const odoFieldEl = document.getElementById("odo-field")
 const serviceJobEl = document.getElementById("sj-field")
@@ -76,8 +78,17 @@ onValue(recordsInDB, function(snapshot) {
     }
 })
 
+// Set Default Tab
+tabSwitch("page-wc")
 
 // Event Listeners
+
+wcTabEl.addEventListener("click", function() {
+    tabSwitch("page-wc")
+})
+sjTabEl.addEventListener("click", function() {
+    tabSwitch("page-sj")
+})
 
 serviceBtnEl.addEventListener("click", function() {
     push(serviceJobsInDB, serviceJobEl.value)
@@ -133,6 +144,18 @@ let weeklyJobsStatus = {}
 weeklyJobList()
 
 // Functions
+
+function tabSwitch(tab) {
+    let tabcontent
+
+    tabcontent = document.getElementsByClassName("tabcontent")
+    for (let i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none"
+    }
+
+    let targetTab = document.getElementById(tab)
+    targetTab.style.display = "block"
+}
 
 function serviceJobAppend(job) {
     let itemID = job[0]
@@ -192,6 +215,7 @@ function weeklyJobList() {
 // Breaks the .style.element parts of the function
 
 function weeklyJobBtnReset() {
+    // Neither for loop works - FIX!!!
     for (let i = 0; i < weeklyJobsStatus.length; i++) {
         console.log(`Weekly Jobs List #${i} = ${weeklyJobsStatus}`)
     }

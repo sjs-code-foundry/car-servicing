@@ -15,42 +15,50 @@
     <body>
         <img id="avatar" src="img/avatar.png">
         <h1>Weekly Car Checks</h1>
-        <div class="entry-field">
-            <p>Date: </p>
-            <input id="date-field" type="date">
+        <div class="navbar">
+            <button id="nav-wc" class="tablinks">Weekly Checks</button>
+            <button id="nav-sj" class="tablinks">Service Jobs</button>
         </div>
-        <div class="entry-field">
-            <p>Odometer: </p>
-            <input id="odo-field" type="number">
+        <div id="page-wc" class="tabcontent">
+            <h2>Weekly Jobs</h2>
+            <div class="entry-field">
+                <p>Date: </p>
+                <input id="date-field" type="date">
+            </div>
+            <div class="entry-field">
+                <p>Odometer: </p>
+                <input id="odo-field" type="number">
+            </div>
+            <ul id="weeklies">
+            </ul>
+            <button id="submit-btn">Submit Weekly Check</button>
+            <hr>
+            <h2>Weekly Check History</h2>
+            <div id="hist-headers">
+                <h4>Date</h4>
+                <h4>Odo Miles</h4>
+                <h4>Weekly Jobs</h4>
+                <h4>Delete?</h4>
+            </div>
+            <ul id="history">
+                <li class="hist-list">
+                </li>
+            </ul>
         </div>
-        <h2>Servicing Jobs</h2>
-        <div class="entry-field">
-            <input id="sj-field" type="text">
-            <button id="sj-btn">Submit Service Job</button>
+        <div id="page-sj" class="tabcontent">
+            <h2>Servicing Jobs</h2>
+            <div class="entry-field">
+                <input id="sj-field" type="text">
+                <button id="sj-btn">Submit Service Job</button>
+            </div>
+            <ul id="jobs-list">
+            </ul>
         </div>
-        <ul id="jobs-list">
-        </ul>
-        <h2>Weekly Jobs</h2>
-        <ul id="weeklies">
-        </ul>
-        <button id="submit-btn">Submit Weekly Check</button>
-        <hr>
-        <h2>Weekly Check History</h2>
-        <div id="hist-headers">
-            <h4>Date</h4>
-            <h4>Odo Miles</h4>
-            <h4>Weekly Jobs</h4>
-            <h4>Delete?</h4>
-        </div>
-        <ul id="history">
-            <li class="hist-list">
-            </li>
-        </ul>
         <hr>
         <script src="index.js" type="module"></script>
     </body>
     <footer>
         <p>sjs-code-foundry</p>
-        <p>v0.1.1</p>
+        <p>v0.2.0</p>
     </footer>
 </html>
