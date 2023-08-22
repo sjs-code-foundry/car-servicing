@@ -191,12 +191,12 @@ function weeklyJobList() {
 
         newEl.addEventListener("click", function() {
             if (weeklyJobsStatus[`${weeklyJobs[i]}`] === false) {
-                document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "green"
-                document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "white"
+                document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "var(--secondary-color-1)"
+                document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "var(--primary-color)"
                 weeklyJobsStatus[`${weeklyJobs[i]}`] = true
             } else if (weeklyJobsStatus[`${weeklyJobs[i]}`] === true) {
-                document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "white"
-                document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "black"
+                document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "var(--primary-color)"
+                document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "var(--secondary-color-1)"
                 weeklyJobsStatus[`${weeklyJobs[i]}`] = false
             }
         })

@@ -11,7 +11,7 @@
 /* General Layout */
 
 html {
-    background-color: var(--primary-color)
+    background-color: var(--primary-color);
 }
 
 body, hr {
@@ -100,6 +100,9 @@ footer {
 
 input {
     width: 200px;
+
+    background-color: var(--primary-color);
+    color: var(--secondary-color-1);
     font-size: 100%;
 }
 
