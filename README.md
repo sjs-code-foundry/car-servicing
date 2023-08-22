@@ -3,7 +3,7 @@ A mobile app for the weekly recording of car checks.
 ## Motivation
 This is a replacement for my current practice of recording my weekly car checks in Google Keep and Sheets.  I will only need to enter the data once, and then I'll have a record of my checks, servicing tasks and miles travelled.
 ## Current Version
-v0.2.0
+v0.2.1
 ## Dependencies
 - Firebase 9.15.0
 ## Changelog
@@ -19,8 +19,10 @@ v0.2.0
 - Separated Weekly Checks & Servicing Jobs onto their own tabs
 - Service Job tab shows remaining jobs
 - Implemented variables for easy changes to colour pallette
+### v0.2.1
+- Weekly Check buttons now auto-reset
 ## Planned Features
 ### Usability
-- [ ] Auto-reset weekly check buttons (v0.2.1)
+- [x] Auto-reset weekly check buttons (v0.2.1)
 ### Data Readouts
 - [ ] Miles Travelled between checks (v0.2.1)

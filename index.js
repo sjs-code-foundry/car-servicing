@@ -5,17 +5,17 @@ import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/9.15
 
 // Initialize firebase - 1st code block = DB emulator; 2nd code block = online DB
 
-// const app = initializeApp({ projectId: "playground-62567" })
-// const database = getDatabase(app)
-// if (location.hostname === "localhost") {
-//     connectDatabaseEmulator(database, "127.0.0.1", 9000)
-// }
-
-const appSettings = {
-    databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/"
-}
-const app = initializeApp(appSettings)
+const app = initializeApp({ projectId: "playground-62567" })
 const database = getDatabase(app)
+if (location.hostname === "localhost") {
+    connectDatabaseEmulator(database, "127.0.0.1", 9000)
+}
+
+// const appSettings = {
+//     databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/"
+// }
+// const app = initializeApp(appSettings)
+// const database = getDatabase(app)
 
 const serviceJobsInDB = ref(database, "weeklyCarChecks/serviceJobs")
 const recordsInDB = ref(database, "weeklyCarChecks/checkRecords")
@@ -210,22 +210,13 @@ function weeklyJobBtnSwitch(jobID) {
 }
 
 function weeklyJobBtnReset() {
-    // Neither for loop works - FIX!!!
-    console.log(`Weekly Jobs List = ${weeklyJobsStatus}`) // Returns an object
+    for (let i = 0; i < weeklyJobs.length; i++) {
+        let jobStatus = weeklyJobsStatus[`${weeklyJobs[i]}`]
 
-    console.log(weeklyJobsStatus.value)
-
-    // for (let i = 0; i < weeklyJobsStatus.length; i++) {
-    //     console.log(`Weekly Jobs List #${i} = ${weeklyJobsStatus[i]}`)
-    // }
-    // for (let i = 0; i < weeklyJobsStatus.length; i++) {
-    //     console.log(`i = ${i}`)
-    //     console.log(`weeklyJobs[i] = ${weeklyJobs[i]}`)
-    //     document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "var(--primary-color)"
-    //     document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "var(--secondary-color-1)"
-    //     weeklyJobsStatus[`${weeklyJobs[i]}`] = false
-    //     console.log(`${weeklyJobs[i]} = ${weeklyJobsStatus[`${weeklyJobs[i]}`]}`)
-    // }
+        if (jobStatus === true) {
+            weeklyJobBtnSwitch(weeklyJobs[i])
+        }
+    }
 }
 
 function weeklyJobPercent(weeklies) {
@@ -318,11 +309,13 @@ function clearRecord(list, askDel, rec) {
     let exactLocationInDB = ref(database, `weeklyCarChecks/${list}/${rec}`)
     let delAns
 
-    let delVal = query(listInDB, orderByKey(rec))
-    get(delVal).then((snapshot) => {
-        console.log(snapshot.val)
-    })
+    // let delVal = query(listInDB, orderByKey(rec))
+    // get(delVal).then((snapshot) => {
+    //     console.log(snapshot.val)
+    // })
     // console.log(delVal) // Returns object data, not actual value
+
+    // console.log(exactLocationInDB)
 
     if (askDel) {
         delAns = confirm("Delete this record?")
