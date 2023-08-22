@@ -218,7 +218,6 @@ function weeklyJobBtnSwitch(jobID) {
         weeklyJobsStatus[`${jobID}`] = false
     }
 }
-// Breaks the .style.element parts of the function
 
 function weeklyJobBtnReset() {
     // Neither for loop works - FIX!!!
@@ -228,8 +227,8 @@ function weeklyJobBtnReset() {
     for (let i = 0; i < weeklyJobsStatus.length; i++) {
         console.log(`i = ${i}`)
         console.log(`weeklyJobs[i] = ${weeklyJobs[i]}`)
-        document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "white"
-        document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "black"
+        document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "var(--primary-color)"
+        document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "var(--secondary-color-1)"
         weeklyJobsStatus[`${weeklyJobs[i]}`] = false
         console.log(`${weeklyJobs[i]} = ${weeklyJobsStatus[`${weeklyJobs[i]}`]}`)
     }
