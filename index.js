@@ -54,8 +54,12 @@ onValue(serviceJobsInDB, function(snapshot) {
 
         sortList(serviceTasksEl, false)
 
+        sjTabEl.textContent = `Service Jobs (${serviceArray.length})`
+
     } else {
         serviceTasksEl.innerHTML = "All tasks complete!"
+
+        sjTabEl.textContent = "Service Jobs"
     }
 })
 

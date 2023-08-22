@@ -105,6 +105,7 @@ input {
 }
 
 #submit-btn {
+    width: 640px;
     padding: 30px 0;
 }
 
