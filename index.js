@@ -190,15 +190,6 @@ function weeklyJobList() {
         weeklyJobsStatus[`${weeklyJobs[i]}`] = false
 
         newEl.addEventListener("click", function() {
-            // if (weeklyJobsStatus[`${weeklyJobs[i]}`] === false) {
-            //     document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "var(--secondary-color-1)"
-            //     document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "var(--primary-color)"
-            //     weeklyJobsStatus[`${weeklyJobs[i]}`] = true
-            // } else if (weeklyJobsStatus[`${weeklyJobs[i]}`] === true) {
-            //     document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "var(--primary-color)"
-            //     document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "var(--secondary-color-1)"
-            //     weeklyJobsStatus[`${weeklyJobs[i]}`] = false
-            // }
             weeklyJobBtnSwitch(weeklyJobs[i])
 
         })
@@ -221,8 +212,9 @@ function weeklyJobBtnSwitch(jobID) {
 
 function weeklyJobBtnReset() {
     // Neither for loop works - FIX!!!
+    console.log(`Weekly Jobs List = ${weeklyJobsStatus}`)
     for (let i = 0; i < weeklyJobsStatus.length; i++) {
-        console.log(`Weekly Jobs List #${i} = ${weeklyJobsStatus}`)
+        console.log(`Weekly Jobs List #${i} = ${weeklyJobsStatus[i]}`)
     }
     for (let i = 0; i < weeklyJobsStatus.length; i++) {
         console.log(`i = ${i}`)
