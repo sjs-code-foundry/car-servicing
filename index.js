@@ -5,17 +5,17 @@ import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/9.15
 
 // Initialize firebase - 1st code block = DB emulator; 2nd code block = online DB
 
-const app = initializeApp({ projectId: "playground-62567" })
-const database = getDatabase(app)
-if (location.hostname === "localhost") {
-    connectDatabaseEmulator(database, "127.0.0.1", 9000)
-}
-
-// const appSettings = {
-//     databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/"
-// }
-// const app = initializeApp(appSettings)
+// const app = initializeApp({ projectId: "playground-62567" })
 // const database = getDatabase(app)
+// if (location.hostname === "localhost") {
+//     connectDatabaseEmulator(database, "127.0.0.1", 9000)
+// }
+
+const appSettings = {
+    databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/"
+}
+const app = initializeApp(appSettings)
+const database = getDatabase(app)
 
 const serviceJobsInDB = ref(database, "weeklyCarChecks/serviceJobs")
 const recordsInDB = ref(database, "weeklyCarChecks/checkRecords")
