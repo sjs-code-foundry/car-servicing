@@ -20,7 +20,7 @@ v0.2.0
 ## Planned Features
 ### Usability
 - [x] Separate Weekly Checks & Servicing Jobs onto their own tabs (v0.2.0)
-- [ ] Show amount of Servicing Jobs on tab (v0.2.0)
+- [x] Show amount of Servicing Jobs on tab (v0.2.0)
 - [ ] Auto-reset weekly check buttons (v0.2.1)
 ### Data Readouts
 - [ ] Miles Travelled between checks (v0.2.1)

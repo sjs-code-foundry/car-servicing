@@ -1,6 +1,18 @@
 /* Styling Variables */
 
+:root {
+    --primary-color: #f2f2f2;
+    --secondary-color-1: #595959;
+    --secondary-color-2: #a5a5a5;
+    --tertiary-color-1: #7f7f7f;
+    --tertiary-color-2: #cccccc;
+}
+
 /* General Layout */
+
+html {
+    background-color: var(--primary-color)
+}
 
 body, hr {
     width: 640px;
@@ -21,6 +33,7 @@ body {
     text-align: center;
     padding: 25px;
 
+    color: var(--secondary-color-1);
     font-size: 150%;
 }
 
@@ -29,7 +42,11 @@ img {
 }
 
 hr {
-    border-color: black;
+    border-color: var(--secondary-color-1);
+}
+
+button {
+    color: var(--secondary-color-1);
 }
 
 ul {
@@ -40,6 +57,7 @@ ul {
 footer {
     flex-direction: row;
     justify-content: space-around;
+    color: var(--secondary-color-2)
 }
 
 /* Navbar */
@@ -48,18 +66,19 @@ footer {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    background-color: lightgray;
+    background-color: var(--secondary-color-2);
 }
 
 .navbar button {
     font-family: 'Ubuntu', sans-serif;
+    background-color: var(--secondary-color-2);
     font-size: 100%;
     padding: 30px;
     border: none;
 }
 
 .navbar button:hover {
-    background-color: gray;
+    background-color: var(--tertiary-color-2);
 }
 
 .tabcontent {
@@ -113,7 +132,7 @@ input {
 
 .service-job, .weekly-job {
     margin: 10px;
-    border: 1px solid black;
+    border: 1px solid var(--secondary-color-1);
     padding: 30px 0;
 }
 
@@ -126,7 +145,7 @@ input {
 }
 
 .service-job {
-    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 1px 4px var(--secondary-color-1);
 }
 
 /* #hist-headers {
