@@ -17,12 +17,10 @@ v0.2.0
 - Reduced Text Size of Weekly Check Records
 ### v0.2.0
 - Separated Weekly Checks & Servicing Jobs onto their own tabs
+- Service Job tab shows remaining jobs
+- Implemented variables for easy changes to colour pallette
 ## Planned Features
 ### Usability
-- [x] Separate Weekly Checks & Servicing Jobs onto their own tabs (v0.2.0)
-- [x] Show amount of Servicing Jobs on tab (v0.2.0)
 - [ ] Auto-reset weekly check buttons (v0.2.1)
 ### Data Readouts
 - [ ] Miles Travelled between checks (v0.2.1)
-### Presentation
-- [ ] Use vars in CSS for color scheme (v0.2.0)

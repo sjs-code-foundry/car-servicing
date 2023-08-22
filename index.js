@@ -190,32 +190,34 @@ function weeklyJobList() {
         weeklyJobsStatus[`${weeklyJobs[i]}`] = false
 
         newEl.addEventListener("click", function() {
-            if (weeklyJobsStatus[`${weeklyJobs[i]}`] === false) {
-                document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "var(--secondary-color-1)"
-                document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "var(--primary-color)"
-                weeklyJobsStatus[`${weeklyJobs[i]}`] = true
-            } else if (weeklyJobsStatus[`${weeklyJobs[i]}`] === true) {
-                document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "var(--primary-color)"
-                document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "var(--secondary-color-1)"
-                weeklyJobsStatus[`${weeklyJobs[i]}`] = false
-            }
+            // if (weeklyJobsStatus[`${weeklyJobs[i]}`] === false) {
+            //     document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "var(--secondary-color-1)"
+            //     document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "var(--primary-color)"
+            //     weeklyJobsStatus[`${weeklyJobs[i]}`] = true
+            // } else if (weeklyJobsStatus[`${weeklyJobs[i]}`] === true) {
+            //     document.getElementById(`wJ-${weeklyJobs[i]}`).style.backgroundColor = "var(--primary-color)"
+            //     document.getElementById(`wJ-${weeklyJobs[i]}`).style.color = "var(--secondary-color-1)"
+            //     weeklyJobsStatus[`${weeklyJobs[i]}`] = false
+            // }
+            weeklyJobBtnSwitch(weeklyJobs[i])
+
         })
 
         weeklyJobListEl.append(newEl)
     }
 }
 
-// function weeklyJobBtnSwitch(jobID) {
-//     if (weeklyJobsStatus[`${jobID}`] === false) {
-//         document.getElementById(`wJ-${jobID}`).style.backgroundColor = "green"
-//         document.getElementById(`wJ-${jobID}`).style.color = "white"
-//         weeklyJobsStatus[`${jobID}`] = true
-//     } else if (weeklyJobsStatus[`${jobID}`] === true) {
-//         document.getElementById(`wJ-${jobID}`).style.backgroundColor = "white"
-//         document.getElementById(`wJ-${jobID}`).style.color = "black"
-//         weeklyJobsStatus[`${jobID}`] = false
-//     }
-// }
+function weeklyJobBtnSwitch(jobID) {
+    if (weeklyJobsStatus[`${jobID}`] === false) {
+        document.getElementById(`wJ-${jobID}`).style.backgroundColor = "var(--secondary-color-1)"
+        document.getElementById(`wJ-${jobID}`).style.color = "var(--primary-color)"
+        weeklyJobsStatus[`${jobID}`] = true
+    } else if (weeklyJobsStatus[`${jobID}`] === true) {
+        document.getElementById(`wJ-${jobID}`).style.backgroundColor = "var(--primary-color)"
+        document.getElementById(`wJ-${jobID}`).style.color = "var(--secondary-color-1)"
+        weeklyJobsStatus[`${jobID}`] = false
+    }
+}
 // Breaks the .style.element parts of the function
 
 function weeklyJobBtnReset() {
