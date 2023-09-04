@@ -17,6 +17,8 @@ const appSettings = {
 const app = initializeApp(appSettings)
 const database = getDatabase(app)
 
+
+
 const serviceJobsInDB = ref(database, "weeklyCarChecks/serviceJobs")
 const recordsInDB = ref(database, "weeklyCarChecks/checkRecords")
 
@@ -69,10 +71,12 @@ onValue(recordsInDB, function(snapshot) {
     
         clearListEl(historyEl)
 
+        odoList = []
+
         for (let i = 0; i < recordArray.length; i++) {
             let currentRecord = recordArray[i]
 
-            recordAdd(currentRecord)
+            recordAdd(currentRecord, i)
         }
 
         sortList(historyEl, true)
@@ -147,6 +151,9 @@ const weeklyJobs = [
 let weeklyJobsStatus = {}
 weeklyJobList()
 
+// Initial Variables
+let odoList
+
 // Functions
 
 function tabSwitch(tab) {
@@ -199,12 +206,12 @@ function weeklyJobList() {
 
 function weeklyJobBtnSwitch(jobID) {
     if (weeklyJobsStatus[`${jobID}`] === false) {
-        document.getElementById(`wJ-${jobID}`).style.backgroundColor = "var(--secondary-color-1)"
-        document.getElementById(`wJ-${jobID}`).style.color = "var(--primary-color)"
+        document.getElementById(`wJ-${jobID}`).style.backgroundColor = "var(--accent-light-color)"
+        document.getElementById(`wJ-${jobID}`).style.color = "var(--background-light-color)"
         weeklyJobsStatus[`${jobID}`] = true
     } else if (weeklyJobsStatus[`${jobID}`] === true) {
-        document.getElementById(`wJ-${jobID}`).style.backgroundColor = "var(--primary-color)"
-        document.getElementById(`wJ-${jobID}`).style.color = "var(--secondary-color-1)"
+        document.getElementById(`wJ-${jobID}`).style.backgroundColor = "var(--background-light-color)"
+        document.getElementById(`wJ-${jobID}`).style.color = "var(--text-light-color)"
         weeklyJobsStatus[`${jobID}`] = false
     }
 }
@@ -237,11 +244,13 @@ function weeklyJobPercent(weeklies) {
     return wJP
 }
 
-function recordAdd(record) {
+function recordAdd(record, odoNum) {
     let recordID = record[0]
     let recordDate = record[1].date
     let recordMiles = record[1].miles
     let recordWeeklies = record[1].weeklies
+
+    odoList.push(recordMiles)
 
     let newEl = document.createElement("li")
 
@@ -250,10 +259,21 @@ function recordAdd(record) {
     newEl.innerHTML = `
         <p>${recordDate}</p>
         <p>${recordMiles}</p>
+        <p>${mileCalc(odoNum)}</p>
         <p>Jobs Done: ${weeklyJobPercent(recordWeeklies)}%</p>
         <button id="del-${recordID}">X</button>`
 
     historyEl.append(newEl)
+}
+
+function mileCalc(odoNum) {
+    let mileVal = odoList[odoNum] - odoList[odoNum - 1]
+
+    if (isNaN(mileVal)) {
+        return 0
+    }
+
+    return mileVal
 }
 
 function fieldPlaceholder(field, placeholder) {

@@ -21,8 +21,14 @@ v0.2.1
 - Implemented variables for easy changes to colour pallette
 ### v0.2.1
 - Weekly Check buttons now auto-reset
+- Miles travelled between checks now displayed
 ## Planned Features
 ### Usability
 - [x] Auto-reset weekly check buttons (v0.2.1)
 ### Data Readouts
-- [ ] Miles Travelled between checks (v0.2.1)
+- [x] Miles Travelled between checks (v0.2.1)
+- [ ] Improve miles travelled calculations to take dates into account (v0.2.2)
+### Security
+- [x] Test inputs for ability to execute malicious JS code (v0.2.1)
+### Presentation
+- [ ] Finish and implement new design from Figma (v0.2.1)
