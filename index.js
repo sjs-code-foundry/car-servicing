@@ -1,8 +1,8 @@
 // Imports
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
-import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app-check.js";
-import { getDatabase, ref, push, onValue, remove, query, orderByKey, get } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
-import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import { initializeApp } from "firebase/app"
+import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-check";
+import { getDatabase, ref, push, onValue, remove, query, orderByKey, get } from "firebase/database"
+import { connectDatabaseEmulator } from "firebase/database"
 
 // Initialize firebase - 1st code block = DB emulator; 2nd code block = online DB
 
