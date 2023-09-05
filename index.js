@@ -13,7 +13,13 @@ import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/9.15
 // }
 
 const appSettings = {
-    databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/"
+    databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/",
+    apiKey: "AIzaSyBF39RJz9HnX_gU2aUhe31IHJz8vp7qnEM",
+    authDomain: "playground-62567.firebaseapp.com",
+    projectId: "playground-62567",
+    storageBucket: "playground-62567.appspot.com",
+    messagingSenderId: "914430038851",
+    appId: "1:914430038851:web:e4e714f50b17a2a2c715f6"
 }
 const app = initializeApp(appSettings)
 const appCheck = initializeAppCheck(app, {
