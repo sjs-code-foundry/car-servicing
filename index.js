@@ -6,27 +6,27 @@ import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/10.3
 
 // Initialize firebase - 1st code block = DB emulator; 2nd code block = online DB
 
-// const app = initializeApp({ projectId: "playground-62567" })
-// const database = getDatabase(app)
-// if (location.hostname === "localhost") {
-//     connectDatabaseEmulator(database, "127.0.0.1", 9000)
-// }
-
-const appSettings = {
-    databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/",
-    apiKey: "AIzaSyBF39RJz9HnX_gU2aUhe31IHJz8vp7qnEM",
-    authDomain: "playground-62567.firebaseapp.com",
-    projectId: "playground-62567",
-    storageBucket: "playground-62567.appspot.com",
-    messagingSenderId: "914430038851",
-    appId: "1:914430038851:web:e4e714f50b17a2a2c715f6"
+const app = initializeApp({ projectId: "playground-62567" })
+const database = getDatabase(app)
+if (location.hostname === "localhost") {
+    connectDatabaseEmulator(database, "127.0.0.1", 9000)
 }
-const app = initializeApp(appSettings)
+
+// const appSettings = {
+//     databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/",
+//     apiKey: "AIzaSyBF39RJz9HnX_gU2aUhe31IHJz8vp7qnEM",
+//     authDomain: "playground-62567.firebaseapp.com",
+//     projectId: "playground-62567",
+//     storageBucket: "playground-62567.appspot.com",
+//     messagingSenderId: "914430038851",
+//     appId: "1:914430038851:web:e4e714f50b17a2a2c715f6"
+// }
+// const app = initializeApp(appSettings)
 // const appCheck = initializeAppCheck(app, {
 //     provider: new ReCaptchaEnterpriseProvider('6LfIDQAoAAAAAH9H3cK6a7tOtXZUK_b5So1t57LV'),
 //     isTokenAutoRefreshEnabled: true
-// })                                                                                           // Not working, FIX!!!
-const database = getDatabase(app)
+// })
+// const database = getDatabase(app)
 
 
 

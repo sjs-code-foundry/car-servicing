@@ -27,10 +27,6 @@ body, hr {
     width: 640px;
 }
 
-body, img {
-    margin: 0 auto;
-}
-
 body, footer {
     display: flex;
     font-family: 'Ubuntu', sans-serif;
@@ -40,6 +36,7 @@ body {
     flex-direction: column;
     user-select: none;
     text-align: center;
+    margin: 0 auto;
     padding: 25px;
 
     color: var(--text-light-color);
@@ -54,10 +51,6 @@ h1 {
 h4 {
     font-size: 14px;
     font-weight: bold;
-}
-
-img {
-    width: 160px;
 }
 
 hr {
@@ -79,6 +72,39 @@ footer {
     justify-content: space-around;
     color: var(--text-light-color);
     font-size: 14px;
+}
+
+/* Top Navigation Bar */
+
+#topnav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+}
+
+#topnav img {
+    width: 64px;
+}
+
+#menu-burger {
+    margin: 0 0 0 auto;
+    width: 64px;
+}
+
+#menu-dropdown {
+    display: block;
+}
+
+#menu-dropdown ul {
+    background-color: var(--accent-light-color);
+    color: var(--text-light-color);
+    padding: 10px;
+}
+
+#menu-dropdown li {
+    overflow: hidden;
 }
 
 /* Navbar */
@@ -180,6 +206,7 @@ input {
     border: none;
     border-radius: 5px;
     font-weight: bold;
+    padding: 0 20px;
 }
 
 /* Record Lists */
