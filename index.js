@@ -22,10 +22,10 @@ const appSettings = {
     appId: "1:914430038851:web:e4e714f50b17a2a2c715f6"
 }
 const app = initializeApp(appSettings)
-const appCheck = initializeAppCheck(app, {
-    provider: new ReCaptchaEnterpriseProvider('6LfIDQAoAAAAAH9H3cK6a7tOtXZUK_b5So1t57LV'),
-    isTokenAutoRefreshEnabled: true
-})
+// const appCheck = initializeAppCheck(app, {
+//     provider: new ReCaptchaEnterpriseProvider('6LfIDQAoAAAAAH9H3cK6a7tOtXZUK_b5So1t57LV'),
+//     isTokenAutoRefreshEnabled: true
+// })                                                                                           // Not working, FIX!!!
 const database = getDatabase(app)
 
 
@@ -165,7 +165,7 @@ weeklyJobList()
 // Initial Variables
 let odoList
 
-// Functions
+// Function Declarations
 
 function tabSwitch(tab) {
     let tabcontent
