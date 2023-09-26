@@ -27,10 +27,6 @@ body, hr {
     width: 640px;
 }
 
-body, img {
-    margin: 0 auto;
-}
-
 body, footer {
     display: flex;
     font-family: 'Ubuntu', sans-serif;
@@ -40,6 +36,7 @@ body {
     flex-direction: column;
     user-select: none;
     text-align: center;
+    margin: 0 auto;
     padding: 25px;
 
     color: var(--text-light-color);
@@ -54,10 +51,6 @@ h1 {
 h4 {
     font-size: 14px;
     font-weight: bold;
-}
-
-img {
-    width: 160px;
 }
 
 hr {
@@ -80,6 +73,111 @@ footer {
     color: var(--text-light-color);
     font-size: 14px;
 }
+
+/* Top Navigation Bar */
+
+.header {
+    width: 640px;
+    height: 64px;
+    font-size: 32px;
+    box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+    z-index: 3;
+}
+
+.header img {
+    display: block;
+    float: left;
+    width: 64px;
+}
+
+/* Hamburger Menu - Static Properties */
+
+.header ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    background-color: var(--background-light-color)
+}
+
+.header li a {
+    display: block;
+    padding: 20px;
+    border-right: 1px solid var(--accent-light-color);
+    text-decoration: none;
+}
+
+.header .menu {
+    clear: both;
+    max-height: 0;
+    transition: max-height .2s ease-out;
+}
+
+/* Hamburger Menu - Hamburger Icon Properties */
+
+.header .menu-icon {
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+    padding: 28px 20px;
+    position: relative;
+}
+
+.header .menu-icon .navicon {
+    background: var(--text-light-color);
+    display: block;
+    height: 3px;
+    position: relative;
+    transition: background .2s ease-out;
+    width: 24px;
+}
+
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {
+    background: var(--text-light-color);
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+}
+
+.header .menu-icon .navicon:before {
+    top: 8px;
+}
+
+.header .menu-icon .navicon:after {
+    top: -8px;
+}
+
+/* Hamburger Menu - Icon & Menu Animation Properties */
+
+.header .menu-btn {
+    display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+    max-height: 240px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+    background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+    transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+    transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+    top: 0;
+}
+
 
 /* Navbar */
 
@@ -180,6 +278,7 @@ input {
     border: none;
     border-radius: 5px;
     font-weight: bold;
+    padding: 0 20px;
 }
 
 /* Record Lists */
