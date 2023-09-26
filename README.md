@@ -10,6 +10,6 @@ v0.2.1
 Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated list.
 ## Planned Features
 ### JS Functions
-- [ ] Improve miles travelled calculations to take dates into account (v0.2.2)
+- [ ] Improve miles travelled calculations to take dates into account (v0.3.1)
 ### Security
-- [ ] Implement protections for Firebase (v0.2.2)
+- [ ] Implement protections for Firebase (v0.3.0)
