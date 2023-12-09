@@ -14,6 +14,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 ### JS Functions
 - [ ] Improve miles travelled calculations to take dates into account (v0.3.2-alpha)
 - [ ] Refactor code to cut down on DOM elements (v0.3.2-alpha)
+- [ ] Use Data Attributes to for Weekly Checks (deleting checks, opening table of weekly checks, etc.) (v0.3.2-alpha)
 ### Layout
 - [ ] Implement landscape layout for when the device is rotated (v0.3.2-alpha)
 ### Security
