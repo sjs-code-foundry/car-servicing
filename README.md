@@ -11,6 +11,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 ## Planned Features
 ### Aesthetics
 - [ ] Replace alert methods with custom-styled modals (v0.3.2-alpha)
+- [ ] Add metadata to Servicing Jobs like date of creation and source (user or auto-generated) (v0.3.2-alpha)
 ### JS Functions
 - [ ] Improve miles travelled calculations to take dates into account (v0.3.2-alpha)
 - [ ] Refactor code to cut down on DOM elements (v0.3.2-alpha)
