@@ -158,7 +158,7 @@ footer {
 }
 
 .header .menu-btn:checked ~ .menu {
-    max-height: 240px;
+    max-height: 320px;
 }
 
 .header .menu-btn:checked ~ .menu-icon .navicon {
@@ -179,34 +179,7 @@ footer {
 }
 
 
-/* Navbar */
-
-.navbar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-.navbar button {
-    font-family: 'Ubuntu', sans-serif;
-    background-color: var(--secondary-light-color);
-    border: 2px solid var(--background-light-color);
-    border-radius: 5px;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 30px;
-    border: none;
-}
-
-.navbar button:hover {
-    border: 2px solid var(--text-light-color);
-}
-
-.navbar button:active {
-    background-color: var(--accent-light-color);
-    color: var(--background-light-color);
-    border: 2px solid var(--background-light-color);
-}
+/* General Tab Formatting */
 
 .tabcontent {
     display: none;

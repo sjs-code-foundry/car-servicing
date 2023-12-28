@@ -22,6 +22,6 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 - [ ] Add Firebase Authentication for additional protection (v0.3.1-alpha)
 ### User Experience
 - [ ] Prevent user from submitting Weekly Check unless date and mileage fields are appropriately filled (v0.3.2-alpha)
-- [ ] Refactor tabs to be self-contained in index.html (v0.3.2-alpha)
+- [x] Refactor tabs to be self-contained in index.html (v0.3.2-alpha)
 - [ ] Double click copies values from Weekly Check record table (v0.3.2-alpha)
 - [ ] Convert all text & element sizes to em for better scalability across devices (v0.3.2-alpha)

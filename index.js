@@ -1,48 +1,49 @@
-// Imports
+/* Imports */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js"
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app-check.js";
 import { getDatabase, ref, push, onValue, remove, query, orderByKey, get } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"
 import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"
 
-// Initialize firebase - 1st code block = DB emulator; 2nd code block = online DB
+/* Initialize firebase - 1st code block = DB emulator; 2nd code block = online DB */
 
-// const app = initializeApp({ projectId: "playground-62567" })
-// const database = getDatabase(app)
-// if (location.hostname === "localhost") {
-//     connectDatabaseEmulator(database, "127.0.0.1", 9000)
-// }
-
-const appSettings = {
-    databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/",
-    apiKey: "AIzaSyBF39RJz9HnX_gU2aUhe31IHJz8vp7qnEM",
-    authDomain: "playground-62567.firebaseapp.com",
-    projectId: "playground-62567",
-    storageBucket: "playground-62567.appspot.com",
-    messagingSenderId: "914430038851",
-    appId: "1:914430038851:web:e4e714f50b17a2a2c715f6"
-}
-const app = initializeApp(appSettings)
-const appCheck = initializeAppCheck(app, {
-    provider: new ReCaptchaV3Provider('6Lf50lYoAAAAACBj2HsksvAxrgO8D-GmHDqqhYgl'),
-    isTokenAutoRefreshEnabled: true
-})
+const app = initializeApp({ projectId: "playground-62567" })
 const database = getDatabase(app)
+if (location.hostname === "localhost") {
+    connectDatabaseEmulator(database, "127.0.0.1", 9000)
+}
+
+// const appSettings = {
+//     databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/",
+//     apiKey: "AIzaSyBF39RJz9HnX_gU2aUhe31IHJz8vp7qnEM",
+//     authDomain: "playground-62567.firebaseapp.com",
+//     projectId: "playground-62567",
+//     storageBucket: "playground-62567.appspot.com",
+//     messagingSenderId: "914430038851",
+//     appId: "1:914430038851:web:e4e714f50b17a2a2c715f6"
+// }
+// const app = initializeApp(appSettings)
+// const appCheck = initializeAppCheck(app, {
+//     provider: new ReCaptchaV3Provider('6Lf50lYoAAAAACBj2HsksvAxrgO8D-GmHDqqhYgl'),
+//     isTokenAutoRefreshEnabled: true
+// })
+// const database = getDatabase(app)
 
 
 
 const serviceJobsInDB = ref(database, "weeklyCarChecks/serviceJobs")
 const recordsInDB = ref(database, "weeklyCarChecks/checkRecords")
 
-// Cross-platform scaling
+/* Cross-platform scaling */
 
+// Determine whether the following code is necessary:
 let siteWidth = window.innerWidth
 let scale = screen.width / siteWidth
 
 document.querySelector('meta[name="viewport"]').setAttribute('content', `width=${siteWidth}, initial-scale=${scale}`)
 
-// DOM Elements
-const wcTabEl = document.getElementById("nav-wc")
-const sjTabEl = document.getElementById("nav-sj")
+/* DOM Elements */
+const tabMenuEl = document.getElementById("tab-menu")
+const tabBtnServiceJobs = document.getElementById("tab-btn-service-jobs")
 const dateFieldEl = document.getElementById("date-field")
 const odoFieldEl = document.getElementById("odo-field")
 const serviceJobEl = document.getElementById("sj-field")
@@ -52,7 +53,7 @@ const weeklyJobListEl = document.getElementById("weeklies")
 const weeklyCheckBtnEl = document.getElementById("submit-btn")
 const historyEl = document.getElementById("history")
 
-// Retrieve snapshot from DB
+/* Retrieve snapshot from DB */
 onValue(serviceJobsInDB, function(snapshot) {
     if (snapshot.exists()) {
         let serviceArray = Object.entries(snapshot.val())
@@ -67,12 +68,12 @@ onValue(serviceJobsInDB, function(snapshot) {
 
         sortList(serviceTasksEl, false)
 
-        sjTabEl.textContent = `Service Jobs (${serviceArray.length})`
+        tabBtnServiceJobs.textContent = `Servicing Jobs (${serviceArray.length})`
 
     } else {
         serviceTasksEl.innerHTML = "All tasks complete!"
 
-        sjTabEl.textContent = "Service Jobs"
+        tabBtnServiceJobs.textContent = "Servicing Jobs"
     }
 })
 
@@ -97,16 +98,15 @@ onValue(recordsInDB, function(snapshot) {
     }
 })
 
-// Set Default Tab
-tabSwitch("page-wc")
+/* Set Default Tab */
+tabSwitch("tab-weekly-checks")
 
-// Event Listeners
+/* Event Listeners */
 
-wcTabEl.addEventListener("click", function() {
-    tabSwitch("page-wc")
-})
-sjTabEl.addEventListener("click", function() {
-    tabSwitch("page-sj")
+tabMenuEl.addEventListener("click", function(e) {
+    if (e.target.nodeName === "BUTTON") {
+        tabSwitch(e.target.dataset.tab)
+    }
 })
 
 serviceBtnEl.addEventListener("click", function() {
@@ -145,7 +145,7 @@ historyEl.addEventListener("click", (event) => {
     clearRecord('checkRecords', true, recordToClear)
 })
 
-// Weekly Jobs List
+/* Weekly Jobs List */
 
 const weeklyJobs = [
     "Tyre Pressure",
@@ -162,10 +162,10 @@ const weeklyJobs = [
 let weeklyJobsStatus = {}
 weeklyJobList()
 
-// Initial Variables
+/* Initial Variables */
 let odoList
 
-// Function Declarations
+/*  Function Declarations */
 
 function tabSwitch(tab) {
     let tabcontent

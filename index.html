@@ -17,17 +17,18 @@
             <img src="/img/avatar.png">
             <input class="menu-btn" type="checkbox" id="menu-btn">
             <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
-            <ul class="menu">
-                <li><a href="/not-implemented.html">Car Stats</a></li>
-                <li><a href="/not-implemented.html">About App</a></li>
+            <ul id="tab-menu" class="menu">
+                <li><button id="tab-btn-weekly-checks" class="tab" data-tab="tab-weekly-checks">Weekly Car Checks</button></li>
+                <li><button id="tab-btn-service-jobs" class="tab" data-tab="tab-service-jobs">Servicing Jobs</button></li>
+                <li><button id="tab-btn-weekly-history" class="tab" data-tab="tab-weekly-history">Weekly Check History</button></li>
+                <li><button id="tab-btn-car-stats" class="tab" data-tab="tab-car-stats">Car Stats</button></li>
+                <li><button id="tab-btn-account" class="tab" data-tab="">Sign In</button></li>
+                <li><button id="tab-btn-logout" class="tab" data-tab="">Sign Out</button></li>
+                <li><button id="tab-btn-about-app" class="tab" data-tab="tab-about-app">About App</button></li>
             </ul>
         </header>
         <h1>Weekly Car Checks</h1>
-        <div class="navbar">
-            <button id="nav-wc" class="tablinks">Weekly Checks</button>
-            <button id="nav-sj" class="tablinks">Service Jobs</button>
-        </div>
-        <div id="page-wc" class="tabcontent">
+        <section id="tab-weekly-checks" class="tabcontent">
             <h2>Weekly Jobs</h2>
             <div class="entry-field">
                 <p>Date: </p>
@@ -38,9 +39,21 @@
                 <input id="odo-field" type="number">
             </div>
             <ul id="weeklies">
+                <!-- List of Weekly Check Buttons goes here -->
             </ul>
             <button id="submit-btn">Submit Weekly Check</button>
-            <hr>
+        </section>
+        <section id="tab-service-jobs" class="tabcontent">
+            <h2>Servicing Jobs</h2>
+            <div class="entry-field">
+                <input id="sj-field" type="text">
+                <button id="sj-btn">Submit Service Job</button>
+            </div>
+            <ul id="jobs-list">
+                <!-- Service Jobs go here -->
+            </ul>
+        </section>
+        <section id="tab-weekly-history" class="tabcontent">
             <h2>Weekly Check History</h2>
             <div id="hist-headers">
                 <h4>Date</h4>
@@ -51,24 +64,24 @@
             </div>
             <ul id="history">
                 <li class="hist-list">
+                    <!-- History Items go here -->
                 </li>
             </ul>
-        </div>
-        <div id="page-sj" class="tabcontent">
-            <h2>Servicing Jobs</h2>
-            <div class="entry-field">
-                <input id="sj-field" type="text">
-                <button id="sj-btn">Submit Service Job</button>
-            </div>
-            <ul id="jobs-list">
-                <!-- Service Jobs go here -->
-            </ul>
-        </div>
+        </section>
+        <section id="tab-car-stats" class="tabcontent">
+            <h2>Car Stats</h2>
+            <p>Not Implemented, check later.</p>
+            <!-- Create Place to enter car stats like engine type, tyre type, bulbs for various locations, etc. -->
+        </section>
+        <section id="tab-about-app" class="tabcontent">
+            <h2>About App</h2>
+            <h3>Created by:</h3>
+            <p>sjs-code-foundry</p>
+            <h3>App Version:</h3>
+            <p>v0.3.1-alpha</p>
+        </section>
         <hr>
         <script src="index.js" type="module"></script>
     </body>
-    <footer>
-        <p>sjs-code-foundry</p>
-        <p>v0.3.0</p>
-    </footer>
+    <footer></footer>
 </html>
