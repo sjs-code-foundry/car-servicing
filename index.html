@@ -22,7 +22,7 @@
                 <li><button id="tab-btn-service-jobs" class="tab" data-tab="tab-service-jobs">Servicing Jobs</button></li>
                 <li><button id="tab-btn-weekly-history" class="tab" data-tab="tab-weekly-history">Weekly Check History</button></li>
                 <li><button id="tab-btn-car-stats" class="tab" data-tab="tab-car-stats">Car Stats</button></li>
-                <li><button id="tab-btn-account" class="tab" data-tab="">Sign In</button></li>
+                <li><button id="tab-btn-account" class="tab" data-tab="modal-account">Sign In</button></li>
                 <li><button id="tab-btn-logout" class="tab" data-tab="">Sign Out</button></li>
                 <li><button id="tab-btn-about-app" class="tab" data-tab="tab-about-app">About App</button></li>
             </ul>
@@ -80,8 +80,31 @@
             <h3>App Version:</h3>
             <p>v0.3.1-alpha</p>
         </section>
+        <div id="modal-account" class="modal">
+            <div>
+                <h2>Sign In.</h2>
+                <button data-target="modal-account">X</button>
+            </div>
+            <form>
+                <label for="email">Enter email address:</label>
+                <input type="email" name="email" placeholder="someone@something.com" required>
+                <label for="password">Enter password:</label>
+                <input type="password" name="password" placeholder="******" required>
+                <button>Submit</button>
+            </form>
+        </div>
+        <div id="modal-alert" class="modal">
+            <div>
+                <h2>Not Implemented.</h2>
+                <button data-target="modal-alert">X</button>
+            </div>
+            <p>This is a text prompt that is yet to be implemented.</p>
+            <!-- Use a JS function to insert heading and paragraph content into these modals -->
+        </div>
         <hr>
         <script src="index.js" type="module"></script>
     </body>
-    <footer></footer>
+    <footer>
+        <!-- Add user account status here ("logged in as ..." or "sign in to see your lists.") -->
+    </footer>
 </html>

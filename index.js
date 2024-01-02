@@ -44,6 +44,7 @@ document.querySelector('meta[name="viewport"]').setAttribute('content', `width=$
 /* DOM Elements */
 const tabMenuEl = document.getElementById("tab-menu")
 const tabBtnServiceJobs = document.getElementById("tab-btn-service-jobs")
+const tabBtnAccount = document.getElementById("tab-btn-account") // Retain for displaying account statuses, or move into relevant functions
 const dateFieldEl = document.getElementById("date-field")
 const odoFieldEl = document.getElementById("odo-field")
 const serviceJobEl = document.getElementById("sj-field")
@@ -104,17 +105,37 @@ tabSwitch("tab-weekly-checks")
 /* Event Listeners */
 
 tabMenuEl.addEventListener("click", function(e) {
+
     if (e.target.nodeName === "BUTTON") {
-        tabSwitch(e.target.dataset.tab)
+        const targetEl = document.getElementById(e.target.dataset.tab)
+
+        if (targetEl.classList.contains("modal")) {
+            modalDisplay(targetEl)
+
+            targetEl.addEventListener("click", function(e) {
+                if (e.target.nodeName === "BUTTON") {
+                    if (e.target.dataset.target) {
+                        modalClose(targetEl)
+                    } // Perhaps refactor at some point?
+                }
+            })
+        } else {
+            tabSwitch(e.target.dataset.tab)
+        }
+
+        document.getElementById("menu-btn").checked = false
     }
+
 })
 
 serviceBtnEl.addEventListener("click", function() {
+
     push(serviceJobsInDB, serviceJobEl.value)
 
     alert(`${serviceJobEl.value} added!`)
 
     clearFieldEl(serviceJobEl)
+
 })
 
 weeklyCheckBtnEl.addEventListener("click", function() {
@@ -357,5 +378,13 @@ function clearRecord(list, askDel, rec) {
     if (delAns) {
         remove(exactLocationInDB)
     }
+}
+
+function modalDisplay(targetModal) {
+    targetModal.style.display = "flex"
+}
+
+function modalClose(targetModal) {
+    targetModal.style.display = "none"
 }
 

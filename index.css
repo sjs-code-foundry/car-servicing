@@ -100,11 +100,16 @@ footer {
     background-color: var(--background-light-color)
 }
 
-.header li a {
+.header li button {
     display: block;
+    margin: 0 auto;
     padding: 20px;
-    border-right: 1px solid var(--accent-light-color);
-    text-decoration: none;
+    font-size: 32px;
+    border: none;
+}
+
+.header li button:active {
+    text-decoration: underline;
 }
 
 .header .menu {
@@ -158,7 +163,7 @@ footer {
 }
 
 .header .menu-btn:checked ~ .menu {
-    max-height: 320px;
+    max-height: 640px;
 }
 
 .header .menu-btn:checked ~ .menu-icon .navicon {
@@ -178,6 +183,11 @@ footer {
     top: 0;
 }
 
+/* Hamburger Menu - Button States */
+
+#tab-btn-logout {
+    display: none;
+}
 
 /* General Tab Formatting */
 
@@ -280,6 +290,52 @@ input {
 
 .hist-list {
     font-size: 14px;
+}
+
+/* Modals */
+
+.modal {
+    display: none;
+    flex-direction: column;
+
+    position: absolute;
+    top: 10vh;
+    left: auto;
+    z-index: 4;
+
+    width: 600px;
+
+    padding: 20px;
+
+    background-color: var(--background-light-color);
+
+    border: 1px solid red;
+}
+
+.modal div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.modal div button {
+    width: 40px;
+    height: 40px;
+}
+
+.modal label, .modal input {
+    display: block;
+
+    width: 600px;
+
+    margin: 5px auto;
+}
+
+.modal button {
+    width: 600px;
+
+    margin-top: 10px;
+    padding: 10px 0;
 }
 
 /* Editing Borders */
