@@ -1,17 +1,19 @@
-/* Imports */
+/* === Imports === */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js"
 import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app-check.js";
 import { getDatabase, ref, push, onValue, remove, query, orderByKey, get } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"
 import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"
 
-/* Initialize firebase - 1st code block = DB emulator; 2nd code block = online DB */
+/* === Initialize Firebase === */
 
+/* == Firebase - Local DB Emulator == */
 const app = initializeApp({ projectId: "playground-62567" })
 const database = getDatabase(app)
 if (location.hostname === "localhost") {
     connectDatabaseEmulator(database, "127.0.0.1", 9000)
 }
 
+/* == Firebase - Online DB == */
 // const appSettings = {
 //     databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/",
 //     apiKey: "AIzaSyBF39RJz9HnX_gU2aUhe31IHJz8vp7qnEM",
@@ -33,7 +35,7 @@ if (location.hostname === "localhost") {
 const serviceJobsInDB = ref(database, "weeklyCarChecks/serviceJobs")
 const recordsInDB = ref(database, "weeklyCarChecks/checkRecords")
 
-/* Cross-platform scaling */
+/* === Cross-platform scaling === */
 
 // Determine whether the following code is necessary:
 let siteWidth = window.innerWidth
@@ -41,7 +43,7 @@ let scale = screen.width / siteWidth
 
 document.querySelector('meta[name="viewport"]').setAttribute('content', `width=${siteWidth}, initial-scale=${scale}`)
 
-/* DOM Elements */
+/* === DOM Elements === */
 const tabMenuEl = document.getElementById("tab-menu")
 const tabBtnServiceJobs = document.getElementById("tab-btn-service-jobs")
 const tabBtnAccount = document.getElementById("tab-btn-account") // Retain for displaying account statuses, or move into relevant functions
@@ -54,7 +56,7 @@ const weeklyJobListEl = document.getElementById("weeklies")
 const weeklyCheckBtnEl = document.getElementById("submit-btn")
 const historyEl = document.getElementById("history")
 
-/* Retrieve snapshot from DB */
+/* === Retrieve snapshot from DB === */
 onValue(serviceJobsInDB, function(snapshot) {
     if (snapshot.exists()) {
         let serviceArray = Object.entries(snapshot.val())
@@ -99,10 +101,10 @@ onValue(recordsInDB, function(snapshot) {
     }
 })
 
-/* Set Default Tab */
+/* === Set Default Tab === */
 tabSwitch("tab-weekly-checks")
 
-/* Event Listeners */
+/* === Event Listeners === */
 
 tabMenuEl.addEventListener("click", function(e) {
 
@@ -166,7 +168,7 @@ historyEl.addEventListener("click", (event) => {
     clearRecord('checkRecords', true, recordToClear)
 })
 
-/* Weekly Jobs List */
+/* === Weekly Jobs List === */
 
 const weeklyJobs = [
     "Tyre Pressure",
@@ -183,10 +185,10 @@ const weeklyJobs = [
 let weeklyJobsStatus = {}
 weeklyJobList()
 
-/* Initial Variables */
+/* === Initial Variables === */
 let odoList
 
-/*  Function Declarations */
+/* ===  Function Declarations === */
 
 function tabSwitch(tab) {
     let tabcontent
