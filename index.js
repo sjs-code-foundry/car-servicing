@@ -329,6 +329,21 @@ function mileCalc(odoNum) {
     }
 
     return mileVal
+
+    /* 
+    Current calculation uses the value from a table assembled from
+    odoList, which isn't synced to dates of entry.
+
+    We need a new function that will search through the DB for the
+    mile value from the previous date, and use that in it's calculation.
+
+    To preserve savings on mobile data, we should implement a search
+    function that expands it's scope to previous week/month/year/all
+    time, until it finds the next mile value.
+
+    Otherwise, zero should be returned.
+    */
+
 }
 
 function fieldPlaceholder(field, placeholder) {
