@@ -6,31 +6,33 @@ import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/10.3
 
 /* === Initialize Firebase === */
 
-/* == Firebase - Local DB Emulator == */
-const app = initializeApp({ projectId: "playground-62567" })
-const database = getDatabase(app)
-if (location.hostname === "localhost") {
-    connectDatabaseEmulator(database, "127.0.0.1", 9000)
+const isOffline = true
+
+if (isOffline) {
+    const app = initializeApp({ projectId: "playground-62567" })
+    const database = getDatabase(app)
+    if (location.hostname === "localhost") {
+        connectDatabaseEmulator(database, "127.0.0.1", 9000)
+    }
+} else {
+    const appSettings = {
+        databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/",
+        apiKey: "AIzaSyBF39RJz9HnX_gU2aUhe31IHJz8vp7qnEM",
+        authDomain: "playground-62567.firebaseapp.com",
+        projectId: "playground-62567",
+        storageBucket: "playground-62567.appspot.com",
+        messagingSenderId: "914430038851",
+        appId: "1:914430038851:web:e4e714f50b17a2a2c715f6"
+    }
+    const app = initializeApp(appSettings)
+    const appCheck = initializeAppCheck(app, {
+        provider: new ReCaptchaV3Provider('6Lf50lYoAAAAACBj2HsksvAxrgO8D-GmHDqqhYgl'),
+        isTokenAutoRefreshEnabled: true
+    })
+    const database = getDatabase(app)
 }
 
-/* == Firebase - Online DB == */
-// const appSettings = {
-//     databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/",
-//     apiKey: "AIzaSyBF39RJz9HnX_gU2aUhe31IHJz8vp7qnEM",
-//     authDomain: "playground-62567.firebaseapp.com",
-//     projectId: "playground-62567",
-//     storageBucket: "playground-62567.appspot.com",
-//     messagingSenderId: "914430038851",
-//     appId: "1:914430038851:web:e4e714f50b17a2a2c715f6"
-// }
-// const app = initializeApp(appSettings)
-// const appCheck = initializeAppCheck(app, {
-//     provider: new ReCaptchaV3Provider('6Lf50lYoAAAAACBj2HsksvAxrgO8D-GmHDqqhYgl'),
-//     isTokenAutoRefreshEnabled: true
-// })
-// const database = getDatabase(app)
-
-
+/* == Database Location Refs == */
 
 const serviceJobsInDB = ref(database, "weeklyCarChecks/serviceJobs")
 const recordsInDB = ref(database, "weeklyCarChecks/checkRecords")
