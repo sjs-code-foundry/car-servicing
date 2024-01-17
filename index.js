@@ -51,30 +51,6 @@ function getAppCheck() {
     }
 }
 
-// const app = initializeApp({ projectId: "playground-62567" })
-// const database = getDatabase(app)
-
-
-// if (isOffline) {
-//     // Blank
-// } else {
-//     const appSettings = {
-//         databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/",
-//         apiKey: "AIzaSyBF39RJz9HnX_gU2aUhe31IHJz8vp7qnEM",
-//         authDomain: "playground-62567.firebaseapp.com",
-//         projectId: "playground-62567",
-//         storageBucket: "playground-62567.appspot.com",
-//         messagingSenderId: "914430038851",
-//         appId: "1:914430038851:web:e4e714f50b17a2a2c715f6"
-//     }
-//     const app = initializeApp(appSettings)
-//     const appCheck = initializeAppCheck(app, {
-//         provider: new ReCaptchaV3Provider('6Lf50lYoAAAAACBj2HsksvAxrgO8D-GmHDqqhYgl'),
-//         isTokenAutoRefreshEnabled: true
-//     })
-//     const database = getDatabase(app)
-// }
-
 /* == Database Location Refs == */
 
 const serviceJobsInDB = ref(database, "weeklyCarChecks/serviceJobs")
