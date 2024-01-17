@@ -16,29 +16,64 @@ import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/10.3
 
 const isOffline = true
 
-if (isOffline) {
-    const app = initializeApp({ projectId: "playground-62567" })
-    const database = getDatabase(app)
-    if (location.hostname === "localhost") {
-        connectDatabaseEmulator(database, "127.0.0.1", 9000)
-    }
-} else {
-    const appSettings = {
-        databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/",
-        apiKey: "AIzaSyBF39RJz9HnX_gU2aUhe31IHJz8vp7qnEM",
-        authDomain: "playground-62567.firebaseapp.com",
-        projectId: "playground-62567",
-        storageBucket: "playground-62567.appspot.com",
-        messagingSenderId: "914430038851",
-        appId: "1:914430038851:web:e4e714f50b17a2a2c715f6"
-    }
-    const app = initializeApp(appSettings)
-    const appCheck = initializeAppCheck(app, {
-        provider: new ReCaptchaV3Provider('6Lf50lYoAAAAACBj2HsksvAxrgO8D-GmHDqqhYgl'),
-        isTokenAutoRefreshEnabled: true
-    })
-    const database = getDatabase(app)
+const appSettings = getAppConfig()
+const app = initializeApp(appSettings)
+const appCheck = getAppCheck()
+const database = getDatabase(app)
+if (isOffline && location.hostname === "localhost") {
+    connectDatabaseEmulator(database, "127.0.0.1", 9000)
 }
+
+function getAppConfig() {
+    if (isOffline) {
+        return { projectId: "playground-62567" }
+    } else {
+        return  {
+                    databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/",
+                    apiKey: "AIzaSyBF39RJz9HnX_gU2aUhe31IHJz8vp7qnEM",
+                    authDomain: "playground-62567.firebaseapp.com",
+                    projectId: "playground-62567",
+                    storageBucket: "playground-62567.appspot.com",
+                    messagingSenderId: "914430038851",
+                    appId: "1:914430038851:web:e4e714f50b17a2a2c715f6"
+                }
+    }
+}
+
+function getAppCheck() {
+    if (isOffline) {
+        // AppCheck not needed
+    } else {
+        return initializeAppCheck(app, {
+            provider: new ReCaptchaV3Provider('6Lf50lYoAAAAACBj2HsksvAxrgO8D-GmHDqqhYgl'),
+            isTokenAutoRefreshEnabled: true
+        })
+    }
+}
+
+// const app = initializeApp({ projectId: "playground-62567" })
+// const database = getDatabase(app)
+
+
+// if (isOffline) {
+//     // Blank
+// } else {
+//     const appSettings = {
+//         databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/",
+//         apiKey: "AIzaSyBF39RJz9HnX_gU2aUhe31IHJz8vp7qnEM",
+//         authDomain: "playground-62567.firebaseapp.com",
+//         projectId: "playground-62567",
+//         storageBucket: "playground-62567.appspot.com",
+//         messagingSenderId: "914430038851",
+//         appId: "1:914430038851:web:e4e714f50b17a2a2c715f6"
+//     }
+//     const app = initializeApp(appSettings)
+//     const appCheck = initializeAppCheck(app, {
+//         provider: new ReCaptchaV3Provider('6Lf50lYoAAAAACBj2HsksvAxrgO8D-GmHDqqhYgl'),
+//         isTokenAutoRefreshEnabled: true
+//     })
+//     const database = getDatabase(app)
+// }
 
 /* == Database Location Refs == */
 
