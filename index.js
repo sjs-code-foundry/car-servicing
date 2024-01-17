@@ -1,7 +1,15 @@
 /* === Imports === */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js"
-import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app-check.js";
-import { getDatabase, ref, push, onValue, remove, query, orderByKey, get } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"
+import { initializeAppCheck,
+         ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app-check.js";
+import { getDatabase,
+         ref,
+         push,
+         onValue,
+         remove,
+         query,
+         orderByKey,
+         get } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"
 import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"
 
 /* === Initialize Firebase === */
