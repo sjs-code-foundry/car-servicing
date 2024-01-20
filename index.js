@@ -77,6 +77,8 @@ const weeklyJobListEl = document.getElementById("weeklies")
 const weeklyCheckBtnEl = document.getElementById("submit-btn")
 const historyEl = document.getElementById("history")
 
+// Check each of these to see if they can be called locally to relevant functions - will speed up the page
+
 /* === Retrieve snapshot from DB === */
 onValue(serviceJobsInDB, function(snapshot) {
     if (snapshot.exists()) {
@@ -95,7 +97,7 @@ onValue(serviceJobsInDB, function(snapshot) {
         tabBtnServiceJobs.textContent = `Servicing Jobs (${serviceArray.length})`
 
     } else {
-        serviceTasksEl.innerHTML = "All tasks complete!"
+        serviceTasksEl.innerHTML = "All tasks complete!" // replace with textContent
 
         tabBtnServiceJobs.textContent = "Servicing Jobs"
     }
@@ -107,7 +109,7 @@ onValue(recordsInDB, function(snapshot) {
     
         clearListEl(historyEl)
 
-        odoList = []
+        odoList = [] // This will be replaced by getting the actual data and calculating miles from previous entry
 
         for (let i = 0; i < recordArray.length; i++) {
             let currentRecord = recordArray[i]
@@ -118,9 +120,11 @@ onValue(recordsInDB, function(snapshot) {
         sortList(historyEl, true)
 
     } else {
-        historyEl.innerHTML = "No Records!"
+        historyEl.innerHTML = "No Records!" // replace with textContent
     }
 })
+
+// Both above functions will be replaced by equivalents for Firestore
 
 /* === Set Default Tab === */
 tabSwitch("tab-weekly-checks")
@@ -136,7 +140,7 @@ tabMenuEl.addEventListener("click", function(e) {
             modalDisplay(targetEl)
 
             targetEl.addEventListener("click", function(e) {
-                if (e.target.nodeName === "BUTTON") {
+                if (e.target.nodeName === "BUTTON") { // Add check for classlist item "close" or similar to ensure it's a close button
                     if (e.target.dataset.target) {
                         modalClose(targetEl)
                     } // Perhaps refactor at some point?
@@ -167,7 +171,7 @@ weeklyCheckBtnEl.addEventListener("click", function() {
         date:fieldPlaceholder(dateFieldEl, "0000-00-00"),
         miles:fieldPlaceholder(odoFieldEl, "00000"),
         weeklies:weeklyJobsStatus
-    }
+    } // Put this and the push command below into a dedicated function
 
     push(recordsInDB, weeklyArray)
 
@@ -183,6 +187,13 @@ historyEl.addEventListener("click", (event) => {
     if (!isButton) {
         return
     }
+
+    // if (event.target.nodeName === "BUTTON") {
+        // Run code below
+    //}
+    // else {
+        // return
+    //}
     
     let recordToClear = `${event.target.id}`
     recordToClear = recordToClear.substring(4)
@@ -207,15 +218,16 @@ let weeklyJobsStatus = {}
 weeklyJobList()
 
 /* === Initial Variables === */
-let odoList
+let odoList // Will be made redundant with Firestore
 
 /* ===  Function Declarations === */
 
-function tabSwitch(tab) {
+function tabSwitch(tab) { // Have this one call two functions, one setting all tabs to display:none, the other setting the target tab to display:block
     let tabcontent
+    // const tabcontent = document.getElementsByClassName("tabcontent")
 
     tabcontent = document.getElementsByClassName("tabcontent")
-    for (let i = 0; i < tabcontent.length; i++) {
+    for (let i = 0; i < tabcontent.length; i++) { // for (tab of tabcontent) {
         tabcontent[i].style.display = "none"
     }
 
@@ -224,9 +236,10 @@ function tabSwitch(tab) {
 }
 
 function serviceJobAppend(job) {
-    let itemID = job[0]
-    let itemValue = job[1]
+    let itemID = job[0] // const
+    let itemValue = job[1] // const
 
+    // Code beyond this point should be it's own function
     let newEl = document.createElement("li")
 
     newEl.setAttribute("class", "service-job")
