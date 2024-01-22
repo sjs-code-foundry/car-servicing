@@ -227,55 +227,53 @@ function allTabClose(tabs) {
     for (let tab of tabs) {
         tab.style.display = "none"
     }
-    
+
 }
 
 function serviceJobAppend(job) {
-    let itemID = job[0] // const
-    let itemValue = job[1] // const
 
-    // Code beyond this point should be it's own function, perhaps a function that deals with both WC and SJ lists
-    let newEl = document.createElement("li")
+    const jobID = job[0]
+    const jobText = job[1]
 
-    newEl.setAttribute("class", "service-job")
+    const jobAttr = [ ["class", "service-job"] ]
 
-    newEl.textContent = itemValue
+    let newEl = addLiElToList(jobAttr, false, jobText)
 
     newEl.addEventListener("click", function() {
-        clearRecord('serviceJobs', false, itemID)
+        clearRecord('serviceJobs', false, jobID)
     })
 
     serviceTasksEl.append(newEl)
+
 }
 
 function weeklyJobList() {
-    for (let i = 0; i < weeklyJobs.length; i++) { // for (job in weeklyJobs) {
-        let newEl = document.createElement("li")
 
-        newEl.setAttribute("class", "weekly-job") // In new function, set attributes with a for loop taking attributes as an array of [type, value]
-        newEl.setAttribute("id", `wJ-${weeklyJobs[i]}`)
+    for (let job in weeklyJobs) {
 
-        newEl.textContent = weeklyJobs[i]
+        const weeklyJobAttrs = [ ["class", "weekly-job"], ["id", `wJ-${weeklyJobs[job]}`] ]
+
+        let newEl = addLiElToList(weeklyJobAttrs, false, weeklyJobs[job])
         
-        weeklyJobsStatus[`${weeklyJobs[i]}`] = false
+        weeklyJobsStatus[`${weeklyJobs[job]}`] = false
 
         newEl.addEventListener("click", function() {
-            weeklyJobBtnSwitch(weeklyJobs[i])
+            weeklyJobBtnSwitch(weeklyJobs[job])
         })
 
         weeklyJobListEl.append(newEl)
+
     }
+
 }
 
-/*
-Example function for creating new elements:
+function addLiElToList(attrList, isHTML, text) {
 
-function addLiElToList(attrList, isHTML, text, eventListenerFunc) {
     let newEl = document.createElement("li")
 
     if (attrList) {
-        for (attr in attrList) {
-            newEl.setAttribute(attr[0], attr[1])
+        for (let attr in attrList) {
+            newEl.setAttribute(attrList[attr][0], attrList[attr][1])
         }
     }
 
@@ -284,14 +282,10 @@ function addLiElToList(attrList, isHTML, text, eventListenerFunc) {
     } else {
         newEl.textContent = text
     }
-    
-    if (eventListenerFunc) {
-        newEl.addEventListener("click", function() {
-            eventListenerFunc
-        })
-    }
+
+    return newEl
+
 }
-*/
 
 function weeklyJobBtnSwitch(jobID) {
     if (weeklyJobsStatus[`${jobID}`] === false) {
@@ -335,26 +329,24 @@ function weeklyJobPercent(weeklies) {
 }
 
 function recordAdd(record, odoNum) {
-    let recordID = record[0]
-    let recordDate = record[1].date
-    let recordMiles = record[1].miles
-    let recordWeeklies = record[1].weeklies
+        
+    const recordID = record[0]
 
-    odoList.push(recordMiles) // Will be made redundant
+    odoList.push(record[1].miles) // Will be made redundant
 
-    // Use the newEl function prototyped above ^^^
-    let newEl = document.createElement("li")
-
-    newEl.setAttribute("class", "hist-list")
-
-    newEl.innerHTML = `
-        <p>${recordDate}</p>
-        <p>${recordMiles}</p>
+    const recordHTML =  `
+        <p>${record[1].date}</p>
+        <p>${record[1].miles}</p>
         <p>${mileCalc(odoNum)}</p>
-        <p>Jobs Done: ${weeklyJobPercent(recordWeeklies)}%</p>
+        <p>Jobs Done: ${weeklyJobPercent(record[1].weeklies)}%</p>
         <button id="del-${recordID}">X</button>`
 
+    const histAttr = [ ["class", "hist-list"] ]
+
+    let newEl = addLiElToList(histAttr, true, recordHTML)
+
     historyEl.append(newEl)
+    
 }
 
 function mileCalc(odoNum) {
