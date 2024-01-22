@@ -187,7 +187,7 @@ historyEl.addEventListener("click", (e) => {
     else {
         return
     }
-    
+
 })
 
 /* === Weekly Jobs List === */
@@ -212,17 +212,22 @@ let odoList // Will be made redundant with Firestore
 
 /* ===  Function Declarations === */
 
-function tabSwitch(tab) { // Have this one call two functions, one setting all tabs to display:none, the other setting the target tab to display:block
-    let tabcontent
-    // const tabcontent = document.getElementsByClassName("tabcontent")
+function tabSwitch(tab) {
 
-    tabcontent = document.getElementsByClassName("tabcontent")
-    for (let i = 0; i < tabcontent.length; i++) { // for (tab of tabcontent) {
-        tabcontent[i].style.display = "none"
+    const tabs = document.getElementsByClassName("tabcontent")
+
+    allTabClose(tabs)
+
+    document.getElementById(tab).style.display = "block"
+
+}
+
+function allTabClose(tabs) {
+
+    for (let tab of tabs) {
+        tab.style.display = "none"
     }
-
-    let targetTab = document.getElementById(tab)
-    targetTab.style.display = "block"
+    
 }
 
 function serviceJobAppend(job) {
