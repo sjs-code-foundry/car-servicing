@@ -239,7 +239,7 @@ function serviceJobAppend(job) {
     let itemID = job[0] // const
     let itemValue = job[1] // const
 
-    // Code beyond this point should be it's own function
+    // Code beyond this point should be it's own function, perhaps a function that deals with both WC and SJ lists
     let newEl = document.createElement("li")
 
     newEl.setAttribute("class", "service-job")
@@ -254,10 +254,10 @@ function serviceJobAppend(job) {
 }
 
 function weeklyJobList() {
-    for (let i = 0; i < weeklyJobs.length; i++) {
+    for (let i = 0; i < weeklyJobs.length; i++) { // for (job in weeklyJobs) {
         let newEl = document.createElement("li")
 
-        newEl.setAttribute("class", "weekly-job")
+        newEl.setAttribute("class", "weekly-job") // In new function, set attributes with a for loop taking attributes as an array of [type, value]
         newEl.setAttribute("id", `wJ-${weeklyJobs[i]}`)
 
         newEl.textContent = weeklyJobs[i]
@@ -271,6 +271,32 @@ function weeklyJobList() {
         weeklyJobListEl.append(newEl)
     }
 }
+
+/*
+Example function for creating new elements:
+
+function addLiElToList(attrList, isHTML, text, eventListenerFunc) {
+    let newEl = document.createElement("li")
+
+    if (attrList) {
+        for (attr in attrList) {
+            newEl.setAttribute(attr[0], attr[1])
+        }
+    }
+
+    if (isHTML) {
+        newEl.innerHTML = text
+    } else {
+        newEl.textContent = text
+    }
+    
+    if (eventListenerFunc) {
+        newEl.addEventListener("click", function() {
+            eventListenerFunc
+        })
+    }
+}
+*/
 
 function weeklyJobBtnSwitch(jobID) {
     if (weeklyJobsStatus[`${jobID}`] === false) {
@@ -299,6 +325,7 @@ function weeklyJobPercent(weeklies) {
     for (let key in weeklies) {
         wJTotal++
     }
+    // Previous code can be replaced with weeklies.length
 
     let wJDone = 0
     for (let key in weeklies) {
@@ -318,8 +345,9 @@ function recordAdd(record, odoNum) {
     let recordMiles = record[1].miles
     let recordWeeklies = record[1].weeklies
 
-    odoList.push(recordMiles)
+    odoList.push(recordMiles) // Will be made redundant
 
+    // Use the newEl function prototyped above ^^^
     let newEl = document.createElement("li")
 
     newEl.setAttribute("class", "hist-list")
@@ -359,7 +387,8 @@ function mileCalc(odoNum) {
 
 }
 
-function fieldPlaceholder(field, placeholder) {
+function fieldPlaceholder(field, placeholder) { // Perhaps change name to make it clear that this inserts a placeholder into the record
+    // It does not pertain to the placeholder in the HTML input field
     if (field.value != "") {
         return field.value
     } else {
@@ -371,13 +400,12 @@ function sortList(listEl, descOrd) {
     let shouldSwitch, i, listItems
     let switching = true
     
-
     while (switching) {
-        switching = false
+        switching = false // Confusing, rewrite so that other devs don't think the while loop cancels immediately
         listItems = listEl.getElementsByTagName("LI")
 
-        for (i = 0; i < (listItems.length - 1); i++) {
-            shouldSwitch = false
+        for (i = 0; i < (listItems.length - 1); i++) { // for (item in listItems) {
+            shouldSwitch = false // Items should not be switched by default
 
             let switchCond
             if (descOrd === true) {
@@ -407,18 +435,10 @@ function clearFieldEl(field) {
     field.value = ""
 }
 
-function clearRecord(list, askDel, rec) {
-    let listInDB = ref(database, `weeklyCarChecks/${list}`)
-    let exactLocationInDB = ref(database, `weeklyCarChecks/${list}/${rec}`)
+function clearRecord(list, askDel, rec) { // Expand out the names used here to clarify to the user what is going on
+    let listInDB = ref(database, `weeklyCarChecks/${list}`) // Delete - redundant
+    let exactLocationInDB = ref(database, `weeklyCarChecks/${list}/${rec}`) // const
     let delAns
-
-    // let delVal = query(listInDB, orderByKey(rec))
-    // get(delVal).then((snapshot) => {
-    //     console.log(snapshot.val)
-    // })
-    // console.log(delVal) // Returns object data, not actual value
-
-    // console.log(exactLocationInDB)
 
     if (askDel) {
         delAns = confirm("Delete this record?")
