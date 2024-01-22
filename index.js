@@ -132,10 +132,13 @@ tabMenuEl.addEventListener("click", function(e) {
             modalDisplay(targetEl)
 
             targetEl.addEventListener("click", function(e) {
-                if (e.target.nodeName === "BUTTON") { // Add check for classlist item "close" or similar to ensure it's a close button
+                const isButton = (e.target.nodeName === "BUTTON")
+                const isCloseButton = (e.target.classList.contains("close-btn"))
+                
+                if (isButton && isCloseButton) {
                     if (e.target.dataset.target) {
                         modalClose(targetEl)
-                    } // Perhaps refactor at some point?
+                    }
                 }
             })
         } else {
