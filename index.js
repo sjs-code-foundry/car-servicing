@@ -177,22 +177,17 @@ weeklyCheckBtnEl.addEventListener("click", function() {
     weeklyJobBtnReset()
 })
 
-historyEl.addEventListener("click", (event) => {
-    const isButton = event.target.nodeName === "BUTTON"
-    if (!isButton) {
+historyEl.addEventListener("click", (e) => {
+
+    if (e.target.nodeName === "BUTTON") {
+        let recordToClear = `${e.target.id}`
+        recordToClear = recordToClear.substring(4)
+        clearRecord('checkRecords', true, recordToClear)
+    }
+    else {
         return
     }
-
-    // if (event.target.nodeName === "BUTTON") {
-        // Run code below
-    //}
-    // else {
-        // return
-    //}
     
-    let recordToClear = `${event.target.id}`
-    recordToClear = recordToClear.substring(4)
-    clearRecord('checkRecords', true, recordToClear)
 })
 
 /* === Weekly Jobs List === */
