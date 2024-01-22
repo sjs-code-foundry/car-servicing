@@ -56,14 +56,6 @@ function getAppCheck() {
 const serviceJobsInDB = ref(database, "weeklyCarChecks/serviceJobs")
 const recordsInDB = ref(database, "weeklyCarChecks/checkRecords")
 
-/* === Cross-platform scaling === */
-
-// Determine whether the following code is necessary:
-let siteWidth = window.innerWidth
-let scale = screen.width / siteWidth
-
-document.querySelector('meta[name="viewport"]').setAttribute('content', `width=${siteWidth}, initial-scale=${scale}`)
-
 /* === DOM Elements === */
 const tabMenuEl = document.getElementById("tab-menu")
 const tabBtnServiceJobs = document.getElementById("tab-btn-service-jobs")
