@@ -162,19 +162,16 @@ serviceBtnEl.addEventListener("click", function() {
 
 weeklyCheckBtnEl.addEventListener("click", function() {
 
-    let weeklyArray = {
-        date:fieldPlaceholder(dateFieldEl, "0000-00-00"),
-        miles:fieldPlaceholder(odoFieldEl, "00000"),
-        weeklies:weeklyJobsStatus
-    } // Put this and the push command below into a dedicated function
+    let currentArray = new WeeklyArray()
 
-    push(recordsInDB, weeklyArray)
+    push(recordsInDB, currentArray)
 
-    alert(`Weekly Check for ${weeklyArray.date} added!`)
+    alert(`Weekly Check for ${currentArray.date} added!`)
 
     clearFieldEl(dateFieldEl)
     clearFieldEl(odoFieldEl)
     weeklyJobBtnReset()
+    
 })
 
 historyEl.addEventListener("click", (e) => {
@@ -209,6 +206,14 @@ weeklyJobList()
 
 /* === Initial Variables === */
 let odoList // Will be made redundant with Firestore
+
+/* ===  Object Constructors === */
+
+function WeeklyArray() {
+    this.date = recordKeyPlaceholder(dateFieldEl, "0000-00-00")
+    this.miles = recordKeyPlaceholder(odoFieldEl, "00000")
+    this.weeklies = weeklyJobsStatus
+}
 
 /* ===  Function Declarations === */
 
@@ -314,7 +319,6 @@ function weeklyJobPercent(weeklies) {
     for (let key in weeklies) {
         wJTotal++
     }
-    // Previous code can be replaced with weeklies.length
 
     let wJDone = 0
     for (let key in weeklies) {
@@ -374,7 +378,7 @@ function mileCalc(odoNum) {
 
 }
 
-function fieldPlaceholder(field, placeholder) { // Perhaps change name to make it clear that this inserts a placeholder into the record
+function recordKeyPlaceholder(field, placeholder) { // Perhaps change name to make it clear that this inserts a placeholder into the record
     // It does not pertain to the placeholder in the HTML input field
     if (field.value != "") {
         return field.value
@@ -382,6 +386,8 @@ function fieldPlaceholder(field, placeholder) { // Perhaps change name to make i
         return placeholder
     }
 }
+
+
 
 function sortList(listEl, descOrd) {
     let shouldSwitch, i, listItems
