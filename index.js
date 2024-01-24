@@ -106,8 +106,12 @@ onValue(recordsInDB, function(snapshot) {
         for (let i = 0; i < recordArray.length; i++) {
             let currentRecord = recordArray[i]
 
-            recordAdd(currentRecord, i)
+            recordList.push(new RecordListing(currentRecord))
+
+            recordAdd(currentRecord, i) // This will be done after the various calcs have been done to recordList
         }
+
+        recordListCalcs(recordList)
 
         sortList(historyEl, true)
 
@@ -205,7 +209,9 @@ let weeklyJobsStatus = {}
 weeklyJobList()
 
 /* === Initial Variables === */
+
 let odoList // Will be made redundant with Firestore
+let recordList = []
 
 /* ===  Object Constructors === */
 
@@ -214,6 +220,52 @@ function WeeklyArray() {
     this.miles = recordKeyPlaceholder(odoFieldEl, "00000")
     this.weeklies = weeklyJobsStatus
 }
+
+/*
+My idea is to change the onValue snapshot from adding to the weekly history
+tab directly, to adding to an array which is referenced by all on-page
+functions.
+
+This also simplifies the calculation of miles, as it can now account for
+the dates that the records have and are sorted accordingly.
+
+Chain of events:
+- Snapshot obtained
+- Record list constructed
+- Record list sorted by date
+- Odometer differences calculated
+- Weekly job percents calculated
+- Records displayed
+*/
+
+function RecordListing(record) {
+    this.ID = record[0]
+    this.date = record[1].date
+    this.miles = record[1].miles
+    this.milesTravelled = 0
+    this.weeklies = record[1].weeklies
+}
+
+// function recordAdd(record, odoNum) {
+        
+//     const recordID = record[0]
+
+//     odoList.push(record[1].miles) // Will be made redundant
+
+//     const recordHTML =  `
+//         <p>${record[1].date}</p>
+//         <p>${record[1].miles}</p>
+//         <p>${mileCalc(odoNum)}</p>
+//         <p>Jobs Done: ${weeklyJobPercent(record[1].weeklies)}%</p>
+//         <button id="del-${recordID}">X</button>`
+
+//     const histAttr = [ ["class", "hist-list"] ]
+
+//     let newEl = addLiElToList(histAttr, true, recordHTML)
+
+//     historyEl.append(newEl)
+    
+// }
 
 /* ===  Function Declarations === */
 
@@ -387,8 +439,6 @@ function recordKeyPlaceholder(field, placeholder) {
     }
 }
 
-
-
 function sortList(listEl, descOrd) {
     let shouldSwitch, i, listItems
     let switching = true
@@ -428,7 +478,7 @@ function clearFieldEl(field) {
     field.value = ""
 }
 
-function clearRecord(list, askIfDelete, recordID) { // Expand out the names used here to clarify to the user what is going on
+function clearRecord(list, askIfDelete, recordID) {
     
     const exactLocationInDB = ref(database, `weeklyCarChecks/${list}/${recordID}`)
     let deleteDecision
@@ -450,5 +500,27 @@ function modalDisplay(targetModal) {
 
 function modalClose(targetModal) {
     targetModal.style.display = "none"
+}
+
+function recordListCalcs(recordList) {
+    
+    recordListSortByDate(recordList)
+
+    // Calculate milesTravelled
+
+    // Turn weeklies into a percentage value
+
+    console.log(recordList)
+
+    return recordList
+
+}
+
+function recordListSortByDate(recordList) {
+
+    for (let record in recordList) {
+        console.log(recordList[record].date) // Displays dates
+    }
+
 }
 
