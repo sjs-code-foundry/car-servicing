@@ -171,7 +171,7 @@ weeklyCheckBtnEl.addEventListener("click", function() {
     clearFieldEl(dateFieldEl)
     clearFieldEl(odoFieldEl)
     weeklyJobBtnReset()
-    
+
 })
 
 historyEl.addEventListener("click", (e) => {
@@ -378,8 +378,8 @@ function mileCalc(odoNum) {
 
 }
 
-function recordKeyPlaceholder(field, placeholder) { // Perhaps change name to make it clear that this inserts a placeholder into the record
-    // It does not pertain to the placeholder in the HTML input field
+function recordKeyPlaceholder(field, placeholder) {
+    
     if (field.value != "") {
         return field.value
     } else {
@@ -394,10 +394,10 @@ function sortList(listEl, descOrd) {
     let switching = true
     
     while (switching) {
-        switching = false // Confusing, rewrite so that other devs don't think the while loop cancels immediately
+        switching = false // If switch conditions are not met, while loop should end by default
         listItems = listEl.getElementsByTagName("LI")
 
-        for (i = 0; i < (listItems.length - 1); i++) { // for (item in listItems) {
+        for (i = 0; i < (listItems.length - 1); i++) {
             shouldSwitch = false // Items should not be switched by default
 
             let switchCond
@@ -428,18 +428,18 @@ function clearFieldEl(field) {
     field.value = ""
 }
 
-function clearRecord(list, askDel, rec) { // Expand out the names used here to clarify to the user what is going on
-    let listInDB = ref(database, `weeklyCarChecks/${list}`) // Delete - redundant
-    let exactLocationInDB = ref(database, `weeklyCarChecks/${list}/${rec}`) // const
-    let delAns
+function clearRecord(list, askIfDelete, recordID) { // Expand out the names used here to clarify to the user what is going on
+    
+    const exactLocationInDB = ref(database, `weeklyCarChecks/${list}/${recordID}`)
+    let deleteDecision
 
-    if (askDel) {
-        delAns = confirm("Delete this record?")
+    if (askIfDelete) {
+        deleteDecision = confirm("Delete this record?")
     } else {
-        delAns = true
+        deleteDecision = true
     }
 
-    if (delAns) {
+    if (deleteDecision) {
         remove(exactLocationInDB)
     }
 }
