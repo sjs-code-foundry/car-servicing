@@ -25,3 +25,4 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 - [x] Refactor tabs to be self-contained in index.html (v0.3.2-alpha)
 - [ ] Double click copies values from Weekly Check record table (v0.3.2-alpha)
 - [ ] Convert all text & element sizes to em for better scalability across devices (v0.3.2-alpha)
+- [ ] Blank out buttons so that user cannot enter two weekly checks on the same day (v0.3.2-alpha)

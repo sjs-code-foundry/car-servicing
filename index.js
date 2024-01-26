@@ -73,15 +73,19 @@ const historyEl = document.getElementById("history")
 
 /* === Retrieve snapshot from DB === */
 onValue(serviceJobsInDB, function(snapshot) {
+
     if (snapshot.exists()) {
+
         let serviceArray = Object.entries(snapshot.val())
     
         clearListEl(serviceTasksEl)
 
         for (let i = 0; i < serviceArray.length; i++) {
+
             let currentItem = serviceArray[i]
 
             serviceJobAppend(currentItem)
+
         }
 
         sortList(serviceTasksEl, false)
@@ -89,14 +93,19 @@ onValue(serviceJobsInDB, function(snapshot) {
         tabBtnServiceJobs.textContent = `Servicing Jobs (${serviceArray.length})`
 
     } else {
+
         serviceTasksEl.innerHTML = "All tasks complete!" // replace with textContent
 
         tabBtnServiceJobs.textContent = "Servicing Jobs"
+
     }
+
 })
 
 onValue(recordsInDB, function(snapshot) {
+
     if (snapshot.exists()) {
+
         let recordArray = Object.entries(snapshot.val())
     
         clearListEl(historyEl)
@@ -108,16 +117,27 @@ onValue(recordsInDB, function(snapshot) {
 
             recordList.push(new RecordListing(currentRecord))
 
-            recordAdd(currentRecord, i) // This will be done after the various calcs have been done to recordList
+            //recordAdd(currentRecord, i) // This will be done after the various calcs have been done to recordList
         }
+
+        // for (let record of recordArray) {
+        //     recordList.push(new RecordListing(recordArray[record]))
+        // }
 
         recordListCalcs(recordList)
 
-        sortList(historyEl, true)
+        for (let i = 0; i < recordList.length; i++) { // try this: (let i = recordList.length; i = 0; i--)
+            recordAdd(recordList[i]) // Modify to sort by recent dates first
+        }
+
+        // sortList(historyEl, true)
 
     } else {
+
         historyEl.innerHTML = "No Records!" // replace with textContent
+
     }
+
 })
 
 // Both above functions will be replaced by equivalents for Firestore
@@ -384,18 +404,16 @@ function weeklyJobPercent(weeklies) {
     return wJP
 }
 
-function recordAdd(record, odoNum) {
-        
-    const recordID = record[0]
+function recordAdd(record) {
 
-    odoList.push(record[1].miles) // Will be made redundant
+    //odoList.push(record[1].miles) // Will be made redundant
 
     const recordHTML =  `
-        <p>${record[1].date}</p>
-        <p>${record[1].miles}</p>
-        <p>${mileCalc(odoNum)}</p>
-        <p>Jobs Done: ${weeklyJobPercent(record[1].weeklies)}%</p>
-        <button id="del-${recordID}">X</button>`
+        <p>${record.date}</p>
+        <p>${record.miles}</p>
+        <p>${record.milesTravelled}</p>
+        <p>Jobs Done: ${record.weeklies}%</p>
+        <button id="del-${record.ID}">X</button>`
 
     const histAttr = [ ["class", "hist-list"] ]
 
@@ -506,9 +524,9 @@ function recordListCalcs(recordList) {
     
     recordListSortByDate(recordList)
 
-    // Calculate milesTravelled
+    recordListCalculateMiles(recordList)
 
-    // Turn weeklies into a percentage value
+    recordListCalculateJobPercentage(recordList)
 
     console.log(recordList)
 
@@ -518,8 +536,48 @@ function recordListCalcs(recordList) {
 
 function recordListSortByDate(recordList) {
 
+    recordList.sort(function(a, b) {
+
+        let keyA = new String(a.date)
+        let keyB = new String(b.date)
+        // Compare the two dates
+        if (keyA < keyB) {
+            return -1
+        } else if (keyA > keyB) {
+            return 1
+        } else { // Dates are equal
+            return 0
+        }
+
+    })
+
+}
+
+function recordListCalculateMiles(recordList) {
+
     for (let record in recordList) {
-        console.log(recordList[record].date) // Displays dates
+
+        let currentMiles = recordList[record].miles
+        let previousMiles = 0
+
+        try {
+            previousMiles = recordList[record-1].miles
+        } catch {
+            previousMiles = 0
+        }
+        
+        recordList[record].milesTravelled = currentMiles - previousMiles
+
+    }
+
+}
+
+function recordListCalculateJobPercentage(recordList) {
+    
+    for (let record in recordList) {
+
+        recordList[record].weeklies = weeklyJobPercent(recordList[record].weeklies)
+
     }
 
 }
