@@ -94,7 +94,7 @@ onValue(serviceJobsInDB, function(snapshot) {
 
     } else {
 
-        serviceTasksEl.innerHTML = "All tasks complete!" // replace with textContent
+        serviceTasksEl.textContent = "All tasks complete!"
 
         tabBtnServiceJobs.textContent = "Servicing Jobs"
 
@@ -235,23 +235,6 @@ function WeeklyArray() {
     this.weeklies = weeklyJobsStatus
 }
 
-/*
-My idea is to change the onValue snapshot from adding to the weekly history
-tab directly, to adding to an array which is referenced by all on-page
-functions.
-
-This also simplifies the calculation of miles, as it can now account for
-the dates that the records have and are sorted accordingly.
-
-Chain of events:
-- Snapshot obtained
-- Record list constructed
-- Record list sorted by date
-- Odometer differences calculated
-- Weekly job percents calculated
-- Records displayed
-*/
-
 function RecordListing(record) {
     this.ID = record[0]
     this.date = record[1].date
@@ -259,27 +242,6 @@ function RecordListing(record) {
     this.milesTravelled = 0
     this.weeklies = record[1].weeklies
 }
-
-// function recordAdd(record, odoNum) {
-        
-//     const recordID = record[0]
-
-//     odoList.push(record[1].miles) // Will be made redundant
-
-//     const recordHTML =  `
-//         <p>${record[1].date}</p>
-//         <p>${record[1].miles}</p>
-//         <p>${mileCalc(odoNum)}</p>
-//         <p>Jobs Done: ${weeklyJobPercent(record[1].weeklies)}%</p>
-//         <button id="del-${recordID}">X</button>`
-
-//     const histAttr = [ ["class", "hist-list"] ]
-
-//     let newEl = addLiElToList(histAttr, true, recordHTML)
-
-//     historyEl.append(newEl)
-    
-// }
 
 /* ===  Function Declarations === */
 
@@ -400,8 +362,6 @@ function weeklyJobPercent(weeklies) {
 
 function recordAdd(record) {
 
-    //odoList.push(record[1].miles) // Will be made redundant
-
     const recordHTML =  `
         <p>${record.date}</p>
         <p>${record.miles}</p>
@@ -415,31 +375,6 @@ function recordAdd(record) {
 
     historyEl.append(newEl)
     
-}
-
-function mileCalc(odoNum) {
-    let mileVal = odoList[odoNum] - odoList[odoNum - 1]
-
-    if (isNaN(mileVal)) {
-        return 0
-    }
-
-    return mileVal
-
-    /* 
-    Current calculation uses the value from a table assembled from
-    odoList, which isn't synced to dates of entry.
-
-    We need a new function that will search through the DB for the
-    mile value from the previous date, and use that in it's calculation.
-
-    To preserve savings on mobile data, we should implement a search
-    function that expands it's scope to previous week/month/year/all
-    time, until it finds the next mile value.
-
-    Otherwise, zero should be returned.
-    */
-
 }
 
 function recordKeyPlaceholder(field, placeholder) {
