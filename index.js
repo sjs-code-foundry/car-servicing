@@ -242,6 +242,8 @@ function RecordListing(record) {
 
 /* ===  Function Declarations === */
 
+/* ==  Tab Functions == */
+
 function tabSwitch(tab) {
 
     const tabs = document.getElementsByClassName("tabcontent")
@@ -259,6 +261,18 @@ function allTabClose(tabs) {
     }
 
 }
+
+/* ==  Modal Functions == */
+
+function modalDisplay(targetModal) {
+    targetModal.style.display = "flex"
+}
+
+function modalClose(targetModal) {
+    targetModal.style.display = "none"
+}
+
+/* ==  Job/Check List Functions == */
 
 function serviceJobAppend(job) {
 
@@ -297,66 +311,6 @@ function weeklyJobList() {
 
 }
 
-function addLiElToList(attrList, isHTML, text) {
-
-    let newEl = document.createElement("li")
-
-    if (attrList) {
-        for (let attr in attrList) {
-            newEl.setAttribute(attrList[attr][0], attrList[attr][1])
-        }
-    }
-
-    if (isHTML) {
-        newEl.innerHTML = text
-    } else {
-        newEl.textContent = text
-    }
-
-    return newEl
-
-}
-
-function weeklyJobBtnSwitch(jobID) {
-    if (weeklyJobsStatus[`${jobID}`] === false) {
-        document.getElementById(`wJ-${jobID}`).style.backgroundColor = "var(--accent-light-color)"
-        document.getElementById(`wJ-${jobID}`).style.color = "var(--background-light-color)"
-        weeklyJobsStatus[`${jobID}`] = true
-    } else if (weeklyJobsStatus[`${jobID}`] === true) {
-        document.getElementById(`wJ-${jobID}`).style.backgroundColor = "var(--background-light-color)"
-        document.getElementById(`wJ-${jobID}`).style.color = "var(--text-light-color)"
-        weeklyJobsStatus[`${jobID}`] = false
-    }
-}
-
-function weeklyJobBtnReset() {
-    for (let i = 0; i < weeklyJobs.length; i++) {
-        let jobStatus = weeklyJobsStatus[`${weeklyJobs[i]}`]
-
-        if (jobStatus === true) {
-            weeklyJobBtnSwitch(weeklyJobs[i])
-        }
-    }
-}
-
-function weeklyJobPercent(weeklies) {
-    let wJTotal = 0
-    for (let key in weeklies) {
-        wJTotal++
-    }
-
-    let wJDone = 0
-    for (let key in weeklies) {
-        if (weeklies.hasOwnProperty(key) && weeklies[key] === true) {
-            wJDone++
-        }
-    }
-
-    let wJP = (wJDone / wJTotal) * 100
-
-    return wJP
-}
-
 function recordAdd(record) {
 
     const recordHTML =  `
@@ -381,6 +335,26 @@ function recordKeyPlaceholder(field, placeholder) {
     } else {
         return placeholder
     }
+}
+
+function addLiElToList(attrList, isHTML, text) {
+
+    let newEl = document.createElement("li")
+
+    if (attrList) {
+        for (let attr in attrList) {
+            newEl.setAttribute(attrList[attr][0], attrList[attr][1])
+        }
+    }
+
+    if (isHTML) {
+        newEl.innerHTML = text
+    } else {
+        newEl.textContent = text
+    }
+
+    return newEl
+
 }
 
 function sortList(listEl, descOrd) {
@@ -438,13 +412,31 @@ function clearRecord(list, askIfDelete, recordID) {
     }
 }
 
-function modalDisplay(targetModal) {
-    targetModal.style.display = "flex"
+/* ==  Weekly Job Button Functions == */
+
+function weeklyJobBtnSwitch(jobID) {
+    if (weeklyJobsStatus[`${jobID}`] === false) {
+        document.getElementById(`wJ-${jobID}`).style.backgroundColor = "var(--accent-light-color)"
+        document.getElementById(`wJ-${jobID}`).style.color = "var(--background-light-color)"
+        weeklyJobsStatus[`${jobID}`] = true
+    } else if (weeklyJobsStatus[`${jobID}`] === true) {
+        document.getElementById(`wJ-${jobID}`).style.backgroundColor = "var(--background-light-color)"
+        document.getElementById(`wJ-${jobID}`).style.color = "var(--text-light-color)"
+        weeklyJobsStatus[`${jobID}`] = false
+    }
 }
 
-function modalClose(targetModal) {
-    targetModal.style.display = "none"
+function weeklyJobBtnReset() {
+    for (let i = 0; i < weeklyJobs.length; i++) {
+        let jobStatus = weeklyJobsStatus[`${weeklyJobs[i]}`]
+
+        if (jobStatus === true) {
+            weeklyJobBtnSwitch(weeklyJobs[i])
+        }
+    }
 }
+
+/* ==  Weekly Job Record List Functions == */
 
 function recordListCalcs(recordList) {
     
@@ -504,6 +496,24 @@ function recordListCalculateJobPercentage(recordList) {
 
     }
 
+}
+
+function weeklyJobPercent(weeklies) {
+    let wJTotal = 0
+    for (let key in weeklies) {
+        wJTotal++
+    }
+
+    let wJDone = 0
+    for (let key in weeklies) {
+        if (weeklies.hasOwnProperty(key) && weeklies[key] === true) {
+            wJDone++
+        }
+    }
+
+    let wJP = (wJDone / wJTotal) * 100
+
+    return wJP
 }
 
 function recordListReverse(recordList) {
