@@ -65,6 +65,7 @@ const serviceBtnEl = document.getElementById("sj-btn")
 const serviceTasksEl = document.getElementById("jobs-list")
 const weeklyCheckBtnEl = document.getElementById("submit-btn")
 const historyEl = document.getElementById("history")
+const modalAlertEl = document.getElementById("modal-alert")
 
 /* === Retrieve snapshot from DB === */
 
@@ -147,16 +148,16 @@ tabMenuEl.addEventListener("click", function(e) {
         if (targetEl.classList.contains("modal")) {
             modalDisplay(targetEl)
 
-            targetEl.addEventListener("click", function(e) {
-                const isButton = (e.target.nodeName === "BUTTON")
-                const isCloseButton = (e.target.classList.contains("close-btn"))
+            targetEl.addEventListener("click", function(e) { // modalCloseBtnTest(e)
+                const isButton = (e.target.nodeName === "BUTTON") //
+                const isCloseButton = (e.target.classList.contains("close-btn")) //
                 
-                if (isButton && isCloseButton) {
-                    if (e.target.dataset.target) {
-                        modalClose(targetEl)
-                    }
-                }
-            })
+                if (isButton && isCloseButton) { //
+                    if (e.target.dataset.target) { //
+                        modalClose(targetEl) //
+                    } //
+                } //
+            }) //
         } else {
             tabSwitch(e.target.dataset.tab)
         }
@@ -182,7 +183,11 @@ weeklyCheckBtnEl.addEventListener("click", function() {
 
     push(recordsInDB, currentArray)
 
-    alert(`Weekly Check for ${currentArray.date} added!`)
+    // alert(`Weekly Check for ${currentArray.date} added!`)
+
+    modalAlert( modalAlertEl, // Perhaps set modal to sticky?
+                "Success!",
+                `Weekly Check for ${currentArray.date} added!`)
 
     clearFieldEl(dateFieldEl)
     clearFieldEl(odoFieldEl)
@@ -265,11 +270,43 @@ function allTabClose(tabs) {
 /* ==  Modal Functions == */
 
 function modalDisplay(targetModal) {
+
     targetModal.style.display = "flex"
+
 }
 
 function modalClose(targetModal) {
+
     targetModal.style.display = "none"
+
+}
+
+function modalCloseBtnTest(e, targetEl) {
+
+    const isButton = (e.target.nodeName === "BUTTON")
+    const isCloseButton = (e.target.classList.contains("close-btn"))
+    
+    if (isButton && isCloseButton) {
+        if (e.target.dataset.target) {
+            modalClose(targetEl)
+        }
+    }
+}
+
+function modalAlert(targetModal, modalHeading, modalBody) {
+
+    modalDisplay(targetModal)
+
+    document.getElementById("modal-alert-heading").textContent = modalHeading
+
+    document.getElementById("modal-alert-content").textContent = modalBody
+
+    targetModal.addEventListener("click", function(e) {
+
+        modalCloseBtnTest(e, targetModal)
+
+    })
+
 }
 
 /* ==  Job/Check List Functions == */
@@ -479,7 +516,9 @@ function recordListCalculateMiles(recordList) {
         try {
             previousMiles = recordList[record-1].miles
         } catch {
-            previousMiles = 0
+            previousMiles = 0 // Perhaps set this to "recordList[record].miles"
+            // Thinking of future calcs based on miles travelled, and how
+            // having all the miles up to that point affects that
         }
         
         recordList[record].milesTravelled = currentMiles - previousMiles
