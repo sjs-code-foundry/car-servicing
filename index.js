@@ -107,34 +107,29 @@ onValue(recordsInDB, function(snapshot) {
     if (snapshot.exists()) {
 
         let recordArray = Object.entries(snapshot.val())
+
+        recordList = recordListClear(recordList)
     
         clearListEl(historyEl)
-
-        odoList = [] // This will be replaced by getting the actual data and calculating miles from previous entry
 
         for (let i = 0; i < recordArray.length; i++) {
             let currentRecord = recordArray[i]
 
             recordList.push(new RecordListing(currentRecord))
 
-            //recordAdd(currentRecord, i) // This will be done after the various calcs have been done to recordList
         }
-
-        // for (let record of recordArray) {
-        //     recordList.push(new RecordListing(recordArray[record]))
-        // }
 
         recordListCalcs(recordList)
 
-        for (let i = 0; i < recordList.length; i++) { // try this: (let i = recordList.length; i = 0; i--)
-            recordAdd(recordList[i]) // Modify to sort by recent dates first
-        }
+        recordListReverse(recordList)
 
-        // sortList(historyEl, true)
+        for (let i = 0; i < recordList.length; i++) {
+            recordAdd(recordList[i])
+        }
 
     } else {
 
-        historyEl.innerHTML = "No Records!" // replace with textContent
+        historyEl.textContent = "No Records!" // replace with textContent
 
     }
 
@@ -230,7 +225,6 @@ weeklyJobList()
 
 /* === Initial Variables === */
 
-let odoList // Will be made redundant with Firestore
 let recordList = []
 
 /* ===  Object Constructors === */
@@ -579,6 +573,20 @@ function recordListCalculateJobPercentage(recordList) {
         recordList[record].weeklies = weeklyJobPercent(recordList[record].weeklies)
 
     }
+
+}
+
+function recordListReverse(recordList) {
+
+    recordList.reverse()
+
+}
+
+function recordListClear(recordList) {
+
+    recordList = []
+
+    return recordList
 
 }
 
