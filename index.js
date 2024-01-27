@@ -6,10 +6,7 @@ import { getDatabase,
          ref,
          push,
          onValue,
-         remove,
-         query,
-         orderByKey,
-         get } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"
+         remove } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"
 import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"
 
 /* === Initialize Firebase === */
@@ -59,13 +56,11 @@ const recordsInDB = ref(database, "weeklyCarChecks/checkRecords")
 /* === DOM Elements === */
 const tabMenuEl = document.getElementById("tab-menu")
 const tabBtnServiceJobs = document.getElementById("tab-btn-service-jobs")
-const tabBtnAccount = document.getElementById("tab-btn-account") // Retain for displaying account statuses, or move into relevant functions
 const dateFieldEl = document.getElementById("date-field")
 const odoFieldEl = document.getElementById("odo-field")
 const serviceJobEl = document.getElementById("sj-field")
 const serviceBtnEl = document.getElementById("sj-btn")
 const serviceTasksEl = document.getElementById("jobs-list")
-const weeklyJobListEl = document.getElementById("weeklies")
 const weeklyCheckBtnEl = document.getElementById("submit-btn")
 const historyEl = document.getElementById("history")
 
@@ -294,7 +289,7 @@ function weeklyJobList() {
             weeklyJobBtnSwitch(weeklyJobs[job])
         })
 
-        weeklyJobListEl.append(newEl)
+        document.getElementById("weeklies").append(newEl)
 
     }
 
