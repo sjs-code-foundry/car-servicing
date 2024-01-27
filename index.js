@@ -1,4 +1,5 @@
 /* === Imports === */
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js"
 import { initializeAppCheck,
          ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app-check.js";
@@ -54,6 +55,7 @@ const serviceJobsInDB = ref(database, "weeklyCarChecks/serviceJobs")
 const recordsInDB = ref(database, "weeklyCarChecks/checkRecords")
 
 /* === DOM Elements === */
+
 const tabMenuEl = document.getElementById("tab-menu")
 const tabBtnServiceJobs = document.getElementById("tab-btn-service-jobs")
 const dateFieldEl = document.getElementById("date-field")
@@ -64,9 +66,8 @@ const serviceTasksEl = document.getElementById("jobs-list")
 const weeklyCheckBtnEl = document.getElementById("submit-btn")
 const historyEl = document.getElementById("history")
 
-// Check each of these to see if they can be called locally to relevant functions - will speed up the page
-
 /* === Retrieve snapshot from DB === */
+
 onValue(serviceJobsInDB, function(snapshot) {
 
     if (snapshot.exists()) {
@@ -133,6 +134,7 @@ onValue(recordsInDB, function(snapshot) {
 // Both above functions will be replaced by equivalents for Firestore
 
 /* === Set Default Tab === */
+
 tabSwitch("tab-weekly-checks")
 
 /* === Event Listeners === */
@@ -451,8 +453,6 @@ function recordListCalcs(recordList) {
     recordListCalculateMiles(recordList)
 
     recordListCalculateJobPercentage(recordList)
-
-    console.log(recordList)
 
     return recordList
 
