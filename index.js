@@ -3,11 +3,29 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js"
 import { initializeAppCheck,
          ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app-check.js";
+import { getAuth,
+         createUserWithEmailAndPassword,
+         signInWithEmailAndPassword,
+         signOut,
+         onAuthStateChanged, 
+         GoogleAuthProvider,
+         signInWithPopup } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js"
 import { getDatabase,
          ref,
          push,
          onValue,
          remove } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"
+import { getFirestore,
+         collection,
+         addDoc,
+         serverTimestamp,
+         onSnapshot,
+         query,
+         where,
+         orderBy,
+         doc,
+         updateDoc,
+         deleteDoc } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js"
 import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"
 
 /* === Initialize Firebase === */
