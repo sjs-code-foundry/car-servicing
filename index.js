@@ -171,7 +171,11 @@ serviceBtnEl.addEventListener("click", function() {
 
     push(serviceJobsInDB, serviceJobEl.value)
 
-    alert(`${serviceJobEl.value} added!`)
+    // alert(`${serviceJobEl.value} added!`)
+
+    modalAlert( modalAlertEl,
+                "Success!",
+                `Servicing Job "${serviceJobEl.value}" added!`)
 
     clearFieldEl(serviceJobEl)
 
