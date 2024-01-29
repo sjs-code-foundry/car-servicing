@@ -171,8 +171,6 @@ serviceBtnEl.addEventListener("click", function() {
 
     push(serviceJobsInDB, serviceJobEl.value)
 
-    // alert(`${serviceJobEl.value} added!`)
-
     modalAlert( modalAlertEl,
                 "Success!",
                 `Servicing Job "${serviceJobEl.value}" added!`)
@@ -187,9 +185,7 @@ weeklyCheckBtnEl.addEventListener("click", function() {
 
     push(recordsInDB, currentArray)
 
-    // alert(`Weekly Check for ${currentArray.date} added!`)
-
-    modalAlert( modalAlertEl, // Perhaps set modal to sticky?
+    modalAlert( modalAlertEl,
                 "Success!",
                 `Weekly Check for ${currentArray.date} added!`)
 

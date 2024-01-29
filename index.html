@@ -27,6 +27,28 @@
                 <li><button id="tab-btn-about-app" class="tab" data-tab="tab-about-app">About App</button></li>
             </ul>
         </header>
+        <div id="modal-container">
+            <div id="modal-account" class="modal">
+                <div>
+                    <h2>Sign In.</h2>
+                    <button class="close-btn" data-target="modal-account">X</button>
+                </div>
+                <form>
+                    <label for="email">Enter email address:</label>
+                    <input type="email" name="email" placeholder="someone@something.com" required>
+                    <label for="password">Enter password:</label>
+                    <input type="password" name="password" placeholder="******" required>
+                    <button>Submit</button>
+                </form>
+            </div>
+            <div id="modal-alert" class="modal">
+                <div>
+                    <h2 id="modal-alert-heading">Not Implemented.</h2>
+                    <button class="close-btn" data-target="modal-alert">X</button>
+                </div>
+                <p id="modal-alert-content">This is a text prompt that is yet to be implemented.</p>
+            </div>
+        </div>
         <h1>Weekly Car Checks</h1>
         <section id="tab-weekly-checks" class="tabcontent">
             <h2>Weekly Jobs</h2>
@@ -80,27 +102,6 @@
             <h3>App Version:</h3>
             <p>v0.4.0-alpha</p>
         </section>
-        <div id="modal-account" class="modal">
-            <div>
-                <h2>Sign In.</h2>
-                <button class="close-btn" data-target="modal-account">X</button>
-            </div>
-            <form>
-                <label for="email">Enter email address:</label>
-                <input type="email" name="email" placeholder="someone@something.com" required>
-                <label for="password">Enter password:</label>
-                <input type="password" name="password" placeholder="******" required>
-                <button>Submit</button>
-            </form>
-        </div>
-        <div id="modal-alert" class="modal">
-            <div>
-                <h2 id="modal-alert-heading">Not Implemented.</h2>
-                <button class="close-btn" data-target="modal-alert">X</button>
-            </div>
-            <p id="modal-alert-content">This is a text prompt that is yet to be implemented.</p>
-            <!-- Use a JS function to insert heading and paragraph content into these modals -->
-        </div>
         <hr>
         <script src="index.js" type="module"></script>
     </body>

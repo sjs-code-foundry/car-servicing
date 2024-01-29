@@ -294,22 +294,29 @@ input {
 
 /* Modals */
 
+#modal-container { /* Container to allow travel across page for modals */
+    position: absolute;
+
+    height: 100%;
+}
+
 .modal {
     display: none;
     flex-direction: column;
 
-    position: absolute;
-    top: 10vh;
+    position: sticky;
+    top: 20vh;
     left: auto;
     z-index: 4;
 
     width: 600px;
 
     padding: 20px;
+    border-radius: 20px;
 
     background-color: var(--background-light-color);
 
-    border: 1px solid red;
+    box-shadow: 0px 1px 10px var(--text-light-color)
 }
 
 .modal div {
