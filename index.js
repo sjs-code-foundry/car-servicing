@@ -28,13 +28,18 @@ import { getFirestore,
          deleteDoc } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js"
 import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"
 
-/* === Initialize Firebase === */
+/* === Firebase - Initialize Firebase === */
 
 const isOffline = true
 
 const appSettings = getAppConfig()
 const app = initializeApp(appSettings)
+
 const appCheck = getAppCheck()
+
+// const auth = getAuth(app)
+// const provider = new GoogleAuthProvider()
+
 const database = getDatabase(app)
 if (isOffline && location.hostname === "localhost") {
     connectDatabaseEmulator(database, "127.0.0.1", 9000)
@@ -67,10 +72,13 @@ function getAppCheck() {
     }
 }
 
-/* == Database Location Refs == */
+/* == Firebase - Database Location Refs == */
 
 const serviceJobsInDB = ref(database, "weeklyCarChecks/serviceJobs")
 const recordsInDB = ref(database, "weeklyCarChecks/checkRecords")
+
+// const serviceJobsCollectionName = "serviceJobs"
+// const recordsCollectionName = "weeklyChecks"
 
 /* === DOM Elements === */
 
@@ -84,8 +92,53 @@ const serviceTasksEl = document.getElementById("jobs-list")
 const weeklyCheckBtnEl = document.getElementById("submit-btn")
 const historyEl = document.getElementById("history")
 const modalAlertEl = document.getElementById("modal-alert")
+const accountFormEl = document.getElementById("modal-account-form")
 
-/* === Retrieve snapshot from DB === */
+/* === Firebase - Authentication === */
+
+let accountExists = true
+
+accountFormEl.addEventListener("submit", function(e) {
+
+    e.preventDefault()
+
+    if (accountExists) {
+
+        authSignInWithEmail()
+
+    } else {
+
+        authCreateAccountWithEmail()
+
+    }
+
+}) 
+
+function authSignInWithEmail() {
+
+    const email = accountFormEl.email.value
+    const password = accountFormEl.password.value
+
+    console.log(`Signed in with Email: ${email} and Password: ${password}.`)
+
+}
+
+function authCreateAccountWithEmail() {
+
+    const email = accountFormEl.email.value
+    const password = accountFormEl.password.value
+
+    console.log(`Created account with Email: ${email} and Password: ${password}.`)
+
+}
+
+function authSignOut() {
+
+    console.log("Signed out with Email")
+
+}
+
+/* === Firebase - Retrieve snapshot from DB === */
 
 onValue(serviceJobsInDB, function(snapshot) {
 
