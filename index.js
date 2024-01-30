@@ -26,7 +26,10 @@ import { getFirestore,
          doc,
          updateDoc,
          deleteDoc } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js"
+
 import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"
+import { connectAuthEmulator } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js"
+import { connectFirestoreEmulator } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js"
 
 /* === Firebase - Initialize Firebase === */
 
@@ -37,20 +40,29 @@ const app = initializeApp(appSettings)
 
 const appCheck = getAppCheck()
 
-// const auth = getAuth(app)
-// const provider = new GoogleAuthProvider()
+const auth = getAuth(app)
+const provider = new GoogleAuthProvider()
 
 const database = getDatabase(app)
+// const database = getFirestore(app)
+
 if (isOffline && location.hostname === "localhost") {
     connectDatabaseEmulator(database, "127.0.0.1", 9000)
+    connectAuthEmulator(auth, "http://127.0.0.1:9099")
+    // connectFirestoreEmulator(database, '127.0.0.1', 8080)
+
 }
 
 function getAppConfig() {
     if (isOffline) {
-        return { projectId: "playground-62567" }
+        return {
+                    projectId: "playground-62567",
+                    apiKey: "test-api-key",
+                    appId: "test"
+                }
     } else {
         return  {
-                    databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/",
+                    databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/", // Update when going online!
                     apiKey: "AIzaSyBF39RJz9HnX_gU2aUhe31IHJz8vp7qnEM",
                     authDomain: "playground-62567.firebaseapp.com",
                     projectId: "playground-62567",
@@ -84,6 +96,8 @@ const recordsInDB = ref(database, "weeklyCarChecks/checkRecords")
 
 const tabMenuEl = document.getElementById("tab-menu")
 const tabBtnServiceJobs = document.getElementById("tab-btn-service-jobs")
+const tabBtnAccount = document.getElementById("tab-btn-account")
+const tabBtnLogout = document.getElementById("tab-btn-logout")
 const dateFieldEl = document.getElementById("date-field")
 const odoFieldEl = document.getElementById("odo-field")
 const serviceJobEl = document.getElementById("sj-field")
@@ -100,6 +114,12 @@ const createAccountBtn = document.getElementById("create-account-btn")
 /* === Firebase - Authentication === */
 
 let createAccountMode = false
+
+tabBtnLogout.addEventListener("click", function() {
+
+    authSignOut()
+
+})
 
 signinBtnGoogle.addEventListener("click", function() {
 
@@ -123,6 +143,8 @@ accountFormEl.addEventListener("submit", function(e) {
 
     }
 
+    accountFormEl.reset()
+
     modalClose(modalAccountEl)
 
 })
@@ -140,7 +162,6 @@ function accountBtnSwitch(createAccountMode) {
     flipAccountMode()
 
     const modalHeader = document.getElementById("modal-account-header")
-    const tab = document.getElementById("tab-btn-account")
     const formButton = document.getElementById("modal-account-form-btn")
 
     let text = ""
@@ -166,7 +187,7 @@ function accountBtnSwitch(createAccountMode) {
     console.log(`Switched to "${text}" mode.`)
 
     modalHeader.textContent = text
-    tab.textContent = text
+    tabBtnAccount.textContent = text
     createAccountBtn.textContent = text
 
 }
@@ -188,7 +209,15 @@ function authSignInWithEmail() {
     const email = accountFormEl.email.value
     const password = accountFormEl.password.value
 
-    console.log(`Signed in with Email: ${email} and Password: ${password}.`)
+    signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Not needed
+        })
+        .catch((error) => {
+            modalAlert( modalAlertEl,
+                "Sign In Failed!",
+                `${error.message}`)
+        })
 
 }
 
@@ -197,17 +226,57 @@ function authCreateAccountWithEmail() {
     const email = accountFormEl.email.value
     const password = accountFormEl.password.value
 
-    console.log(`Created account with Email: ${email} and Password: ${password}.`)
+    createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            modalAlert( modalAlertEl,
+                "Account Created!",
+                `Account for "${email}" created!`)
+        })
+        .catch((error) => {
+            modalAlert( modalAlertEl,
+                "Create Account Failed!",
+                `${error.message}`)
+        })
 
 }
 
 function authSignOut() {
 
-    console.log("Signed out with Email")
+    signOut(auth)
+        .then(() => {
+            // Not needed
+        })
+        .catch((error) => {
+            modalAlert( modalAlertEl,
+                "Sign Out Failed!",
+                `${error.message}`)
+        })
 
 }
 
 /* === Firebase - Retrieve snapshot from DB === */
+
+onAuthStateChanged(auth, (user) => {
+
+    const accountStatusHeader = document.getElementById("account-status-header")
+
+    if (user) {
+
+        accountStatusHeader.textContent = `Signed in as: ${user.email}.`
+        tabBtnAccount.style.display = "none"
+        tabBtnLogout.style.display = "block"
+
+        // Fetch DB Items for User
+
+    } else {
+
+        accountStatusHeader.textContent = "Not Signed In.  Sign in to view records."
+        tabBtnAccount.style.display = "block"
+        tabBtnLogout.style.display = "none"
+
+    }
+
+})
 
 onValue(serviceJobsInDB, function(snapshot) {
 
