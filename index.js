@@ -112,7 +112,13 @@ accountFormEl.addEventListener("submit", function(e) {
 
     }
 
-}) 
+})
+
+function authSignInWithGoogle() {
+
+    console.log("Signed in with Google account.")
+
+}
 
 function authSignInWithEmail() {
 
