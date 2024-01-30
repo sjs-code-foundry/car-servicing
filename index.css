@@ -345,6 +345,34 @@ input {
     margin: 5px auto;
 }
 
+#modal-account-switch-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    width: 100%;
+    height: 32px;
+
+    margin: 20px 0;
+
+    width: inherit;
+
+    align-items: center;
+}
+
+#modal-account-switch-line button {
+    width: fit-content;
+    height: 21px;
+    
+    border: none;
+
+    margin: 18px 2px 18px 6px;
+    padding: 0;
+
+    color: var(--accent-light-color);
+    text-decoration: underline;
+}
+
 .modal button {
     width: 600px;
 

@@ -92,11 +92,22 @@ const serviceTasksEl = document.getElementById("jobs-list")
 const weeklyCheckBtnEl = document.getElementById("submit-btn")
 const historyEl = document.getElementById("history")
 const modalAlertEl = document.getElementById("modal-alert")
+const modalAccountEl = document.getElementById("modal-account")
 const accountFormEl = document.getElementById("modal-account-form")
+const signinBtnGoogle = document.getElementById("signin-btn-google")
+const createAccountBtn = document.getElementById("create-account-btn")
 
 /* === Firebase - Authentication === */
 
 let accountExists = true
+
+signinBtnGoogle.addEventListener("click", function() {
+
+    authSignInWithGoogle()
+
+    modalClose(modalAccountEl)
+
+})
 
 accountFormEl.addEventListener("submit", function(e) {
 
@@ -111,6 +122,14 @@ accountFormEl.addEventListener("submit", function(e) {
         authCreateAccountWithEmail()
 
     }
+
+    modalClose(modalAccountEl)
+
+})
+
+createAccountBtn.addEventListener("click", function() {
+    
+    console.log("Switched to create account mode.")
 
 })
 
