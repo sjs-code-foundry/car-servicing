@@ -203,7 +203,7 @@ function authSignInWithGoogle() {
 
     signInWithPopup(auth, provider)
         .then((result) => {
-            // Not needed
+            tabSwitch("tab-weekly-checks")
         })
         .catch((error) => {
             modalAlert( modalAlertEl,
@@ -220,7 +220,7 @@ function authSignInWithEmail() {
 
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            // Not needed
+            tabSwitch("tab-weekly-checks")
         })
         .catch((error) => {
             modalAlert( modalAlertEl,
@@ -253,7 +253,7 @@ function authSignOut() {
 
     signOut(auth)
         .then(() => {
-            // Not needed
+            // Not Needed, tab switched by tabMenuEl Event Listener
         })
         .catch((error) => {
             modalAlert( modalAlertEl,
@@ -275,7 +275,11 @@ onAuthStateChanged(auth, (user) => {
         tabBtnAccount.style.display = "none"
         tabBtnLogout.style.display = "block"
 
-        // Fetch DB Items for User
+        /*
+        
+        
+
+        */
 
     } else {
 
@@ -286,6 +290,37 @@ onAuthStateChanged(auth, (user) => {
     }
 
 })
+
+/*
+
+function fetchItemsInRealTimeFromDB(query, user) {
+
+    onSnapshot(query, (querySnapshot) => {
+
+        clearListEl(serviceTasksEl)
+
+        querySnapshot.forEach((doc) => {
+
+            // Insert doc as appropriate
+
+        })
+
+    })
+
+}
+
+function fetchServiceJobs(user) {
+
+    const serviceJobsRef = collection(database, serviceJobsCollectionName)
+
+    const q = query(serviceJobsRef, where("uid", "==", user.uid),
+                                    orderBy(createdAt, body))
+
+    fetchItemsInRealTimeFromDB(q, user)
+
+}
+
+*/
 
 onValue(serviceJobsInDB, function(snapshot) {
 
@@ -344,7 +379,7 @@ onValue(recordsInDB, function(snapshot) {
 
     } else {
 
-        historyEl.textContent = "No Records!" // replace with textContent
+        historyEl.textContent = "No Records!"
 
     }
 
@@ -354,7 +389,7 @@ onValue(recordsInDB, function(snapshot) {
 
 /* === Set Default Tab === */
 
-tabSwitch("tab-weekly-checks")
+tabSwitch("tab-blank")
 
 /* === Event Listeners === */
 
