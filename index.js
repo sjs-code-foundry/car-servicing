@@ -99,7 +99,7 @@ const createAccountBtn = document.getElementById("create-account-btn")
 
 /* === Firebase - Authentication === */
 
-let accountExists = true
+let createAccountMode = false
 
 signinBtnGoogle.addEventListener("click", function() {
 
@@ -113,13 +113,13 @@ accountFormEl.addEventListener("submit", function(e) {
 
     e.preventDefault()
 
-    if (accountExists) {
-
-        authSignInWithEmail()
-
-    } else {
+    if (createAccountMode) {
 
         authCreateAccountWithEmail()
+        
+    } else {
+
+        authSignInWithEmail()
 
     }
 
@@ -128,10 +128,54 @@ accountFormEl.addEventListener("submit", function(e) {
 })
 
 createAccountBtn.addEventListener("click", function() {
+
+    console.log(createAccountMode)
     
-    console.log("Switched to create account mode.")
+    accountBtnSwitch(createAccountMode)
 
 })
+
+function accountBtnSwitch(createAccountMode) {
+
+    flipAccountMode()
+
+    const modalHeader = document.getElementById("modal-account-header")
+    const tab = document.getElementById("tab-btn-account")
+    const formButton = document.getElementById("modal-account-form-btn")
+
+    let text = ""
+
+    if (createAccountMode) {
+
+        text = "Sign In"
+
+        formButton.textContent = "Sign In with Email"
+
+        signinBtnGoogle.style.display = "inline-block"
+
+    } else {
+
+        text = "Create an account"
+
+        formButton.textContent = "Create Account with Email"
+
+        signinBtnGoogle.style.display = "none"
+
+    }
+
+    console.log(`Switched to "${text}" mode.`)
+
+    modalHeader.textContent = text
+    tab.textContent = text
+    createAccountBtn.textContent = text
+
+}
+
+function flipAccountMode() {
+
+    createAccountMode = !createAccountMode
+
+}
 
 function authSignInWithGoogle() {
 
