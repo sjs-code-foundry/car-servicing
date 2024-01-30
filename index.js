@@ -58,6 +58,7 @@ function getAppConfig() {
         return {
                     projectId: "playground-62567",
                     apiKey: "test-api-key",
+                    authDomain: "test",
                     appId: "test"
                 }
     } else {
@@ -86,8 +87,8 @@ function getAppCheck() {
 
 /* == Firebase - Database Location Refs == */
 
-const serviceJobsInDB = ref(database, "weeklyCarChecks/serviceJobs")
-const recordsInDB = ref(database, "weeklyCarChecks/checkRecords")
+const serviceJobsInDB = ref(database, "weeklyCarChecks/serviceJobs") // Legacy for RTDB
+const recordsInDB = ref(database, "weeklyCarChecks/checkRecords") // Legacy for RTDB
 
 // const serviceJobsCollectionName = "serviceJobs"
 // const recordsCollectionName = "weeklyChecks"
@@ -200,7 +201,15 @@ function flipAccountMode() {
 
 function authSignInWithGoogle() {
 
-    console.log("Signed in with Google account.")
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            // Not needed
+        })
+        .catch((error) => {
+            modalAlert( modalAlertEl,
+                "Sign In with Google Failed!",
+                `${error.message}`)
+        })
 
 }
 
