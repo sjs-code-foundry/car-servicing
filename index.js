@@ -91,7 +91,7 @@ const serviceJobsInDB = ref(database, "weeklyCarChecks/serviceJobs") // Legacy f
 const recordsInDB = ref(database, "weeklyCarChecks/checkRecords") // Legacy for RTDB
 
 // const serviceJobsCollectionName = "serviceJobs"
-// const recordsCollectionName = "weeklyChecks"
+// const weeklyChecksCollectionName = "weeklyChecks"
 
 /* === DOM Elements === */
 
@@ -277,7 +277,7 @@ onAuthStateChanged(auth, (user) => {
 
         /*
         
-        
+        Code for loading posts for both collections
 
         */
 
@@ -301,7 +301,7 @@ function fetchItemsInRealTimeFromDB(query, user) {
 
         querySnapshot.forEach((doc) => {
 
-            // Insert doc as appropriate
+            renderServiceJobs(doc)
 
         })
 
@@ -316,7 +316,7 @@ function fetchServiceJobs(user) {
     const q = query(serviceJobsRef, where("uid", "==", user.uid),
                                     orderBy(createdAt, body))
 
-    fetchItemsInRealTimeFromDB(q, user)
+    fetchItemsInRealTimeFromDB(q, user, serviceTasksEl)
 
 }
 
@@ -490,13 +490,29 @@ function WeeklyArray() {
     this.weeklies = weeklyJobsStatus
 }
 
-function RecordListing(record) {
+function RecordListing(record) { // Modify this to match docs from Firestore
     this.ID = record[0]
     this.date = record[1].date
     this.miles = record[1].miles
     this.milesTravelled = 0
     this.weeklies = record[1].weeklies
 }
+
+/*
+^^^
+function RecordListing(wholeDoc) {
+
+    const docData = wholeDoc.data()
+
+    this.ID = wholeDoc.id
+    this.date = docData.date
+    this.miles = docData.miles
+    this.milesTravelled = 0
+    this.weeklies = docData.weeklies
+
+}
+
+*/
 
 /* ===  Function Declarations === */
 
@@ -581,6 +597,24 @@ function serviceJobAppend(job) {
 
 }
 
+/*
+^^^
+function renderServiceJobs(wholeDoc) {
+
+    const serviceJobData = wholeDoc.data()
+
+    const jobAttr = [ ["class", "service-job"] ]
+
+    let newEl = addLiElToList(jobAttr, false, serviceJobData.body)
+
+    newEl.addEventListener("click", function() {
+        clearRecord('serviceJobs', false, wholeDoc.id)
+    })
+
+}
+
+*/
+
 function weeklyJobList() {
 
     for (let job in weeklyJobs) {
@@ -647,7 +681,7 @@ function addLiElToList(attrList, isHTML, text) {
 
 }
 
-function sortList(listEl, descOrd) {
+function sortList(listEl, descOrd) { // May be made redundant by indexing in Firestore
     let shouldSwitch, i, listItems
     let switching = true
     
@@ -692,7 +726,7 @@ function clearRecord(list, askIfDelete, recordID) {
     let deleteDecision
 
     if (askIfDelete) {
-        deleteDecision = confirm("Delete this record?")
+        deleteDecision = confirm("Delete this record?") // Add confirmation modal?
     } else {
         deleteDecision = true
     }
@@ -700,7 +734,34 @@ function clearRecord(list, askIfDelete, recordID) {
     if (deleteDecision) {
         remove(exactLocationInDB)
     }
+
 }
+
+/*
+^^^
+async function clearRecord(collection, askIfDelete, docID) {
+
+    let deleteDecision
+
+    if (askIfDelete) {
+
+        deleteDecision = confirm("Delete this record?") // Add confirmation modal?
+
+    } else {
+
+        deleteDecision = true
+
+    }
+
+    if (deleteDecision) {
+
+        await deleteDoc(doc(database, collection, docID))
+
+    }
+
+}
+
+*/
 
 /* ==  Weekly Job Button Functions == */
 
