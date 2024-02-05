@@ -43,13 +43,12 @@ const appCheck = getAppCheck()
 const auth = getAuth(app)
 const provider = new GoogleAuthProvider()
 
-const database = getDatabase(app)
-// const database = getFirestore(app)
+const database = getFirestore(app)
 
 if (isOffline && location.hostname === "localhost") {
-    connectDatabaseEmulator(database, "127.0.0.1", 9000)
+    // connectDatabaseEmulator(database, "127.0.0.1", 9000)
     connectAuthEmulator(auth, "http://127.0.0.1:9099")
-    // connectFirestoreEmulator(database, '127.0.0.1', 8080)
+    connectFirestoreEmulator(database, '127.0.0.1', 8080)
 
 }
 
@@ -87,11 +86,8 @@ function getAppCheck() {
 
 /* == Firebase - Database Location Refs == */
 
-const serviceJobsInDB = ref(database, "weeklyCarChecks/serviceJobs") // Legacy for RTDB
-const recordsInDB = ref(database, "weeklyCarChecks/checkRecords") // Legacy for RTDB
-
-// const serviceJobsCollectionName = "serviceJobs"
-// const weeklyChecksCollectionName = "weeklyChecks"
+const serviceJobsCollectionName = "serviceJobs"
+const weeklyChecksCollectionName = "weeklyChecks"
 
 /* === DOM Elements === */
 
@@ -274,12 +270,11 @@ onAuthStateChanged(auth, (user) => {
         accountStatusHeader.textContent = `Signed in as: ${user.email}.`
         tabBtnAccount.style.display = "none"
         tabBtnLogout.style.display = "block"
-
-        /*
         
-        Code for loading posts for both collections
+        // fetchServiceJobs(user)
+        fetchWeeklyChecks(user)
 
-        */
+        // console.log(user)
 
     } else {
 
@@ -291,9 +286,7 @@ onAuthStateChanged(auth, (user) => {
 
 })
 
-/*
-
-function fetchItemsInRealTimeFromDB(query, user) {
+function fetchServiceJobsInRealTimeFromDBs(query, user) { // This infinitely loops - FIX!!!
 
     onSnapshot(query, (querySnapshot) => {
 
@@ -301,7 +294,7 @@ function fetchItemsInRealTimeFromDB(query, user) {
 
         querySnapshot.forEach((doc) => {
 
-            renderServiceJobs(doc)
+            renderServiceJob(doc)
 
         })
 
@@ -309,83 +302,60 @@ function fetchItemsInRealTimeFromDB(query, user) {
 
 }
 
+function fetchWeeklyChecksInRealTimeFromDBs(query, user) { // Errors are happening at onSnapshot function!
+
+    console.log(query)
+    console.log(user)
+
+    // onSnapshot(query, (querySnapshot) => {
+
+    //     clearListEl(historyEl)
+        
+    //     recordList = recordListClear(recordList)
+
+    //     querySnapshot.forEach((doc) => {
+
+    //         recordList.push(new RecordListing(doc))
+
+    //     })
+        
+    //     recordListCalcs(recordList) // Do we need to sort the records?
+
+    //     recordListReverse(recordList)
+        
+    //     for (let r in recordList) {
+        
+    //         renderWeeklyCheck(recordList[r])
+        
+    //     }
+
+    // })
+
+}
+
+// Refactor the above two at some point to use a common function?
+
 function fetchServiceJobs(user) {
 
     const serviceJobsRef = collection(database, serviceJobsCollectionName)
 
     const q = query(serviceJobsRef, where("uid", "==", user.uid),
-                                    orderBy(createdAt, body))
+                                    orderBy("createdAt", "body"))
 
-    fetchItemsInRealTimeFromDB(q, user, serviceTasksEl)
+    fetchServiceJobsInRealTimeFromDBs(q, user)
 
 }
 
-*/
+function fetchWeeklyChecks(user) {
 
-onValue(serviceJobsInDB, function(snapshot) {
-
-    if (snapshot.exists()) {
-
-        let serviceArray = Object.entries(snapshot.val())
+    const weeklyChecksRef = collection(database, weeklyChecksCollectionName)
     
-        clearListEl(serviceTasksEl)
-
-        for (let i = 0; i < serviceArray.length; i++) {
-
-            let currentItem = serviceArray[i]
-
-            serviceJobAppend(currentItem)
-
-        }
-
-        sortList(serviceTasksEl, false)
-
-        tabBtnServiceJobs.textContent = `Servicing Jobs (${serviceArray.length})`
-
-    } else {
-
-        serviceTasksEl.textContent = "All tasks complete!"
-
-        tabBtnServiceJobs.textContent = "Servicing Jobs"
-
-    }
-
-})
-
-onValue(recordsInDB, function(snapshot) {
-
-    if (snapshot.exists()) {
-
-        let recordArray = Object.entries(snapshot.val())
-
-        recordList = recordListClear(recordList)
+    const q = query(weeklyChecksRef, where("uid", "==", user.uid),
+    				     orderBy("date", "miles"))
     
-        clearListEl(historyEl)
+    fetchWeeklyChecksInRealTimeFromDBs(q, user)
 
-        for (let i = 0; i < recordArray.length; i++) {
-            let currentRecord = recordArray[i]
-
-            recordList.push(new RecordListing(currentRecord))
-
-        }
-
-        recordListCalcs(recordList)
-
-        recordListReverse(recordList)
-
-        for (let i = 0; i < recordList.length; i++) {
-            recordAdd(recordList[i])
-        }
-
-    } else {
-
-        historyEl.textContent = "No Records!"
-
-    }
-
-})
-
-// Both above functions will be replaced by equivalents for Firestore
+}
 
 /* === Set Default Tab === */
 
@@ -422,7 +392,9 @@ tabMenuEl.addEventListener("click", function(e) {
 
 serviceBtnEl.addEventListener("click", function() {
 
-    push(serviceJobsInDB, serviceJobEl.value)
+    const user = auth.currentUser
+
+    addServiceJobToDB(serviceJobEl.value, user)
 
     modalAlert( modalAlertEl,
                 "Success!",
@@ -434,9 +406,11 @@ serviceBtnEl.addEventListener("click", function() {
 
 weeklyCheckBtnEl.addEventListener("click", function() {
 
+    const user = auth.currentUser
+
     let currentArray = new WeeklyArray()
 
-    push(recordsInDB, currentArray)
+    addWeeklyCheckToDB(currentArray.date, currentArray.miles, currentArray.weeklies, user)
 
     modalAlert( modalAlertEl,
                 "Success!",
@@ -452,8 +426,8 @@ historyEl.addEventListener("click", (e) => {
 
     if (e.target.nodeName === "BUTTON") {
         let recordToClear = `${e.target.id}`
-        recordToClear = recordToClear.substring(4)
-        clearRecord('checkRecords', true, recordToClear)
+        recordToClear = recordToClear.substring(4) // Remove 'del-' from beginning of record ID to target DB record
+        clearRecord(weeklyChecksCollectionName, true, recordToClear)
     }
     else {
         return
@@ -490,16 +464,6 @@ function WeeklyArray() {
     this.weeklies = weeklyJobsStatus
 }
 
-function RecordListing(record) { // Modify this to match docs from Firestore
-    this.ID = record[0]
-    this.date = record[1].date
-    this.miles = record[1].miles
-    this.milesTravelled = 0
-    this.weeklies = record[1].weeklies
-}
-
-/*
-^^^
 function RecordListing(wholeDoc) {
 
     const docData = wholeDoc.data()
@@ -511,8 +475,6 @@ function RecordListing(wholeDoc) {
     this.weeklies = docData.weeklies
 
 }
-
-*/
 
 /* ===  Function Declarations === */
 
@@ -580,26 +542,7 @@ function modalAlert(targetModal, modalHeading, modalBody) {
 
 /* ==  Job/Check List Functions == */
 
-function serviceJobAppend(job) {
-
-    const jobID = job[0]
-    const jobText = job[1]
-
-    const jobAttr = [ ["class", "service-job"] ]
-
-    let newEl = addLiElToList(jobAttr, false, jobText)
-
-    newEl.addEventListener("click", function() {
-        clearRecord('serviceJobs', false, jobID)
-    })
-
-    serviceTasksEl.append(newEl)
-
-}
-
-/*
-^^^
-function renderServiceJobs(wholeDoc) {
+function renderServiceJob(wholeDoc) {
 
     const serviceJobData = wholeDoc.data()
 
@@ -608,12 +551,71 @@ function renderServiceJobs(wholeDoc) {
     let newEl = addLiElToList(jobAttr, false, serviceJobData.body)
 
     newEl.addEventListener("click", function() {
-        clearRecord('serviceJobs', false, wholeDoc.id)
+        clearRecord(serviceJobsCollectionName, false, wholeDoc.id)
     })
+    
+    serviceTasksEl.append(newEl)
 
 }
 
-*/
+function renderWeeklyCheck(record) {
+    
+    const checkHTML =  `
+        <p>${record.date}</p>
+        <p>${record.miles}</p>
+        <p>${record.milesTravelled}</p>
+        <p>Jobs Done: ${record.weeklies}%</p>
+        <button id="del-${record.ID}">X</button>`
+    
+    const checkAttr = [ ["class", "hist-list"] ]
+    
+    let newEl = addLiElToList(checkAttr, true, checkHTML)
+    
+    historyEl.append(newEl)
+
+}
+
+async function addServiceJobToDB(jobBody, user) {
+
+    try {
+    
+        const docRef = await addDoc(collection(database, serviceJobsCollectionName), {
+            body: jobBody,
+            uid: user.uid,
+            createdAt: serverTimestamp()
+        })
+    
+    } catch (error) {
+    
+    	modalAlert(modalAlertEl,
+            "Adding Service Job to DB Failed!",
+            `${error.message}`)
+    
+    }
+
+}
+
+async function addWeeklyCheckToDB(checkDate, checkMiles, checkWeeklies, user) {
+
+    try {
+    
+        const docRef = await addDoc(collection(database, weeklyChecksCollectionName), {
+            date: checkDate,
+            miles: checkMiles,
+            weeklies: checkWeeklies,
+            uid: user.uid,
+            createdAt: serverTimestamp()
+        })
+    
+    } catch (error) {
+    
+    	modalAlert(modalAlertEl,
+            "Adding Weekly Check to DB Failed!",
+            `${error.message}`)
+    
+    }
+
+}
 
 function weeklyJobList() {
 
@@ -635,23 +637,6 @@ function weeklyJobList() {
 
 }
 
-function recordAdd(record) {
-
-    const recordHTML =  `
-        <p>${record.date}</p>
-        <p>${record.miles}</p>
-        <p>${record.milesTravelled}</p>
-        <p>Jobs Done: ${record.weeklies}%</p>
-        <button id="del-${record.ID}">X</button>`
-
-    const histAttr = [ ["class", "hist-list"] ]
-
-    let newEl = addLiElToList(histAttr, true, recordHTML)
-
-    historyEl.append(newEl)
-    
-}
-
 function recordKeyPlaceholder(field, placeholder) {
     
     if (field.value != "") {
@@ -666,8 +651,8 @@ function addLiElToList(attrList, isHTML, text) {
     let newEl = document.createElement("li")
 
     if (attrList) {
-        for (let attr in attrList) {
-            newEl.setAttribute(attrList[attr][0], attrList[attr][1])
+        for (let a in attrList) {
+            newEl.setAttribute(attrList[a][0], attrList[a][1])
         }
     }
 
@@ -720,25 +705,6 @@ function clearFieldEl(field) {
     field.value = ""
 }
 
-function clearRecord(list, askIfDelete, recordID) {
-    
-    const exactLocationInDB = ref(database, `weeklyCarChecks/${list}/${recordID}`)
-    let deleteDecision
-
-    if (askIfDelete) {
-        deleteDecision = confirm("Delete this record?") // Add confirmation modal?
-    } else {
-        deleteDecision = true
-    }
-
-    if (deleteDecision) {
-        remove(exactLocationInDB)
-    }
-
-}
-
-/*
-^^^
 async function clearRecord(collection, askIfDelete, docID) {
 
     let deleteDecision
@@ -760,8 +726,6 @@ async function clearRecord(collection, askIfDelete, docID) {
     }
 
 }
-
-*/
 
 /* ==  Weekly Job Button Functions == */
 
@@ -791,7 +755,7 @@ function weeklyJobBtnReset() {
 
 function recordListCalcs(recordList) {
     
-    recordListSortByDate(recordList)
+    recordListSortByDate(recordList) // Do we need this function?  Firestore can sort the data from the start.
 
     recordListCalculateMiles(recordList)
 
@@ -830,7 +794,7 @@ function recordListCalculateMiles(recordList) {
         try {
             previousMiles = recordList[record-1].miles
         } catch {
-            previousMiles = 0 // Perhaps set this to "recordList[record].miles"
+            previousMiles = recordList[record].miles // Perhaps set this to "recordList[record].miles"
             // Thinking of future calcs based on miles travelled, and how
             // having all the miles up to that point affects that
         }
