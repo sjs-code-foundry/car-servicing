@@ -24,7 +24,7 @@ import { getFirestore,
          where,
          orderBy,
          doc,
-         updateDoc,
+         updateDoc, // Keep for editing entries later on
          deleteDoc } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js"
 
 import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"
@@ -48,7 +48,7 @@ const database = getFirestore(app)
 if (isOffline && location.hostname === "localhost") {
     // connectDatabaseEmulator(database, "127.0.0.1", 9000)
     connectAuthEmulator(auth, "http://127.0.0.1:9099")
-    connectFirestoreEmulator(database, '127.0.0.1', 8080)
+    connectFirestoreEmulator(database, '127.0.0.1', 8080) // Does not function correctly - FIX!!!
 
 }
 
@@ -62,7 +62,7 @@ function getAppConfig() {
                 }
     } else {
         return  {
-                    databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/", // Update when going online!
+                    databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/",
                     apiKey: "AIzaSyDfQw-0aghLyxvbgBSeVMqzvQav9NFj9fo",
                     authDomain: "weekly-car-checks.firebaseapp.com",
                     projectId: "weekly-car-checks",
@@ -274,8 +274,6 @@ onAuthStateChanged(auth, (user) => {
         fetchServiceJobs(user)
         fetchWeeklyChecks(user)
 
-        // console.log(user)
-
     } else {
 
         accountStatusHeader.textContent = "Not Signed In.  Sign in to view records."
@@ -286,23 +284,38 @@ onAuthStateChanged(auth, (user) => {
 
 })
 
-function fetchServiceJobsInRealTimeFromDBs(query, user) { // This infinitely loops - FIX!!!
+function fetchServiceJobsInRealTimeFromDBs(query, user) {
 
     onSnapshot(query, (querySnapshot) => {
 
         clearListEl(serviceTasksEl)
 
+        let jobCount = 0
+
         querySnapshot.forEach((doc) => {
 
             renderServiceJob(doc)
 
+            jobCount++
+
         })
+
+
+        if (jobCount > 0) {
+
+            tabBtnServiceJobs.textContent = `Servicing Jobs (${jobCount})`
+
+        } else {
+
+            tabBtnServiceJobs.textContent = "Servicing Jobs"
+
+        }
 
     })
 
 }
 
-function fetchWeeklyChecksInRealTimeFromDBs(query, user) { // Errors are happening at onSnapshot function!
+function fetchWeeklyChecksInRealTimeFromDBs(query, user) {
 
     console.log(query)
     console.log(user)
@@ -341,8 +354,8 @@ function fetchServiceJobs(user) {
 
     const serviceJobsRef = collection(database, serviceJobsCollectionName)
 
-    const q = query(serviceJobsRef, where("uid", "==", user.uid),
-                                    orderBy("createdAt", "body"))
+    const q = query(serviceJobsRef, where("uid", "==", user.uid))
+    // Fix this part of query: orderBy("createdAt", "body")
 
     fetchServiceJobsInRealTimeFromDBs(q, user)
 
@@ -352,8 +365,8 @@ function fetchWeeklyChecks(user) {
 
     const weeklyChecksRef = collection(database, weeklyChecksCollectionName)
     
-    const q = query(weeklyChecksRef, where("uid", "==", user.uid),
-    				     orderBy("date", "miles"))
+    const q = query(weeklyChecksRef, where("uid", "==", user.uid))
+    // Fix this part of query: orderBy("date", "miles")
     
     fetchWeeklyChecksInRealTimeFromDBs(q, user)
 
