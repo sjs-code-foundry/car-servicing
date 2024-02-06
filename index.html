@@ -17,17 +17,50 @@
             <img src="/img/avatar.png">
             <input class="menu-btn" type="checkbox" id="menu-btn">
             <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
-            <ul class="menu">
-                <li><a href="/not-implemented.html">Car Stats</a></li>
-                <li><a href="/not-implemented.html">About App</a></li>
+            <ul id="tab-menu" class="menu">
+                <li><button id="tab-btn-weekly-checks" class="tab" data-tab="tab-weekly-checks">Weekly Car Checks</button></li>
+                <li><button id="tab-btn-service-jobs" class="tab" data-tab="tab-service-jobs">Servicing Jobs</button></li>
+                <li><button id="tab-btn-weekly-history" class="tab" data-tab="tab-weekly-history">Weekly Check History</button></li>
+                <li><button id="tab-btn-car-stats" class="tab" data-tab="tab-car-stats">Car Stats</button></li>
+                <li><button id="tab-btn-account" class="tab" data-tab="modal-account">Sign In</button></li>
+                <li><button id="tab-btn-logout" class="tab" data-tab="tab-blank">Sign Out</button></li>
+                <li><button id="tab-btn-about-app" class="tab" data-tab="tab-about-app">About App</button></li>
             </ul>
         </header>
-        <h1>Weekly Car Checks</h1>
-        <div class="navbar">
-            <button id="nav-wc" class="tablinks">Weekly Checks</button>
-            <button id="nav-sj" class="tablinks">Service Jobs</button>
+        <div id="modal-container">
+            <div id="modal-account" class="modal">
+                <div>
+                    <h2 id="modal-account-header">Sign In.</h2>
+                    <button class="close-btn" data-target="modal-account">X</button>
+                </div>
+                <form id="modal-account-form">
+                    <label for="email">Enter email address:</label>
+                    <input type="email" name="email" placeholder="someone@something.com" required>
+                    <label for="password">Enter password:</label>
+                    <input type="password" name="password" placeholder="******" required>
+                    <button id="modal-account-form-btn">Sign In with Email</button>
+                </form>
+                <button id="signin-btn-google">Sign in with Google</button>
+                <div id="modal-account-switch-line">
+                    <p>No account?</p>
+                    <button id="create-account-btn">Create an account</button>
+                    <p>.</p>
+                </div>
+            </div>
+            <div id="modal-alert" class="modal">
+                <div>
+                    <h2 id="modal-alert-heading">Heading.</h2>
+                    <button class="close-btn" data-target="modal-alert">X</button>
+                </div>
+                <p id="modal-alert-content">Alert Modal Body</p>
+            </div>
         </div>
-        <div id="page-wc" class="tabcontent">
+        <h3 id="account-status-header">Not Signed In.  Sign in to view records.</h3>
+        <!-- Configure header above to change according to sign-in status -->
+        <section id="tab-blank" class="tabcontent">
+            <!-- Blank section for pre-signin view -->
+        </section>
+        <section id="tab-weekly-checks" class="tabcontent">
             <h2>Weekly Jobs</h2>
             <div class="entry-field">
                 <p>Date: </p>
@@ -38,9 +71,21 @@
                 <input id="odo-field" type="number">
             </div>
             <ul id="weeklies">
+                <!-- List of Weekly Check Buttons goes here -->
             </ul>
             <button id="submit-btn">Submit Weekly Check</button>
-            <hr>
+        </section>
+        <section id="tab-service-jobs" class="tabcontent">
+            <h2>Servicing Jobs</h2>
+            <div class="entry-field">
+                <input id="sj-field" type="text">
+                <button id="sj-btn">Submit Service Job</button>
+            </div>
+            <ul id="jobs-list">
+                <!-- Service Jobs go here -->
+            </ul>
+        </section>
+        <section id="tab-weekly-history" class="tabcontent">
             <h2>Weekly Check History</h2>
             <div id="hist-headers">
                 <h4>Date</h4>
@@ -51,24 +96,26 @@
             </div>
             <ul id="history">
                 <li class="hist-list">
+                    <!-- History Items go here -->
                 </li>
             </ul>
-        </div>
-        <div id="page-sj" class="tabcontent">
-            <h2>Servicing Jobs</h2>
-            <div class="entry-field">
-                <input id="sj-field" type="text">
-                <button id="sj-btn">Submit Service Job</button>
-            </div>
-            <ul id="jobs-list">
-                <!-- Service Jobs go here -->
-            </ul>
-        </div>
+        </section>
+        <section id="tab-car-stats" class="tabcontent">
+            <h2>Car Stats</h2>
+            <p>Not Implemented, check later.</p>
+            <!-- Create Place to enter car stats like engine type, tyre type, bulbs for various locations, etc. -->
+        </section>
+        <section id="tab-about-app" class="tabcontent">
+            <h2>About App</h2>
+            <h3>Created by:</h3>
+            <p>sjs-code-foundry</p>
+            <h3>App Version:</h3>
+            <p>v0.4.0-alpha</p>
+        </section>
         <hr>
         <script src="index.js" type="module"></script>
     </body>
     <footer>
-        <p>sjs-code-foundry</p>
-        <p>v0.3.0</p>
+        <!-- Add user account status here ("logged in as ..." or "sign in to see your lists.") -->
     </footer>
 </html>

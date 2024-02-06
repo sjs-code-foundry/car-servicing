@@ -1,4 +1,8 @@
 {
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
   "emulators": {
     "singleProjectMode": true,
     "hosting": {
@@ -9,6 +13,12 @@
     },
     "database": {
       "port": 9000
+    },
+    "auth": {
+      "port": 9099
+    },
+    "firestore": {
+      "port": 8080
     }
   },
   "hosting": {
