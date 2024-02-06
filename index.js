@@ -33,7 +33,7 @@ import { connectFirestoreEmulator } from "https://www.gstatic.com/firebasejs/10.
 
 /* === Firebase - Initialize Firebase === */
 
-const isOffline = true
+const isOffline = false
 
 const appSettings = getAppConfig()
 const app = initializeApp(appSettings)
@@ -63,12 +63,12 @@ function getAppConfig() {
     } else {
         return  {
                     databaseURL: "https://playground-62567-default-rtdb.europe-west1.firebasedatabase.app/", // Update when going online!
-                    apiKey: "AIzaSyBF39RJz9HnX_gU2aUhe31IHJz8vp7qnEM",
-                    authDomain: "playground-62567.firebaseapp.com",
-                    projectId: "playground-62567",
-                    storageBucket: "playground-62567.appspot.com",
-                    messagingSenderId: "914430038851",
-                    appId: "1:914430038851:web:e4e714f50b17a2a2c715f6"
+                    apiKey: "AIzaSyDfQw-0aghLyxvbgBSeVMqzvQav9NFj9fo",
+                    authDomain: "weekly-car-checks.firebaseapp.com",
+                    projectId: "weekly-car-checks",
+                    storageBucket: "weekly-car-checks.appspot.com",
+                    messagingSenderId: "1081763112489",
+                    appId: "1:1081763112489:web:00e68b7266894249211e38"
                 }
     }
 }
@@ -271,7 +271,7 @@ onAuthStateChanged(auth, (user) => {
         tabBtnAccount.style.display = "none"
         tabBtnLogout.style.display = "block"
         
-        // fetchServiceJobs(user)
+        fetchServiceJobs(user)
         fetchWeeklyChecks(user)
 
         // console.log(user)
@@ -307,29 +307,31 @@ function fetchWeeklyChecksInRealTimeFromDBs(query, user) { // Errors are happeni
     console.log(query)
     console.log(user)
 
-    // onSnapshot(query, (querySnapshot) => {
+    onSnapshot(query, (querySnapshot) => {
 
-    //     clearListEl(historyEl)
+        clearListEl(historyEl)
         
-    //     recordList = recordListClear(recordList)
+        recordList = recordListClear(recordList)
 
-    //     querySnapshot.forEach((doc) => {
+        querySnapshot.forEach((doc) => {
 
-    //         recordList.push(new RecordListing(doc))
+            recordList.push(new RecordListing(doc))
 
-    //     })
+        })
+
+        console.log(recordList)
         
-    //     recordListCalcs(recordList) // Do we need to sort the records?
+        recordListCalcs(recordList) // Do we need to sort the records?
 
-    //     recordListReverse(recordList)
+        recordListReverse(recordList)
         
-    //     for (let r in recordList) {
+        for (let r in recordList) {
         
-    //         renderWeeklyCheck(recordList[r])
+            renderWeeklyCheck(recordList[r])
         
-    //     }
+        }
 
-    // })
+    })
 
 }
 
