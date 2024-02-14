@@ -89,6 +89,14 @@ function getAppCheck() {
 const serviceJobsCollectionName = "serviceJobs"
 const weeklyChecksCollectionName = "weeklyChecks"
 
+/* === Cross-Platform Scaling === */
+
+const siteWidth = window.innerWidth
+const scale = screen.width / siteWidth
+
+const viewport = document.querySelector('meta[name="viewport"]')
+viewport.setAttribute('content', `width=${siteWidth}, initial-scale=${scale}`)
+
 /* === DOM Elements === */
 
 const tabMenuEl = document.getElementById("tab-menu")
@@ -317,9 +325,6 @@ function fetchServiceJobsInRealTimeFromDBs(query, user) {
 
 function fetchWeeklyChecksInRealTimeFromDBs(query, user) {
 
-    console.log(query)
-    console.log(user)
-
     onSnapshot(query, (querySnapshot) => {
 
         clearListEl(historyEl)
@@ -331,8 +336,6 @@ function fetchWeeklyChecksInRealTimeFromDBs(query, user) {
             recordList.push(new RecordListing(doc))
 
         })
-
-        console.log(recordList)
         
         recordListCalcs(recordList) // Do we need to sort the records?
 
