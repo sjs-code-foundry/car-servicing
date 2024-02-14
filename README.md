@@ -10,28 +10,20 @@ v0.4.0-alpha
 Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated list.
 ## Planned Features
 ### Done
-#### Aesthetics
-- [x] Replace alert methods with custom-styled modals
-- [x] Add metadata to Servicing Jobs like date of creation and source (user or auto-generated)
-#### JS Functions
-- [x] Improve miles travelled calculations to take dates into account
-- [x] Refactor code to cut down on DOM elements
-#### Security
-- [x] Add Firebase Authentication for additional protection
 #### User Experience
-- [x] Refactor tabs to be self-contained in index.html
+- [x] Reinstate scaling codeto eliminate need to zoom on opening app
+- [x] Convert all text & element sizes to em for better scalability across devices
 ### v0.4.1-alpha
 #### Layout
 - [ ] Implement landscape layout for when the device is rotated
 - [ ] Resize interactive elements for easier targeting
 - [ ] Convert Weekly Checks to HTML table for more consistent formatting
-#### User Experience
-- [ ] Convert all text & element sizes to em for better scalability across devices
 ### v0.4.2-alpha
 #### JS Functions
 - [ ] Use Data Attributes to for Weekly Checks (deleting checks, opening table of weekly checks, etc.)
 #### User Experience
 - [ ] Prevent user from submitting Weekly Check unless date and mileage fields are appropriately filled
+- [ ] Prevent user from adding service jobs in the absence of text values
 - [ ] Double click copies values from Weekly Check record table
 - [ ] Blank out buttons so that user cannot enter two weekly checks on the same day
 ### v0.4.3-alpha
