@@ -9,20 +9,33 @@ v0.4.0-alpha
 ## Changelog
 Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated list.
 ## Planned Features
-### Aesthetics
-- [ ] Replace alert methods with custom-styled modals (v0.4.0-alpha)
-- [ ] Add metadata to Servicing Jobs like date of creation and source (user or auto-generated) (v0.4.0-alpha)
-### JS Functions
-- [x] Improve miles travelled calculations to take dates into account (v0.4.0-alpha)
-- [x] Refactor code to cut down on DOM elements (v0.4.0-alpha)
-- [ ] Use Data Attributes to for Weekly Checks (deleting checks, opening table of weekly checks, etc.) (v0.4.0-alpha)
-### Layout
-- [ ] Implement landscape layout for when the device is rotated (v0.4.0-alpha)
-### Security
-- [ ] Add Firebase Authentication for additional protection (v0.4.0-alpha)
-### User Experience
-- [ ] Prevent user from submitting Weekly Check unless date and mileage fields are appropriately filled (v0.4.0-alpha)
-- [x] Refactor tabs to be self-contained in index.html (v0.4.0-alpha)
-- [ ] Double click copies values from Weekly Check record table (v0.4.0-alpha)
-- [ ] Convert all text & element sizes to em for better scalability across devices (v0.4.0-alpha)
-- [ ] Blank out buttons so that user cannot enter two weekly checks on the same day (v0.4.0-alpha)
+### Done
+#### Aesthetics
+- [x] Replace alert methods with custom-styled modals
+- [x] Add metadata to Servicing Jobs like date of creation and source (user or auto-generated)
+#### JS Functions
+- [x] Improve miles travelled calculations to take dates into account
+- [x] Refactor code to cut down on DOM elements
+#### Security
+- [x] Add Firebase Authentication for additional protection
+#### User Experience
+- [x] Refactor tabs to be self-contained in index.html
+### v0.4.1-alpha
+#### Layout
+- [ ] Implement landscape layout for when the device is rotated
+- [ ] Resize interactive elements for easier targeting
+- [ ] Convert Weekly Checks to HTML table for more consistent formatting
+#### User Experience
+- [ ] Convert all text & element sizes to em for better scalability across devices
+### v0.4.2-alpha
+#### JS Functions
+- [ ] Use Data Attributes to for Weekly Checks (deleting checks, opening table of weekly checks, etc.)
+#### User Experience
+- [ ] Prevent user from submitting Weekly Check unless date and mileage fields are appropriately filled
+- [ ] Double click copies values from Weekly Check record table
+- [ ] Blank out buttons so that user cannot enter two weekly checks on the same day
+### v0.4.3-alpha
+#### User Experience
+- [ ] Add picture icon for users
+- [ ] Implement sorting functions for service jobs and weekly checks
+
