@@ -11,12 +11,14 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 ## Planned Features
 ### Done
 #### User Experience
-- [x] Reinstate scaling codeto eliminate need to zoom on opening app
+- [x] Reinstate scaling code to eliminate need to zoom on opening app
 - [x] Convert all text & element sizes to em for better scalability across devices
 ### v0.4.1-alpha
 #### Layout
 - [ ] Implement landscape layout for when the device is rotated
+- [ ] Place the Weekly Check buttons into a flex-wrap container for scaling across browser widths
 - [ ] Resize interactive elements for easier targeting
+- [ ] Use mobile layout as basis for a new desktop layout, designed for PC monitors
 - [ ] Convert Weekly Checks to HTML table for more consistent formatting
 ### v0.4.2-alpha
 #### JS Functions
