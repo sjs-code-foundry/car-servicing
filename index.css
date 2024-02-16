@@ -1,4 +1,6 @@
-/* Styling Variables */
+/* ========================
+	Styling Variables
+   ======================== */
 
 :root {
     --background-light-color: #F2F2F2;
@@ -17,7 +19,9 @@
     --success-color: #2A7221;
 }
 
-/* General Layout */
+/* ========================
+	General Layout
+   ======================== */
 
 html {
     background-color: var(--background-light-color);
@@ -73,7 +77,9 @@ footer {
     font-size: 0.875rem;
 }
 
-/* Top Navigation Bar */
+/* ========================
+	Top Navigation Bar
+   ======================== */
 
 .header {
     width: inherit;
@@ -88,7 +94,9 @@ footer {
     width: 4em;
 }
 
-/* Hamburger Menu - Static Properties */
+/* ========================================
+	Hamburger Menu - Static Properties
+   ======================================== */
 
 .header ul {
     margin: 0;
@@ -116,7 +124,9 @@ footer {
     transition: max-height .2s ease-out;
 }
 
-/* Hamburger Menu - Hamburger Icon Properties */
+/* ================================================
+	Hamburger Menu - Hamburger Icon Properties
+   ================================================ */
 
 .header .menu-icon {
     cursor: pointer;
@@ -154,7 +164,9 @@ footer {
     top: -0.8em;
 }
 
-/* Hamburger Menu - Icon & Menu Animation Properties */
+/* ====================================================
+	Hamburger Menu - Icon & Menu Animation Properties
+   ==================================================== */
 
 .header .menu-btn {
     display: none;
@@ -181,7 +193,9 @@ footer {
     top: 0;
 }
 
-/* Hamburger Menu - Button States */
+/* ====================================
+	Hamburger Menu - Button States
+   ==================================== */
 
 #tab-btn-logout {
     display: none;
@@ -223,7 +237,9 @@ input {
     padding: 0.5556em 0;
 }
 
-/* Buttons */
+/* ============
+	Buttons
+   ============ */
 
 #sj-btn, #submit-btn {
     font-family: 'Ubuntu', sans-serif;
@@ -260,7 +276,9 @@ input {
     padding: 0 1.111em;
 }
 
-/* Record Lists */
+/* ================
+	Record Lists
+   ================ */
 
 .service-job, .weekly-job {
     margin: 0.5556em;
@@ -288,7 +306,9 @@ input {
     font-size: 0.875rem;
 }
 
-/* Modals */
+/* ========
+	Modals
+   ======== */
 
 #modal-container { /* Container to allow travel across page for modals */
     position: absolute;
@@ -376,7 +396,9 @@ input {
     padding: 0.556em 0;
 }
 
-/* Editing Borders */
+/* ====================
+	Editing Borders
+   ==================== */
 
 /* body {
     border: 1px solid red;
