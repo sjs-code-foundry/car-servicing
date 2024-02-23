@@ -20,6 +20,8 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 - [ ] Resize interactive elements for easier targeting
 - [ ] Use mobile layout as basis for a new desktop layout, designed for PC monitors
 - [ ] Convert Weekly Checks to HTML table for more consistent formatting
+#### User Experience
+- [ ] Add focus states to the input fields
 ### v0.4.2-alpha
 #### JS Functions
 - [ ] Use Data Attributes to for Weekly Checks (deleting checks, opening table of weekly checks, etc.)
