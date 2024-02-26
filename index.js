@@ -381,6 +381,16 @@ tabSwitch("tab-blank")
 
 /* === Event Listeners === */
 
+document.addEventListener("click", function(e) {
+
+    if (!e.target.closest(".header") || e.target.nodeName === "BUTTON") {
+
+        document.getElementById("menu-btn").checked = false
+
+    }
+
+})
+
 tabMenuEl.addEventListener("click", function(e) {
 
     if (e.target.nodeName === "BUTTON") {

@@ -9,10 +9,6 @@ v0.4.0-alpha
 ## Changelog
 Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated list.
 ## Planned Features
-### Done
-#### User Experience
-- [x] Reinstate scaling code to eliminate need to zoom on opening app
-- [x] Convert all text & element sizes to em for better scalability across devices
 ### v0.4.1-alpha
 #### Layout
 - [ ] Implement landscape layout for when the device is rotated
@@ -22,6 +18,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 - [ ] Convert Weekly Checks to HTML table for more consistent formatting
 #### User Experience
 - [ ] Add focus states to the input fields
+- [x] Tapping anywhere besides the drop-down closes the menu
 ### v0.4.2-alpha
 #### JS Functions
 - [ ] Use Data Attributes to for Weekly Checks (deleting checks, opening table of weekly checks, etc.)
