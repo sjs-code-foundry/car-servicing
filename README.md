@@ -31,7 +31,11 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 - [ ] Double click copies values from Weekly Check record table
 - [ ] Blank out buttons so that user cannot enter two weekly checks on the same day
 ### v0.4.3-alpha
+#### Firestore
+- [ ] Enable offline caching
 #### User Experience
 - [ ] Add picture icon for users
 - [ ] Implement sorting functions for service jobs and weekly checks
-
+### v0.5.0-alpha
+#### Cross-Platform
+- [ ] Fork repo for native Android app written in Kotlin
