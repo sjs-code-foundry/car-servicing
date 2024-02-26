@@ -17,31 +17,37 @@
 
     --error-color: #EA2B1F;
     --success-color: #2A7221;
+
+    --main-width: 40rem;
+    --header-landscape-width: 20rem;
 }
 
 /* ========================
 	General Layout
    ======================== */
 
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 html {
+    display: block;
     background-color: var(--background-light-color);
 }
 
-body, hr {
-    width: 40rem;
-}
-
 body, footer {
-    display: flex;
     font-family: 'Ubuntu', sans-serif;
 }
 
-body {
+#interactive-area {
+    display: flex;
     flex-direction: column;
     user-select: none;
     text-align: center;
+
+    width: var(--main-width);
+
     margin: 0 auto;
-    padding: 1.5em;
 
     color: var(--text-light-color);
     font-size: 1.125rem; /* 18px */
@@ -57,6 +63,7 @@ h4 {
 }
 
 hr {
+    width: var(--main-width);
     border-color: var(--text-light-color);
 }
 
@@ -71,143 +78,205 @@ ul {
 }
 
 footer {
-    flex-direction: row;
+    display: flex;
+    flex-direction: column;
     justify-content: space-around;
+    text-align: center;
     color: var(--text-light-color);
     font-size: 0.875rem;
 }
 
-/* ========================
-	Top Navigation Bar
-   ======================== */
+@media (orientation: portrait) {
 
-.header {
-    width: inherit;
-    height: 4em;
-    box-shadow: 0.0625em 0.0625em 0.25em 0 rgba(0,0,0,.1);
-    z-index: 3;
+    /* ========================
+        Top Navigation Bar
+    ======================== */
+
+    .header {
+        width: inherit;
+        height: 4em;
+        box-shadow: 0.0625em 0.0625em 0.25em 0 rgba(0,0,0,.1);
+        z-index: 3;
+    }
+
+    .header img {
+        display: block;
+        float: left;
+        width: 4em;
+    }
+
+    /* ========================================
+        Hamburger Menu - Static Properties
+    ======================================== */
+
+    .header ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        overflow: hidden;
+        background-color: var(--background-light-color)
+    }
+
+    .header li button {
+        display: block;
+        margin: 0 auto;
+        padding: 0.625em;
+        font-size: 1.77778em;
+        border: none;
+    }
+
+    .header li button:hover {
+        text-decoration: underline;
+    }
+
+    .header li button:active {
+        color: var(--accent-light-color);
+    }
+
+    .header .menu {
+        clear: both;
+        max-height: 0;
+        transition: max-height .2s ease-out;
+    }
+
+    /* ================================================
+        Hamburger Menu - Hamburger Icon Properties
+    ================================================ */
+
+    .header .menu-icon {
+        cursor: pointer;
+        display: inline-block;
+        float: right;
+        padding: 1.75em 1.25em;
+        position: relative;
+    }
+
+    .header .menu-icon .navicon {
+        background: var(--text-light-color);
+        display: block;
+        height: 0.25em;
+        position: relative;
+        transition: background .2s ease-out;
+        width: 2em;
+    }
+
+    .header .menu-icon .navicon:before,
+    .header .menu-icon .navicon:after {
+        background: var(--text-light-color);
+        content: '';
+        display: block;
+        height: 90%;
+        position: absolute;
+        transition: all .2s ease-out;
+        width: 100%;
+    }
+
+    .header .menu-icon .navicon:before {
+        top: 0.8em;
+    }
+
+    .header .menu-icon .navicon:after {
+        top: -0.8em;
+    }
+
+    /* ====================================================
+        Hamburger Menu - Icon & Menu Animation Properties
+    ==================================================== */
+
+    .header .menu-btn {
+        display: none;
+    }
+
+    .header .menu-btn:checked ~ .menu {
+        max-height: 40rem;
+    }
+
+    .header .menu-btn:checked ~ .menu-icon .navicon {
+        background: transparent;
+    }
+
+    .header .menu-btn:checked ~ .menu-icon .navicon:before {
+        transform: rotate(-45deg);
+    }
+
+    .header .menu-btn:checked ~ .menu-icon .navicon:after {
+        transform: rotate(45deg);
+    }
+
+    .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+    .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+        top: 0;
+    }
+
 }
 
-.header img {
-    display: block;
-    float: left;
-    width: 4em;
+@media (orientation: landscape) {
+    #interactive-area {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    header {
+        width: var(--header-landscape-width);
+    }
+
+    #tab-menu {
+        width: inherit;
+    }
+
+    #tab-menu button {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0 auto;
+        padding: 1em 0.5em;
+        border: none;
+    }
+
+    #tab-menu button:hover {
+        text-decoration: underline;
+    }
+
+    #tab-menu button:active {
+        color: var(--accent-light-color);
+    }
+
+    section {
+        width: var(--main-width);
+    }
+
+    #menu-btn {
+        display: none;
+    }
+
+    footer {
+        width: calc(var(--header-landscape-width) + var(--main-width));
+        margin: 0 auto;
+    }
+
+    footer hr {
+        width: inherit;
+    }
 }
 
-/* ========================================
-	Hamburger Menu - Static Properties
-   ======================================== */
-
-.header ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    overflow: hidden;
-    background-color: var(--background-light-color)
-}
-
-.header li button {
-    display: block;
-    margin: 0 auto;
-    padding: 0.625em;
-    font-size: 1.77778em;
-    border: none;
-}
-
-.header li button:active {
-    text-decoration: underline;
-}
-
-.header .menu {
-    clear: both;
-    max-height: 0;
-    transition: max-height .2s ease-out;
-}
-
-/* ================================================
-	Hamburger Menu - Hamburger Icon Properties
-   ================================================ */
-
-.header .menu-icon {
-    cursor: pointer;
-    display: inline-block;
-    float: right;
-    padding: 1.75em 1.25em;
-    position: relative;
-}
-
-.header .menu-icon .navicon {
-    background: var(--text-light-color);
-    display: block;
-    height: 0.25em;
-    position: relative;
-    transition: background .2s ease-out;
-    width: 2em;
-}
-
-.header .menu-icon .navicon:before,
-.header .menu-icon .navicon:after {
-    background: var(--text-light-color);
-    content: '';
-    display: block;
-    height: 90%;
-    position: absolute;
-    transition: all .2s ease-out;
-    width: 100%;
-}
-
-.header .menu-icon .navicon:before {
-    top: 0.8em;
-}
-
-.header .menu-icon .navicon:after {
-    top: -0.8em;
-}
-
-/* ====================================================
-	Hamburger Menu - Icon & Menu Animation Properties
-   ==================================================== */
-
-.header .menu-btn {
-    display: none;
-}
-
-.header .menu-btn:checked ~ .menu {
-    max-height: 40rem;
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon {
-    background: transparent;
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon:before {
-    transform: rotate(-45deg);
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon:after {
-    transform: rotate(45deg);
-}
-
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
-    top: 0;
-}
-
-/* ====================================
-	Hamburger Menu - Button States
-   ==================================== */
+/* ============================
+	Both Menus - Button States
+   ============================ */
 
 #tab-btn-logout {
     display: none;
 }
 
-/* General Tab Formatting */
+/* ========================
+    General Tab Formatting
+   ========================*/
 
 .tabcontent {
     display: none;
 }
 
-/* Fields */
+/* ========
+    Fields
+   ======== */
 
 .entry-field, #sj-field {
     font-family: 'Ubuntu', sans-serif;
@@ -218,6 +287,7 @@ footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: var(--main-width);
 }
 
 input {
@@ -237,13 +307,45 @@ input {
     padding: 0.5556em 0;
 }
 
+/* ========================
+    Weekly Check Buttons
+   ======================== */
+
+#weeklies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+}
+
+.weekly-job {
+    flex: 1 1 auto;
+    font-weight: bold;
+    padding: 1.6667em 0;
+    border: 1px solid var(--text-light-color);
+}
+
+@media (max-width: 480px) {
+    .weekly-job {
+        width: var(--main-width);
+        font-size: 2rem;
+        padding: 0.5em;
+    }
+}
+
+@media (min-width: 481px) {
+    .weekly-job {
+        font-size: 1.5rem;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+    }
+}
+
 /* ============
 	Buttons
    ============ */
 
 #sj-btn, #submit-btn {
     font-family: 'Ubuntu', sans-serif;
-    font-size: 1.125rem;
     font-weight: bold;
     background-color: var(--secondary-light-color);
     border: none;
@@ -259,12 +361,14 @@ input {
 }
 
 #sj-btn {
-    padding: 1.6667em 0.5556em;
+    font-size: 1.5rem;
+    padding: 1em 0.5em;
 }
 
 #submit-btn {
-    width: 40rem;
-    padding: 1.6667em 0;
+    width: var(--main-width);
+    font-size: 2.5rem;
+    padding: 0.5em 0;
 }
 
 .hist-list button {
@@ -280,22 +384,50 @@ input {
 	Record Lists
    ================ */
 
-.service-job, .weekly-job {
-    margin: 0.5556em;
+#jobs-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+}
+
+.service-job {
+    flex: 1 1 auto;
     border: 1px solid var(--text-light-color);
-    padding: 1.6667em 0;
+    box-shadow: 0 0.0625em 0.25em var(--text-light-color);
 }
 
 #hist-headers, .hist-list {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: var(--main-width);
     text-align: center;
     padding: 0.28em;
 }
 
-.service-job {
-    box-shadow: 0 0.0625em 0.25em var(--text-light-color);
+#tab-car-stats p, #tab-about-app p {
+    width: var(--main-width);
+    /* Temporary - Spaces content out correctly for Landscape */
+}
+
+#tab-blank p {
+    color: var(--background-light-color);
+    width: var(--main-width);
+}
+
+@media (max-width: 480px) {
+    .service-job {
+        width: var(--main-width);
+        font-size: 2rem;
+        padding: 0.5em;
+    }
+}
+
+@media (min-width: 481px) {
+    .service-job {
+        font-size: 1.5rem;
+        padding: 1em 0.5em;
+    }
 }
 
 /* #hist-headers {

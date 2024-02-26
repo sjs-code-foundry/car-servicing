@@ -91,11 +91,13 @@ const weeklyChecksCollectionName = "weeklyChecks"
 
 /* === Cross-Platform Scaling === */
 
-const siteWidth = window.innerWidth
-const scale = screen.width / siteWidth
+// const siteWidth = window.innerWidth
+// const scale = screen.width / siteWidth
 
-const viewport = document.querySelector('meta[name="viewport"]')
-viewport.setAttribute('content', `width=${siteWidth}, initial-scale=${scale}`)
+// const viewport = document.querySelector('meta[name="viewport"]')
+// viewport.setAttribute('content', `width=${siteWidth}, initial-scale=${scale}`)
+
+// This code messes with media queries - find an alternative solution!
 
 /* === DOM Elements === */
 
@@ -277,7 +279,7 @@ onAuthStateChanged(auth, (user) => {
 
         accountStatusHeader.textContent = `Signed in as: ${user.email}.`
         tabBtnAccount.style.display = "none"
-        tabBtnLogout.style.display = "block"
+        tabBtnLogout.style.display = "flex"
         
         fetchServiceJobs(user)
         fetchWeeklyChecks(user)
@@ -285,7 +287,7 @@ onAuthStateChanged(auth, (user) => {
     } else {
 
         accountStatusHeader.textContent = "Not Signed In.  Sign in to view records."
-        tabBtnAccount.style.display = "block"
+        tabBtnAccount.style.display = "flex"
         tabBtnLogout.style.display = "none"
 
     }

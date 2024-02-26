@@ -11,14 +11,15 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 ## Planned Features
 ### v0.4.1-alpha
 #### Layout
-- [ ] Implement landscape layout for when the device is rotated
-- [ ] Place the Weekly Check buttons into a flex-wrap container for scaling across browser widths
+- [x] Implement landscape layout for when the device is rotated
+- [x] Place the Weekly Check buttons into a flex-wrap container for scaling across browser widths
 - [ ] Resize interactive elements for easier targeting
-- [ ] Use mobile layout as basis for a new desktop layout, designed for PC monitors
+- [x] Use mobile layout as basis for a new desktop layout, designed for PC monitors
 - [ ] Convert Weekly Checks to HTML table for more consistent formatting
+- [ ] Fix paddings and margins on sign-in and other modals
 #### User Experience
-- [ ] Add focus states to the input fields
 - [x] Tapping anywhere besides the drop-down closes the menu
+- [ ] Implement decision modal for deleting weekly checks
 ### v0.4.2-alpha
 #### JS Functions
 - [ ] Use Data Attributes to for Weekly Checks (deleting checks, opening table of weekly checks, etc.)
@@ -30,6 +31,8 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 ### v0.4.3-alpha
 #### Firestore
 - [ ] Enable offline caching
+#### JS Functions
+- [ ] Implement Age of Vehicle in Car Stats (new collection in Firestore)
 #### User Experience
 - [ ] Add picture icon for users
 - [ ] Implement sorting functions for service jobs and weekly checks

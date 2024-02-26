@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
@@ -13,113 +13,114 @@
         <link rel="stylesheet" href="index.css">
     </head>
     <body>
-        <header class="header">
-            <img src="/img/avatar.png">
-            <input class="menu-btn" type="checkbox" id="menu-btn">
-            <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
-            <ul id="tab-menu" class="menu">
-                <li><button id="tab-btn-weekly-checks" class="tab" data-tab="tab-weekly-checks">Weekly Car Checks</button></li>
-                <li><button id="tab-btn-service-jobs" class="tab" data-tab="tab-service-jobs">Servicing Jobs</button></li>
-                <li><button id="tab-btn-weekly-history" class="tab" data-tab="tab-weekly-history">Weekly Check History</button></li>
-                <li><button id="tab-btn-car-stats" class="tab" data-tab="tab-car-stats">Car Stats</button></li>
-                <li><button id="tab-btn-account" class="tab" data-tab="modal-account">Sign In</button></li>
-                <li><button id="tab-btn-logout" class="tab" data-tab="tab-blank">Sign Out</button></li>
-                <li><button id="tab-btn-about-app" class="tab" data-tab="tab-about-app">About App</button></li>
-            </ul>
-        </header>
-        <div id="modal-container">
-            <div id="modal-account" class="modal">
-                <div>
-                    <h2 id="modal-account-header">Sign In.</h2>
-                    <button class="close-btn" data-target="modal-account">X</button>
+        <div id="interactive-area">
+            <header class="header">
+                <img src="/img/avatar.png">
+                <input class="menu-btn" type="checkbox" id="menu-btn">
+                <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+                <ul id="tab-menu" class="menu">
+                    <li><button id="tab-btn-weekly-checks" class="tab" data-tab="tab-weekly-checks">Weekly Car Checks</button></li>
+                    <li><button id="tab-btn-service-jobs" class="tab" data-tab="tab-service-jobs">Servicing Jobs</button></li>
+                    <li><button id="tab-btn-weekly-history" class="tab" data-tab="tab-weekly-history">Weekly Check History</button></li>
+                    <li><button id="tab-btn-car-stats" class="tab" data-tab="tab-car-stats">Car Stats</button></li>
+                    <li><button id="tab-btn-account" class="tab" data-tab="modal-account">Sign In</button></li>
+                    <li><button id="tab-btn-logout" class="tab" data-tab="tab-blank">Sign Out</button></li>
+                    <li><button id="tab-btn-about-app" class="tab" data-tab="tab-about-app">About App</button></li>
+                </ul>
+            </header>
+            <div id="modal-container">
+                <div id="modal-account" class="modal">
+                    <div>
+                        <h2 id="modal-account-header">Sign In.</h2>
+                        <button class="close-btn" data-target="modal-account">X</button>
+                    </div>
+                    <form id="modal-account-form">
+                        <label for="email">Enter email address:</label>
+                        <input type="email" name="email" placeholder="someone@something.com" required>
+                        <label for="password">Enter password:</label>
+                        <input type="password" name="password" placeholder="******" required>
+                        <button id="modal-account-form-btn">Sign In with Email</button>
+                    </form>
+                    <button id="signin-btn-google">Sign in with Google</button>
+                    <div id="modal-account-switch-line">
+                        <p>No account?</p>
+                        <button id="create-account-btn">Create an account</button>
+                        <p>.</p>
+                    </div>
                 </div>
-                <form id="modal-account-form">
-                    <label for="email">Enter email address:</label>
-                    <input type="email" name="email" placeholder="someone@something.com" required>
-                    <label for="password">Enter password:</label>
-                    <input type="password" name="password" placeholder="******" required>
-                    <button id="modal-account-form-btn">Sign In with Email</button>
-                </form>
-                <button id="signin-btn-google">Sign in with Google</button>
-                <div id="modal-account-switch-line">
-                    <p>No account?</p>
-                    <button id="create-account-btn">Create an account</button>
-                    <p>.</p>
+                <div id="modal-alert" class="modal">
+                    <div>
+                        <h2 id="modal-alert-heading">Heading.</h2>
+                        <button class="close-btn" data-target="modal-alert">X</button>
+                    </div>
+                    <p id="modal-alert-content">Alert Modal Body</p>
                 </div>
             </div>
-            <div id="modal-alert" class="modal">
-                <div>
-                    <h2 id="modal-alert-heading">Heading.</h2>
-                    <button class="close-btn" data-target="modal-alert">X</button>
+            <section id="tab-blank" class="tabcontent">
+                <p>Click a link to begin.</p>
+                <!-- Blank section for pre-signin view -->
+            </section>
+            <section id="tab-weekly-checks" class="tabcontent">
+                <h2>Weekly Jobs</h2>
+                <div class="entry-field">
+                    <p>Date: </p>
+                    <input id="date-field" type="date">
                 </div>
-                <p id="modal-alert-content">Alert Modal Body</p>
-            </div>
+                <div class="entry-field">
+                    <p>Odometer: </p>
+                    <input id="odo-field" type="number">
+                </div>
+                <ul id="weeklies">
+                    <!-- List of Weekly Check Buttons goes here -->
+                </ul>
+                <button id="submit-btn">Submit Weekly Check</button>
+            </section>
+            <section id="tab-service-jobs" class="tabcontent">
+                <h2>Servicing Jobs</h2>
+                <div class="entry-field">
+                    <input id="sj-field" type="text">
+                    <button id="sj-btn">Submit Service Job</button>
+                </div>
+                <ul id="jobs-list">
+                    <!-- Service Jobs go here -->
+                </ul>
+            </section>
+            <section id="tab-weekly-history" class="tabcontent">
+                <h2>Weekly Check History</h2>
+                <div id="hist-headers">
+                    <h4>Date</h4>
+                    <h4>Odo Miles</h4>
+                    <h4>Miles Travelled</h4>
+                    <h4>Weekly Jobs</h4>
+                    <h4>Delete?</h4>
+                </div>
+                <ul id="history">
+                    <li class="hist-list">
+                        <!-- History Items go here -->
+                    </li>
+                </ul>
+            </section>
+            <section id="tab-car-stats" class="tabcontent">
+                <h2>Car Stats</h2>
+                <p>Not Implemented, check later.</p>
+                <!-- Display calculated stats like total miles travelled,
+                    mean average miles/week, predicted miles travelled
+                    in a year, etc. -->
+                <!-- Create Place to enter car stats like engine type,
+                    tyre type, bulbs for various locations, etc. -->
+            </section>
+            <section id="tab-about-app" class="tabcontent">
+                <h2>About App</h2>
+                <h3>Created by:</h3>
+                <p>sjs-code-foundry</p>
+                <h3>App Version:</h3>
+                <p>v0.4.1-alpha</p>
+            </section>
         </div>
-        <h3 id="account-status-header">Not Signed In.  Sign in to view records.</h3>
-        <!-- Configure header above to change according to sign-in status -->
-        <section id="tab-blank" class="tabcontent">
-            <!-- Blank section for pre-signin view -->
-        </section>
-        <section id="tab-weekly-checks" class="tabcontent">
-            <h2>Weekly Jobs</h2>
-            <div class="entry-field">
-                <p>Date: </p>
-                <input id="date-field" type="date">
-            </div>
-            <div class="entry-field">
-                <p>Odometer: </p>
-                <input id="odo-field" type="number">
-            </div>
-            <ul id="weeklies">
-                <!-- List of Weekly Check Buttons goes here -->
-            </ul>
-            <button id="submit-btn">Submit Weekly Check</button>
-        </section>
-        <section id="tab-service-jobs" class="tabcontent">
-            <h2>Servicing Jobs</h2>
-            <div class="entry-field">
-                <input id="sj-field" type="text">
-                <button id="sj-btn">Submit Service Job</button>
-            </div>
-            <ul id="jobs-list">
-                <!-- Service Jobs go here -->
-            </ul>
-        </section>
-        <section id="tab-weekly-history" class="tabcontent">
-            <h2>Weekly Check History</h2>
-            <div id="hist-headers">
-                <h4>Date</h4>
-                <h4>Odo Miles</h4>
-                <h4>Miles Travelled</h4>
-                <h4>Weekly Jobs</h4>
-                <h4>Delete?</h4>
-            </div>
-            <ul id="history">
-                <li class="hist-list">
-                    <!-- History Items go here -->
-                </li>
-            </ul>
-        </section>
-        <section id="tab-car-stats" class="tabcontent">
-            <h2>Car Stats</h2>
-            <p>Not Implemented, check later.</p>
-            <!-- Display calculated stats like total miles travelled,
-                 mean average miles/week, predicted miles travelled
-                 in a year, etc. -->
-            <!-- Create Place to enter car stats like engine type,
-                 tyre type, bulbs for various locations, etc. -->
-        </section>
-        <section id="tab-about-app" class="tabcontent">
-            <h2>About App</h2>
-            <h3>Created by:</h3>
-            <p>sjs-code-foundry</p>
-            <h3>App Version:</h3>
-            <p>v0.4.1-alpha</p>
-        </section>
-        <hr>
         <script src="index.js" type="module"></script>
     </body>
     <footer>
-        <!-- No content planned -->
+        <hr>
+        <h3 id="account-status-header">Not Signed In.  Sign in to view records.</h3>
     </footer>
 </html>
