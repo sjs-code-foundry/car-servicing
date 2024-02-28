@@ -15,7 +15,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 - [x] Place the Weekly Check buttons into a flex-wrap container for scaling across browser widths
 - [ ] Resize interactive elements for easier targeting
 - [x] Use mobile layout as basis for a new desktop layout, designed for PC monitors
-- [ ] Convert Weekly Checks to HTML table for more consistent formatting
+- [ ] Convert Weekly Check History to CSS Grid (perhaps with HTML Table?) for more consistent formatting
 - [ ] Fix paddings and margins on sign-in and other modals
 #### User Experience
 - [x] Tapping anywhere besides the drop-down closes the menu
