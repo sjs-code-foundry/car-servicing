@@ -483,15 +483,25 @@ input {
     justify-content: space-between;
 }
 
-.modal div button {
-    width: 2.25em;
-    height: 2.25em;
+.modal .close-btn {
+    width: 2.5em;
+
+    margin: 0;
+
+    background-color: var(--accent-light-color);
+    color: var(--background-light-color);
+
+    font-size: 32px;
+    font-weight: bold;
+
+    border: none;
+    border-radius: 1em;
 }
 
 .modal label, .modal input {
     display: block;
 
-    width: 37.5rem;
+    width: 100%;
 
     margin: 0.28em auto;
 }
@@ -505,8 +515,6 @@ input {
     height: 1.7778em;
 
     margin: 1.111em 0;
-
-    width: inherit;
 
     align-items: center;
 }
@@ -525,7 +533,7 @@ input {
 }
 
 .modal button {
-    width: 37.5rem;
+    width: 100%;
 
     margin-top: 0.75em;
     padding: 0.556em 0;

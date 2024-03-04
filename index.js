@@ -570,6 +570,14 @@ function modalAlert(targetModal, modalHeading, modalBody) {
 
 }
 
+// function modalConfirm(targetModal, modalHeading, modalBody) {
+
+//     modalDisplay(targetModal)
+
+//     console.log(`Heading: ${modalHeading}, Body: ${modalBody}`)
+
+// }
+
 /* ==  Job/Check List Functions == */
 
 function renderServiceJob(wholeDoc) {

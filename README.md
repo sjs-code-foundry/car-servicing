@@ -16,7 +16,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 - [ ] Resize interactive elements for easier targeting
 - [x] Use mobile layout as basis for a new desktop layout, designed for PC monitors
 - [ ] Convert Weekly Check History to CSS Grid (perhaps with HTML Table?) for more consistent formatting
-- [ ] Fix paddings and margins on sign-in and other modals
+- [x] Fix paddings and margins on sign-in and other modals
 #### User Experience
 - [x] Tapping anywhere besides the drop-down closes the menu
 - [x] Implement sticky links in landscape mode
