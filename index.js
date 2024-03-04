@@ -279,7 +279,7 @@ onAuthStateChanged(auth, (user) => {
 
         accountStatusHeader.textContent = `Signed in as: ${user.email}.`
         tabBtnAccount.style.display = "none"
-        tabBtnLogout.style.display = "flex"
+        tabBtnLogout.style.display = "block"
         
         fetchServiceJobs(user)
         fetchWeeklyChecks(user)
@@ -287,7 +287,7 @@ onAuthStateChanged(auth, (user) => {
     } else {
 
         accountStatusHeader.textContent = "Not Signed In.  Sign in to view records."
-        tabBtnAccount.style.display = "flex"
+        tabBtnAccount.style.display = "block"
         tabBtnLogout.style.display = "none"
 
     }

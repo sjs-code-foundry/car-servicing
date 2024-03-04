@@ -19,6 +19,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 - [ ] Fix paddings and margins on sign-in and other modals
 #### User Experience
 - [x] Tapping anywhere besides the drop-down closes the menu
+- [x] Implement sticky links in landscape mode
 - [ ] Implement decision modal for deleting weekly checks
 ### v0.4.2-alpha
 #### JS Functions
