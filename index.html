@@ -56,7 +56,15 @@
                     <p id="modal-alert-content">Alert Modal Body</p>
                 </div>
                 <div id="modal-confirm" class="modal">
-                    <!-- Style like the alert modal, but with added decision buttons -->
+                    <div>
+                        <h2 id="modal-confirm-heading">Heading.</h2>
+                        <button class="close-btn" data-target="modal-alert">X</button>
+                    </div>
+                    <p id="modal-confirm-content">Alert Modal Body</p>
+                    <div>
+                        <button class="confirm-btn" data-verdict="no">Cancel</button>
+                        <button class="confirm-btn" data-verdict="yes">OK</button>
+                    </div>
                 </div>
             </div>
             <section id="tab-blank" class="tabcontent">

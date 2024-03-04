@@ -114,6 +114,7 @@ const weeklyCheckBtnEl = document.getElementById("submit-btn")
 const historyEl = document.getElementById("history")
 const modalAlertEl = document.getElementById("modal-alert")
 const modalAccountEl = document.getElementById("modal-account")
+const modalConfirmEl = document.getElementById("modal-confirm")
 const accountFormEl = document.getElementById("modal-account-form")
 const signinBtnGoogle = document.getElementById("signin-btn-google")
 const createAccountBtn = document.getElementById("create-account-btn")
@@ -570,13 +571,21 @@ function modalAlert(targetModal, modalHeading, modalBody) {
 
 }
 
-// function modalConfirm(targetModal, modalHeading, modalBody) {
+function modalConfirm(targetModal, modalHeading, modalBody) {
 
-//     modalDisplay(targetModal)
+    modalDisplay(targetModal)
 
-//     console.log(`Heading: ${modalHeading}, Body: ${modalBody}`)
+    document.getElementById("modal-confirm-heading").textContent = modalHeading
 
-// }
+    document.getElementById("modal-confirm-content").textContent = modalBody
+
+    targetModal.addEventListener("click", function(e) {
+
+        modalCloseBtnTest(e, targetModal)
+
+    })
+
+}
 
 /* ==  Job/Check List Functions == */
 
@@ -743,13 +752,26 @@ function clearFieldEl(field) {
     field.value = ""
 }
 
+function confirmClearRecord() {
+
+    const modalHeading = "Delete this record?"
+    const modalBody = "This is a permanent action and you will lose this record forever."
+
+    modalConfirm(modalConfirmEl, modalHeading, modalBody)
+
+    const verdict = confirm("Delete this record?")
+
+    return verdict
+
+}
+
 async function clearRecord(collection, askIfDelete, docID) {
 
     let deleteDecision
 
     if (askIfDelete) {
 
-        deleteDecision = confirm("Delete this record?") // Add confirmation modal?
+        deleteDecision = confirmClearRecord()
 
     } else {
 
@@ -884,4 +906,3 @@ function recordListClear(recordList) {
     return recordList
 
 }
-
