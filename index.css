@@ -408,6 +408,20 @@ input {
     padding: 0.28em;
 }
 
+#hist-area {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas:
+        "header header header header header"
+        "record record record record record";
+    
+    width: inherit;
+}
+
+/* .hist-header {
+    grid-area: header;
+} */
+
 #tab-car-stats p, #tab-about-app p {
     width: var(--main-width);
     /* Temporary - Spaces content out correctly for Landscape */
