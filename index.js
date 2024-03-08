@@ -486,6 +486,7 @@ weeklyJobList()
 /* === Initial Variables === */
 
 let recordList = []
+// let deleteVerdict = false // Deletion of Weekly Checks does not go ahead by default
 
 /* ===  Object Constructors === */
 
@@ -549,11 +550,46 @@ function modalCloseBtnTest(e, targetEl) {
     const isCloseButton = (e.target.classList.contains("close-btn"))
     
     if (isButton && isCloseButton) {
+
         if (e.target.dataset.target) {
+
             modalClose(targetEl)
+
         }
+
     }
 }
+
+// function modalConfirmVerdict(e, targetEl) {
+
+//     const isButton = (e.target.nodeName === "BUTTON")
+//     const isConfirmButton = (e.target.classList.contains("confirm-btn"))
+
+//     if (isButton && isConfirmButton) {
+
+//         if (e.target.dataset.verdict) {
+
+//             let verdict = e.target.dataset.verdict
+
+//             if (verdict === "yes") {
+
+//                 modalClose(targetEl)
+
+//                 return true
+
+//             } else {
+
+//                 modalClose(targetEl)
+
+//                 return false
+
+//             }
+
+//         }
+
+//     }
+
+// }
 
 function modalAlert(targetModal, modalHeading, modalBody) {
 
@@ -571,21 +607,29 @@ function modalAlert(targetModal, modalHeading, modalBody) {
 
 }
 
-function modalConfirm(targetModal, modalHeading, modalBody) {
+// function modalConfirm(targetModal, modalHeading, modalBody) {
 
-    modalDisplay(targetModal)
+//     modalDisplay(targetModal)
 
-    document.getElementById("modal-confirm-heading").textContent = modalHeading
+//     document.getElementById("modal-confirm-heading").textContent = modalHeading
 
-    document.getElementById("modal-confirm-content").textContent = modalBody
+//     document.getElementById("modal-confirm-content").textContent = modalBody
 
-    targetModal.addEventListener("click", function(e) {
+//     targetModal.addEventListener("click", function(e) {
 
-        modalCloseBtnTest(e, targetModal)
+//         modalCloseBtnTest(e, targetModal)
 
-    })
+//         return false
 
-}
+//     })
+
+//     targetModal.addEventListener("click", function(e) {
+
+//         return modalConfirmVerdict(e, targetModal)
+
+//     })
+
+// }
 
 /* ==  Job/Check List Functions == */
 
@@ -752,18 +796,67 @@ function clearFieldEl(field) {
     field.value = ""
 }
 
-function confirmClearRecord() {
+// function confirmClearRecord() {
 
-    const modalHeading = "Delete this record?"
-    const modalBody = "This is a permanent action and you will lose this record forever."
+//     const modalHeading = "Delete this record?"
+//     const modalBody = "This is a permanent action and you will lose this record forever."
 
-    modalConfirm(modalConfirmEl, modalHeading, modalBody)
+//     const verdict = modalConfirm(modalConfirmEl, modalHeading, modalBody)
 
-    const verdict = confirm("Delete this record?")
+//     console.log(`Modal Verdict: ${verdict}`)
 
-    return verdict
+//     return verdict
+
+// }
+
+async function promiseTest() {
+
+    let promise = new Promise((resolve, reject) => {
+
+        setTimeout(() => resolve("done!"), 2000)
+
+    })
+
+    let result = await promise
+
+    alert(result)
+
+    return result
 
 }
+
+// async function confirmClearRecordSequence() {
+
+//     let promise = new Promise((resolve, reject) => {
+
+//         const modalHeading = "Delete this record?"
+// 		const modalBody = "This is a permanent action and you will lose this record forever."
+
+// 		const verdict = modalConfirm(modalConfirmEl, modalHeading, modalBody)
+
+//         console.log(`verdict: ${verdict}`)
+		
+// 		if (verdict) {
+		
+// 			resolve(true)
+		
+// 		} else {
+		
+// 			resolve(false)
+		
+// 		}
+
+//         // resolve("This is the desired result")
+
+//     })
+
+//     // promise.then(confirmClearRecord())
+
+//     let result = await promise
+
+//     return result
+
+// }
 
 async function clearRecord(collection, askIfDelete, docID) {
 
@@ -771,7 +864,9 @@ async function clearRecord(collection, askIfDelete, docID) {
 
     if (askIfDelete) {
 
-        deleteDecision = confirmClearRecord()
+        deleteDecision = confirm(`Clear this record?`)
+
+        // deleteDecision = await promiseTest() // Timeout delays function!!!
 
     } else {
 
@@ -782,6 +877,8 @@ async function clearRecord(collection, askIfDelete, docID) {
     if (deleteDecision) {
 
         await deleteDoc(doc(database, collection, docID))
+
+        // deleteVerdict = false
 
     }
 

@@ -20,7 +20,6 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 #### User Experience
 - [x] Tapping anywhere besides the drop-down closes the menu
 - [x] Implement sticky links in landscape mode
-- [ ] Implement decision modal for deleting weekly checks
 ### v0.4.2-alpha
 #### JS Functions
 - [ ] Use Data Attributes to for Weekly Checks (deleting checks, opening table of weekly checks, etc.)
@@ -29,6 +28,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 - [ ] Prevent user from adding service jobs in the absence of text values
 - [ ] Double click copies values from Weekly Check record table
 - [ ] Blank out buttons so that user cannot enter two weekly checks on the same day
+- [ ] Implement decision modal for deleting weekly checks
 ### v0.4.3-alpha
 #### Firestore
 - [ ] Enable offline caching
