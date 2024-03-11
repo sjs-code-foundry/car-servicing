@@ -641,7 +641,7 @@ function renderServiceJob(wholeDoc) {
 
     const jobAttr = [ ["class", "service-job"] ]
 
-    let newEl = addLiElToList(jobAttr, false, serviceJobData.body)
+    let newEl = addLiElToList(jobAttr, true, serviceJobData.body)
 
     newEl.addEventListener("click", function() {
         clearRecord(serviceJobsCollectionName, false, wholeDoc.id)
@@ -775,7 +775,7 @@ function recordKeyPlaceholder(field, placeholder) {
     }
 }
 
-function addLiElToList(attrList, isHTML, text) {
+function addLiElToList(attrList, needSpaces, text) {
 
     let newEl = document.createElement("li")
 
@@ -785,13 +785,25 @@ function addLiElToList(attrList, isHTML, text) {
         }
     }
 
-    if (isHTML) {
+    if (needSpaces) {
+
+        text = replaceNewLinesWithBrTags(text)
+
         newEl.innerHTML = text
+
     } else {
-        newEl.textContent = text
+
+        newEl.innerHTML = text
+
     }
 
     return newEl
+
+}
+
+function replaceNewLinesWithBrTags(inputString) {
+
+    return inputString.replace(/\n/g, "<br>")
 
 }
 
