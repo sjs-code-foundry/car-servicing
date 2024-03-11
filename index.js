@@ -91,11 +91,11 @@ const weeklyChecksCollectionName = "weeklyChecks"
 
 /* === Cross-Platform Scaling === */
 
-// const siteWidth = window.innerWidth
-// const scale = screen.width / siteWidth
+const siteWidth = window.innerWidth
+const scale = screen.width / siteWidth
 
-// const viewport = document.querySelector('meta[name="viewport"]')
-// viewport.setAttribute('content', `width=${siteWidth}, initial-scale=${scale}`)
+const viewport = document.querySelector('meta[name="viewport"]')
+viewport.setAttribute('content', `width=device-width, initial-scale=${scale}`)
 
 // This code messes with media queries - find an alternative solution!
 

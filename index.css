@@ -53,13 +53,23 @@ body, footer {
     font-size: 1.125rem; /* 18px */
 }
 
-h1 {
+h2 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 2rem;
     font-weight: bold;
 }
 
 h4 {
-    font-size: 0.875rem; /* 14px */
+    font-size: 1.5rem;
     font-weight: bold;
+}
+
+p {
+    font-size: 1.5rem;
 }
 
 hr {
@@ -74,6 +84,8 @@ button {
 
 ul {
     list-style-type: none;
+
+    margin: 2.5em 0;
     padding: 0;
 }
 
@@ -94,7 +106,7 @@ footer {
 
     .header {
         width: inherit;
-        height: 4em;
+        height: 6em;
         box-shadow: 0.0625em 0.0625em 0.25em 0 rgba(0,0,0,.1);
         z-index: 3;
     }
@@ -102,7 +114,7 @@ footer {
     .header img {
         display: block;
         float: left;
-        width: 4em;
+        width: 6em;
     }
 
     /* ========================================
@@ -119,9 +131,13 @@ footer {
 
     .header li button {
         display: block;
-        margin: 0 auto;
-        padding: 0.625em;
-        font-size: 1.77778em;
+
+        width: 100%;
+        padding: 0.75em;
+
+        font-size: 3rem;
+        text-align: center;
+
         border: none;
     }
 
@@ -147,17 +163,17 @@ footer {
         cursor: pointer;
         display: inline-block;
         float: right;
-        padding: 1.75em 1.25em;
+        padding: 2.5em 1.25em;
         position: relative;
     }
 
     .header .menu-icon .navicon {
         background: var(--text-light-color);
         display: block;
-        height: 0.25em;
+        height: 0.5em;
         position: relative;
         transition: background .2s ease-out;
-        width: 2em;
+        width: 4em;
     }
 
     .header .menu-icon .navicon:before,
@@ -172,11 +188,11 @@ footer {
     }
 
     .header .menu-icon .navicon:before {
-        top: 0.8em;
+        top: 2em;
     }
 
     .header .menu-icon .navicon:after {
-        top: -0.8em;
+        top: -2em;
     }
 
     /* ====================================================
@@ -188,7 +204,7 @@ footer {
     }
 
     .header .menu-btn:checked ~ .menu {
-        max-height: 40rem;
+        max-height: 60rem;
     }
 
     .header .menu-btn:checked ~ .menu-icon .navicon {
@@ -281,6 +297,11 @@ footer {
     Fields
    ======== */
 
+.field-label {
+    font-size: 2.5rem;
+    margin: 1em 0 0.5em 0;
+}
+
 .entry-field, #sj-field {
     font-family: 'Ubuntu', sans-serif;
     font-size: 100%;
@@ -288,25 +309,26 @@ footer {
 
 .entry-field {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+
     width: var(--main-width);
+
+    font-size: 2.5rem;
 }
 
 input {
-    width: 12.5rem;
+    width: inherit;
+    height: 8rem;
 
     background-color: var(--background-light-color);
     color: var(--text-light-color);
     font-size: 100%;
-}
-
-.date-field, .odo-field {
-    font-size: 100%;
+    text-align: center;
 }
 
 #sj-field {
-    width: 25rem;
+    width: inherit;
     padding: 0.5556em 0;
 }
 
@@ -322,24 +344,22 @@ input {
 
 .weekly-job {
     flex: 1 1 auto;
+
+    width: var(--main-width);
+    padding: 1.25em 0.5em;
+
+    font-size: 3rem;
     font-weight: bold;
-    padding: 1.6667em 0;
+    
     border: 1px solid var(--text-light-color);
 }
 
-@media (max-width: 480px) {
+@media (min-width: 769px) {
     .weekly-job {
-        width: var(--main-width);
-        font-size: 2rem;
-        padding: 0.5em;
-    }
-}
+        width: auto;
+        padding: 2.5em 0.5em;
 
-@media (min-width: 481px) {
-    .weekly-job {
         font-size: 1.5rem;
-        padding-left: 0.5em;
-        padding-right: 0.5em;
     }
 }
 
@@ -364,23 +384,17 @@ input {
 }
 
 #sj-btn {
-    font-size: 1.5rem;
+    width: inherit;
+    margin: 0.5em 0;
     padding: 1em 0.5em;
+
+    font-size: 3rem;
 }
 
 #submit-btn {
     width: var(--main-width);
-    font-size: 2.5rem;
-    padding: 0.5em 0;
-}
-
-.hist-list button {
-    background-color: var(--accent-light-color);
-    color: var(--background-light-color);
-    border: none;
-    border-radius: 0.28em;
-    font-weight: bold;
-    padding: 0 1.111em;
+    font-size: 3.5rem;
+    padding: 1.25em 0;
 }
 
 /* ================
@@ -395,36 +409,39 @@ input {
 
 .service-job {
     flex: 1 1 auto;
+
+    width: var(--main-width);
+    padding: 0.5em;
+
+    font-size: 3rem;
+
     border: 1px solid var(--text-light-color);
     box-shadow: 0 0.0625em 0.25em var(--text-light-color);
 }
 
-/* #hist-headers, .hist-list {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: var(--main-width);
-    text-align: center;
-    padding: 0.28em;
-} */
-
 #hist-area {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-auto-rows: 3.5em;
-
-    font-size: 0.875rem;
+    grid-auto-rows: auto;
+    align-items: center;
+    justify-items: center;
     
     width: inherit;
 }
+
+/* #hist-area p {
+    font-size: 1.5rem;
+} */
 
 #hist-area button {
     background-color: var(--accent-light-color);
     color: var(--background-light-color);
 
-    width: 40%;
-
+    width: 1.75em;
+    height: 1.75em;
     margin: 0.1em auto;
+
+    font-size: 3rem;
 
     border: none;
     border-radius: 0.33em;
@@ -440,24 +457,12 @@ input {
     width: var(--main-width);
 }
 
-@media (max-width: 480px) {
+@media (min-width: 769px) {
     .service-job {
-        width: var(--main-width);
-        font-size: 2rem;
-        padding: 0.5em;
-    }
-}
-
-@media (min-width: 481px) {
-    .service-job {
-        font-size: 1.5rem;
+        font-size: 2.5rem;
         padding: 1em 0.5em;
     }
 }
-
-/* #hist-headers {
-    
-} */
 
 .hist-list {
     font-size: 0.875rem;
@@ -513,32 +518,35 @@ input {
     background-color: var(--accent-light-color);
     color: var(--background-light-color);
 
-    font-size: 32px;
+    font-size: 3rem;
     font-weight: bold;
 
     border: none;
-    border-radius: 1em;
+    border-radius: 0.5em;
 }
 
 .modal label, .modal input {
     display: block;
 
     width: 100%;
-
     margin: 0.28em auto;
+
+    font-size: 2rem;
 }
 
 #modal-account-switch-line {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    align-items: center;
 
     width: 100%;
     height: 1.7778em;
-
     margin: 1.111em 0;
+}
 
-    align-items: center;
+#modal-account-switch-line p {
+    font-size: 2rem;
 }
 
 #modal-account-switch-line button {
@@ -552,13 +560,23 @@ input {
 
     color: var(--accent-light-color);
     text-decoration: underline;
+    font-size: 2rem;
 }
 
 .modal button {
     width: 100%;
-
-    margin-top: 0.75em;
+    margin-top: 1em;
     padding: 0.556em 0;
+
+    font-size: 2rem;
+}
+
+#signin-btn-google {
+    background-color: white;
+}
+
+#modal-alert-content {
+    font-size: 2rem;
 }
 
 /* ====================
