@@ -399,28 +399,36 @@ input {
     box-shadow: 0 0.0625em 0.25em var(--text-light-color);
 }
 
-#hist-headers, .hist-list {
+/* #hist-headers, .hist-list {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: var(--main-width);
     text-align: center;
     padding: 0.28em;
-}
+} */
 
 #hist-area {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-areas:
-        "header header header header header"
-        "record record record record record";
+    grid-auto-rows: 3.5em;
+
+    font-size: 0.875rem;
     
     width: inherit;
 }
 
-/* .hist-header {
-    grid-area: header;
-} */
+#hist-area button {
+    background-color: var(--accent-light-color);
+    color: var(--background-light-color);
+
+    width: 40%;
+
+    margin: 0.1em auto;
+
+    border: none;
+    border-radius: 0.33em;
+}
 
 #tab-car-stats p, #tab-about-app p {
     width: var(--main-width);

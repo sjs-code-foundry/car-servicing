@@ -111,7 +111,7 @@ const serviceJobEl = document.getElementById("sj-field")
 const serviceBtnEl = document.getElementById("sj-btn")
 const serviceTasksEl = document.getElementById("jobs-list")
 const weeklyCheckBtnEl = document.getElementById("submit-btn")
-const historyEl = document.getElementById("history")
+const historyEl = document.getElementById("hist-area")
 const modalAlertEl = document.getElementById("modal-alert")
 const modalAccountEl = document.getElementById("modal-account")
 const modalConfirmEl = document.getElementById("modal-confirm")
@@ -333,6 +333,8 @@ function fetchWeeklyChecksInRealTimeFromDBs(query, user) {
         clearListEl(historyEl)
         
         recordList = recordListClear(recordList)
+
+        renderWeeklyCheckHeaders()
 
         querySnapshot.forEach((doc) => {
 
@@ -649,20 +651,56 @@ function renderServiceJob(wholeDoc) {
 
 }
 
+function renderWeeklyCheckHeaders() {
+
+    const headerData = [
+        ["h4", "Date", "class", "hist-header"],
+        ["h4", "Odometer Miles", "class", "hist-header"],
+        ["h4", "Miles Travelled", "class", "hist-header"],
+        ["h4", "Weekly Jobs", "class", "hist-header"],
+        ["h4", "Delete?", "class", "hist-header"]
+    ]
+
+    for (let h in headerData) {
+
+        let headerEl = constructWeeklyCheckEl(headerData[h])
+
+        historyEl.append(headerEl)
+
+    }
+
+}
+
 function renderWeeklyCheck(record) {
-    
-    const checkHTML =  `
-        <p>${record.date}</p>
-        <p>${record.miles}</p>
-        <p>${record.milesTravelled}</p>
-        <p>Jobs Done: ${record.weeklies}%</p>
-        <button id="del-${record.ID}">X</button>`
-    
-    const checkAttr = [ ["class", "hist-list"] ]
-    
-    let newEl = addLiElToList(checkAttr, true, checkHTML)
-    
-    historyEl.append(newEl)
+
+    const checkData = [
+        ["p", record.date, "id", `date-${record.ID}`],
+        ["p", record.miles, "id", `miles-${record.ID}`],
+        ["p", record.milesTravelled, "id", `dist-${record.ID}`],
+        ["p", `Jobs Done: ${record.weeklies}%`, "id", `jobs-${record.ID}`],
+        ["button", "X", "id", `del-${record.ID}`]
+    ]
+    // Element Type, cell content, attribute type, attribute data
+
+    for (let d in checkData) {
+
+        let dataEl = constructWeeklyCheckEl(checkData[d])
+
+        historyEl.append(dataEl)
+
+    }
+
+}
+
+function constructWeeklyCheckEl(data) {
+
+    let newEl = document.createElement(data[0])
+
+    newEl.textContent = data[1]
+
+    newEl.setAttribute(data[2], data[3])
+
+    return newEl
 
 }
 
