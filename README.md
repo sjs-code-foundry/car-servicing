@@ -13,7 +13,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 #### Layout
 - [x] Implement landscape layout for when the device is rotated
 - [x] Place the Weekly Check buttons into a flex-wrap container for scaling across browser widths
-- [ ] Resize interactive elements for easier targeting
+- [x] Resize interactive elements for easier targeting
 - [x] Use mobile layout as basis for a new desktop layout, designed for PC monitors
 - [x] Convert Weekly Check History to CSS Grid (perhaps with HTML Table?) for more consistent formatting
 - [x] Fix paddings and margins on sign-in and other modals

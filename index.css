@@ -19,7 +19,7 @@
     --success-color: #2A7221;
 
     --main-width: 40rem;
-    --header-landscape-width: 20rem;
+    --header-landscape-width: 25rem;
 }
 
 /* ========================
@@ -96,6 +96,39 @@ footer {
     text-align: center;
     color: var(--text-light-color);
     font-size: 0.875rem;
+}
+
+@media (orientation: landscape) {
+    header {
+        width: var(--header-landscape-width);
+    }
+
+    #interactive-area {
+        width: 95vw;
+    }
+
+    h4 {
+        font-size: 2rem;
+    }
+
+    section {
+        width: 100%;
+    }
+
+    footer {
+        width: 95vw;
+        margin: 0 auto;
+    }
+
+    footer hr {
+        width: inherit;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1920px) {
+    p {
+        font-size: 1.75rem;
+    }
 }
 
 @media (orientation: portrait) {
@@ -232,10 +265,6 @@ footer {
         justify-content: space-around;
     }
 
-    header {
-        width: var(--header-landscape-width);
-    }
-
     #tab-menu {
         width: inherit;
         top: 0;
@@ -244,10 +273,10 @@ footer {
 
     #tab-menu button {
         width: 95%;
-        font-size: 1.5rem;
+        font-size: 2rem;
         font-weight: bold;
         margin: 0 auto;
-        padding: 1em 0.5em;
+        padding: 1.5em 0.5em;
         border: none;
     }
 
@@ -259,21 +288,8 @@ footer {
         color: var(--accent-light-color);
     }
 
-    section {
-        width: var(--main-width);
-    }
-
     #menu-btn {
         display: none;
-    }
-
-    footer {
-        width: calc(var(--header-landscape-width) + var(--main-width));
-        margin: 0 auto;
-    }
-
-    footer hr {
-        width: inherit;
     }
 }
 
@@ -332,6 +348,12 @@ input {
     padding: 0.5556em 0;
 }
 
+@media (orientation: landscape) {
+    .entry-field {
+        width: 100%;
+    }
+}
+
 /* ========================
     Weekly Check Buttons
    ======================== */
@@ -354,12 +376,12 @@ input {
     border: 1px solid var(--text-light-color);
 }
 
-@media (min-width: 769px) {
+@media (min-width: 769px) and (max-width: 1920px) {
     .weekly-job {
         width: auto;
-        padding: 2.5em 0.5em;
+        padding: 1.75em 0.5em;
 
-        font-size: 1.5rem;
+        font-size: 2.5rem;
     }
 }
 
@@ -397,6 +419,12 @@ input {
     padding: 1.25em 0;
 }
 
+@media (orientation: landscape) {
+    #sj-btn, #submit-btn {
+        width: 100%;
+    }
+}
+
 /* ================
 	Record Lists
    ================ */
@@ -429,9 +457,9 @@ input {
     width: inherit;
 }
 
-/* #hist-area p {
+#hist-area p {
     font-size: 1.5rem;
-} */
+}
 
 #hist-area button {
     background-color: var(--accent-light-color);
@@ -457,15 +485,29 @@ input {
     width: var(--main-width);
 }
 
-@media (min-width: 769px) {
+@media (orientation: landscape) {
+    #hist-area p {
+        font-size: 2rem;
+    }
+
+    #tab-car-stats p, #tab-about-app p {
+        width: 100%;
+        /* Temporary - Spaces content out correctly for Landscape */
+    }
+}
+
+
+
+@media (min-width: 769px) and (max-width: 1920px) {
     .service-job {
         font-size: 2.5rem;
         padding: 1em 0.5em;
     }
-}
 
-.hist-list {
-    font-size: 0.875rem;
+    #hist-area button {
+        width: 2em;
+        height: 2.5em;
+    }
 }
 
 /* ========
