@@ -353,6 +353,7 @@ footer {
 .entry-field, #sj-field {
     font-family: 'Ubuntu', sans-serif;
     font-size: 100%;
+}
 
 .entry-field {
     display: flex;
