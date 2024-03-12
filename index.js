@@ -291,6 +291,9 @@ onAuthStateChanged(auth, (user) => {
         tabBtnAccount.style.display = "block"
         tabBtnLogout.style.display = "none"
 
+        clearServiceJobsOnLogout()
+        clearWeeklyChecksOnLogout()
+
     }
 
 })
@@ -377,6 +380,24 @@ function fetchWeeklyChecks(user) {
     // Fix this part of query: orderBy("date", "miles")
     
     fetchWeeklyChecksInRealTimeFromDBs(q, user)
+
+}
+
+function clearServiceJobsOnLogout() {
+
+    clearListEl(serviceTasksEl)
+
+    tabBtnServiceJobs.textContent = "Servicing Jobs"
+
+}
+
+function clearWeeklyChecksOnLogout() {
+
+    clearListEl(historyEl)
+
+    recordList = recordListClear(recordList)
+
+    renderWeeklyCheckHeaders()
 
 }
 

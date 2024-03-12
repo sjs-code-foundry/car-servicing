@@ -17,17 +17,18 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 - [x] Use mobile layout as basis for a new desktop layout, designed for PC monitors
 - [x] Convert Weekly Check History to CSS Grid (perhaps with HTML Table?) for more consistent formatting
 - [x] Fix paddings and margins on sign-in and other modals
-- [ ] Implement page breaks in Service Jobs (paragraphs supported)
 - [x] Fix issues with modal container preventing inputs
 #### Security
-- [ ] Prevent users from inserting buttons and other HTML elements via the Servicing Jobs field!
-- [ ] Make app clear records from weekly checks and service jobs when user logs out!
+- [x] Prevent users from inserting buttons and other HTML elements via the Servicing Jobs field!
+- [x] Make app clear records from weekly checks and service jobs when user logs out!
 #### User Experience
 - [x] Tapping anywhere besides the drop-down closes the menu
 - [x] Implement sticky links in landscape mode
 ### v0.4.2-alpha
 #### JS Functions
 - [ ] Use Data Attributes to for Weekly Checks (deleting checks, opening table of weekly checks, etc.)
+- [ ] Reimplement orderBy queries based on success with shopping list app
+- [ ] Try to catch errors with AppCheck on desktop (open app early on Sunday morning, when you usually need it)
 #### User Experience
 - [ ] Prevent user from submitting Weekly Check unless date and mileage fields are appropriately filled
 - [ ] Prevent user from adding service jobs in the absence of text values
