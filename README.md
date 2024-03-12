@@ -9,22 +9,9 @@ v0.4.0-alpha
 ## Changelog
 Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated list.
 ## Planned Features
-### v0.4.1-alpha
-#### Layout
-- [x] Implement landscape layout for when the device is rotated
-- [x] Place the Weekly Check buttons into a flex-wrap container for scaling across browser widths
-- [x] Resize interactive elements for easier targeting
-- [x] Use mobile layout as basis for a new desktop layout, designed for PC monitors
-- [x] Convert Weekly Check History to CSS Grid (perhaps with HTML Table?) for more consistent formatting
-- [x] Fix paddings and margins on sign-in and other modals
-- [x] Fix issues with modal container preventing inputs
-#### Security
-- [x] Prevent users from inserting buttons and other HTML elements via the Servicing Jobs field!
-- [x] Make app clear records from weekly checks and service jobs when user logs out!
-#### User Experience
-- [x] Tapping anywhere besides the drop-down closes the menu
-- [x] Implement sticky links in landscape mode
 ### v0.4.2-alpha
+#### Aesthetics
+- [ ] Scale car image appropriately across devices in landscape mode (keep it in the menu bar!)
 #### JS Functions
 - [ ] Use Data Attributes to for Weekly Checks (deleting checks, opening table of weekly checks, etc.)
 - [ ] Reimplement orderBy queries based on success with shopping list app
