@@ -20,6 +20,7 @@
 
     --main-width: 40rem;
     --header-landscape-width: 25rem;
+    --modal-width: 37.5rem;
 }
 
 /* ========================
@@ -122,6 +123,31 @@ footer {
 
     footer hr {
         width: inherit;
+    }
+
+    @media (min-width: 1921px) {
+        header {
+            width: 30vw;
+        }
+
+        h2 {
+            font-size: 6rem;
+            font-weight: bold;
+        }
+        
+        h3 {
+            font-size: 4rem;
+            font-weight: bold;
+        }
+        
+        h4 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        
+        p {
+            font-size: 3rem;
+        }
     }
 }
 
@@ -290,6 +316,12 @@ footer {
 
     #menu-btn {
         display: none;
+    }
+
+    @media (min-width: 1921px) {
+        #tab-menu button {
+            font-size: 4rem;
+        }
     }
 }
 
@@ -514,9 +546,12 @@ input {
 	Modals
    ======== */
 
+
+
 #modal-container { /* Container to allow travel across page for modals */
     position: absolute;
 
+    width: 100%;
     height: 100%;
 }
 
@@ -525,11 +560,11 @@ input {
     flex-direction: column;
 
     position: sticky;
-    top: 20vh;
-    left: auto;
+    top: 10vh;
+    left: calc(50% - (var(--modal-width) / 2));
     z-index: 4;
 
-    width: 37.5rem;
+    width: var(--modal-width);
 
     padding: 1.111em;
     border-radius: 1.111em;
@@ -552,10 +587,14 @@ input {
     justify-content: space-between;
 }
 
+#modal-account-header{
+    margin-bottom: 1em;
+}
+
 .modal .close-btn {
     width: 2.5em;
 
-    margin: 0;
+    margin: 0 0 0.5em 0;
 
     background-color: var(--accent-light-color);
     color: var(--background-light-color);
@@ -573,7 +612,7 @@ input {
     width: 100%;
     margin: 0.28em auto;
 
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 
 #modal-account-switch-line {
@@ -584,7 +623,7 @@ input {
 
     width: 100%;
     height: 1.7778em;
-    margin: 1.111em 0;
+    margin: 2.5em 0 1em 0;
 }
 
 #modal-account-switch-line p {
@@ -610,7 +649,9 @@ input {
     margin-top: 1em;
     padding: 0.556em 0;
 
-    font-size: 2rem;
+    font-size: 2.5rem;
+
+    border: 1px solid var(--text-light-color);
 }
 
 #signin-btn-google {
@@ -619,6 +660,50 @@ input {
 
 #modal-alert-content {
     font-size: 2rem;
+}
+
+@media (min-width: 769px) and (max-width: 1920px) {
+    .modal button {
+        font-size: 2rem;
+    }
+}
+
+@media (min-width: 1921px) {
+    .modal {
+        width: 30vw;
+    }
+
+    #modal-account-header {
+        margin: 0.5em 0;
+    }
+
+    .modal .close-btn {
+        width: 4em;
+    }
+
+    .modal label, .modal input {
+        margin: 0.67em auto;
+
+        font-size: 4rem;
+    }
+
+    .modal button {
+        margin-top: 0.5em;
+
+        font-size: 4rem;
+    }
+
+    #modal-account-switch-line {
+        margin: 5em 0 2em 0;
+    }
+
+    #modal-account-switch-line p {
+        font-size: 3rem;
+    }
+
+    #modal-account-switch-line button {
+        font-size: 3rem;
+    }
 }
 
 /* ====================

@@ -20,6 +20,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 - [x] Implement page breaks in Service Jobs (paragraphs supported)
 #### Security
 - [ ] Prevent users from inserting buttons and other HTML elements via the Servicing Jobs field!
+- [ ] Make app clear records from weekly checks and service jobs when user logs out!
 #### User Experience
 - [x] Tapping anywhere besides the drop-down closes the menu
 - [x] Implement sticky links in landscape mode
