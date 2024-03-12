@@ -536,12 +536,16 @@ function allTabClose(tabs) {
 
 function modalDisplay(targetModal) {
 
+    document.getElementById("modal-container").style.display = "block"
+
     targetModal.style.display = "flex"
 
 }
 
 function modalClose(targetModal) {
 
+    document.getElementById("modal-container").style.display = "none"
+    
     targetModal.style.display = "none"
 
 }

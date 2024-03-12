@@ -18,6 +18,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 - [x] Convert Weekly Check History to CSS Grid (perhaps with HTML Table?) for more consistent formatting
 - [x] Fix paddings and margins on sign-in and other modals
 - [x] Implement page breaks in Service Jobs (paragraphs supported)
+- [x] Fix issues with modal container preventing inputs
 #### Security
 - [ ] Prevent users from inserting buttons and other HTML elements via the Servicing Jobs field!
 - [ ] Make app clear records from weekly checks and service jobs when user logs out!

@@ -549,6 +549,8 @@ input {
 
 
 #modal-container { /* Container to allow travel across page for modals */
+    display: none;
+    
     position: absolute;
 
     width: 100%;
