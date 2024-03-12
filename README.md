@@ -9,32 +9,40 @@ v0.4.0-alpha
 ## Changelog
 Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated list.
 ## Planned Features
-### Done
-#### Aesthetics
-- [x] Replace alert methods with custom-styled modals
-- [x] Add metadata to Servicing Jobs like date of creation and source (user or auto-generated)
-#### JS Functions
-- [x] Improve miles travelled calculations to take dates into account
-- [x] Refactor code to cut down on DOM elements
-#### Security
-- [x] Add Firebase Authentication for additional protection
-#### User Experience
-- [x] Refactor tabs to be self-contained in index.html
 ### v0.4.1-alpha
 #### Layout
-- [ ] Implement landscape layout for when the device is rotated
-- [ ] Resize interactive elements for easier targeting
-- [ ] Convert Weekly Checks to HTML table for more consistent formatting
+- [x] Implement landscape layout for when the device is rotated
+- [x] Place the Weekly Check buttons into a flex-wrap container for scaling across browser widths
+- [x] Resize interactive elements for easier targeting
+- [x] Use mobile layout as basis for a new desktop layout, designed for PC monitors
+- [x] Convert Weekly Check History to CSS Grid (perhaps with HTML Table?) for more consistent formatting
+- [x] Fix paddings and margins on sign-in and other modals
+- [x] Fix issues with modal container preventing inputs
+#### Security
+- [x] Prevent users from inserting buttons and other HTML elements via the Servicing Jobs field!
+- [x] Make app clear records from weekly checks and service jobs when user logs out!
 #### User Experience
-- [ ] Convert all text & element sizes to em for better scalability across devices
+- [x] Tapping anywhere besides the drop-down closes the menu
+- [x] Implement sticky links in landscape mode
 ### v0.4.2-alpha
 #### JS Functions
 - [ ] Use Data Attributes to for Weekly Checks (deleting checks, opening table of weekly checks, etc.)
+- [ ] Reimplement orderBy queries based on success with shopping list app
+- [ ] Try to catch errors with AppCheck on desktop (open app early on Sunday morning, when you usually need it)
 #### User Experience
 - [ ] Prevent user from submitting Weekly Check unless date and mileage fields are appropriately filled
+- [ ] Prevent user from adding service jobs in the absence of text values
 - [ ] Double click copies values from Weekly Check record table
 - [ ] Blank out buttons so that user cannot enter two weekly checks on the same day
+- [ ] Implement decision modal for deleting weekly checks
 ### v0.4.3-alpha
+#### Firestore
+- [ ] Enable offline caching
+#### JS Functions
+- [ ] Implement Age of Vehicle in Car Stats (new collection in Firestore)
 #### User Experience
 - [ ] Add picture icon for users
 - [ ] Implement sorting functions for service jobs and weekly checks
+### v0.5.0-alpha
+#### Cross-Platform
+- [ ] Fork repo for native Android app written in Kotlin

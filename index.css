@@ -1,4 +1,6 @@
-/* Styling Variables */
+/* ========================
+	Styling Variables
+   ======================== */
 
 :root {
     --background-light-color: #F2F2F2;
@@ -15,288 +17,542 @@
 
     --error-color: #EA2B1F;
     --success-color: #2A7221;
+
+    --main-width: 40rem;
+    --header-landscape-width: 25rem;
+    --modal-width: 37.5rem;
 }
 
-/* General Layout */
+/* ========================
+	General Layout
+   ======================== */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
 
 html {
+    display: block;
     background-color: var(--background-light-color);
 }
 
-body, hr {
-    width: 640px;
-}
-
 body, footer {
-    display: flex;
     font-family: 'Ubuntu', sans-serif;
 }
 
-body {
+#interactive-area {
+    display: flex;
     flex-direction: column;
     user-select: none;
     text-align: center;
+
+    width: var(--main-width);
+
     margin: 0 auto;
-    padding: 25px;
 
     color: var(--text-light-color);
-    font-size: 18px;
+    font-size: 1.125rem; /* 18px */
 }
 
-h1 {
-    font-size: 32px;
+h2 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 2rem;
     font-weight: bold;
 }
 
 h4 {
-    font-size: 14px;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 
+p {
+    font-size: 1.5rem;
+}
+
 hr {
+    width: var(--main-width);
     border-color: var(--text-light-color);
 }
 
 button {
     color: var(--text-light-color);
-    font-size: 18px;
+    font-size: 1.125rem;
 }
 
 ul {
     list-style-type: none;
+
+    margin: 2.5em 0;
     padding: 0;
 }
 
 footer {
-    flex-direction: row;
+    display: flex;
+    flex-direction: column;
     justify-content: space-around;
+    text-align: center;
     color: var(--text-light-color);
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
-/* Top Navigation Bar */
+@media (orientation: landscape) {
+    header {
+        width: var(--header-landscape-width);
+    }
 
-.header {
-    width: 640px;
-    height: 64px;
-    font-size: 32px;
-    box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
-    z-index: 3;
+    #interactive-area {
+        width: 95vw;
+    }
+
+    h4 {
+        font-size: 2rem;
+    }
+
+    section {
+        width: 100%;
+    }
+
+    footer {
+        width: 95vw;
+        margin: 0 auto;
+    }
+
+    footer hr {
+        width: inherit;
+    }
+
+    @media (min-width: 1921px) {
+        header {
+            width: 30vw;
+        }
+
+        h2 {
+            font-size: 6rem;
+            font-weight: bold;
+        }
+        
+        h3 {
+            font-size: 4rem;
+            font-weight: bold;
+        }
+        
+        h4 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        
+        p {
+            font-size: 3rem;
+        }
+    }
 }
 
-.header img {
-    display: block;
-    float: left;
-    width: 64px;
+@media (min-width: 769px) and (max-width: 1920px) {
+    p {
+        font-size: 1.75rem;
+    }
 }
 
-/* Hamburger Menu - Static Properties */
+@media (orientation: portrait) {
 
-.header ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    overflow: hidden;
-    background-color: var(--background-light-color)
+    /* ========================
+        Top Navigation Bar
+    ======================== */
+
+    .header {
+        width: inherit;
+        height: 6em;
+        box-shadow: 0.0625em 0.0625em 0.25em 0 rgba(0,0,0,.1);
+        z-index: 3;
+    }
+
+    .header img {
+        display: block;
+        float: left;
+        width: 6em;
+    }
+
+    /* ========================================
+        Hamburger Menu - Static Properties
+    ======================================== */
+
+    .header ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        overflow: hidden;
+        background-color: var(--background-light-color)
+    }
+
+    .header li button {
+        display: block;
+
+        width: 100%;
+        padding: 0.75em;
+
+        font-size: 3rem;
+        text-align: center;
+
+        border: none;
+    }
+
+    .header li button:hover {
+        text-decoration: underline;
+    }
+
+    .header li button:active {
+        color: var(--accent-light-color);
+    }
+
+    .header .menu {
+        clear: both;
+        max-height: 0;
+        transition: max-height .2s ease-out;
+    }
+
+    /* ================================================
+        Hamburger Menu - Hamburger Icon Properties
+    ================================================ */
+
+    .header .menu-icon {
+        cursor: pointer;
+        display: inline-block;
+        float: right;
+        padding: 2.5em 1.25em;
+        position: relative;
+    }
+
+    .header .menu-icon .navicon {
+        background: var(--text-light-color);
+        display: block;
+        height: 0.5em;
+        position: relative;
+        transition: background .2s ease-out;
+        width: 4em;
+    }
+
+    .header .menu-icon .navicon:before,
+    .header .menu-icon .navicon:after {
+        background: var(--text-light-color);
+        content: '';
+        display: block;
+        height: 90%;
+        position: absolute;
+        transition: all .2s ease-out;
+        width: 100%;
+    }
+
+    .header .menu-icon .navicon:before {
+        top: 2em;
+    }
+
+    .header .menu-icon .navicon:after {
+        top: -2em;
+    }
+
+    /* ====================================================
+        Hamburger Menu - Icon & Menu Animation Properties
+    ==================================================== */
+
+    .header .menu-btn {
+        display: none;
+    }
+
+    .header .menu-btn:checked ~ .menu {
+        max-height: 60rem;
+    }
+
+    .header .menu-btn:checked ~ .menu-icon .navicon {
+        background: transparent;
+    }
+
+    .header .menu-btn:checked ~ .menu-icon .navicon:before {
+        transform: rotate(-45deg);
+    }
+
+    .header .menu-btn:checked ~ .menu-icon .navicon:after {
+        transform: rotate(45deg);
+    }
+
+    .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+    .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+        top: 0;
+    }
+
 }
 
-.header li button {
-    display: block;
-    margin: 0 auto;
-    padding: 20px;
-    font-size: 32px;
-    border: none;
+@media (orientation: landscape) {
+    #interactive-area {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    #tab-menu {
+        width: inherit;
+        top: 0;
+        position: sticky;
+    }
+
+    #tab-menu button {
+        width: 95%;
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 0 auto;
+        padding: 1.5em 0.5em;
+        border: none;
+    }
+
+    #tab-menu button:hover {
+        text-decoration: underline;
+    }
+
+    #tab-menu button:active {
+        color: var(--accent-light-color);
+    }
+
+    #menu-btn {
+        display: none;
+    }
+
+    @media (min-width: 1921px) {
+        #tab-menu button {
+            font-size: 4rem;
+        }
+    }
 }
 
-.header li button:active {
-    text-decoration: underline;
-}
-
-.header .menu {
-    clear: both;
-    max-height: 0;
-    transition: max-height .2s ease-out;
-}
-
-/* Hamburger Menu - Hamburger Icon Properties */
-
-.header .menu-icon {
-    cursor: pointer;
-    display: inline-block;
-    float: right;
-    padding: 28px 20px;
-    position: relative;
-}
-
-.header .menu-icon .navicon {
-    background: var(--text-light-color);
-    display: block;
-    height: 3px;
-    position: relative;
-    transition: background .2s ease-out;
-    width: 24px;
-}
-
-.header .menu-icon .navicon:before,
-.header .menu-icon .navicon:after {
-    background: var(--text-light-color);
-    content: '';
-    display: block;
-    height: 100%;
-    position: absolute;
-    transition: all .2s ease-out;
-    width: 100%;
-}
-
-.header .menu-icon .navicon:before {
-    top: 8px;
-}
-
-.header .menu-icon .navicon:after {
-    top: -8px;
-}
-
-/* Hamburger Menu - Icon & Menu Animation Properties */
-
-.header .menu-btn {
-    display: none;
-}
-
-.header .menu-btn:checked ~ .menu {
-    max-height: 640px;
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon {
-    background: transparent;
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon:before {
-    transform: rotate(-45deg);
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon:after {
-    transform: rotate(45deg);
-}
-
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
-    top: 0;
-}
-
-/* Hamburger Menu - Button States */
+/* ============================
+	Both Menus - Button States
+   ============================ */
 
 #tab-btn-logout {
     display: none;
 }
 
-/* General Tab Formatting */
+/* ========================
+    General Tab Formatting
+   ========================*/
 
 .tabcontent {
     display: none;
 }
 
-/* Fields */
+/* ========
+    Fields
+   ======== */
+
+.field-label {
+    font-size: 2.5rem;
+    margin: 1em 0 0.5em 0;
+}
 
 .entry-field, #sj-field {
     font-family: 'Ubuntu', sans-serif;
     font-size: 100%;
-}
 
 .entry-field {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+
+    width: var(--main-width);
+
+    font-size: 2.5rem;
 }
 
 input {
-    width: 200px;
+    width: inherit;
+    height: 8rem;
 
     background-color: var(--background-light-color);
     color: var(--text-light-color);
     font-size: 100%;
-}
-
-.date-field, .odo-field {
-    font-size: 100%;
+    text-align: center;
 }
 
 #sj-field {
-    width: 400px;
-    padding: 10px 0;
+    width: inherit;
+    padding: 0.5556em 0;
 }
 
-/* Buttons */
+@media (orientation: landscape) {
+    .entry-field {
+        width: 100%;
+    }
+}
+
+/* ========================
+    Weekly Check Buttons
+   ======================== */
+
+#weeklies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+}
+
+.weekly-job {
+    flex: 1 1 auto;
+
+    width: var(--main-width);
+    padding: 1.25em 0.5em;
+
+    font-size: 3rem;
+    font-weight: bold;
+    
+    border: 1px solid var(--text-light-color);
+}
+
+@media (min-width: 769px) and (max-width: 1920px) {
+    .weekly-job {
+        width: auto;
+        padding: 1.75em 0.5em;
+
+        font-size: 2.5rem;
+    }
+}
+
+/* ============
+	Buttons
+   ============ */
 
 #sj-btn, #submit-btn {
     font-family: 'Ubuntu', sans-serif;
-    font-size: 18px;
     font-weight: bold;
     background-color: var(--secondary-light-color);
-    border: 2px solid var(--background-light-color);
-    border-radius: 5px;
+    border: none;
+    border-radius: 0.28em;
 }
 
 #sj-btn:hover, #submit-btn:hover {
-    border: 2px solid var(--text-light-color);
+    color: var(--background-light-color) /* Come back to this later, do not use a border! */
 }
 
 #sj-btn:active, #submit-btn:active {
     background-color: var(--accent-light-color);
-    color: var(--background-light-color);
-    border: 2px solid var(--background-light-color);
 }
 
 #sj-btn {
-    padding: 30px 10px;
+    width: inherit;
+    margin: 0.5em 0;
+    padding: 1em 0.5em;
+
+    font-size: 3rem;
 }
 
 #submit-btn {
-    width: 640px;
-    padding: 30px 0;
+    width: var(--main-width);
+    font-size: 3.5rem;
+    padding: 1.25em 0;
 }
 
-.hist-list button {
-    background-color: var(--accent-light-color);
-    color: var(--background-light-color);
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    padding: 0 20px;
+@media (orientation: landscape) {
+    #sj-btn, #submit-btn {
+        width: 100%;
+    }
 }
 
-/* Record Lists */
+/* ================
+	Record Lists
+   ================ */
 
-.service-job, .weekly-job {
-    margin: 10px;
-    border: 1px solid var(--text-light-color);
-    padding: 30px 0;
-}
-
-#hist-headers, .hist-list {
+#jobs-list {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    text-align: center;
-    padding: 5px;
+    flex-wrap: wrap;
+    gap: 0.5em;
 }
 
 .service-job {
-    box-shadow: 0px 1px 4px var(--text-light-color);
+    flex: 1 1 auto;
+
+    width: var(--main-width);
+    padding: 0.5em;
+
+    font-size: 3rem;
+
+    border: 1px solid var(--text-light-color);
+    box-shadow: 0 0.0625em 0.25em var(--text-light-color);
 }
 
-/* #hist-headers {
+#hist-area {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: auto;
+    align-items: center;
+    justify-items: center;
     
-} */
-
-.hist-list {
-    font-size: 14px;
+    width: inherit;
 }
 
-/* Modals */
+#hist-area p {
+    font-size: 1.5rem;
+}
+
+#hist-area button {
+    background-color: var(--accent-light-color);
+    color: var(--background-light-color);
+
+    width: 1.75em;
+    height: 1.75em;
+    margin: 0.1em auto;
+
+    font-size: 3rem;
+
+    border: none;
+    border-radius: 0.33em;
+}
+
+#tab-car-stats p, #tab-about-app p {
+    width: var(--main-width);
+    /* Temporary - Spaces content out correctly for Landscape */
+}
+
+#tab-blank p {
+    color: var(--background-light-color);
+    width: var(--main-width);
+}
+
+@media (orientation: landscape) {
+    #hist-area p {
+        font-size: 2rem;
+    }
+
+    #tab-car-stats p, #tab-about-app p {
+        width: 100%;
+        /* Temporary - Spaces content out correctly for Landscape */
+    }
+}
+
+
+
+@media (min-width: 769px) and (max-width: 1920px) {
+    .service-job {
+        font-size: 2.5rem;
+        padding: 1em 0.5em;
+    }
+
+    #hist-area button {
+        width: 2em;
+        height: 2.5em;
+    }
+}
+
+/* ========
+	Modals
+   ======== */
+
+
 
 #modal-container { /* Container to allow travel across page for modals */
+    display: none;
+    
     position: absolute;
 
+    width: 100%;
     height: 100%;
 }
 
@@ -305,18 +561,18 @@ input {
     flex-direction: column;
 
     position: sticky;
-    top: 20vh;
-    left: auto;
+    top: 10vh;
+    left: calc(50% - (var(--modal-width) / 2));
     z-index: 4;
 
-    width: 600px;
+    width: var(--modal-width);
 
-    padding: 20px;
-    border-radius: 20px;
+    padding: 1.111em;
+    border-radius: 1.111em;
 
     background-color: var(--background-light-color);
 
-    box-shadow: 0px 1px 10px var(--text-light-color);
+    box-shadow: 0 0.0625em 0.625em var(--text-light-color);
 
     animation: modal-fadein 500ms;
 }
@@ -332,55 +588,128 @@ input {
     justify-content: space-between;
 }
 
-.modal div button {
-    width: 40px;
-    height: 40px;
+#modal-account-header{
+    margin-bottom: 1em;
+}
+
+.modal .close-btn {
+    width: 2.5em;
+
+    margin: 0 0 0.5em 0;
+
+    background-color: var(--accent-light-color);
+    color: var(--background-light-color);
+
+    font-size: 3rem;
+    font-weight: bold;
+
+    border: none;
+    border-radius: 0.5em;
 }
 
 .modal label, .modal input {
     display: block;
 
-    width: 600px;
+    width: 100%;
+    margin: 0.28em auto;
 
-    margin: 5px auto;
+    font-size: 2.5rem;
 }
 
 #modal-account-switch-line {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    align-items: center;
 
     width: 100%;
-    height: 32px;
+    height: 1.7778em;
+    margin: 2.5em 0 1em 0;
+}
 
-    margin: 20px 0;
-
-    width: inherit;
-
-    align-items: center;
+#modal-account-switch-line p {
+    font-size: 2rem;
 }
 
 #modal-account-switch-line button {
     width: fit-content;
-    height: 21px;
+    height: 1.1667em;
     
     border: none;
 
-    margin: 18px 2px 18px 6px;
+    margin: 1em 0.111em 1em 0.333em;
     padding: 0;
 
     color: var(--accent-light-color);
     text-decoration: underline;
+    font-size: 2rem;
 }
 
 .modal button {
-    width: 600px;
+    width: 100%;
+    margin-top: 1em;
+    padding: 0.556em 0;
 
-    margin-top: 10px;
-    padding: 10px 0;
+    font-size: 2.5rem;
+
+    border: 1px solid var(--text-light-color);
 }
 
-/* Editing Borders */
+#signin-btn-google {
+    background-color: white;
+}
+
+#modal-alert-content {
+    font-size: 2rem;
+}
+
+@media (min-width: 769px) and (max-width: 1920px) {
+    .modal button {
+        font-size: 2rem;
+    }
+}
+
+@media (min-width: 1921px) {
+    .modal {
+        width: 30vw;
+    }
+
+    #modal-account-header {
+        margin: 0.5em 0;
+    }
+
+    .modal .close-btn {
+        width: 4em;
+    }
+
+    .modal label, .modal input {
+        margin: 0.67em auto;
+
+        font-size: 4rem;
+    }
+
+    .modal button {
+        margin-top: 0.5em;
+
+        font-size: 4rem;
+    }
+
+    #modal-account-switch-line {
+        margin: 5em 0 2em 0;
+    }
+
+    #modal-account-switch-line p {
+        font-size: 3rem;
+    }
+
+    #modal-account-switch-line button {
+        font-size: 3rem;
+    }
+}
+
+/* ====================
+	Editing Borders
+   ==================== */
 
 /* body {
     border: 1px solid red;

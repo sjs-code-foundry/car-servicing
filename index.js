@@ -89,6 +89,16 @@ function getAppCheck() {
 const serviceJobsCollectionName = "serviceJobs"
 const weeklyChecksCollectionName = "weeklyChecks"
 
+/* === Cross-Platform Scaling === */
+
+const siteWidth = window.innerWidth
+const scale = screen.width / siteWidth
+
+const viewport = document.querySelector('meta[name="viewport"]')
+viewport.setAttribute('content', `width=device-width, initial-scale=${scale}`)
+
+// This code messes with media queries - find an alternative solution!
+
 /* === DOM Elements === */
 
 const tabMenuEl = document.getElementById("tab-menu")
@@ -101,9 +111,10 @@ const serviceJobEl = document.getElementById("sj-field")
 const serviceBtnEl = document.getElementById("sj-btn")
 const serviceTasksEl = document.getElementById("jobs-list")
 const weeklyCheckBtnEl = document.getElementById("submit-btn")
-const historyEl = document.getElementById("history")
+const historyEl = document.getElementById("hist-area")
 const modalAlertEl = document.getElementById("modal-alert")
 const modalAccountEl = document.getElementById("modal-account")
+const modalConfirmEl = document.getElementById("modal-confirm")
 const accountFormEl = document.getElementById("modal-account-form")
 const signinBtnGoogle = document.getElementById("signin-btn-google")
 const createAccountBtn = document.getElementById("create-account-btn")
@@ -280,6 +291,9 @@ onAuthStateChanged(auth, (user) => {
         tabBtnAccount.style.display = "block"
         tabBtnLogout.style.display = "none"
 
+        clearServiceJobsOnLogout()
+        clearWeeklyChecksOnLogout()
+
     }
 
 })
@@ -322,6 +336,8 @@ function fetchWeeklyChecksInRealTimeFromDBs(query, user) {
         clearListEl(historyEl)
         
         recordList = recordListClear(recordList)
+
+        renderWeeklyCheckHeaders()
 
         querySnapshot.forEach((doc) => {
 
@@ -367,11 +383,39 @@ function fetchWeeklyChecks(user) {
 
 }
 
+function clearServiceJobsOnLogout() {
+
+    clearListEl(serviceTasksEl)
+
+    tabBtnServiceJobs.textContent = "Servicing Jobs"
+
+}
+
+function clearWeeklyChecksOnLogout() {
+
+    clearListEl(historyEl)
+
+    recordList = recordListClear(recordList)
+
+    renderWeeklyCheckHeaders()
+
+}
+
 /* === Set Default Tab === */
 
 tabSwitch("tab-blank")
 
 /* === Event Listeners === */
+
+document.addEventListener("click", function(e) {
+
+    if (!e.target.closest(".header") || e.target.nodeName === "BUTTON") {
+
+        document.getElementById("menu-btn").checked = false
+
+    }
+
+})
 
 tabMenuEl.addEventListener("click", function(e) {
 
@@ -465,6 +509,7 @@ weeklyJobList()
 /* === Initial Variables === */
 
 let recordList = []
+// let deleteVerdict = false // Deletion of Weekly Checks does not go ahead by default
 
 /* ===  Object Constructors === */
 
@@ -512,12 +557,16 @@ function allTabClose(tabs) {
 
 function modalDisplay(targetModal) {
 
+    document.getElementById("modal-container").style.display = "block"
+
     targetModal.style.display = "flex"
 
 }
 
 function modalClose(targetModal) {
 
+    document.getElementById("modal-container").style.display = "none"
+    
     targetModal.style.display = "none"
 
 }
@@ -528,11 +577,46 @@ function modalCloseBtnTest(e, targetEl) {
     const isCloseButton = (e.target.classList.contains("close-btn"))
     
     if (isButton && isCloseButton) {
+
         if (e.target.dataset.target) {
+
             modalClose(targetEl)
+
         }
+
     }
 }
+
+// function modalConfirmVerdict(e, targetEl) {
+
+//     const isButton = (e.target.nodeName === "BUTTON")
+//     const isConfirmButton = (e.target.classList.contains("confirm-btn"))
+
+//     if (isButton && isConfirmButton) {
+
+//         if (e.target.dataset.verdict) {
+
+//             let verdict = e.target.dataset.verdict
+
+//             if (verdict === "yes") {
+
+//                 modalClose(targetEl)
+
+//                 return true
+
+//             } else {
+
+//                 modalClose(targetEl)
+
+//                 return false
+
+//             }
+
+//         }
+
+//     }
+
+// }
 
 function modalAlert(targetModal, modalHeading, modalBody) {
 
@@ -549,6 +633,30 @@ function modalAlert(targetModal, modalHeading, modalBody) {
     })
 
 }
+
+// function modalConfirm(targetModal, modalHeading, modalBody) {
+
+//     modalDisplay(targetModal)
+
+//     document.getElementById("modal-confirm-heading").textContent = modalHeading
+
+//     document.getElementById("modal-confirm-content").textContent = modalBody
+
+//     targetModal.addEventListener("click", function(e) {
+
+//         modalCloseBtnTest(e, targetModal)
+
+//         return false
+
+//     })
+
+//     targetModal.addEventListener("click", function(e) {
+
+//         return modalConfirmVerdict(e, targetModal)
+
+//     })
+
+// }
 
 /* ==  Job/Check List Functions == */
 
@@ -568,20 +676,56 @@ function renderServiceJob(wholeDoc) {
 
 }
 
+function renderWeeklyCheckHeaders() {
+
+    const headerData = [
+        ["h4", "Date", "class", "hist-header"],
+        ["h4", "Odometer Miles", "class", "hist-header"],
+        ["h4", "Miles Travelled", "class", "hist-header"],
+        ["h4", "Weekly Jobs", "class", "hist-header"],
+        ["h4", "Delete?", "class", "hist-header"]
+    ]
+
+    for (let h in headerData) {
+
+        let headerEl = constructWeeklyCheckEl(headerData[h])
+
+        historyEl.append(headerEl)
+
+    }
+
+}
+
 function renderWeeklyCheck(record) {
-    
-    const checkHTML =  `
-        <p>${record.date}</p>
-        <p>${record.miles}</p>
-        <p>${record.milesTravelled}</p>
-        <p>Jobs Done: ${record.weeklies}%</p>
-        <button id="del-${record.ID}">X</button>`
-    
-    const checkAttr = [ ["class", "hist-list"] ]
-    
-    let newEl = addLiElToList(checkAttr, true, checkHTML)
-    
-    historyEl.append(newEl)
+
+    const checkData = [
+        ["p", record.date, "id", `date-${record.ID}`],
+        ["p", record.miles, "id", `miles-${record.ID}`],
+        ["p", record.milesTravelled, "id", `dist-${record.ID}`],
+        ["p", `Jobs Done: ${record.weeklies}%`, "id", `jobs-${record.ID}`],
+        ["button", "X", "id", `del-${record.ID}`]
+    ]
+    // Element Type, cell content, attribute type, attribute data
+
+    for (let d in checkData) {
+
+        let dataEl = constructWeeklyCheckEl(checkData[d])
+
+        historyEl.append(dataEl)
+
+    }
+
+}
+
+function constructWeeklyCheckEl(data) {
+
+    let newEl = document.createElement(data[0])
+
+    newEl.textContent = data[1]
+
+    newEl.setAttribute(data[2], data[3])
+
+    return newEl
 
 }
 
@@ -715,13 +859,77 @@ function clearFieldEl(field) {
     field.value = ""
 }
 
+// function confirmClearRecord() {
+
+//     const modalHeading = "Delete this record?"
+//     const modalBody = "This is a permanent action and you will lose this record forever."
+
+//     const verdict = modalConfirm(modalConfirmEl, modalHeading, modalBody)
+
+//     console.log(`Modal Verdict: ${verdict}`)
+
+//     return verdict
+
+// }
+
+async function promiseTest() {
+
+    let promise = new Promise((resolve, reject) => {
+
+        setTimeout(() => resolve("done!"), 2000)
+
+    })
+
+    let result = await promise
+
+    alert(result)
+
+    return result
+
+}
+
+// async function confirmClearRecordSequence() {
+
+//     let promise = new Promise((resolve, reject) => {
+
+//         const modalHeading = "Delete this record?"
+// 		const modalBody = "This is a permanent action and you will lose this record forever."
+
+// 		const verdict = modalConfirm(modalConfirmEl, modalHeading, modalBody)
+
+//         console.log(`verdict: ${verdict}`)
+		
+// 		if (verdict) {
+		
+// 			resolve(true)
+		
+// 		} else {
+		
+// 			resolve(false)
+		
+// 		}
+
+//         // resolve("This is the desired result")
+
+//     })
+
+//     // promise.then(confirmClearRecord())
+
+//     let result = await promise
+
+//     return result
+
+// }
+
 async function clearRecord(collection, askIfDelete, docID) {
 
     let deleteDecision
 
     if (askIfDelete) {
 
-        deleteDecision = confirm("Delete this record?") // Add confirmation modal?
+        deleteDecision = confirm(`Clear this record?`)
+
+        // deleteDecision = await promiseTest() // Timeout delays function!!!
 
     } else {
 
@@ -732,6 +940,8 @@ async function clearRecord(collection, askIfDelete, docID) {
     if (deleteDecision) {
 
         await deleteDoc(doc(database, collection, docID))
+
+        // deleteVerdict = false
 
     }
 
@@ -856,4 +1066,3 @@ function recordListClear(recordList) {
     return recordList
 
 }
-
