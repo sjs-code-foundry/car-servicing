@@ -12,24 +12,27 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 ### v0.4.2-alpha
 #### Aesthetics
 - [ ] Scale car image appropriately across devices in landscape mode (keep it in the menu bar!)
+- [ ] Implement more margin so that UI doesn't feel so cramped
+- [ ] Centralise date entry field
 #### JS Functions
-- [ ] Use Data Attributes to for Weekly Checks (deleting checks, opening table of weekly checks, etc.)
 - [ ] Reimplement orderBy queries based on success with shopping list app
 - [ ] Try to catch errors with AppCheck on desktop (open app early on Sunday morning, when you usually need it)
 #### User Experience
 - [ ] Prevent user from submitting Weekly Check unless date and mileage fields are appropriately filled
 - [ ] Prevent user from adding service jobs in the absence of text values
-- [ ] Double click copies values from Weekly Check record table
-- [ ] Blank out buttons so that user cannot enter two weekly checks on the same day
-- [ ] Implement decision modal for deleting weekly checks
+- [ ] Fix modal so that it will scroll fully down length of content in landscape mode
+- [ ] Add separate scroll bar to side menu in landscape mode
 ### v0.4.3-alpha
 #### Firestore
 - [ ] Enable offline caching
 #### JS Functions
 - [ ] Implement Age of Vehicle in Car Stats (new collection in Firestore)
+- [ ] Use Data Attributes on Weekly Checks (deleting checks, opening table of weekly checks, etc.)
 #### User Experience
 - [ ] Add picture icon for users
+- [ ] Double click copies values from Weekly Check record table
 - [ ] Implement sorting functions for service jobs and weekly checks
+- [ ] Implement decision modal for deleting weekly checks
 ### v0.5.0-alpha
 #### Cross-Platform
 - [ ] Fork repo for native Android app written in Kotlin
