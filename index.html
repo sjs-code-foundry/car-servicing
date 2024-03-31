@@ -73,18 +73,16 @@
             </section>
             <section id="tab-weekly-checks" class="tabcontent">
                 <h2>Weekly Jobs</h2>
-                <div class="entry-field">
-                    <p class="field-label">Date: </p>
-                    <input id="date-field" type="date" placeholder="dd/mm/yyyy">
-                </div>
-                <div class="entry-field">
-                    <p class="field-label">Odometer: </p>
-                    <input id="odo-field" type="number" placeholder="00000">
-                </div>
-                <ul id="weeklies">
-                    <!-- List of Weekly Check Buttons goes here -->
-                </ul>
-                <button id="submit-btn">Submit Weekly Check</button>
+                <form id="weekly-check-form">
+                    <label for="date-field">Date:</label>
+                    <input id="date-field" type="date" name="date" placeholder="dd/mm/yyyy" required>
+                    <label for="odo-field">Odometer Reading:</label>
+                    <input id="odo-field" type="number" name="odometer" placeholder="00000" required>
+                    <ul id="weeklies">
+                        <!-- List of Weekly Check Buttons goes here -->
+                    </ul>
+                    <button id="submit-btn">Submit Weekly Check</button>
+                </form>
             </section>
             <section id="tab-service-jobs" class="tabcontent">
                 <h2>Servicing Jobs</h2>

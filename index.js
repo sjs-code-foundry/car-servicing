@@ -106,6 +106,7 @@ const tabBtnServiceJobs = document.getElementById("tab-btn-service-jobs")
 const tabBtnAccount = document.getElementById("tab-btn-account")
 const tabBtnLogout = document.getElementById("tab-btn-logout")
 
+const weeklyCheckFormEl = document.getElementById("weekly-check-form")
 const dateFieldEl = document.getElementById("date-field")
 const odoFieldEl = document.getElementById("odo-field")
 const weeklyCheckBtnEl = document.getElementById("submit-btn")
@@ -464,20 +465,23 @@ serviceBtnEl.addEventListener("click", function() {
 
 })
 
-weeklyCheckBtnEl.addEventListener("click", function() {
+weeklyCheckFormEl.addEventListener("submit", function(e) {
+
+    e.preventDefault()
 
     const user = auth.currentUser
 
-    let currentArray = new WeeklyArray()
+    const date = weeklyCheckFormEl.date.value
+    const odometer = weeklyCheckFormEl.odometer.value
+    const currentArray = new WeeklyArray()
 
-    addWeeklyCheckToDB(currentArray.date, currentArray.miles, currentArray.weeklies, user)
+    addWeeklyCheckToDB(date, odometer, currentArray.weeklies, user)
 
     modalAlert( modalAlertEl,
                 "Success!",
                 `Weekly Check for ${currentArray.date} added!`)
-
-    clearFieldEl(dateFieldEl)
-    clearFieldEl(odoFieldEl)
+    
+    weeklyCheckFormEl.reset()
     weeklyJobBtnReset()
 
 })

@@ -18,7 +18,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 - [ ] Reimplement orderBy queries based on success with shopping list app
 - [ ] Try to catch errors with AppCheck on desktop (open app early on Sunday morning, when you usually need it)
 #### User Experience
-- [ ] Prevent user from submitting Weekly Check unless date and mileage fields are appropriately filled
+- [x] Prevent user from submitting Weekly Check unless date and mileage fields are appropriately filled
 - [ ] Prevent user from adding service jobs in the absence of text values
 - [ ] Fix modal so that it will scroll fully down length of content in landscape mode
 - [ ] Add separate scroll bar to side menu in landscape mode
