@@ -105,16 +105,22 @@ const tabMenuEl = document.getElementById("tab-menu")
 const tabBtnServiceJobs = document.getElementById("tab-btn-service-jobs")
 const tabBtnAccount = document.getElementById("tab-btn-account")
 const tabBtnLogout = document.getElementById("tab-btn-logout")
+
 const dateFieldEl = document.getElementById("date-field")
 const odoFieldEl = document.getElementById("odo-field")
+const weeklyCheckBtnEl = document.getElementById("submit-btn")
+
 const serviceJobEl = document.getElementById("sj-field")
 const serviceBtnEl = document.getElementById("sj-btn")
 const serviceTasksEl = document.getElementById("jobs-list")
-const weeklyCheckBtnEl = document.getElementById("submit-btn")
+
 const historyEl = document.getElementById("hist-area")
+
 const modalAlertEl = document.getElementById("modal-alert")
+
+const modalConfirmEl = document.getElementById("modal-confirm") // Keep for future implementation
+
 const modalAccountEl = document.getElementById("modal-account")
-const modalConfirmEl = document.getElementById("modal-confirm")
 const accountFormEl = document.getElementById("modal-account-form")
 const signinBtnGoogle = document.getElementById("signin-btn-google")
 const createAccountBtn = document.getElementById("create-account-btn")
