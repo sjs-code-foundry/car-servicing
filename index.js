@@ -97,8 +97,6 @@ const scale = screen.width / siteWidth
 const viewport = document.querySelector('meta[name="viewport"]')
 viewport.setAttribute('content', `width=device-width, initial-scale=${scale}`)
 
-// This code messes with media queries - find an alternative solution!
-
 /* === DOM Elements === */
 
 const tabMenuEl = document.getElementById("tab-menu")
@@ -451,6 +449,12 @@ tabMenuEl.addEventListener("click", function(e) {
 
 })
 
+serviceJobEl.addEventListener("input", function() {
+
+    lockServiceJobButton(false)
+
+})
+
 serviceBtnEl.addEventListener("click", function() {
 
     const user = auth.currentUser
@@ -462,6 +466,8 @@ serviceBtnEl.addEventListener("click", function() {
                 `Servicing Job "${serviceJobEl.value}" added!`)
 
     clearFieldEl(serviceJobEl)
+
+    lockServiceJobButton(true)
 
 })
 
@@ -520,6 +526,7 @@ weeklyJobList()
 
 let recordList = []
 // let deleteVerdict = false // Deletion of Weekly Checks does not go ahead by default
+lockServiceJobButton(true)
 
 /* ===  Object Constructors === */
 
@@ -736,6 +743,24 @@ function constructWeeklyCheckEl(data) {
     newEl.setAttribute(data[2], data[3])
 
     return newEl
+
+}
+
+function lockServiceJobButton(state) {
+
+    if (state) {
+
+        serviceBtnEl.disabled = true
+        serviceBtnEl.style.backgroundColor = "var(--accent-light-color)"
+        serviceBtnEl.style.cursor = "not-allowed"
+
+    } else {
+
+        serviceBtnEl.disabled = false
+        serviceBtnEl.style.backgroundColor = "var(--secondary-light-color)"
+        serviceBtnEl.style.cursor = "pointer"
+
+    }
 
 }
 
