@@ -451,8 +451,16 @@ tabMenuEl.addEventListener("click", function(e) {
 
 serviceJobEl.addEventListener("input", function() {
 
-    lockServiceJobButton(false)
+    if (serviceJobEl.value.length) {
 
+        lockServiceJobButton(false)
+
+    } else {
+
+        lockServiceJobButton(true)
+
+    }
+    
 })
 
 serviceBtnEl.addEventListener("click", function() {
