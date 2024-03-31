@@ -13,7 +13,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 #### Aesthetics
 - [x] Scale car image appropriately across devices in landscape mode (keep it in the menu bar!)
 - [ ] Implement more margin so that UI doesn't feel so cramped
-- [ ] Centralise date entry field
+- [x] Centralise date entry field
 #### JS Functions
 - [ ] Reimplement orderBy queries based on success with shopping list app
 - [ ] Try to catch errors with AppCheck on desktop (open app early on Sunday morning, when you usually need it)

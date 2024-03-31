@@ -370,6 +370,8 @@ footer {
 }
 
 input {
+    display: block;
+
     width: inherit;
     height: 8rem;
 
