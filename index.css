@@ -291,6 +291,10 @@ footer {
         justify-content: space-around;
     }
 
+    .header img {
+        width: 6em;
+    }
+
     #tab-menu {
         width: inherit;
         top: 0;
