@@ -101,7 +101,7 @@ footer {
 
 @media (orientation: landscape) {
     header {
-        width: var(--header-landscape-width);
+        max-width: var(--header-landscape-width);
     }
 
     #interactive-area {
@@ -285,20 +285,38 @@ footer {
 
 }
 
+/* ====================================================
+    Side Menu - Landscape Mode
+   ==================================================== */
+
 @media (orientation: landscape) {
     #interactive-area {
         flex-direction: row;
         justify-content: space-around;
     }
 
+    .header {
+        width: 100%;
+        height: 100vh;
+        overflow: auto;
+        /* position: sticky; */
+    }
+
     .header img {
         width: 6em;
+    }
+
+    .header ul {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        overflow: hidden;
     }
 
     #tab-menu {
         width: inherit;
         top: 0;
-        position: sticky;
+        /* position: sticky; */
     }
 
     #tab-menu button {
@@ -354,7 +372,7 @@ footer {
     flex-direction: column;
     align-items: center;
 
-    width: var(--main-width);
+    width: 100%;
 
     font-family: 'Ubuntu', sans-serif;
     font-size: 100%;
