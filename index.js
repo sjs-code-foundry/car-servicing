@@ -91,6 +91,8 @@ const weeklyChecksCollectionName = "weeklyChecks"
 
 /* === Cross-Platform Scaling === */
 
+/* == Main Viewport == */
+
 const siteWidth = window.innerWidth
 const scale = screen.width / siteWidth
 
@@ -442,6 +444,10 @@ tabMenuEl.addEventListener("click", function(e) {
             }) //
         } else {
             tabSwitch(e.target.dataset.tab)
+
+            const tabHeight = document.getElementById("interactive-area").offsetHeight
+
+            setModalContainerHeight(tabHeight)
         }
 
         document.getElementById("menu-btn").checked = false
@@ -682,6 +688,16 @@ function modalAlert(targetModal, modalHeading, modalBody) {
 //     })
 
 // }
+
+function setModalContainerHeight(tabHeight) {
+
+    const modalContainer = document.getElementById("modal-container")
+
+    modalContainer.setAttribute("style", `height:${tabHeight}`)
+    modalContainer.style.height = `${tabHeight}px`
+
+
+}
 
 /* ==  Job/Check List Functions == */
 
