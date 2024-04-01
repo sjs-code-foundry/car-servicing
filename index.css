@@ -101,6 +101,7 @@ footer {
 
 @media (orientation: landscape) {
     header {
+        width: 30vw;
         max-width: var(--header-landscape-width);
     }
 
@@ -113,7 +114,8 @@ footer {
     }
 
     section {
-        width: 100%;
+        margin-left: 30vw;
+        width: 70%;
     }
 
     footer {
@@ -299,7 +301,12 @@ footer {
         width: 100%;
         height: 100vh;
         overflow: auto;
-        /* position: sticky; */
+
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        background-color: var(--background-light-color);
     }
 
     .header img {
@@ -398,7 +405,7 @@ footer {
 #sj-field {
     display: block;
 
-    width: inherit;
+    width: 100%;
     height: 8rem;
 
     background-color: var(--background-light-color);
@@ -545,6 +552,10 @@ footer {
 }
 
 @media (orientation: landscape) {
+    #hist-area {
+        width: 100%;
+    }
+
     #hist-area p {
         font-size: 2rem;
     }
@@ -567,6 +578,18 @@ footer {
         width: 2em;
         height: 2.5em;
     }
+}
+
+/* ========
+	Footer
+   ======== */
+
+@media (orientation: landscape) {
+
+    footer hr, #account-status-header {
+        margin-left: 30vw;
+    }
+
 }
 
 /* ========
