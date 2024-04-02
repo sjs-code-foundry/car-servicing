@@ -15,7 +15,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 - [ ] Implement more margin so that UI doesn't feel so cramped
 - [x] Centralise date entry field
 #### JS Functions
-- [ ] Reimplement orderBy queries based on success with shopping list app
+- [x] Reimplement orderBy queries based on success with shopping list app
 - [ ] Calculate time elapsed and miles travelled since first entry, with average miles per week
 #### User Experience
 - [x] Prevent user from submitting Weekly Check unless date and mileage fields are appropriately filled

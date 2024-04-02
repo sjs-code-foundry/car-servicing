@@ -352,7 +352,7 @@ function fetchWeeklyChecksInRealTimeFromDBs(query, user) {
 
         })
         
-        recordListCalcs(recordList) // Do we need to sort the records?
+        recordListCalcs(recordList)
 
         recordListReverse(recordList)
         
@@ -372,8 +372,9 @@ function fetchServiceJobs(user) {
 
     const serviceJobsRef = collection(database, serviceJobsCollectionName)
 
-    const q = query(serviceJobsRef, where("uid", "==", user.uid))
-    // Fix this part of query: orderBy("createdAt", "body")
+    const q = query(serviceJobsRef, where("uid", "==", user.uid),
+                                    orderBy("createdAt", "asc"))
+    // Add this at a later date for user options: orderBy("body", "asc")
 
     fetchServiceJobsInRealTimeFromDBs(q, user)
 
@@ -383,8 +384,9 @@ function fetchWeeklyChecks(user) {
 
     const weeklyChecksRef = collection(database, weeklyChecksCollectionName)
     
-    const q = query(weeklyChecksRef, where("uid", "==", user.uid))
-    // Fix this part of query: orderBy("date", "miles")
+    const q = query(weeklyChecksRef,    where("uid", "==", user.uid),
+                                        orderBy("date", "asc"),
+                                        orderBy("miles", "asc"))
     
     fetchWeeklyChecksInRealTimeFromDBs(q, user)
 
@@ -879,37 +881,6 @@ function addLiElToList(attrList, isHTML, text) {
 
 }
 
-function sortList(listEl, descOrd) { // May be made redundant by indexing in Firestore
-    let shouldSwitch, i, listItems
-    let switching = true
-    
-    while (switching) {
-        switching = false // If switch conditions are not met, while loop should end by default
-        listItems = listEl.getElementsByTagName("LI")
-
-        for (i = 0; i < (listItems.length - 1); i++) {
-            shouldSwitch = false // Items should not be switched by default
-
-            let switchCond
-            if (descOrd === true) {
-                switchCond = (listItems[i].innerHTML < listItems[i+1].innerHTML)
-            } else {
-                switchCond = (listItems[i].innerHTML > listItems[i+1].innerHTML)
-            }
-
-            if (switchCond) {
-                shouldSwitch = true
-                break
-            }
-        }
-
-        if (shouldSwitch) {
-            listItems[i].parentNode.insertBefore(listItems[i+1], listItems[i])
-            switching = true
-        }
-    }
-}
-
 function clearListEl(list) {
     list.innerHTML = ""
 }
@@ -1033,33 +1004,12 @@ function weeklyJobBtnReset() {
 /* ==  Weekly Job Record List Functions == */
 
 function recordListCalcs(recordList) {
-    
-    recordListSortByDate(recordList) // Do we need this function?  Firestore can sort the data from the start.
 
     recordListCalculateMiles(recordList)
 
     recordListCalculateJobPercentage(recordList)
 
     return recordList
-
-}
-
-function recordListSortByDate(recordList) {
-
-    recordList.sort(function(a, b) {
-
-        let keyA = new String(a.date)
-        let keyB = new String(b.date)
-        // Compare the two dates
-        if (keyA < keyB) {
-            return -1
-        } else if (keyA > keyB) {
-            return 1
-        } else { // Dates are equal
-            return 0
-        }
-
-    })
 
 }
 
