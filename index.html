@@ -113,7 +113,14 @@
             </section>
             <section id="tab-car-stats" class="tabcontent">
                 <h2>Car Stats</h2>
-                <p>Not Implemented, check later.</p>
+                <div id="stats-area">
+                    <h4 class="stats-cell">Time since first entry</h4>
+                    <p class="stats-cell">0</p>
+                    <h4 class="stats-cell">Total miles travelled</h4>
+                    <p class="stats-cell">0</p>
+                    <h4 class="stats-cell">Average miles per week</h4>
+                    <p class="stats-cell">0</p>
+                </div>
                 <!-- Display calculated stats like total miles travelled,
                     mean average miles/week, predicted miles travelled
                     in a year, etc. -->
@@ -142,6 +149,8 @@
             </section>
         </div>
         <script src="index.js" type="module"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+        <script src="https://raw.githubusercontent.com/codebox/moment-precise-range/master/moment-precise-range.js"></script>
     </body>
     <footer>
         <hr>

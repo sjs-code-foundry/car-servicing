@@ -580,6 +580,32 @@ footer {
     }
 }
 
+/* ============
+	Car Stats
+   ============ */
+
+#stats-area {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-auto-rows: minmax(4em, auto);
+    grid-gap: 0;
+
+    border: 2px solid var(--background-dark-color);
+}
+
+.stats-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+    margin: auto 0;
+
+    font-size: 2rem;
+
+    border: 1px solid var(--background-dark-color);
+}
+
 /* ========
 	Footer
    ======== */

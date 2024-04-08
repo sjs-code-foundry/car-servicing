@@ -362,6 +362,8 @@ function fetchWeeklyChecksInRealTimeFromDBs(query, user) {
         
         }
 
+        carStatsCalcs(recordList)
+
     })
 
 }
@@ -547,9 +549,11 @@ lockServiceJobButton(true)
 /* ===  Object Constructors === */
 
 function WeeklyArray() {
+
     this.date = recordKeyPlaceholder(dateFieldEl, "0000-00-00")
     this.miles = recordKeyPlaceholder(odoFieldEl, "00000")
     this.weeklies = weeklyJobsStatus
+
 }
 
 function RecordListing(wholeDoc) {
@@ -561,6 +565,61 @@ function RecordListing(wholeDoc) {
     this.miles = docData.miles
     this.milesTravelled = 0
     this.weeklies = docData.weeklies
+
+}
+
+function TimeElapsed(then, now) {
+
+    this.timeThen = moment(then)
+    this.timeNow = moment(now)
+
+    this.durMs = this.timeNow.diff(this.timeThen)
+    this.durDays = this.timeNow.diff(this.timeThen, 'days', true)
+    this.durWeeks = this.timeNow.diff(this.timeThen, 'weeks', true)
+    this.durMonths = this.timeNow.diff(this.timeThen, 'months', true)
+    this.durYears = this.timeNow.diff(this.timeThen, 'years', true)
+
+    this.durHumanTerms = new TimeHumanTerms(this)
+
+    // Moment.js homepage:  https://momentjs.com/
+
+}
+
+function TimeHumanTerms(elapsedObj) {
+
+    this.durYears = Math.floor(elapsedObj.durYears)
+
+    const dateToMonths = elapsedObj.timeThen.add(this.durYears, 'years')
+    this.durMonths = (elapsedObj.timeNow).diff(dateToMonths, 'months')
+
+    const dateToDays = dateToMonths.add(this.durMonths, 'months')
+    this.durDays = (elapsedObj.timeNow).diff(dateToDays, 'days')
+
+    if (this.durMonths === 0 && this.durYears === 0) {
+        this.report = `${this.durDays} days`
+    } else if (this.durYears === 0) {
+        this.report = `${this.durMonths} months and ${this.durDays} days`
+    } else {
+        this.report = `${this.durYears} years, ${this.durMonths} months and ${this.durDays} days`
+    }
+
+}
+
+function CarStatTableRow(heading, data, roundBool) {
+
+    this.heading = heading
+
+    const dataType = typeof(data)
+
+    if (dataType === "number" && roundBool === true) {
+
+        this.data = Math.round(data)
+
+    } else {
+
+        this.data = data
+
+    }
 
 }
 
@@ -1075,3 +1134,89 @@ function recordListClear(recordList) {
     return recordList
 
 }
+
+/* ==  Car Stats Functions == */
+
+function carStatsCalcs(recordList) {
+
+    const timeElapsed = getTotalTimeElapsed(recordList)
+    // console.log(timeElapsed)
+
+    const milesTravelled =  getTotalMilesTravelled(recordList)
+    // console.log(milesTravelled)
+
+    const milesPerWeek = getAverageMilesPerWeek(milesTravelled, timeElapsed.durWeeks)
+    // console.log(milesPerWeek)
+
+    const table =  [
+                    new CarStatTableRow("Time since first entry", timeElapsed.durHumanTerms.report, false),
+                    new CarStatTableRow("Total miles travelled", milesTravelled, true),
+                    new CarStatTableRow("Average miles per week", milesPerWeek, true),
+                    new CarStatTableRow("Expected Yearly Miles", (milesPerWeek * 52), true)
+    ]
+
+    renderCarStatTableContents(table)
+
+}
+
+function getTotalTimeElapsed(recordList) {
+
+    // Get oldest date value and subtract from today's date
+
+    const recordEnd = recordList.length - 1
+    const dateOldest = recordList[recordEnd].date
+
+    const dateToday = new Date().toISOString().split("T")[0]
+
+    const time = new TimeElapsed(dateOldest, dateToday)
+
+    return time
+
+}
+
+function getTotalMilesTravelled(recordList) {
+
+    // Subtract oldest mile value from latest one
+
+    const recordEnd = recordList.length - 1
+    const milesOldest = recordList[recordEnd].miles
+
+    const milesNewest = recordList[0].miles
+
+    return milesNewest - milesOldest
+    
+}
+
+function getAverageMilesPerWeek(miles, weeks) {
+
+    return miles / weeks
+
+}
+
+function renderCarStatTableContents(tableArr) {
+
+    const statsArea = document.getElementById("stats-area")
+
+    statsArea.innerHTML = ""
+
+    for (let row in tableArr) {
+
+        statsArea.append(renderCarStatRowEl("h4", tableArr[row].heading))
+        statsArea.append(renderCarStatRowEl("p", tableArr[row].data))
+
+    }
+
+}
+
+function renderCarStatRowEl(type, content) {
+    
+    let newEl = document.createElement(type)
+
+    newEl.setAttribute("class", "stats-cell")
+
+    newEl.textContent = content
+
+    return newEl
+
+}
+

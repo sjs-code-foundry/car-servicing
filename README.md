@@ -13,16 +13,19 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 #### Aesthetics
 - [x] Scale car image appropriately across devices in landscape mode (keep it in the menu bar!)
 - [ ] Implement more margin so that UI doesn't feel so cramped
+- [ ] Adjust new additions so that they scale up from small mobile devices
 - [x] Centralise date entry field
 #### JS Functions
 - [x] Reimplement orderBy queries based on success with shopping list app
-- [ ] Calculate time elapsed and miles travelled since first entry, with average miles per week
+- [x] Calculate time elapsed and miles travelled since first entry, with average miles per week
 #### User Experience
 - [x] Prevent user from submitting Weekly Check unless date and mileage fields are appropriately filled
 - [x] Prevent user from adding service jobs in the absence of text values
 - [x] Fix modal so that it will scroll fully down length of content in landscape mode
 - [x] Add separate scroll bar to side menu in landscape mode
 ### v0.4.3-alpha
+#### General Strategy
+- [ ] Work out what the minimum viable product will be (this will be version 1.0.0)
 #### Firestore
 - [ ] Enable offline caching
 #### JS Functions
