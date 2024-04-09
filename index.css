@@ -60,17 +60,17 @@ h2 {
 }
 
 h3 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
 }
 
 h4 {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: bold;
 }
 
 p {
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
 
 hr {
@@ -124,7 +124,7 @@ footer {
     }
 
     footer hr {
-        width: inherit;
+        width: 70%; /* Temporary Fix - create a neater solution */
     }
 
     @media (min-width: 1921px) {
@@ -298,7 +298,7 @@ footer {
     }
 
     .header {
-        width: 100%;
+        width: 100%; /* Delete this, then reinsert in bigger breakpoints */
         height: 100vh;
         overflow: auto;
 
@@ -523,10 +523,6 @@ footer {
     width: inherit;
 }
 
-#hist-area p {
-    font-size: 1.5rem;
-}
-
 #hist-area button {
     background-color: var(--accent-light-color);
     color: var(--background-light-color);
@@ -539,11 +535,6 @@ footer {
 
     border: none;
     border-radius: 0.33em;
-}
-
-#tab-car-stats p, #tab-about-app p {
-    width: var(--main-width);
-    /* Temporary - Spaces content out correctly for Landscape */
 }
 
 #tab-blank p {
@@ -689,6 +680,7 @@ footer {
 
     width: 100%;
     margin: 0.28em auto;
+    padding: 0.5em 0;
 
     font-size: 2.5rem;
 }
