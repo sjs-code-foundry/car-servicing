@@ -60,17 +60,17 @@ h2 {
 }
 
 h3 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
 }
 
 h4 {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: bold;
 }
 
 p {
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
 
 hr {
@@ -101,7 +101,8 @@ footer {
 
 @media (orientation: landscape) {
     header {
-        width: var(--header-landscape-width);
+        width: 30vw;
+        max-width: var(--header-landscape-width);
     }
 
     #interactive-area {
@@ -113,7 +114,8 @@ footer {
     }
 
     section {
-        width: 100%;
+        margin-left: 30vw;
+        width: 70%;
     }
 
     footer {
@@ -122,7 +124,7 @@ footer {
     }
 
     footer hr {
-        width: inherit;
+        width: 70%; /* Temporary Fix - create a neater solution */
     }
 
     @media (min-width: 1921px) {
@@ -285,16 +287,43 @@ footer {
 
 }
 
+/* ====================================================
+    Side Menu - Landscape Mode
+   ==================================================== */
+
 @media (orientation: landscape) {
     #interactive-area {
         flex-direction: row;
         justify-content: space-around;
     }
 
+    .header {
+        width: 100%; /* Delete this, then reinsert in bigger breakpoints */
+        height: 100vh;
+        overflow: auto;
+
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        background-color: var(--background-light-color);
+    }
+
+    .header img {
+        width: 6em;
+    }
+
+    .header ul {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        overflow: hidden;
+    }
+
     #tab-menu {
         width: inherit;
         top: 0;
-        position: sticky;
+        /* position: sticky; */
     }
 
     #tab-menu button {
@@ -345,39 +374,44 @@ footer {
     Fields
    ======== */
 
-.field-label {
-    font-size: 2.5rem;
-    margin: 1em 0 0.5em 0;
-}
-
-.entry-field, #sj-field {
-    font-family: 'Ubuntu', sans-serif;
-    font-size: 100%;
-}
-
-.entry-field {
+#tab-weekly-checks form {
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    width: var(--main-width);
+    width: 100%;
 
-    font-size: 2.5rem;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 100%;
 }
 
-input {
+#tab-weekly-checks form label {
+    font-size: 2.5rem;
+    margin: 1em 0 0.5em 0;
+}
+
+#tab-weekly-checks form input {
+    display: block;
+
     width: inherit;
     height: 8rem;
 
     background-color: var(--background-light-color);
     color: var(--text-light-color);
-    font-size: 100%;
+    font-size: 2.5rem;
     text-align: center;
 }
 
 #sj-field {
-    width: inherit;
-    padding: 0.5556em 0;
+    display: block;
+
+    width: 100%;
+    height: 8rem;
+
+    background-color: var(--background-light-color);
+    color: var(--text-light-color);
+    font-size: 2.5rem;
+    text-align: center;
 }
 
 @media (orientation: landscape) {
@@ -489,10 +523,6 @@ input {
     width: inherit;
 }
 
-#hist-area p {
-    font-size: 1.5rem;
-}
-
 #hist-area button {
     background-color: var(--accent-light-color);
     color: var(--background-light-color);
@@ -507,17 +537,16 @@ input {
     border-radius: 0.33em;
 }
 
-#tab-car-stats p, #tab-about-app p {
-    width: var(--main-width);
-    /* Temporary - Spaces content out correctly for Landscape */
-}
-
 #tab-blank p {
     color: var(--background-light-color);
     width: var(--main-width);
 }
 
 @media (orientation: landscape) {
+    #hist-area {
+        width: 100%;
+    }
+
     #hist-area p {
         font-size: 2rem;
     }
@@ -540,6 +569,44 @@ input {
         width: 2em;
         height: 2.5em;
     }
+}
+
+/* ============
+	Car Stats
+   ============ */
+
+#stats-area {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-auto-rows: minmax(4em, auto);
+    grid-gap: 0;
+
+    border: 2px solid var(--background-dark-color);
+}
+
+.stats-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+    margin: auto 0;
+
+    font-size: 2rem;
+
+    border: 1px solid var(--background-dark-color);
+}
+
+/* ========
+	Footer
+   ======== */
+
+@media (orientation: landscape) {
+
+    footer hr, #account-status-header {
+        margin-left: 30vw;
+    }
+
 }
 
 /* ========
@@ -613,6 +680,7 @@ input {
 
     width: 100%;
     margin: 0.28em auto;
+    padding: 0.5em 0;
 
     font-size: 2.5rem;
 }

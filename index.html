@@ -73,25 +73,21 @@
             </section>
             <section id="tab-weekly-checks" class="tabcontent">
                 <h2>Weekly Jobs</h2>
-                <div class="entry-field">
-                    <p class="field-label">Date: </p>
-                    <input id="date-field" type="date">
-                </div>
-                <div class="entry-field">
-                    <p class="field-label">Odometer: </p>
-                    <input id="odo-field" type="number">
-                </div>
-                <ul id="weeklies">
-                    <!-- List of Weekly Check Buttons goes here -->
-                </ul>
-                <button id="submit-btn">Submit Weekly Check</button>
+                <form id="weekly-check-form">
+                    <label for="date-field">Date:</label>
+                    <input id="date-field" type="date" name="date" placeholder="dd/mm/yyyy" required>
+                    <label for="odo-field">Odometer Reading:</label>
+                    <input id="odo-field" type="number" name="odometer" placeholder="00000" required>
+                    <ul id="weeklies">
+                        <!-- List of Weekly Check Buttons goes here -->
+                    </ul>
+                    <button id="submit-btn">Submit Weekly Check</button>
+                </form>
             </section>
             <section id="tab-service-jobs" class="tabcontent">
                 <h2>Servicing Jobs</h2>
-                <div class="entry-field">
-                    <input id="sj-field" type="text">
-                    <button id="sj-btn">Submit Service Job</button>
-                </div>
+                <input id="sj-field" type="text">
+                <button id="sj-btn">Submit Service Job</button>
                 <ul id="jobs-list">
                     <!-- Service Jobs go here -->
                 </ul>
@@ -117,7 +113,14 @@
             </section>
             <section id="tab-car-stats" class="tabcontent">
                 <h2>Car Stats</h2>
-                <p>Not Implemented, check later.</p>
+                <div id="stats-area">
+                    <h4 class="stats-cell">Time since first entry</h4>
+                    <p class="stats-cell">0</p>
+                    <h4 class="stats-cell">Total miles travelled</h4>
+                    <p class="stats-cell">0</p>
+                    <h4 class="stats-cell">Average miles per week</h4>
+                    <p class="stats-cell">0</p>
+                </div>
                 <!-- Display calculated stats like total miles travelled,
                     mean average miles/week, predicted miles travelled
                     in a year, etc. -->
@@ -126,13 +129,28 @@
             </section>
             <section id="tab-about-app" class="tabcontent">
                 <h2>About App</h2>
+                <p>
+                    This app was born out of a need to amalgamate the processes
+                    involved in keeping my car maintained - which involved many
+                    different spreadsheets and procedures - and present them
+                    in a format that allowed me to view and carry them out
+                    anywhere.
+                </p>
+                <p>
+                    The focus of this app is to keep the interface responsive
+                    and visually appealing, so that as my devices are upgraded
+                    the interface remains useable.  This also serves as a
+                    demonstration of my understanding of designing apps.
+                </p>
                 <h3>Created by:</h3>
                 <p>sjs-code-foundry</p>
                 <h3>App Version:</h3>
-                <p>v0.4.1-alpha</p>
+                <p>v0.4.2-alpha</p>
             </section>
         </div>
         <script src="index.js" type="module"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+        <script src="https://raw.githubusercontent.com/codebox/moment-precise-range/master/moment-precise-range.js"></script>
     </body>
     <footer>
         <hr>

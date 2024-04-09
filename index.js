@@ -91,13 +91,19 @@ const weeklyChecksCollectionName = "weeklyChecks"
 
 /* === Cross-Platform Scaling === */
 
+/* == Main Viewport == */
+
 const siteWidth = window.innerWidth
 const scale = screen.width / siteWidth
+
+console.log(`screen width: ${screen.width}; siteWidth: ${siteWidth}`)
+console.log(`scale: ${scale}`)
 
 const viewport = document.querySelector('meta[name="viewport"]')
 viewport.setAttribute('content', `width=device-width, initial-scale=${scale}`)
 
-// This code messes with media queries - find an alternative solution!
+// Inspect browser on phone to determine what is causing scaling issues on this page, but not with the shopping list app:
+// Dev mode & USB debug on, then plug phone in and head to chrome://inspect/#devices to inspect the page
 
 /* === DOM Elements === */
 
@@ -105,16 +111,23 @@ const tabMenuEl = document.getElementById("tab-menu")
 const tabBtnServiceJobs = document.getElementById("tab-btn-service-jobs")
 const tabBtnAccount = document.getElementById("tab-btn-account")
 const tabBtnLogout = document.getElementById("tab-btn-logout")
+
+const weeklyCheckFormEl = document.getElementById("weekly-check-form")
 const dateFieldEl = document.getElementById("date-field")
 const odoFieldEl = document.getElementById("odo-field")
+const weeklyCheckBtnEl = document.getElementById("submit-btn")
+
 const serviceJobEl = document.getElementById("sj-field")
 const serviceBtnEl = document.getElementById("sj-btn")
 const serviceTasksEl = document.getElementById("jobs-list")
-const weeklyCheckBtnEl = document.getElementById("submit-btn")
+
 const historyEl = document.getElementById("hist-area")
+
 const modalAlertEl = document.getElementById("modal-alert")
+
+const modalConfirmEl = document.getElementById("modal-confirm") // Keep for future implementation
+
 const modalAccountEl = document.getElementById("modal-account")
-const modalConfirmEl = document.getElementById("modal-confirm")
 const accountFormEl = document.getElementById("modal-account-form")
 const signinBtnGoogle = document.getElementById("signin-btn-google")
 const createAccountBtn = document.getElementById("create-account-btn")
@@ -345,7 +358,7 @@ function fetchWeeklyChecksInRealTimeFromDBs(query, user) {
 
         })
         
-        recordListCalcs(recordList) // Do we need to sort the records?
+        recordListCalcs(recordList)
 
         recordListReverse(recordList)
         
@@ -354,6 +367,8 @@ function fetchWeeklyChecksInRealTimeFromDBs(query, user) {
             renderWeeklyCheck(recordList[r])
         
         }
+
+        carStatsCalcs(recordList)
 
     })
 
@@ -365,8 +380,9 @@ function fetchServiceJobs(user) {
 
     const serviceJobsRef = collection(database, serviceJobsCollectionName)
 
-    const q = query(serviceJobsRef, where("uid", "==", user.uid))
-    // Fix this part of query: orderBy("createdAt", "body")
+    const q = query(serviceJobsRef, where("uid", "==", user.uid),
+                                    orderBy("createdAt", "asc"))
+    // Add this at a later date for user options: orderBy("body", "asc")
 
     fetchServiceJobsInRealTimeFromDBs(q, user)
 
@@ -376,8 +392,9 @@ function fetchWeeklyChecks(user) {
 
     const weeklyChecksRef = collection(database, weeklyChecksCollectionName)
     
-    const q = query(weeklyChecksRef, where("uid", "==", user.uid))
-    // Fix this part of query: orderBy("date", "miles")
+    const q = query(weeklyChecksRef,    where("uid", "==", user.uid),
+                                        orderBy("date", "asc"),
+                                        orderBy("miles", "asc"))
     
     fetchWeeklyChecksInRealTimeFromDBs(q, user)
 
@@ -403,7 +420,7 @@ function clearWeeklyChecksOnLogout() {
 
 /* === Set Default Tab === */
 
-tabSwitch("tab-blank")
+tabSwitch("tab-weekly-checks")
 
 /* === Event Listeners === */
 
@@ -437,11 +454,29 @@ tabMenuEl.addEventListener("click", function(e) {
             }) //
         } else {
             tabSwitch(e.target.dataset.tab)
+
+            const tabHeight = document.getElementById("interactive-area").offsetHeight
+
+            setModalContainerHeight(tabHeight)
         }
 
         document.getElementById("menu-btn").checked = false
     }
 
+})
+
+serviceJobEl.addEventListener("input", function() {
+
+    if (serviceJobEl.value.length) {
+
+        lockServiceJobButton(false)
+
+    } else {
+
+        lockServiceJobButton(true)
+
+    }
+    
 })
 
 serviceBtnEl.addEventListener("click", function() {
@@ -456,22 +491,27 @@ serviceBtnEl.addEventListener("click", function() {
 
     clearFieldEl(serviceJobEl)
 
+    lockServiceJobButton(true)
+
 })
 
-weeklyCheckBtnEl.addEventListener("click", function() {
+weeklyCheckFormEl.addEventListener("submit", function(e) {
+
+    e.preventDefault()
 
     const user = auth.currentUser
 
-    let currentArray = new WeeklyArray()
+    const date = weeklyCheckFormEl.date.value
+    const odometer = weeklyCheckFormEl.odometer.value
+    const currentArray = new WeeklyArray()
 
-    addWeeklyCheckToDB(currentArray.date, currentArray.miles, currentArray.weeklies, user)
+    addWeeklyCheckToDB(date, odometer, currentArray.weeklies, user)
 
     modalAlert( modalAlertEl,
                 "Success!",
                 `Weekly Check for ${currentArray.date} added!`)
-
-    clearFieldEl(dateFieldEl)
-    clearFieldEl(odoFieldEl)
+    
+    weeklyCheckFormEl.reset()
     weeklyJobBtnReset()
 
 })
@@ -510,13 +550,16 @@ weeklyJobList()
 
 let recordList = []
 // let deleteVerdict = false // Deletion of Weekly Checks does not go ahead by default
+lockServiceJobButton(true)
 
 /* ===  Object Constructors === */
 
 function WeeklyArray() {
+
     this.date = recordKeyPlaceholder(dateFieldEl, "0000-00-00")
     this.miles = recordKeyPlaceholder(odoFieldEl, "00000")
     this.weeklies = weeklyJobsStatus
+
 }
 
 function RecordListing(wholeDoc) {
@@ -528,6 +571,61 @@ function RecordListing(wholeDoc) {
     this.miles = docData.miles
     this.milesTravelled = 0
     this.weeklies = docData.weeklies
+
+}
+
+function TimeElapsed(then, now) {
+
+    this.timeThen = moment(then)
+    this.timeNow = moment(now)
+
+    this.durMs = this.timeNow.diff(this.timeThen)
+    this.durDays = this.timeNow.diff(this.timeThen, 'days', true)
+    this.durWeeks = this.timeNow.diff(this.timeThen, 'weeks', true)
+    this.durMonths = this.timeNow.diff(this.timeThen, 'months', true)
+    this.durYears = this.timeNow.diff(this.timeThen, 'years', true)
+
+    this.durHumanTerms = new TimeHumanTerms(this)
+
+    // Moment.js homepage:  https://momentjs.com/
+
+}
+
+function TimeHumanTerms(elapsedObj) {
+
+    this.durYears = Math.floor(elapsedObj.durYears)
+
+    const dateToMonths = elapsedObj.timeThen.add(this.durYears, 'years')
+    this.durMonths = (elapsedObj.timeNow).diff(dateToMonths, 'months')
+
+    const dateToDays = dateToMonths.add(this.durMonths, 'months')
+    this.durDays = (elapsedObj.timeNow).diff(dateToDays, 'days')
+
+    if (this.durMonths === 0 && this.durYears === 0) {
+        this.report = `${this.durDays} days`
+    } else if (this.durYears === 0) {
+        this.report = `${this.durMonths} months and ${this.durDays} days`
+    } else {
+        this.report = `${this.durYears} years, ${this.durMonths} months and ${this.durDays} days`
+    }
+
+}
+
+function CarStatTableRow(heading, data, roundBool) {
+
+    this.heading = heading
+
+    const dataType = typeof(data)
+
+    if (dataType === "number" && roundBool === true) {
+
+        this.data = Math.round(data)
+
+    } else {
+
+        this.data = data
+
+    }
 
 }
 
@@ -658,6 +756,16 @@ function modalAlert(targetModal, modalHeading, modalBody) {
 
 // }
 
+function setModalContainerHeight(tabHeight) {
+
+    const modalContainer = document.getElementById("modal-container")
+
+    modalContainer.setAttribute("style", `height:${tabHeight}`)
+    modalContainer.style.height = `${tabHeight}px`
+
+
+}
+
 /* ==  Job/Check List Functions == */
 
 function renderServiceJob(wholeDoc) {
@@ -726,6 +834,24 @@ function constructWeeklyCheckEl(data) {
     newEl.setAttribute(data[2], data[3])
 
     return newEl
+
+}
+
+function lockServiceJobButton(state) {
+
+    if (state) {
+
+        serviceBtnEl.disabled = true
+        serviceBtnEl.style.backgroundColor = "var(--accent-light-color)"
+        serviceBtnEl.style.cursor = "not-allowed"
+
+    } else {
+
+        serviceBtnEl.disabled = false
+        serviceBtnEl.style.backgroundColor = "var(--secondary-light-color)"
+        serviceBtnEl.style.cursor = "pointer"
+
+    }
 
 }
 
@@ -818,37 +944,6 @@ function addLiElToList(attrList, isHTML, text) {
 
     return newEl
 
-}
-
-function sortList(listEl, descOrd) { // May be made redundant by indexing in Firestore
-    let shouldSwitch, i, listItems
-    let switching = true
-    
-    while (switching) {
-        switching = false // If switch conditions are not met, while loop should end by default
-        listItems = listEl.getElementsByTagName("LI")
-
-        for (i = 0; i < (listItems.length - 1); i++) {
-            shouldSwitch = false // Items should not be switched by default
-
-            let switchCond
-            if (descOrd === true) {
-                switchCond = (listItems[i].innerHTML < listItems[i+1].innerHTML)
-            } else {
-                switchCond = (listItems[i].innerHTML > listItems[i+1].innerHTML)
-            }
-
-            if (switchCond) {
-                shouldSwitch = true
-                break
-            }
-        }
-
-        if (shouldSwitch) {
-            listItems[i].parentNode.insertBefore(listItems[i+1], listItems[i])
-            switching = true
-        }
-    }
 }
 
 function clearListEl(list) {
@@ -974,33 +1069,12 @@ function weeklyJobBtnReset() {
 /* ==  Weekly Job Record List Functions == */
 
 function recordListCalcs(recordList) {
-    
-    recordListSortByDate(recordList) // Do we need this function?  Firestore can sort the data from the start.
 
     recordListCalculateMiles(recordList)
 
     recordListCalculateJobPercentage(recordList)
 
     return recordList
-
-}
-
-function recordListSortByDate(recordList) {
-
-    recordList.sort(function(a, b) {
-
-        let keyA = new String(a.date)
-        let keyB = new String(b.date)
-        // Compare the two dates
-        if (keyA < keyB) {
-            return -1
-        } else if (keyA > keyB) {
-            return 1
-        } else { // Dates are equal
-            return 0
-        }
-
-    })
 
 }
 
@@ -1066,3 +1140,89 @@ function recordListClear(recordList) {
     return recordList
 
 }
+
+/* ==  Car Stats Functions == */
+
+function carStatsCalcs(recordList) {
+
+    const timeElapsed = getTotalTimeElapsed(recordList)
+    // console.log(timeElapsed)
+
+    const milesTravelled =  getTotalMilesTravelled(recordList)
+    // console.log(milesTravelled)
+
+    const milesPerWeek = getAverageMilesPerWeek(milesTravelled, timeElapsed.durWeeks)
+    // console.log(milesPerWeek)
+
+    const table =  [
+                    new CarStatTableRow("Time since first entry", timeElapsed.durHumanTerms.report, false),
+                    new CarStatTableRow("Total miles travelled", milesTravelled, true),
+                    new CarStatTableRow("Average miles per week", milesPerWeek, true),
+                    new CarStatTableRow("Expected Yearly Miles", (milesPerWeek * 52), true)
+    ]
+
+    renderCarStatTableContents(table)
+
+}
+
+function getTotalTimeElapsed(recordList) {
+
+    // Get oldest date value and subtract from today's date
+
+    const recordEnd = recordList.length - 1
+    const dateOldest = recordList[recordEnd].date
+
+    const dateToday = new Date().toISOString().split("T")[0]
+
+    const time = new TimeElapsed(dateOldest, dateToday)
+
+    return time
+
+}
+
+function getTotalMilesTravelled(recordList) {
+
+    // Subtract oldest mile value from latest one
+
+    const recordEnd = recordList.length - 1
+    const milesOldest = recordList[recordEnd].miles
+
+    const milesNewest = recordList[0].miles
+
+    return milesNewest - milesOldest
+    
+}
+
+function getAverageMilesPerWeek(miles, weeks) {
+
+    return miles / weeks
+
+}
+
+function renderCarStatTableContents(tableArr) {
+
+    const statsArea = document.getElementById("stats-area")
+
+    statsArea.innerHTML = ""
+
+    for (let row in tableArr) {
+
+        statsArea.append(renderCarStatRowEl("h4", tableArr[row].heading))
+        statsArea.append(renderCarStatRowEl("p", tableArr[row].data))
+
+    }
+
+}
+
+function renderCarStatRowEl(type, content) {
+    
+    let newEl = document.createElement(type)
+
+    newEl.setAttribute("class", "stats-cell")
+
+    newEl.textContent = content
+
+    return newEl
+
+}
+
