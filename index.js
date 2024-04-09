@@ -96,8 +96,14 @@ const weeklyChecksCollectionName = "weeklyChecks"
 const siteWidth = window.innerWidth
 const scale = screen.width / siteWidth
 
+console.log(`screen width: ${screen.width}; siteWidth: ${siteWidth}`)
+console.log(`scale: ${scale}`)
+
 const viewport = document.querySelector('meta[name="viewport"]')
 viewport.setAttribute('content', `width=device-width, initial-scale=${scale}`)
+
+// Inspect browser on phone to determine what is causing scaling issues on this page, but not with the shopping list app:
+// Dev mode & USB debug on, then plug phone in and head to chrome://inspect/#devices to inspect the page
 
 /* === DOM Elements === */
 
@@ -414,7 +420,7 @@ function clearWeeklyChecksOnLogout() {
 
 /* === Set Default Tab === */
 
-tabSwitch("tab-blank")
+tabSwitch("tab-weekly-checks")
 
 /* === Event Listeners === */
 

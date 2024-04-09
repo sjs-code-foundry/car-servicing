@@ -12,9 +12,8 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 ### v0.4.2-alpha
 #### Aesthetics
 - [x] Scale car image appropriately across devices in landscape mode (keep it in the menu bar!)
-- [ ] Implement more margin so that UI doesn't feel so cramped
-- [ ] Adjust new additions so that they scale up from small mobile devices
 - [x] Centralise date entry field
+- [ ] Adjust new additions so that they scale up from small mobile devices
 #### JS Functions
 - [x] Reimplement orderBy queries based on success with shopping list app
 - [x] Calculate time elapsed and miles travelled since first entry, with average miles per week
@@ -24,6 +23,11 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 - [x] Fix modal so that it will scroll fully down length of content in landscape mode
 - [x] Add separate scroll bar to side menu in landscape mode
 ### v0.4.3-alpha
+#### Aesthetics
+- [ ] Implement more margin so that UI doesn't feel so cramped
+#### User Experience
+- [ ] Solve scaling issues!
+### v0.4.4-alpha
 #### General Strategy
 - [ ] Work out what the minimum viable product will be (this will be version 1.0.0)
 #### Firestore
