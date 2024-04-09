@@ -3,25 +3,12 @@ A mobile app for the weekly recording of car checks.
 ## Motivation
 This is a replacement for my current practice of recording my weekly car checks in Google Keep and Sheets.  I will only need to enter the data once, and then I'll have a record of my checks, servicing tasks and miles travelled.
 ## Current Version
-v0.4.2-alpha
+v0.4.3-alpha
 ## Dependencies
 - Firebase 10.3.1
 ## Changelog
 Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated list.
 ## Planned Features
-### v0.4.2-alpha
-#### Aesthetics
-- [x] Scale car image appropriately across devices in landscape mode (keep it in the menu bar!)
-- [x] Centralise date entry field
-- [x] Adjust new additions so that they scale up from small mobile devices
-#### JS Functions
-- [x] Reimplement orderBy queries based on success with shopping list app
-- [x] Calculate time elapsed and miles travelled since first entry, with average miles per week
-#### User Experience
-- [x] Prevent user from submitting Weekly Check unless date and mileage fields are appropriately filled
-- [x] Prevent user from adding service jobs in the absence of text values
-- [x] Fix modal so that it will scroll fully down length of content in landscape mode
-- [x] Add separate scroll bar to side menu in landscape mode
 ### v0.4.3-alpha
 #### Aesthetics
 - [ ] Implement more margin so that UI doesn't feel so cramped
@@ -29,7 +16,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 - [ ] Get buttons to scale within app width properly
 #### User Experience
 - [ ] Solve scaling issues!
-- [ ] Fix side menu on small mobile phone
+- [ ] Fix side menu on small mobile phone (make it scale dynamically)
 ### v0.4.4-alpha
 #### General Strategy
 - [ ] Work out what the minimum viable product will be (this will be version 1.0.0)
