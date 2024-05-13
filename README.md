@@ -15,7 +15,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 - [ ] Fix hr length in landscape mode
 - [ ] Get buttons to scale within app width properly
 #### User Experience
-- [ ] Solve scaling issues!
+- [x] Solve scaling issues by implementing fix from Shopping List app
 - [ ] Fix side menu on small mobile phone (make it scale dynamically)
 ### v0.4.4-alpha
 #### General Strategy
