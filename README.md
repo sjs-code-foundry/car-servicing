@@ -12,11 +12,12 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 ### v0.4.3-alpha
 #### Aesthetics
 - [x] Implement more margin so that UI doesn't feel so cramped
-- [ ] Fix hr length in landscape mode
-- [ ] Get buttons to scale within app width properly
+- [x] Fix hr length in landscape mode
+- [x] Get buttons to scale within app width properly
 #### User Experience
 - [x] Solve scaling issues by implementing fix from Shopping List app
-- [ ] Fix side menu on small mobile phone (make it scale dynamically)
+- [x] Fix side menu on small mobile phone (make it scale dynamically)
+- [x] Check modal centralizes correctly
 ### v0.4.4-alpha
 #### General Strategy
 - [ ] Work out what the minimum viable product will be (this will be version 1.0.0)
@@ -26,8 +27,10 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 - [ ] Implement Age of Vehicle in Car Stats (new collection in Firestore)
 - [ ] Use Data Attributes on Weekly Checks (deleting checks, opening table of weekly checks, etc.)
 - [ ] Try to catch errors with AppCheck on desktop (open app early on Sunday morning, when you usually need it)
+- [ ] Refactor tabHeight const and setModalContainerHeight function (perhaps introduce delay to prevent weird behavior?)
 #### User Experience
 - [ ] Add picture icon for users
+- [ ] History records display as drop-downs ordered by date (Title is date and miles, then drop-down reveals things like miles travelled and jobs done)
 - [ ] Double click copies values from Weekly Check record table
 - [ ] Implement sorting functions for service jobs and weekly checks
 - [ ] Implement decision modal for deleting weekly checks
