@@ -592,6 +592,14 @@ footer {
     border: 1px solid var(--background-dark-color);
 }
 
+/* ============
+	About App
+   ============ */
+
+.about-app-body {
+    text-align: start;
+}
+
 /* ========
 	Footer
    ======== */
