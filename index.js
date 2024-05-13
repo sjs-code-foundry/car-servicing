@@ -1164,7 +1164,7 @@ function getTotalTimeElapsed(recordList) {
     const recordEnd = recordList.length - 1
     const dateOldest = recordList[recordEnd].date
 
-    const dateToday = new Date().toISOString().split("T")[0]
+    const dateToday = new Date().toISOString().split("T")[0] // Set to date of newest record
 
     const time = new TimeElapsed(dateOldest, dateToday)
 
