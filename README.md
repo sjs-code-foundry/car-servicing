@@ -11,7 +11,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 ## Planned Features
 ### v0.4.3-alpha
 #### Aesthetics
-- [ ] Implement more margin so that UI doesn't feel so cramped
+- [x] Implement more margin so that UI doesn't feel so cramped
 - [ ] Fix hr length in landscape mode
 - [ ] Get buttons to scale within app width properly
 #### User Experience

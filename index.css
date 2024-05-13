@@ -18,9 +18,9 @@
     --error-color: #EA2B1F;
     --success-color: #2A7221;
 
-    --main-width: 40rem;
-    --header-landscape-width: 25rem;
-    --modal-width: 37.5rem;
+    --main-width: 36rem;
+    --header-landscape-width: 12rem;
+    --modal-width: 32rem;
 }
 
 /* ========================
@@ -48,7 +48,7 @@ body, footer {
 
     width: var(--main-width);
 
-    margin: 0 auto;
+    margin: 1.5em auto 0 auto;
 
     color: var(--text-light-color);
     font-size: 1.125rem; /* 18px */
