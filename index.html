@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=640, user-scalable=0">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
@@ -129,14 +129,14 @@
             </section>
             <section id="tab-about-app" class="tabcontent">
                 <h2>About App</h2>
-                <p>
+                <p class="about-app-body">
                     This app was born out of a need to amalgamate the processes
                     involved in keeping my car maintained - which involved many
                     different spreadsheets and procedures - and present them
                     in a format that allowed me to view and carry them out
                     anywhere.
                 </p>
-                <p>
+                <p class="about-app-body">
                     The focus of this app is to keep the interface responsive
                     and visually appealing, so that as my devices are upgraded
                     the interface remains useable.  This also serves as a
@@ -145,7 +145,7 @@
                 <h3>Created by:</h3>
                 <p>sjs-code-foundry</p>
                 <h3>App Version:</h3>
-                <p>v0.4.2-alpha</p>
+                <p>v0.4.3-alpha</p>
             </section>
         </div>
         <script src="index.js" type="module"></script>
@@ -153,7 +153,9 @@
         <script src="https://raw.githubusercontent.com/codebox/moment-precise-range/master/moment-precise-range.js"></script>
     </body>
     <footer>
-        <hr>
-        <h3 id="account-status-header">Not Signed In.  Sign in to view records.</h3>
+        <div id="footer-area">
+            <hr>
+            <h3 id="account-status-header">Not Signed In.  Sign in to view records.</h3>
+        </div>
     </footer>
 </html>

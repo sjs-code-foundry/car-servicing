@@ -18,9 +18,9 @@
     --error-color: #EA2B1F;
     --success-color: #2A7221;
 
-    --main-width: 40rem;
-    --header-landscape-width: 25rem;
-    --modal-width: 37.5rem;
+    --main-width: 90vw;
+    --header-landscape-width: 30vw;
+    --modal-width: 80vw;
 }
 
 /* ========================
@@ -48,7 +48,7 @@ body, footer {
 
     width: var(--main-width);
 
-    margin: 0 auto;
+    margin: 1.5em auto 0 auto;
 
     color: var(--text-light-color);
     font-size: 1.125rem; /* 18px */
@@ -101,12 +101,11 @@ footer {
 
 @media (orientation: landscape) {
     header {
-        width: 30vw;
         max-width: var(--header-landscape-width);
     }
 
     #interactive-area {
-        width: 95vw;
+        width: var(--main-width);
     }
 
     h4 {
@@ -114,23 +113,11 @@ footer {
     }
 
     section {
-        margin-left: 30vw;
-        width: 70%;
-    }
-
-    footer {
-        width: 95vw;
-        margin: 0 auto;
-    }
-
-    footer hr {
-        width: 70%; /* Temporary Fix - create a neater solution */
+        margin-left: var(--header-landscape-width);
+        width: calc(var(--main-width) - var(--header-landscape-width));
     }
 
     @media (min-width: 1921px) {
-        header {
-            width: 30vw;
-        }
 
         h2 {
             font-size: 6rem;
@@ -298,7 +285,6 @@ footer {
     }
 
     .header {
-        width: 100%; /* Delete this, then reinsert in bigger breakpoints */
         height: 100vh;
         overflow: auto;
 
@@ -433,7 +419,7 @@ footer {
 .weekly-job {
     flex: 1 1 auto;
 
-    width: var(--main-width);
+    max-width: var(--main-width);
     padding: 1.25em 0.5em;
 
     font-size: 3rem;
@@ -472,7 +458,7 @@ footer {
 }
 
 #sj-btn {
-    width: inherit;
+    width: 100%;
     margin: 0.5em 0;
     padding: 1em 0.5em;
 
@@ -482,7 +468,7 @@ footer {
 #submit-btn {
     width: var(--main-width);
     font-size: 3.5rem;
-    padding: 1.25em 0;
+    padding: 1.25em 0.25em;
 }
 
 @media (orientation: landscape) {
@@ -521,6 +507,11 @@ footer {
     justify-items: center;
     
     width: inherit;
+    gap: 0.25em;
+}
+
+#hist-area h4, #hist-area p {
+    font-size: 1.33rem;
 }
 
 #hist-area button {
@@ -544,11 +535,15 @@ footer {
 
 @media (orientation: landscape) {
     #hist-area {
-        width: 100%;
+        width: calc(var(--main-width) - var(--header-landscape-width));
+    }
+
+    #hist-area h4 {
+        font-size: 1.25rem;
     }
 
     #hist-area p {
-        font-size: 2rem;
+        font-size: 1.25rem;
     }
 
     #tab-car-stats p, #tab-about-app p {
@@ -597,14 +592,31 @@ footer {
     border: 1px solid var(--background-dark-color);
 }
 
+/* ============
+	About App
+   ============ */
+
+.about-app-body {
+    text-align: start;
+}
+
 /* ========
 	Footer
    ======== */
 
 @media (orientation: landscape) {
 
+    #footer-area {
+        margin-left: var(--header-landscape-width);
+        max-width: 100%;
+    }
+
     footer hr, #account-status-header {
-        margin-left: 30vw;
+        width: inherit;
+    }
+
+    footer h3 {
+        font-size: 2rem;
     }
 
 }
@@ -728,10 +740,6 @@ footer {
     background-color: white;
 }
 
-#modal-alert-content {
-    font-size: 2rem;
-}
-
 @media (min-width: 769px) and (max-width: 1920px) {
     .modal button {
         font-size: 2rem;
@@ -739,10 +747,6 @@ footer {
 }
 
 @media (min-width: 1921px) {
-    .modal {
-        width: 30vw;
-    }
-
     #modal-account-header {
         margin: 0.5em 0;
     }
