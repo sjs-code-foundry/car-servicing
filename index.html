@@ -1,69 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=640, user-scalable=0">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <link rel="manifest" href="/site.webmanifest">
-        <link rel="stylesheet" href="index.css">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=640, user-scalable=0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="stylesheet" href="index.css" />
     </head>
     <body>
         <div id="interactive-area">
             <header class="header">
-                <img src="/img/avatar.png">
-                <input class="menu-btn" type="checkbox" id="menu-btn">
-                <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+                <img src="/img/avatar.png" />
+                <input class="menu-btn" type="checkbox" id="menu-btn" />
+                <label class="menu-icon" for="menu-btn"
+                    ><span class="navicon"></span
+                ></label>
                 <ul id="tab-menu" class="menu">
-                    <li><button id="tab-btn-weekly-checks" class="tab" data-tab="tab-weekly-checks">Weekly Car Checks</button></li>
-                    <li><button id="tab-btn-service-jobs" class="tab" data-tab="tab-service-jobs">Servicing Jobs</button></li>
-                    <li><button id="tab-btn-weekly-history" class="tab" data-tab="tab-weekly-history">Weekly Check History</button></li>
-                    <li><button id="tab-btn-car-stats" class="tab" data-tab="tab-car-stats">Car Stats</button></li>
-                    <li><button id="tab-btn-account" class="tab" data-tab="modal-account">Sign In</button></li>
-                    <li><button id="tab-btn-logout" class="tab" data-tab="tab-blank">Sign Out</button></li>
-                    <li><button id="tab-btn-about-app" class="tab" data-tab="tab-about-app">About App</button></li>
+                    <li>
+                        <button
+                            id="tab-btn-weekly-checks"
+                            class="tab"
+                            data-tab="tab-weekly-checks"
+                        >
+                            Weekly Car Checks
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            id="tab-btn-service-jobs"
+                            class="tab"
+                            data-tab="tab-service-jobs"
+                        >
+                            Servicing Jobs
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            id="tab-btn-weekly-history"
+                            class="tab"
+                            data-tab="tab-weekly-history"
+                        >
+                            Weekly Check History
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            id="tab-btn-car-stats"
+                            class="tab"
+                            data-tab="tab-car-stats"
+                        >
+                            Car Stats
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            id="tab-btn-account"
+                            class="tab"
+                            data-tab="modal-account"
+                        >
+                            Sign In
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            id="tab-btn-logout"
+                            class="tab"
+                            data-tab="tab-blank"
+                        >
+                            Sign Out
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            id="tab-btn-about-app"
+                            class="tab"
+                            data-tab="tab-about-app"
+                        >
+                            About App
+                        </button>
+                    </li>
                 </ul>
             </header>
             <div id="modal-container">
                 <div id="modal-account" class="modal">
                     <div>
                         <h2 id="modal-account-header">Sign In.</h2>
-                        <button class="close-btn" data-target="modal-account">X</button>
+                        <button class="close-btn" data-target="modal-account">
+                            X
+                        </button>
                     </div>
                     <form id="modal-account-form">
                         <label for="email">Enter email address:</label>
-                        <input type="email" name="email" placeholder="someone@something.com" required>
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="someone@something.com"
+                            required
+                        />
                         <label for="password">Enter password:</label>
-                        <input type="password" name="password" placeholder="******" required>
-                        <button id="modal-account-form-btn">Sign In with Email</button>
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="******"
+                            required
+                        />
+                        <button id="modal-account-form-btn">
+                            Sign In with Email
+                        </button>
                     </form>
                     <button id="signin-btn-google">Sign in with Google</button>
                     <div id="modal-account-switch-line">
                         <p>No account?</p>
-                        <button id="create-account-btn">Create an account</button>
+                        <button id="create-account-btn">
+                            Create an account
+                        </button>
                         <p>.</p>
                     </div>
                 </div>
                 <div id="modal-alert" class="modal">
                     <div>
                         <h2 id="modal-alert-heading">Heading.</h2>
-                        <button class="close-btn" data-target="modal-alert">X</button>
+                        <button class="close-btn" data-target="modal-alert">
+                            X
+                        </button>
                     </div>
                     <p id="modal-alert-content">Alert Modal Body</p>
                 </div>
                 <div id="modal-confirm" class="modal">
                     <div>
                         <h2 id="modal-confirm-heading">Heading.</h2>
-                        <button class="close-btn" data-target="modal-alert">X</button>
+                        <button class="close-btn" data-target="modal-alert">
+                            X
+                        </button>
                     </div>
                     <p id="modal-confirm-content">Alert Modal Body</p>
                     <div>
-                        <button class="confirm-btn" data-verdict="no">Cancel</button>
-                        <button class="confirm-btn" data-verdict="yes">OK</button>
+                        <button class="confirm-btn" data-verdict="no">
+                            Cancel
+                        </button>
+                        <button class="confirm-btn" data-verdict="yes">
+                            OK
+                        </button>
                     </div>
                 </div>
             </div>
@@ -75,9 +174,21 @@
                 <h2>Weekly Jobs</h2>
                 <form id="weekly-check-form">
                     <label for="date-field">Date:</label>
-                    <input id="date-field" type="date" name="date" placeholder="dd/mm/yyyy" required>
+                    <input
+                        id="date-field"
+                        type="date"
+                        name="date"
+                        placeholder="dd/mm/yyyy"
+                        required
+                    />
                     <label for="odo-field">Odometer Reading:</label>
-                    <input id="odo-field" type="number" name="odometer" placeholder="00000" required>
+                    <input
+                        id="odo-field"
+                        type="number"
+                        name="odometer"
+                        placeholder="00000"
+                        required
+                    />
                     <ul id="weeklies">
                         <!-- List of Weekly Check Buttons goes here -->
                     </ul>
@@ -86,7 +197,7 @@
             </section>
             <section id="tab-service-jobs" class="tabcontent">
                 <h2>Servicing Jobs</h2>
-                <input id="sj-field" type="text">
+                <input id="sj-field" type="text" />
                 <button id="sj-btn">Submit Service Job</button>
                 <ul id="jobs-list">
                     <!-- Service Jobs go here -->
@@ -132,14 +243,14 @@
                 <p class="about-app-body">
                     This app was born out of a need to amalgamate the processes
                     involved in keeping my car maintained - which involved many
-                    different spreadsheets and procedures - and present them
-                    in a format that allowed me to view and carry them out
+                    different spreadsheets and procedures - and present them in
+                    a format that allowed me to view and carry them out
                     anywhere.
                 </p>
                 <p class="about-app-body">
                     The focus of this app is to keep the interface responsive
                     and visually appealing, so that as my devices are upgraded
-                    the interface remains useable.  This also serves as a
+                    the interface remains useable. This also serves as a
                     demonstration of my understanding of designing apps.
                 </p>
                 <h3>Created by:</h3>
@@ -154,8 +265,10 @@
     </body>
     <footer>
         <div id="footer-area">
-            <hr>
-            <h3 id="account-status-header">Not Signed In.  Sign in to view records.</h3>
+            <hr />
+            <h3 id="account-status-header">
+                Not Signed In. Sign in to view records.
+            </h3>
         </div>
     </footer>
 </html>
