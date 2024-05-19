@@ -24,7 +24,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 
 #### General Strategy
 
--   [ ] Work out what the minimum viable product will be (this will be version 1.0.0)
+-   [x] Work out what the minimum viable product will be (this will be version 1.0.0)
 
 #### Firestore
 
@@ -50,7 +50,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 
 #### Cross-Platform
 
--   [ ] Fork repo for native Android app written in Kotlin
+-   [ ] Fork repo for native Android app written in Kotlin (after refactoring JS Code!)
 
 #### JS Functions
 
@@ -58,4 +58,93 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 
 ## Minimum Viable Product
 
-This will be a checklist of things that you need to be able to do in the app for it to be considered complete.
+This will be a checklist of things that you need to be able to do in the app for it to be considered complete. This whole app was inspired by the servicing schedule recommended by the Haynes manual for my car so refer to that for further details on how to implement these.
+
+### Notifications
+
+-   [ ] Weekly Check reminder (open app)
+-   [ ] Upcoming service schedule jobs (open app)
+
+### Login
+
+-   [x] Login with email/password
+-   [x] Login with Google account
+-   [x] Create an account
+-   [ ] Cannot access app interface until signin complete
+
+### Main Menu
+
+-   [x] Links to navigate to all pages
+-   [ ] Latest weekly check record
+-   [ ] Soonest service job reminders
+
+#### Weekly Car Check Entry
+
+-   [x] Date (required)
+-   [x] Odometer Reading (required)
+-   [ ] List of Weekly Job buttons generated according to job list in settings
+-   [x] Submit button
+
+#### Servicing Jobs
+
+-   [x] Manually enter service jobs
+-   [ ] Automatic entry according to job schedule
+-   [ ] Group service jobs according to area of car
+-   [ ] Sort service jobs by A-Z, date added or category, with order reversible
+
+#### Weekly Car Check History
+
+-   [ ] Display only the 10 most recent records
+-   [ ] Add button to expand displayed records
+
+##### Records
+
+-   [x] Ordered by date
+-   [x] Odometer Readings
+-   [x] Miles travelled since last entry
+-   [ ] Drop-down menu with list of jobs and completions
+-   [ ] Delete record button
+
+#### Car Stats
+
+##### Servicing Tracking
+
+-   [ ] Display upcoming service tasks in table form
+-   [ ] Display upcoming service tasks in calendar form
+
+##### Calculated Stats
+
+-   [ ] Age of Car
+-   [ ] Time owned
+-   [ ] Duration of miles tracked (first entry to latest)
+-   [x] Total miles travelled
+-   [x] Average miles per week
+-   [x] Predicted annual mileage (for insurance)
+-   [ ] Age of tyres
+
+#### Settings
+
+##### Job Schedule
+
+-   [ ] Set day for weekly check reminder
+-   [ ] Set time period before service job reminder
+
+##### Car
+
+-   [ ] Engine parts with date of last replacement
+-   [ ] Light bulb codes
+-   [ ] Tyre codes
+-   [ ] Paint code and colour name
+-   [ ] Fluid specs and quantities
+
+##### Maintenance Schedule
+
+-   [ ] Track service tasks with both time and mileage intervals
+-   [ ] Create groups of service tasks around certain times or mileages
+
+#### About App
+
+-   [x] Brief explanation of the app's purpose
+-   [x] Credits
+-   [ ] Copyright notice
+-   [x] App version
