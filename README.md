@@ -38,6 +38,15 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 -   [ ] Refactor tabHeight const and setModalContainerHeight function (perhaps introduce delay to prevent weird behavior?)
 -   [ ] Adjust date calc in Car Stats to use date of newest record
 
+#### Settings
+
+-   [x] Implement and get data from settings form
+-   [ ] Firebase code for uploading settings to cloud
+-   [ ] Settings form defaults to settings from cloud
+-   [ ] On upload button, any different elements are updated separately
+-   [ ] Limit VIN number to a minimum of 17 characters
+-   [ ] Create an editable list of weekly checks (make sure only the list is submitted in the form)
+
 #### User Experience
 
 -   [ ] Add picture icon for users

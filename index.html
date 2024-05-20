@@ -249,128 +249,135 @@
             </section>
             <section id="tab-settings" class="tabcontent">
                 <h2>Settings</h2>
-                <h3>App</h3>
-                <div class="setting">
-                    <p>Default Tab</p>
-                    <div class="setting-radios">
-                        <input
-                            type="radio"
-                            id="default-tab-weekly-checks"
-                            name="default-tab"
-                            value="tab-weekly-checks"
-                        />
-                        <label for="default-tab-weekly-checks"
-                            >Weekly Car Checks</label
-                        >
-                        <input
-                            type="radio"
-                            id="default-tab-service-jobs"
-                            name="default-tab"
-                            value="tab-service-jobs"
-                        />
-                        <label for="default-tab-service-jobs"
-                            >Servicing Jobs</label
-                        >
-                        <input
-                            type="radio"
-                            id="default-tab-weekly-history"
-                            name="default-tab"
-                            value="tab-weekly-history"
-                        />
-                        <label for="default-tab-weekly-history"
-                            >Weekly Check History</label
-                        >
-                        <input
-                            type="radio"
-                            id="default-tab-car-stats"
-                            name="default-tab"
-                            value="tab-car-stats"
-                        />
-                        <label for="default-tab-car-stats">Car Stats</label>
+                <form id="setting-form">
+                    <h3>App</h3>
+                    <div class="setting">
+                        <p>Default Tab</p>
+                        <div class="setting-radios">
+                            <input
+                                type="radio"
+                                id="default-tab-weekly-checks"
+                                name="default-tab"
+                                value="tab-weekly-checks"
+                            />
+                            <label for="default-tab-weekly-checks"
+                                >Weekly Car Checks</label
+                            >
+                            <input
+                                type="radio"
+                                id="default-tab-service-jobs"
+                                name="default-tab"
+                                value="tab-service-jobs"
+                            />
+                            <label for="default-tab-service-jobs"
+                                >Servicing Jobs</label
+                            >
+                            <input
+                                type="radio"
+                                id="default-tab-weekly-history"
+                                name="default-tab"
+                                value="tab-weekly-history"
+                            />
+                            <label for="default-tab-weekly-history"
+                                >Weekly Check History</label
+                            >
+                            <input
+                                type="radio"
+                                id="default-tab-car-stats"
+                                name="default-tab"
+                                value="tab-car-stats"
+                            />
+                            <label for="default-tab-car-stats">Car Stats</label>
+                        </div>
                     </div>
-                </div>
-                <h4>Scheduling</h4>
-                <div class="setting">
-                    <p>Preferred Weekly Check Day & Time</p>
-                    <div>
-                        <select name="setting-wc-day">
-                            <option value="monday">Monday</option>
-                            <option value="tuesday">Tuesday</option>
-                            <option value="wednesday">Wednesday</option>
-                            <option value="thursday">Thursday</option>
-                            <option value="friday">Friday</option>
-                            <option value="saturday">Saturday</option>
-                            <option value="sunday">Sunday</option>
-                        </select>
-                        <input type="time" name="setting-wc-time" />
+                    <h4>Scheduling</h4>
+                    <div class="setting">
+                        <p>Preferred Weekly Check Day & Time</p>
+                        <div>
+                            <select name="setting-wc-day">
+                                <option value="monday">Monday</option>
+                                <option value="tuesday">Tuesday</option>
+                                <option value="wednesday">Wednesday</option>
+                                <option value="thursday">Thursday</option>
+                                <option value="friday">Friday</option>
+                                <option value="saturday">Saturday</option>
+                                <option value="sunday">Sunday</option>
+                            </select>
+                            <input type="time" name="setting-wc-time" />
+                        </div>
                     </div>
-                </div>
-                <div class="setting">
-                    <p>Default Notification Time for Service Jobs</p>
-                    <div>
-                        <input
-                            type="number"
-                            name="setting-sj-notif-time"
-                            min="1"
-                            max="31"
-                        />
-                        <select name="setting-sj-notif-period">
-                            <option value="days">Days</option>
-                            <option value="weeks">Weeks</option>
-                            <option value="months">Months</option>
-                        </select>
+                    <div class="setting">
+                        <p>Default Notification Time for Service Jobs</p>
+                        <div>
+                            <input
+                                type="number"
+                                name="setting-sj-notif-time"
+                                min="1"
+                                max="31"
+                            />
+                            <select name="setting-sj-notif-period">
+                                <option value="days">Days</option>
+                                <option value="weeks">Weeks</option>
+                                <option value="months">Months</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <h3>Car</h3>
-                <div class="setting">
-                    <p>Vehicle Licence Plate (2001 Onwards)</p>
-                    <div>
-                        <input
-                            type="text"
-                            name="setting-licence-plate"
-                            size="7"
-                            maxlength="7"
-                        />
+                    <h3>Car</h3>
+                    <div class="setting">
+                        <p>Vehicle Licence Plate (2001 Onwards)</p>
+                        <div>
+                            <input
+                                type="text"
+                                name="setting-licence-plate"
+                                size="7"
+                                maxlength="7"
+                            />
+                        </div>
                     </div>
-                </div>
-                <div class="setting">
-                    <p>VIN Number</p>
-                    <div>
-                        <input
-                            type="text"
-                            name="setting-vin"
-                            size="17"
-                            maxlength="17"
-                        />
+                    <div class="setting">
+                        <p>VIN Number</p>
+                        <div>
+                            <input
+                                type="text"
+                                name="setting-vin"
+                                size="17"
+                                maxlength="17"
+                            />
+                        </div>
                     </div>
-                </div>
-                <div class="setting">
-                    <p>Date of Vehicle Purchase</p>
-                    <div>
-                        <input
-                            type="date"
-                            name="setting-vehicle-purchase-date"
-                        />
+                    <div class="setting">
+                        <p>Date of Vehicle Purchase</p>
+                        <div>
+                            <input
+                                type="date"
+                                name="setting-vehicle-purchase-date"
+                            />
+                        </div>
                     </div>
-                </div>
-                <h4>Servicing</h4>
-                <div class="setting">
-                    <p>Weekly Checks to Complete</p>
-                    <div>
-                        <select name="setting-wc-jobs">
-                            <option value="Tyre Pressure">Tyre Pressure</option>
-                            <option value="Tyre Condition">
-                                Tyre Condition
-                            </option>
-                        </select>
-                        <input
-                            type="text"
-                            name="setting-wc-add-job"
-                            placeholder="Add a new job"
-                        />
-                        <button>Delete selected job</button>
+                    <h4>Servicing</h4>
+                    <div class="setting">
+                        <p>Weekly Checks to Complete</p>
+                        <div>
+                            <select name="setting-wc-jobs">
+                                <option value="Tyre Pressure">
+                                    Tyre Pressure
+                                </option>
+                                <option value="Tyre Condition">
+                                    Tyre Condition
+                                </option>
+                            </select>
+                            <input
+                                type="text"
+                                name="setting-wc-add-job"
+                                placeholder="Add a new job"
+                            />
+                            <button>Delete selected job</button>
+                        </div>
                     </div>
-                </div>
+                    <button type="submit" id="setting-btn">
+                        Submit Settings
+                    </button>
+                </form>
             </section>
             <section id="tab-about-app" class="tabcontent">
                 <h2>About App</h2>

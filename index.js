@@ -118,6 +118,9 @@ const serviceTasksEl = document.getElementById("jobs-list");
 
 const historyEl = document.getElementById("hist-area");
 
+const settingFormEl = document.getElementById("setting-form");
+const settingBtnEl = document.getElementById("setting-btn");
+
 const modalAlertEl = document.getElementById("modal-alert");
 
 const modalConfirmEl = document.getElementById("modal-confirm"); // Keep for future implementation
@@ -467,6 +470,18 @@ historyEl.addEventListener("click", (e) => {
     }
 });
 
+settingBtnEl.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const settingData = new FormData(settingFormEl);
+
+    console.log(settingData.get("default-tab")); // Returns default tab
+
+    const settings = new SettingsObj(settingData);
+
+    console.log(settings);
+});
+
 /* === Weekly Jobs List === */
 
 const weeklyJobs = [
@@ -551,6 +566,22 @@ function CarStatTableRow(heading, data, roundBool) {
     } else {
         this.data = data;
     }
+}
+
+function SettingsObj(settingData) {
+    this.defaultTab = settingData.get("default-tab");
+    this.wcDateTime = [
+        settingData.get("setting-wc-day"),
+        settingData.get("setting-wc-time"),
+    ];
+    this.sjNotifTime = [
+        settingData.get("setting-sj-notif-time"),
+        settingData.get("setting-sj-notif-period"),
+    ];
+    this.licencePlate = settingData.get("setting-licence-plate");
+    this.vinNumber = settingData.get("setting-vin");
+    this.vehiclePurchaseDate = settingData.get("setting-vehicle-purchase-date");
+    this.weeklyCheckArr = settingData.get("setting-wc-jobs");
 }
 
 /* ===  Function Declarations === */
