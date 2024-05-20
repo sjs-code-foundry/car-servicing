@@ -98,6 +98,7 @@ function getAppCheck() {
 
 const serviceJobsCollectionName = "serviceJobs";
 const weeklyChecksCollectionName = "weeklyChecks";
+const settingsCollectionName = "settings";
 
 /* === DOM Elements === */
 
@@ -1082,3 +1083,5 @@ function renderCarStatRowEl(type, content) {
 
     return newEl;
 }
+
+/* ==  Settings Functions == */

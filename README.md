@@ -62,8 +62,8 @@ This will be a checklist of things that you need to be able to do in the app for
 
 ### Notifications
 
--   [ ] Weekly Check reminder (open app)
--   [ ] Upcoming service schedule jobs (open app)
+-   [ ] Weekly Check reminder (open app on tap)
+-   [ ] Upcoming service schedule jobs (open app on tap)
 
 ### Login
 

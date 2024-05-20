@@ -599,6 +599,25 @@ footer {
 }
 
 /* ============
+	Settings
+   ============ */
+
+.setting {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.setting-radios {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+.setting-radios label {
+    text-align: start;
+}
+
+/* ============
 	About App
    ============ */
 
