@@ -34,7 +34,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 
 -   [ ] Implement Age of Vehicle in Car Stats (new collection in Firestore)
 -   [ ] Use Data Attributes on Weekly Checks (deleting checks, opening table of weekly checks, etc.)
--   [ ] Try to catch errors with AppCheck on desktop (open app early on Sunday morning, when you usually need it)
+-   [x] Try to catch errors with AppCheck on desktop (open app early on Sunday morning, when you usually need it)
 -   [ ] Refactor tabHeight const and setModalContainerHeight function (perhaps introduce delay to prevent weird behavior?)
 -   [ ] Adjust date calc in Car Stats to use date of newest record
 
