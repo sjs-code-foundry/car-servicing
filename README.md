@@ -22,6 +22,9 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 
 ### v0.4.4-alpha
 
+#### Aesthetics
+-   [ ] Change styling of modals for neater appearance and better readability
+
 #### General Strategy
 
 -   [x] Work out what the minimum viable product will be (this will be version 1.0.0)
@@ -40,7 +43,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 
 #### Security
 
--   [ ] Implement Firestore security rules from Shopping List app to prevent frivolous entries from strangers
+-   [x] Implement Firestore security rules from Shopping List app to prevent frivolous entries from strangers
 
 #### Settings
 
