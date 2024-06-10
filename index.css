@@ -151,7 +151,7 @@ footer {
 @media (orientation: portrait) {
     /* ========================
         Top Navigation Bar
-    ======================== */
+       ======================== */
 
     .header {
         width: inherit;
@@ -168,7 +168,7 @@ footer {
 
     /* ========================================
         Hamburger Menu - Static Properties
-    ======================================== */
+       ======================================== */
 
     .header ul {
         margin: 0;
@@ -206,7 +206,7 @@ footer {
 
     /* ================================================
         Hamburger Menu - Hamburger Icon Properties
-    ================================================ */
+       ================================================ */
 
     .header .menu-icon {
         cursor: pointer;
@@ -246,7 +246,7 @@ footer {
 
     /* ====================================================
         Hamburger Menu - Icon & Menu Animation Properties
-    ==================================================== */
+       ==================================================== */
 
     .header .menu-btn {
         display: none;
@@ -618,6 +618,33 @@ footer {
 
 .setting-radios label {
     text-align: start;
+}
+
+/* ==== Weekly Checks List ==== */
+
+.setting-wc-job-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#setting-wc-job-list-add {
+    width: 100%;
+}
+
+.drag-handle {
+    width: 0;
+    height: 0;
+    border-right: 1em solid transparent;
+    border-top: 1em solid var(--background-dark-color);
+    cursor: move;
+}
+
+.setting-wc-job-list-delete {
+    background-color: var(--accent-light-color);
+    font-weight: bold;
+    border: none;
+    margin: 0.2em 0;
 }
 
 /* ============

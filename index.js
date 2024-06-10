@@ -300,6 +300,8 @@ function fetchServiceJobsInRealTimeFromDBs(query, user) {
     });
 }
 
+// function fetchWeeklyCheckJobListInRealTimeFromDBs(query, user)
+
 function fetchWeeklyChecksInRealTimeFromDBs(query, user) {
     onSnapshot(query, (querySnapshot) => {
         clearListEl(historyEl);
@@ -321,6 +323,8 @@ function fetchWeeklyChecksInRealTimeFromDBs(query, user) {
         }
 
         carStatsCalcs(recordList);
+
+        renderWeeklyCheckJobListInSettings(weeklyJobs);
     });
 }
 
@@ -475,8 +479,6 @@ settingBtnEl.addEventListener("click", (e) => {
 
     const settingData = new FormData(settingFormEl);
 
-    console.log(settingData.get("default-tab")); // Returns default tab
-
     const settings = new SettingsObj(settingData);
 
     console.log(settings);
@@ -581,7 +583,7 @@ function SettingsObj(settingData) {
     this.licencePlate = settingData.get("setting-licence-plate");
     this.vinNumber = settingData.get("setting-vin");
     this.vehiclePurchaseDate = settingData.get("setting-vehicle-purchase-date");
-    this.weeklyCheckArr = settingData.get("setting-wc-jobs");
+    this.weeklyCheckArr = weeklyJobs;
 }
 
 /* ===  Function Declarations === */
@@ -1116,3 +1118,51 @@ function renderCarStatRowEl(type, content) {
 }
 
 /* ==  Settings Functions == */
+
+function renderWeeklyCheckJobListInSettings(weeklyJobs) {
+    /*
+    For each list item in weeklyJobs:
+        Containing Div
+            Drag & Drop Handle
+
+            List Item Name
+
+            Delete Button
+    
+    Add Addition button which opens the following:
+        Text Input for new job
+
+        Add Button
+
+        Cancel Button
+    */
+
+    const settingWcJobList = document.getElementById("setting-wc-job-list");
+
+    settingWcJobList.innerHTML = "";
+
+    for (let job in weeklyJobs) {
+        let newEl = document.createElement("div");
+        newEl.setAttribute("class", "setting-wc-job-item");
+
+        let dragHandleEl = document.createElement("div");
+        dragHandleEl.setAttribute("class", "drag-handle");
+        newEl.append(dragHandleEl);
+
+        let weeklyJobNameEl = document.createElement("p");
+        weeklyJobNameEl.textContent = weeklyJobs[job];
+        newEl.append(weeklyJobNameEl);
+
+        let deleteButtonEl = document.createElement("button");
+        deleteButtonEl.textContent = "X";
+        deleteButtonEl.setAttribute("class", "setting-wc-job-list-delete");
+        deleteButtonEl.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            console.log(`Weekly Job #${job} Deleted.`);
+        });
+        newEl.append(deleteButtonEl);
+
+        settingWcJobList.append(newEl);
+    }
+}
