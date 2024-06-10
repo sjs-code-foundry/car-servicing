@@ -23,6 +23,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 ### v0.4.4-alpha
 
 #### Aesthetics
+
 -   [ ] Change styling of modals for neater appearance and better readability
 
 #### General Strategy
@@ -39,7 +40,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 -   [ ] Use Data Attributes on Weekly Checks (deleting checks, opening table of weekly checks, etc.)
 -   [x] Try to catch errors with AppCheck on desktop (open app early on Sunday morning, when you usually need it)
 -   [ ] Refactor tabHeight const and setModalContainerHeight function (perhaps introduce delay to prevent weird behavior?)
--   [ ] Adjust date calc in Car Stats to use date of newest record
+-   [x] Adjust date calc in Car Stats to use date of newest record
 
 #### Security
 
