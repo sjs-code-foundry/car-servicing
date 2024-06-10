@@ -580,8 +580,16 @@ function SettingsObj(settingData) {
         settingData.get("setting-sj-notif-time"),
         settingData.get("setting-sj-notif-period"),
     ];
-    this.licencePlate = settingData.get("setting-licence-plate");
-    this.vinNumber = settingData.get("setting-vin");
+    this.licencePlate = settingsMinLengthCheck(
+        "Licence Plate",
+        settingData.get("setting-licence-plate"),
+        7
+    );
+    this.vinNumber = settingsMinLengthCheck(
+        "VIN Number",
+        settingData.get("setting-vin"),
+        17
+    );
     this.vehiclePurchaseDate = settingData.get("setting-vehicle-purchase-date");
     this.weeklyCheckArr = weeklyJobs;
 }
@@ -1164,5 +1172,19 @@ function renderWeeklyCheckJobListInSettings(weeklyJobs) {
         newEl.append(deleteButtonEl);
 
         settingWcJobList.append(newEl);
+    }
+}
+
+function settingsMinLengthCheck(inputName, input, min) {
+    if (input.length && input.length < min) {
+        modalAlert(
+            modalAlertEl,
+            "Setting input too short!",
+            `The minimum characters for ${inputName} is ${min}, try again.`
+        );
+
+        return "";
+    } else {
+        return input;
     }
 }

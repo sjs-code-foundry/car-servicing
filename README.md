@@ -52,16 +52,12 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 -   [ ] Firebase code for uploading settings to cloud
 -   [x] Settings form defaults
 -   [ ] On upload button, any different elements are updated separately
--   [ ] Limit VIN number to a minimum of 17 characters
+-   [x] Limit VIN number to a minimum of 17 characters
 -   [ ] Create an editable list of weekly checks (make sure only the list is submitted in the form)
 
 #### User Experience
 
 -   [ ] Add picture icon for users
--   [ ] History records display as drop-downs ordered by date (Title is date and miles, then drop-down reveals things like miles travelled and jobs done)
--   [ ] Double click copies values from Weekly Check record table
--   [ ] Implement sorting functions for service jobs and weekly checks
--   [ ] Implement decision modal for deleting weekly checks
 
 ### v0.5.0-alpha
 
@@ -72,6 +68,15 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 #### JS Functions
 
 -   [ ] Separate js code into various files pertaining to certain function groups
+
+### v0.5.1-alpha
+
+#### User Experience
+
+-   [ ] History records display as drop-downs ordered by date (Title is date and miles, then drop-down reveals things like miles travelled and jobs done)
+-   [ ] Double click copies values from Weekly Check record table
+-   [ ] Implement sorting functions for service jobs and weekly checks
+-   [ ] Implement decision modal for deleting weekly checks
 
 ## Minimum Viable Product
 
