@@ -237,11 +237,11 @@ footer {
     }
 
     .header .menu-icon .navicon:before {
-        top: 2em;
+        top: 1.5em;
     }
 
     .header .menu-icon .navicon:after {
-        top: -2em;
+        top: -1.5em;
     }
 
     /* ====================================================
