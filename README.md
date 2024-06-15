@@ -49,7 +49,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 #### Settings
 
 -   [x] Implement and get data from settings form
--   [ ] Firebase code for uploading settings to cloud
+-   [x] Firebase code for uploading settings to cloud
 -   [x] Settings form defaults
 -   [ ] On upload button, any different elements are updated separately
 -   [x] Limit VIN number to a minimum of 17 characters

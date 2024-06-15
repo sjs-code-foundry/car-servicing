@@ -25,6 +25,7 @@ import {
     getFirestore,
     collection,
     addDoc,
+    getDocs,
     serverTimestamp,
     onSnapshot,
     query,
@@ -481,7 +482,7 @@ settingBtnEl.addEventListener("click", (e) => {
 
     const settings = new SettingsObj(settingData);
 
-    console.log(settings);
+    checkUpdateSettings(settings, auth.currentUser);
 });
 
 /* === Weekly Jobs List === */
@@ -1186,5 +1187,57 @@ function settingsMinLengthCheck(inputName, input, min) {
         return "";
     } else {
         return input;
+    }
+}
+
+async function checkUpdateSettings(settingsObj, user) {
+    const settingsRef = collection(database, settingsCollectionName);
+
+    const q = query(settingsRef, where("uid", "==", user.uid));
+
+    const settingSnapshot = await getDocs(q);
+
+    console.log(settingSnapshot);
+
+    if (!settingSnapshot.empty) {
+        // Find the appropriate settings file and update
+        settingSnapshot.forEach((doc) => {
+            console.log(doc.id, " => ", doc.data());
+
+            // Code to scan data fields and update if necessary
+        });
+    } else {
+        // Create new settings file if one does not exist
+        addSettingsToDB(settingsObj, user);
+    }
+}
+
+async function deleteRedundantSettingsDoc(db, collection, id) {
+    await deleteDoc(doc(db, collection, id));
+}
+
+async function addSettingsToDB(settingsObj, user) {
+    try {
+        const docRef = await addDoc(
+            collection(database, settingsCollectionName),
+            {
+                defaultTab: settingsObj.defaultTab,
+                wcDateTime: settingsObj.wcDateTime,
+                sjNotifTime: settingsObj.sjNotifTime,
+                licencePlate: settingsObj.licencePlate,
+                vinNumber: settingsObj.vinNumber,
+                vehiclePurchaseDate: settingsObj.vehiclePurchaseDate,
+                weeklyCheckArr: settingsObj.weeklyCheckArr,
+                uid: user.uid,
+                createdAt: serverTimestamp(),
+                lastUpdated: serverTimestamp(),
+            }
+        );
+    } catch (error) {
+        modalAlert(
+            modalAlertEl,
+            "Initializing Settings in DB Failed!",
+            `${error.message}`
+        );
     }
 }
