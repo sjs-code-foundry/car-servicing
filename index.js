@@ -1190,6 +1190,23 @@ function settingsMinLengthCheck(inputName, input, min) {
     }
 }
 
+async function fetchSettingsFromDB(user) {
+    const settingsRef = collection(database, settingsCollectionName);
+
+    const q = query(settingsRef, where("uid", "==", user.uid));
+
+    const settingSnapshot = await getDocs(q);
+
+    if (!settingSnapshot.empty) {
+        // Fetch settings and set settings fields to the contained data
+        settingSnapshot.forEach((doc) => {
+            // Run through the doc fields and update settings fields
+        });
+    } else {
+        // Run checkUpdateSettings to create a blank settings file
+    }
+}
+
 async function checkUpdateSettings(settingsObj, user) {
     const settingsRef = collection(database, settingsCollectionName);
 
@@ -1197,14 +1214,10 @@ async function checkUpdateSettings(settingsObj, user) {
 
     const settingSnapshot = await getDocs(q);
 
-    console.log(settingSnapshot);
-
     if (!settingSnapshot.empty) {
         // Find the appropriate settings file and update
         settingSnapshot.forEach((doc) => {
-            console.log(doc.id, " => ", doc.data());
-
-            // Code to scan data fields and update if necessary
+            updateSettingsInDB(doc, settingsObj);
         });
     } else {
         // Create new settings file if one does not exist
@@ -1212,8 +1225,19 @@ async function checkUpdateSettings(settingsObj, user) {
     }
 }
 
-async function deleteRedundantSettingsDoc(db, collection, id) {
-    await deleteDoc(doc(db, collection, id));
+async function updateSettingsInDB(wholeDoc, settingsObj) {
+    const docRef = doc(database, settingsCollectionName, wholeDoc.id);
+
+    await updateDoc(docRef, {
+        defaultTab: settingsObj.defaultTab,
+        wcDateTime: settingsObj.wcDateTime,
+        sjNotifTime: settingsObj.sjNotifTime,
+        licencePlate: settingsObj.licencePlate,
+        vinNumber: settingsObj.vinNumber,
+        vehiclePurchaseDate: settingsObj.vehiclePurchaseDate,
+        weeklyCheckArr: settingsObj.weeklyCheckArr,
+        lastUpdated: serverTimestamp(),
+    });
 }
 
 async function addSettingsToDB(settingsObj, user) {
