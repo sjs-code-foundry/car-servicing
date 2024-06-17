@@ -373,10 +373,6 @@ function clearWeeklyChecksOnLogout() {
     renderWeeklyCheckHeaders();
 }
 
-/* === Set Default Tab === */
-
-tabSwitch("tab-weekly-checks");
-
 /* === Event Listeners === */
 
 document.addEventListener("click", function (e) {
@@ -1207,6 +1203,7 @@ async function fetchSettingsFromDB(user) {
         settingSnapshot.forEach((doc) => {
             // Default Tab
             setRadioOption("default-tab-radio-button", doc.data().defaultTab);
+            tabSwitch(doc.data().defaultTab);
 
             // Weekly Check Date/Time
             setSelectOption("setting-wc-day", doc.data().wcDateTime[0]);
