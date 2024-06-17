@@ -53,7 +53,9 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 -   [x] Settings form defaults
 -   [x] On upload button, any different elements are updated separately
 -   [x] Limit VIN number to a minimum of 17 characters
+-   [ ] Add temporary error halo to settings incorrectly entered (licence plate and VIN)
 -   [ ] Create an editable list of weekly checks (make sure only the list is submitted in the form)
+-   [ ] Ensure weekly check list downloaded from settings updates list in Weekly Car Checks page
 
 #### User Experience
 

@@ -253,10 +253,14 @@
                     <h3>App</h3>
                     <div class="setting">
                         <p>Default Tab</p>
-                        <div class="setting-radios">
+                        <div
+                            id="setting-form-default-tab"
+                            class="setting-radios"
+                        >
                             <input
                                 type="radio"
                                 id="default-tab-weekly-checks"
+                                class="default-tab-radio-button"
                                 name="default-tab"
                                 value="tab-weekly-checks"
                                 checked="checked"
@@ -267,6 +271,7 @@
                             <input
                                 type="radio"
                                 id="default-tab-service-jobs"
+                                class="default-tab-radio-button"
                                 name="default-tab"
                                 value="tab-service-jobs"
                             />
@@ -276,6 +281,7 @@
                             <input
                                 type="radio"
                                 id="default-tab-weekly-history"
+                                class="default-tab-radio-button"
                                 name="default-tab"
                                 value="tab-weekly-history"
                             />
@@ -285,6 +291,7 @@
                             <input
                                 type="radio"
                                 id="default-tab-car-stats"
+                                class="default-tab-radio-button"
                                 name="default-tab"
                                 value="tab-car-stats"
                             />
@@ -295,7 +302,7 @@
                     <div class="setting">
                         <p>Preferred Weekly Check Day & Time</p>
                         <div>
-                            <select name="setting-wc-day">
+                            <select id="setting-wc-day" name="setting-wc-day">
                                 <option value="monday">Monday</option>
                                 <option value="tuesday">Tuesday</option>
                                 <option value="wednesday">Wednesday</option>
@@ -308,6 +315,7 @@
                             </select>
                             <input
                                 type="time"
+                                id="setting-wc-time"
                                 name="setting-wc-time"
                                 value="06:00:00"
                             />
@@ -318,12 +326,16 @@
                         <div>
                             <input
                                 type="number"
+                                id="setting-sj-notif-time"
                                 name="setting-sj-notif-time"
                                 min="1"
                                 max="31"
                                 value="7"
                             />
-                            <select name="setting-sj-notif-period">
+                            <select
+                                id="setting-sj-notif-period"
+                                name="setting-sj-notif-period"
+                            >
                                 <option value="days" selected="selected">
                                     Days
                                 </option>
@@ -338,6 +350,7 @@
                         <div>
                             <input
                                 type="text"
+                                id="setting-licence-plate"
                                 name="setting-licence-plate"
                                 size="7"
                                 maxlength="7"
@@ -350,6 +363,7 @@
                         <div>
                             <input
                                 type="text"
+                                id="setting-vin"
                                 name="setting-vin"
                                 size="17"
                                 maxlength="17"
@@ -363,6 +377,7 @@
                         <div>
                             <input
                                 type="date"
+                                id="setting-vehicle-purchase-date"
                                 name="setting-vehicle-purchase-date"
                             />
                         </div>

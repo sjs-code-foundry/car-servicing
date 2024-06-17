@@ -268,6 +268,8 @@ onAuthStateChanged(auth, (user) => {
         tabBtnAccount.style.display = "none";
         tabBtnLogout.style.display = "block";
 
+        fetchSettingsFromDB(user);
+
         fetchServiceJobs(user);
         fetchWeeklyChecks(user);
     } else {
@@ -1200,10 +1202,81 @@ async function fetchSettingsFromDB(user) {
     if (!settingSnapshot.empty) {
         // Fetch settings and set settings fields to the contained data
         settingSnapshot.forEach((doc) => {
-            // Run through the doc fields and update settings fields
+            // Default Tab
+            setRadioOption("default-tab-radio-button", doc.data().defaultTab);
+
+            // Weekly Check Date/Time
+            setSelectOption("setting-wc-day", doc.data().wcDateTime[0]);
+            setTextFieldOption("setting-wc-time", doc.data().wcDateTime[1]);
+
+            // Service Job Notification Warning Time
+            setTextFieldOption(
+                "setting-sj-notif-time",
+                doc.data().sjNotifTime[0]
+            );
+            setSelectOption(
+                "setting-sj-notif-period",
+                doc.data().sjNotifTime[1]
+            );
+
+            // Vehicle Licence Plate
+            setTextFieldOption(
+                "setting-licence-plate",
+                doc.data().licencePlate
+            );
+
+            // VIN Number
+            setTextFieldOption("setting-vin", doc.data().vinNumber);
+
+            // Date of Vehicle Purchase
+            setTextFieldOption(
+                "setting-vehicle-purchase-date",
+                doc.data().vehiclePurchaseDate
+            );
+            // Weekly Check Array of Jobs
+            //      Code Here
         });
     } else {
         // Run checkUpdateSettings to create a blank settings file
+        const settingData = new FormData(settingFormEl);
+
+        const settings = new SettingsObj(settingData);
+
+        checkUpdateSettings(settings, user);
+    }
+}
+
+function setRadioOption(radioBtnListId, docData) {
+    const radioTabEls = document.getElementsByClassName(radioBtnListId);
+
+    Array.from(radioTabEls).forEach(function (radio) {
+        radio.checked = false;
+
+        if (radio.value === docData) {
+            radio.checked = true;
+        }
+    });
+}
+
+function setSelectOption(selectId, docData) {
+    const selectEl = document.getElementById(selectId);
+
+    for (let opt of selectEl) {
+        opt.selected = false;
+
+        if (opt.value === docData) {
+            opt.selected = true;
+        }
+    }
+}
+
+function setTextFieldOption(fieldOptionId, docData) {
+    // Also works for number & date fields
+
+    const fieldEl = document.getElementById(fieldOptionId);
+
+    if (fieldEl.value != docData) {
+        fieldEl.value = docData;
     }
 }
 
