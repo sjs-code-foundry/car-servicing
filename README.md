@@ -56,6 +56,8 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 -   [ ] Add temporary error halo to settings incorrectly entered (licence plate and VIN)
 -   [ ] Create an editable list of weekly checks (make sure only the list is submitted in the form)
 -   [ ] Ensure weekly check list downloaded from settings updates list in Weekly Car Checks page
+-   [ ] Implement default tab option in actual app
+-   [ ] Display licence plate number under car logo
 
 #### User Experience
 
@@ -63,9 +65,13 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 
 ### v0.5.0-alpha
 
+#### CSS
+
+-   [ ] Introduce CSS utility classes to standardize formatting
+
 #### Cross-Platform
 
--   [ ] Fork repo for native Android app written in Kotlin (after refactoring JS Code!)
+-   [ ] Fork repo for native Android app written in Kotlin (after refactoring CSS & JS Code!)
 
 #### JS Functions
 

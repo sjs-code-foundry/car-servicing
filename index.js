@@ -1158,6 +1158,7 @@ function renderWeeklyCheckJobListInSettings(weeklyJobs) {
 
         let dragHandleEl = document.createElement("div");
         dragHandleEl.setAttribute("class", "drag-handle");
+        // Implement drag handle from this:  https://jsfiddle.net/a6tgy9so/1/
         newEl.append(dragHandleEl);
 
         let weeklyJobNameEl = document.createElement("p");
@@ -1170,7 +1171,9 @@ function renderWeeklyCheckJobListInSettings(weeklyJobs) {
         deleteButtonEl.addEventListener("click", function (e) {
             e.preventDefault();
 
-            console.log(`Weekly Job #${job} Deleted.`);
+            weeklyJobs.splice(job, 1);
+
+            renderWeeklyCheckJobListInSettings(weeklyJobs);
         });
         newEl.append(deleteButtonEl);
 

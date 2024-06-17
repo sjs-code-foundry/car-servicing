@@ -628,6 +628,10 @@ footer {
     justify-content: space-between;
 }
 
+.setting-wc-job-item:hover {
+    border: 0.1em solid var(--text-light-color);
+}
+
 #setting-wc-job-list-add {
     width: 100%;
 }
