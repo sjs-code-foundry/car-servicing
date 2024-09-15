@@ -706,8 +706,12 @@ function modalAlert(targetModal, modalHeading, modalBody) {
 function setModalContainerHeight(tabHeight) {
     const modalContainer = document.getElementById("modal-container");
 
-    modalContainer.setAttribute("style", `height:${tabHeight}`);
-    modalContainer.style.height = `${tabHeight}px`;
+    setTimeout(setHeight, 200);
+
+    function setHeight() {
+        modalContainer.setAttribute("style", `height:${tabHeight}`);
+        modalContainer.style.height = `${tabHeight}px`;
+    }
 }
 
 /* ==  Job/Check List Functions == */
