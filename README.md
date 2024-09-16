@@ -36,7 +36,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 
 #### JS Functions
 
--   [ ] Implement Age of Vehicle in Car Stats (new collection in Firestore)
+-   [x] Implement Age of Vehicle in Car Stats (new collection in Firestore)
 -   [ ] Use Data Attributes on Weekly Checks (deleting checks, opening table of weekly checks, etc.)
 -   [x] Try to catch errors with AppCheck on desktop (open app early on Sunday morning, when you usually need it)
 -   [x] Refactor tabHeight const and setModalContainerHeight function (introduce delay to set to height of page after it has loaded)

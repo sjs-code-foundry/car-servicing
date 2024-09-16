@@ -503,6 +503,7 @@ weeklyJobList();
 /* === Initial Variables === */
 
 let recordList = [];
+let localSettingsObj;
 // let deleteVerdict = false // Deletion of Weekly Checks does not go ahead by default
 lockServiceJobButton(true);
 
@@ -569,6 +570,7 @@ function CarStatTableRow(heading, data, roundBool) {
     }
 }
 
+// Get settings from settings form:
 function SettingsObj(settingData) {
     this.defaultTab = settingData.get("default-tab");
     this.wcDateTime = [
@@ -591,6 +593,19 @@ function SettingsObj(settingData) {
     );
     this.vehiclePurchaseDate = settingData.get("setting-vehicle-purchase-date");
     this.weeklyCheckArr = weeklyJobs;
+}
+
+// Locally-stored settings object for calculations:
+function LocalSettingsObj(wholeDoc) {
+    const docData = wholeDoc.data();
+
+    this.defaultTab = docData.defaultTab;
+    this.wcDateTime = [docData.wcDateTime[0], docData.wcDateTime[1]];
+    this.sjNotifTime = [docData.sjNotifTime[0], docData.sjNotifTime[1]];
+    this.licencePlate = docData.licencePlate;
+    this.vinNumber = docData.vinNumber;
+    this.vehiclePurchaseDate = docData.vehiclePurchaseDate;
+    this.weeklyCheckArr = docData.weeklyCheckArr;
 }
 
 /* ===  Function Declarations === */
@@ -1054,16 +1069,15 @@ function recordListClear(recordList) {
 
 function carStatsCalcs(recordList) {
     const timeElapsed = getTotalTimeElapsed(recordList);
-    // console.log(timeElapsed)
-
     const milesTravelled = getTotalMilesTravelled(recordList);
-    // console.log(milesTravelled)
-
     const milesPerWeek = getAverageMilesPerWeek(
         milesTravelled,
         timeElapsed.durWeeks
     );
-    // console.log(milesPerWeek)
+    const ageOfVehicle = getAgeOfVehicle(
+        localSettingsObj.vehiclePurchaseDate,
+        recordList
+    );
 
     const table = [
         new CarStatTableRow(
@@ -1074,6 +1088,11 @@ function carStatsCalcs(recordList) {
         new CarStatTableRow("Total miles travelled", milesTravelled, true),
         new CarStatTableRow("Average miles per week", milesPerWeek, true),
         new CarStatTableRow("Expected Yearly Miles", milesPerWeek * 52, true),
+        new CarStatTableRow(
+            "Age of Vehicle",
+            ageOfVehicle.durHumanTerms.report,
+            false
+        ),
     ];
 
     renderCarStatTableContents(table);
@@ -1105,6 +1124,14 @@ function getTotalMilesTravelled(recordList) {
 
 function getAverageMilesPerWeek(miles, weeks) {
     return miles / weeks;
+}
+
+function getAgeOfVehicle(purchaseDate, recordList) {
+    const dateToday = recordList[0].date;
+
+    const time = new TimeElapsed(purchaseDate, dateToday);
+
+    return time;
 }
 
 function renderCarStatTableContents(tableArr) {
@@ -1205,6 +1232,9 @@ async function fetchSettingsFromDB(user) {
     if (!settingSnapshot.empty) {
         // Fetch settings and set settings fields to the contained data
         settingSnapshot.forEach((doc) => {
+            // Create local settings object
+            localSettingsObj = new LocalSettingsObj(doc);
+
             // Default Tab
             setRadioOption("default-tab-radio-button", doc.data().defaultTab);
             tabSwitch(doc.data().defaultTab);
