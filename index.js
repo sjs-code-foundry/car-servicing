@@ -1074,7 +1074,7 @@ function carStatsCalcs(recordList) {
         milesTravelled,
         timeElapsed.durWeeks
     );
-    const ageOfVehicle = getAgeOfVehicle(
+    const timeOfOwnership = getAgeOfVehicle(
         localSettingsObj.vehiclePurchaseDate,
         recordList
     );
@@ -1089,8 +1089,8 @@ function carStatsCalcs(recordList) {
         new CarStatTableRow("Average miles per week", milesPerWeek, true),
         new CarStatTableRow("Expected Yearly Miles", milesPerWeek * 52, true),
         new CarStatTableRow(
-            "Age of Vehicle",
-            ageOfVehicle.durHumanTerms.report,
+            "Duration of Vehicle Ownership",
+            timeOfOwnership.durHumanTerms.report,
             false
         ),
     ];
