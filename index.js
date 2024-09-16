@@ -40,6 +40,8 @@ import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/10.3
 import { connectAuthEmulator } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js";
 import { connectFirestoreEmulator } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js";
 
+import { vinDecode } from "/js/vinDecode.js";
+
 /* === Firebase - Initialize Firebase === */
 
 const isOffline = false;
@@ -119,6 +121,7 @@ const serviceTasksEl = document.getElementById("jobs-list");
 
 const historyEl = document.getElementById("hist-area");
 
+const vinDecodeTestBtnEl = document.getElementById("vin-decode-test");
 const settingFormEl = document.getElementById("setting-form");
 const settingBtnEl = document.getElementById("setting-btn");
 
@@ -471,6 +474,12 @@ historyEl.addEventListener("click", (e) => {
     } else {
         return;
     }
+});
+
+vinDecodeTestBtnEl.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    vinDecode(localSettingsObj.vinNumber);
 });
 
 settingBtnEl.addEventListener("click", (e) => {
@@ -1074,7 +1083,7 @@ function carStatsCalcs(recordList) {
         milesTravelled,
         timeElapsed.durWeeks
     );
-    const timeOfOwnership = getAgeOfVehicle(
+    const timeOfOwnership = getTimeOfOwnership(
         localSettingsObj.vehiclePurchaseDate,
         recordList
     );
@@ -1126,7 +1135,7 @@ function getAverageMilesPerWeek(miles, weeks) {
     return miles / weeks;
 }
 
-function getAgeOfVehicle(purchaseDate, recordList) {
+function getTimeOfOwnership(purchaseDate, recordList) {
     const dateToday = recordList[0].date;
 
     const time = new TimeElapsed(purchaseDate, dateToday);
