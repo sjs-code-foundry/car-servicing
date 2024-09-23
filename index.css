@@ -348,6 +348,15 @@ footer {
     display: none;
 }
 
+/* ========
+	Header
+   ======== */
+
+.user-avatar {
+    border: 0.33em solid var(--text-light-color);
+    border-radius: 50%;
+}
+
 /* ========================
     General Tab Formatting
    ========================*/

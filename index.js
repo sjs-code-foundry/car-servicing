@@ -105,6 +105,8 @@ const settingsCollectionName = "settings";
 
 /* === DOM Elements === */
 
+const userAvatarEl = document.getElementById("user-avatar");
+
 const tabMenuEl = document.getElementById("tab-menu");
 const tabBtnServiceJobs = document.getElementById("tab-btn-service-jobs");
 const tabBtnAccount = document.getElementById("tab-btn-account");
@@ -265,6 +267,8 @@ onAuthStateChanged(auth, (user) => {
     const accountStatusHeader = document.getElementById(
         "account-status-header"
     );
+
+    userAvatarSwitch(user);
 
     if (user) {
         accountStatusHeader.textContent = `Signed in as: ${user.email}.`;
@@ -618,6 +622,18 @@ function LocalSettingsObj(wholeDoc) {
 }
 
 /* ===  Function Declarations === */
+
+/* ==  Header Functions == */
+
+function userAvatarSwitch(user) {
+    if (user) {
+        userAvatarEl.src = user.photoURL;
+        userAvatarEl.classList.add("user-avatar");
+    } else {
+        userAvatarEl.src = "/img/avatar.png";
+        userAvatarEl.classList.remove("user-avatar");
+    }
+}
 
 /* ==  Tab Functions == */
 
