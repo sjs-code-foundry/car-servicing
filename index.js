@@ -106,6 +106,7 @@ const settingsCollectionName = "settings";
 /* === DOM Elements === */
 
 const userAvatarEl = document.getElementById("user-avatar");
+const userAvatarPlateEl = document.getElementById("user-avatar-plate");
 
 const tabMenuEl = document.getElementById("tab-menu");
 const tabBtnServiceJobs = document.getElementById("tab-btn-service-jobs");
@@ -629,9 +630,13 @@ function userAvatarSwitch(user) {
     if (user) {
         userAvatarEl.src = user.photoURL;
         userAvatarEl.classList.add("user-avatar");
+
+        userAvatarPlateEl.style.display = "block";
     } else {
         userAvatarEl.src = "/img/avatar.png";
         userAvatarEl.classList.remove("user-avatar");
+
+        userAvatarPlateEl.style.display = "none";
     }
 }
 
@@ -1283,6 +1288,7 @@ async function fetchSettingsFromDB(user) {
                 "setting-licence-plate",
                 doc.data().licencePlate
             );
+            userAvatarPlateEl.textContent = doc.data().licencePlate;
 
             // VIN Number
             setTextFieldOption("setting-vin", doc.data().vinNumber);

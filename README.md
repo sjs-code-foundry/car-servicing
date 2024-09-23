@@ -56,7 +56,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 -   [ ] Create an editable list of weekly checks (make sure only the list is submitted in the form)
 -   [ ] Ensure weekly check list downloaded from settings updates list in Weekly Car Checks page
 -   [x] Implement default tab option in actual app
--   [ ] Display licence plate number under car logo
+-   [x] Display licence plate number under car logo
 
 #### User Experience
 
