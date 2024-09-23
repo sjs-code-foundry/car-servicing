@@ -640,6 +640,10 @@ function userAvatarSwitch(user) {
     }
 }
 
+function userLicencePlateFormat(plate) {
+    return plate.slice(0, 4) + " " + plate.slice(4);
+}
+
 /* ==  Tab Functions == */
 
 function tabSwitch(tab) {
@@ -1288,7 +1292,9 @@ async function fetchSettingsFromDB(user) {
                 "setting-licence-plate",
                 doc.data().licencePlate
             );
-            userAvatarPlateEl.textContent = doc.data().licencePlate;
+            userAvatarPlateEl.textContent = userLicencePlateFormat(
+                doc.data().licencePlate
+            );
 
             // VIN Number
             setTextFieldOption("setting-vin", doc.data().vinNumber);

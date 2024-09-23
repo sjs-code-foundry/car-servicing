@@ -68,6 +68,8 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 #### CSS
 
 -   [ ] Introduce CSS utility classes to standardize formatting
+-   [ ] Refactor Header Avatar Code for simplicity
+-   [ ] Introduce automatic capitalization for relevant entries (Licence Plate for example)
 
 #### Cross-Platform
 
