@@ -388,6 +388,11 @@ footer {
     text-align: center;
 }
 
+#tab-weekly-checks form input:focus {
+    outline: 0.05em solid var(--accent-light-color);
+    box-shadow: 0 0 1em var(--accent-light-color);
+}
+
 #sj-field {
     display: block;
 
