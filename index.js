@@ -126,6 +126,7 @@ const historyEl = document.getElementById("hist-area");
 
 const vinDecodeTestBtnEl = document.getElementById("vin-decode-test");
 const settingFormEl = document.getElementById("setting-form");
+const settingWcJobList = document.getElementById("setting-wc-job-list");
 const settingWcJobListAddBtnEl = document.getElementById(
     "setting-wc-job-list-add"
 );
@@ -490,6 +491,26 @@ vinDecodeTestBtnEl.addEventListener("click", (e) => {
     vinDecode(localSettingsObj.vinNumber);
 });
 
+settingWcJobList.addEventListener("dragend", (e) => {
+    // getWeeklyCheckListFromSettings(e);
+
+    let newWeeklyJobs = [];
+
+    for (let li in settingWcJobList.childNodes) {
+        if (settingWcJobList.childNodes[li].nodeName === "LI") {
+            newWeeklyJobs.push(
+                settingWcJobList.childNodes[li].getAttribute(
+                    "data-list-jobname"
+                )
+            );
+        }
+    }
+
+    weeklyJobs = newWeeklyJobs;
+
+    console.log(weeklyJobs);
+});
+
 settingWcJobListAddBtnEl.addEventListener("click", (e) => {
     e.preventDefault();
 
@@ -508,7 +529,7 @@ settingBtnEl.addEventListener("click", (e) => {
 
 /* === Weekly Jobs List === */
 
-const weeklyJobs = [
+let weeklyJobs = [
     "Tyre Pressure",
     "Tyre Condition",
     "Engine Oil Level",
@@ -1218,12 +1239,16 @@ function renderWeeklyCheckJobListInSettings(weeklyJobs) {
         Cancel Button
     */
 
-    const settingWcJobList = document.getElementById("setting-wc-job-list");
+    new Sortable(settingWcJobList, {
+        handle: ".drag-handle",
+        animation: 500,
+    });
 
     settingWcJobList.innerHTML = "";
 
     for (let job in weeklyJobs) {
         let newEl = document.createElement("li");
+        newEl.setAttribute("data-list-jobname", `${weeklyJobs[job]}`);
 
         let divEl = document.createElement("div");
         divEl.setAttribute("class", "setting-wc-job-item");
@@ -1252,6 +1277,10 @@ function renderWeeklyCheckJobListInSettings(weeklyJobs) {
         newEl.append(divEl);
         settingWcJobList.append(newEl);
     }
+}
+
+function getWeeklyCheckListFromSettings(e) {
+    console.log(e.target);
 }
 
 function settingsMinLengthCheck(inputName, input, min) {
