@@ -491,24 +491,8 @@ vinDecodeTestBtnEl.addEventListener("click", (e) => {
     vinDecode(localSettingsObj.vinNumber);
 });
 
-settingWcJobList.addEventListener("dragend", (e) => {
-    // getWeeklyCheckListFromSettings(e);
-
-    let newWeeklyJobs = [];
-
-    for (let li in settingWcJobList.childNodes) {
-        if (settingWcJobList.childNodes[li].nodeName === "LI") {
-            newWeeklyJobs.push(
-                settingWcJobList.childNodes[li].getAttribute(
-                    "data-list-jobname"
-                )
-            );
-        }
-    }
-
-    weeklyJobs = newWeeklyJobs;
-
-    console.log(weeklyJobs);
+settingWcJobList.addEventListener("dragend", () => {
+    weeklyJobs = getWeeklyCheckListFromSettings(settingWcJobList);
 });
 
 settingWcJobListAddBtnEl.addEventListener("click", (e) => {
@@ -541,6 +525,8 @@ let weeklyJobs = [
     "Wiper Blade Condition",
     "Electrical Systems",
 ];
+// Get weekly job list from firebase
+
 let weeklyJobsStatus = {};
 weeklyJobList();
 
@@ -1279,8 +1265,18 @@ function renderWeeklyCheckJobListInSettings(weeklyJobs) {
     }
 }
 
-function getWeeklyCheckListFromSettings(e) {
-    console.log(e.target);
+function getWeeklyCheckListFromSettings(listEl) {
+    let newWeeklyJobs = [];
+
+    for (let li in listEl.childNodes) {
+        if (listEl.childNodes[li].nodeName === "LI") {
+            newWeeklyJobs.push(
+                listEl.childNodes[li].getAttribute("data-list-jobname")
+            );
+        }
+    }
+
+    return newWeeklyJobs;
 }
 
 function settingsMinLengthCheck(inputName, input, min) {
@@ -1346,7 +1342,7 @@ async function fetchSettingsFromDB(user) {
                 doc.data().vehiclePurchaseDate
             );
             // Weekly Check Array of Jobs
-            //      Code Here
+            weeklyJobs = doc.data().weeklyCheckArr;
         });
     } else {
         // Run checkUpdateSettings to create a blank settings file
