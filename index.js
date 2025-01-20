@@ -126,6 +126,9 @@ const historyEl = document.getElementById("hist-area");
 
 const vinDecodeTestBtnEl = document.getElementById("vin-decode-test");
 const settingFormEl = document.getElementById("setting-form");
+const settingWcJobListAddBtnEl = document.getElementById(
+    "setting-wc-job-list-add"
+);
 const settingBtnEl = document.getElementById("setting-btn");
 
 const modalAlertEl = document.getElementById("modal-alert");
@@ -485,6 +488,12 @@ vinDecodeTestBtnEl.addEventListener("click", (e) => {
     e.preventDefault();
 
     vinDecode(localSettingsObj.vinNumber);
+});
+
+settingWcJobListAddBtnEl.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    console.log("Add Weekly Check Item.");
 });
 
 settingBtnEl.addEventListener("click", (e) => {
