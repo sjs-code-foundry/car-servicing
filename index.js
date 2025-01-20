@@ -1223,17 +1223,19 @@ function renderWeeklyCheckJobListInSettings(weeklyJobs) {
     settingWcJobList.innerHTML = "";
 
     for (let job in weeklyJobs) {
-        let newEl = document.createElement("div");
-        newEl.setAttribute("class", "setting-wc-job-item");
+        let newEl = document.createElement("li");
+
+        let divEl = document.createElement("div");
+        divEl.setAttribute("class", "setting-wc-job-item");
 
         let dragHandleEl = document.createElement("div");
         dragHandleEl.setAttribute("class", "drag-handle");
         // Implement drag handle from this:  https://jsfiddle.net/a6tgy9so/1/
-        newEl.append(dragHandleEl);
+        divEl.append(dragHandleEl);
 
         let weeklyJobNameEl = document.createElement("p");
         weeklyJobNameEl.textContent = weeklyJobs[job];
-        newEl.append(weeklyJobNameEl);
+        divEl.append(weeklyJobNameEl);
 
         let deleteButtonEl = document.createElement("button");
         deleteButtonEl.textContent = "X";
@@ -1245,8 +1247,9 @@ function renderWeeklyCheckJobListInSettings(weeklyJobs) {
 
             renderWeeklyCheckJobListInSettings(weeklyJobs);
         });
-        newEl.append(deleteButtonEl);
+        divEl.append(deleteButtonEl);
 
+        newEl.append(divEl);
         settingWcJobList.append(newEl);
     }
 }
