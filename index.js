@@ -498,7 +498,16 @@ settingWcJobList.addEventListener("dragend", () => {
 settingWcJobListAddBtnEl.addEventListener("click", (e) => {
     e.preventDefault();
 
-    console.log("Add Weekly Check Item.");
+    const entryInputEl = document.getElementById(
+        "setting-wc-job-list-entry-field"
+    );
+
+    if (entryInputEl.value != "") {
+        weeklyJobs.push(entryInputEl.value);
+        entryInputEl.value = "";
+
+        renderWeeklyCheckJobListInSettings(weeklyJobs);
+    }
 });
 
 settingBtnEl.addEventListener("click", (e) => {
@@ -513,20 +522,7 @@ settingBtnEl.addEventListener("click", (e) => {
 
 /* === Weekly Jobs List === */
 
-let weeklyJobs = [
-    "Tyre Pressure",
-    "Tyre Condition",
-    "Engine Oil Level",
-    "Coolant Level",
-    "Brake Fluid Level",
-    "Screenwash Level",
-    "Power Steering Fluid Level",
-    "Battery Contacts",
-    "Wiper Blade Condition",
-    "Electrical Systems",
-];
-// Get weekly job list from firebase
-
+let weeklyJobs = [];
 let weeklyJobsStatus = {};
 weeklyJobList();
 

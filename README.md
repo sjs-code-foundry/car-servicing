@@ -62,8 +62,10 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 
 -   [x] Draggable list of Weekly Checks in settings (alter order and content of list)
 -   [x] Enable add button for list of Weekly Checks in settings
--   [ ] Add Entry Field that displays on clicking add button, and hides on completion of entry
+-   [x] Add Entry Field that displays on clicking add button
 -   [x] Refactor Weekly Check list to download from settings (not hardcoded)
+-   [ ] Fix Weekly Checks form so that it takes the weekly check list from the firebase DB
+-   [ ] Sort aesthetics of drag & drop list to look like rest of app
 
 #### User Experience
 
@@ -72,21 +74,19 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 
 ### v0.5.0-alpha
 
+#### Aesthetics
+
+-   [ ] Complete overhaul of user interface for better scaling and looks
+
 #### CSS
 
 -   [ ] Introduce CSS utility classes to standardize formatting
 -   [ ] Refactor Header Avatar Code for simplicity
 -   [ ] Introduce automatic capitalization for relevant entries (Licence Plate for example)
 
-#### Cross-Platform
-
--   [ ] Fork repo for native Android app written in Kotlin (after refactoring CSS & JS Code!)
-
 #### JS Functions
 
 -   [ ] Separate js code into various files pertaining to certain function groups
-
-### v0.5.1-alpha
 
 #### User Experience
 
