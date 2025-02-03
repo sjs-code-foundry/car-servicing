@@ -3,20 +3,20 @@
    ======================== */
 
 :root {
-    --background-light-color: #F2F2F2;
-    --text-light-color: #0D0A0B;
+    --background-light-color: #f2f2f2;
+    --text-light-color: #0d0a0b;
     --primary-light-color: #454955;
-    --secondary-light-color: #6B8F71;
-    --accent-light-color: #DB2B39;
+    --secondary-light-color: #6b8f71;
+    --accent-light-color: #db2b39;
 
-    --background-dark-color: #0D0A0B;
-    --text-dark-color: #F2F2F2;
+    --background-dark-color: #0d0a0b;
+    --text-dark-color: #f2f2f2;
     --primary-dark-color: #454955;
     --secondary-dark-color: #020302;
-    --accent-dark-color: #F1AEB4;
+    --accent-dark-color: #f1aeb4;
 
-    --error-color: #EA2B1F;
-    --success-color: #2A7221;
+    --error-color: #ea2b1f;
+    --success-color: #2a7221;
 
     --main-width: 90vw;
     --header-landscape-width: 30vw;
@@ -27,7 +27,9 @@
 	General Layout
    ======================== */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
@@ -36,8 +38,9 @@ html {
     background-color: var(--background-light-color);
 }
 
-body, footer {
-    font-family: 'Ubuntu', sans-serif;
+body,
+footer {
+    font-family: "Ubuntu", sans-serif;
 }
 
 #interactive-area {
@@ -118,22 +121,21 @@ footer {
     }
 
     @media (min-width: 1921px) {
-
         h2 {
             font-size: 6rem;
             font-weight: bold;
         }
-        
+
         h3 {
             font-size: 4rem;
             font-weight: bold;
         }
-        
+
         h4 {
             font-size: 3rem;
             font-weight: bold;
         }
-        
+
         p {
             font-size: 3rem;
         }
@@ -147,34 +149,48 @@ footer {
 }
 
 @media (orientation: portrait) {
-
     /* ========================
         Top Navigation Bar
-    ======================== */
+       ======================== */
 
     .header {
         width: inherit;
         height: 6em;
-        box-shadow: 0.0625em 0.0625em 0.25em 0 rgba(0,0,0,.1);
+        box-shadow: 0.0625em 0.0625em 0.25em 0 rgba(0, 0, 0, 0.1);
         z-index: 3;
     }
 
-    .header img {
-        display: block;
+    #header-user-id-area {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
         float: left;
-        width: 6em;
+        height: inherit;
+        padding: 0.5em;
+    }
+
+    #user-avatar {
+        width: 3.5em;
+        height: 3.5em;
+    }
+
+    #header-user-id-area p {
+        font-size: 1rem;
+        font-weight: bold;
+        margin: 0;
     }
 
     /* ========================================
         Hamburger Menu - Static Properties
-    ======================================== */
+       ======================================== */
 
     .header ul {
         margin: 0;
         padding: 0;
         list-style: none;
         overflow: hidden;
-        background-color: var(--background-light-color)
+        background-color: var(--background-light-color);
     }
 
     .header li button {
@@ -200,12 +216,12 @@ footer {
     .header .menu {
         clear: both;
         max-height: 0;
-        transition: max-height .2s ease-out;
+        transition: max-height 0.2s ease-out;
     }
 
     /* ================================================
         Hamburger Menu - Hamburger Icon Properties
-    ================================================ */
+       ================================================ */
 
     .header .menu-icon {
         cursor: pointer;
@@ -220,32 +236,32 @@ footer {
         display: block;
         height: 0.5em;
         position: relative;
-        transition: background .2s ease-out;
+        transition: background 0.2s ease-out;
         width: 4em;
     }
 
     .header .menu-icon .navicon:before,
     .header .menu-icon .navicon:after {
         background: var(--text-light-color);
-        content: '';
+        content: "";
         display: block;
         height: 90%;
         position: absolute;
-        transition: all .2s ease-out;
+        transition: all 0.2s ease-out;
         width: 100%;
     }
 
     .header .menu-icon .navicon:before {
-        top: 2em;
+        top: 1.5em;
     }
 
     .header .menu-icon .navicon:after {
-        top: -2em;
+        top: -1.5em;
     }
 
     /* ====================================================
         Hamburger Menu - Icon & Menu Animation Properties
-    ==================================================== */
+       ==================================================== */
 
     .header .menu-btn {
         display: none;
@@ -271,7 +287,6 @@ footer {
     .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
         top: 0;
     }
-
 }
 
 /* ====================================================
@@ -295,8 +310,25 @@ footer {
         background-color: var(--background-light-color);
     }
 
-    .header img {
+    #header-user-id-area {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+
+        height: 8.5em;
+        margin-top: 2em;
+    }
+
+    #user-avatar {
         width: 6em;
+        height: 6em;
+    }
+
+    #header-user-id-area p {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0;
     }
 
     .header ul {
@@ -348,6 +380,15 @@ footer {
     display: none;
 }
 
+/* ========
+	Header
+   ======== */
+
+.user-avatar {
+    border: 0.33em solid var(--text-light-color);
+    border-radius: 50%;
+}
+
 /* ========================
     General Tab Formatting
    ========================*/
@@ -367,7 +408,7 @@ footer {
 
     width: 100%;
 
-    font-family: 'Ubuntu', sans-serif;
+    font-family: "Ubuntu", sans-serif;
     font-size: 100%;
 }
 
@@ -386,6 +427,11 @@ footer {
     color: var(--text-light-color);
     font-size: 2.5rem;
     text-align: center;
+}
+
+#tab-weekly-checks form input:focus {
+    outline: 0.05em solid var(--accent-light-color);
+    box-shadow: 0 0 1em var(--accent-light-color);
 }
 
 #sj-field {
@@ -424,7 +470,7 @@ footer {
 
     font-size: 3rem;
     font-weight: bold;
-    
+
     border: 1px solid var(--text-light-color);
 }
 
@@ -441,19 +487,24 @@ footer {
 	Buttons
    ============ */
 
-#sj-btn, #submit-btn {
-    font-family: 'Ubuntu', sans-serif;
+#sj-btn,
+#submit-btn {
+    font-family: "Ubuntu", sans-serif;
     font-weight: bold;
     background-color: var(--secondary-light-color);
     border: none;
     border-radius: 0.28em;
 }
 
-#sj-btn:hover, #submit-btn:hover {
-    color: var(--background-light-color) /* Come back to this later, do not use a border! */
+#sj-btn:hover,
+#submit-btn:hover {
+    color: var(
+        --background-light-color
+    ); /* Come back to this later, do not use a border! */
 }
 
-#sj-btn:active, #submit-btn:active {
+#sj-btn:active,
+#submit-btn:active {
     background-color: var(--accent-light-color);
 }
 
@@ -472,7 +523,8 @@ footer {
 }
 
 @media (orientation: landscape) {
-    #sj-btn, #submit-btn {
+    #sj-btn,
+    #submit-btn {
         width: 100%;
     }
 }
@@ -505,12 +557,13 @@ footer {
     grid-auto-rows: auto;
     align-items: center;
     justify-items: center;
-    
+
     width: inherit;
     gap: 0.25em;
 }
 
-#hist-area h4, #hist-area p {
+#hist-area h4,
+#hist-area p {
     font-size: 1.33rem;
 }
 
@@ -546,13 +599,12 @@ footer {
         font-size: 1.25rem;
     }
 
-    #tab-car-stats p, #tab-about-app p {
+    #tab-car-stats p,
+    #tab-about-app p {
         width: 100%;
         /* Temporary - Spaces content out correctly for Landscape */
     }
 }
-
-
 
 @media (min-width: 769px) and (max-width: 1920px) {
     .service-job {
@@ -593,6 +645,193 @@ footer {
 }
 
 /* ============
+	Settings
+   ============ */
+
+.setting {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 1.5rem;
+    text-align: start;
+}
+
+.setting p {
+    padding: 0 0.5em;
+}
+
+.setting-radios {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+.setting-radios label {
+    text-align: start;
+
+    padding: 0.5em 0;
+}
+
+.setting select,
+.setting input {
+    width: 100%;
+    margin: 0.2em 0;
+    padding: 0.2em 0;
+
+    background-color: var(--background-light-color);
+
+    border: 1px solid var(--text-light-color);
+
+    font-size: 2rem;
+    text-align: center;
+}
+
+#setting-licence-plate,
+#setting-vin {
+    width: fit-content;
+}
+
+#vin-decode-test {
+    display: none;
+    /* Temporary - removing button causes settings to fail to load */
+}
+
+@media (orientation: landscape) {
+    .setting {
+        font-size: 1rem;
+    }
+
+    .setting select {
+        font-size: 1rem;
+    }
+
+    .setting input {
+        font-size: 1rem;
+    }
+}
+
+/* ==== Weekly Checks List ==== */
+
+#setting-wc-job-list {
+    margin-bottom: 2em;
+
+    border: 0.2em solid var(--text-light-color);
+}
+
+.setting-wc-job-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.setting-wc-job-item:hover {
+    border: 0.1em solid var(--text-light-color);
+}
+
+.drag-handle {
+    width: 0;
+    height: 0;
+    border-right: 3em solid transparent;
+    border-top: 3em solid var(--background-dark-color);
+    cursor: move;
+}
+
+.setting-wc-job-list-delete {
+    background-color: var(--accent-light-color);
+
+    font-size: 2rem;
+    font-weight: bold;
+
+    border: none;
+    border-radius: 0.28em;
+
+    margin: 0.2em 0 0.2em 1em;
+    padding: 0 0.75em;
+}
+
+#setting-wc-job-list-entry-field {
+    width: 100%;
+    height: 2em;
+    margin-bottom: 0.25em;
+    padding: 2em 0;
+
+    background-color: var(--background-light-color);
+    color: var(--text-light-color);
+
+    font-size: 2rem;
+    text-align: center;
+}
+
+#setting-wc-job-list-add {
+    width: 100%;
+    padding: 0.75em 0;
+
+    background-color: var(--secondary-light-color);
+
+    border: none;
+    border-radius: 0.28em;
+
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+#setting-btn {
+    background-color: var(--secondary-light-color);
+
+    width: 100%;
+    padding: 0.3em;
+    margin: 0.6em 0;
+
+    border: none;
+    border-radius: 0.28em;
+
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+
+@media (orientation: landscape) {
+    #setting-wc-job-list {
+        margin-bottom: 1em;
+    }
+
+    .drag-handle {
+        border-right: 1em solid transparent;
+        border-top: 1em solid var(--background-dark-color);
+    }
+
+    .setting-wc-job-list-delete {
+        margin: 0.2em 0;
+    }
+
+    #setting-wc-job-list-entry-field {
+        height: 2rem;
+        margin-bottom: 0.5em;
+
+        font-size: 1.5rem;
+    }
+
+    #setting-wc-job-list-add {
+        border-radius: 0.28em;
+
+        font-size: 2rem;
+    }
+
+    #setting-btn {
+        padding: 0.3em;
+        margin: 0.6em 0;
+
+        border-radius: 0.28em;
+
+        font-size: 3.5rem;
+    }
+}
+
+/* @media (min-width: 769px) and (max-width: 1920px) {
+    Mid size screens
+} */
+
+/* ============
 	About App
    ============ */
 
@@ -605,31 +844,29 @@ footer {
    ======== */
 
 @media (orientation: landscape) {
-
     #footer-area {
         margin-left: var(--header-landscape-width);
         max-width: 100%;
     }
 
-    footer hr, #account-status-header {
+    footer hr,
+    #account-status-header {
         width: inherit;
     }
 
     footer h3 {
         font-size: 2rem;
     }
-
 }
 
 /* ========
 	Modals
    ======== */
 
-
-
-#modal-container { /* Container to allow travel across page for modals */
+#modal-container {
+    /* Container to allow travel across page for modals */
     display: none;
-    
+
     position: absolute;
 
     width: 100%;
@@ -658,8 +895,12 @@ footer {
 }
 
 @keyframes modal-fadein {
-    from {opacity: 0;}
-    to {opacity: 1;}
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .modal div {
@@ -668,7 +909,7 @@ footer {
     justify-content: space-between;
 }
 
-#modal-account-header{
+#modal-account-header {
     margin-bottom: 1em;
 }
 
@@ -687,14 +928,23 @@ footer {
     border-radius: 0.5em;
 }
 
-.modal label, .modal input {
+.modal label,
+.modal input {
     display: block;
 
     width: 100%;
     margin: 0.28em auto;
-    padding: 0.5em 0;
+    padding: 0.5em;
 
-    font-size: 2.5rem;
+    font-size: 1.75rem;
+}
+
+.modal input {
+    border: 1px solid var(--primary-light-color);
+}
+
+#modal-account-form {
+    margin: 2em;
 }
 
 #modal-account-switch-line {
@@ -715,7 +965,7 @@ footer {
 #modal-account-switch-line button {
     width: fit-content;
     height: 1.1667em;
-    
+
     border: none;
 
     margin: 1em 0.111em 1em 0.333em;
@@ -755,7 +1005,8 @@ footer {
         width: 4em;
     }
 
-    .modal label, .modal input {
+    .modal label,
+    .modal input {
         margin: 0.67em auto;
 
         font-size: 4rem;

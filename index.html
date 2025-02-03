@@ -1,69 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=640, user-scalable=0">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <link rel="manifest" href="/site.webmanifest">
-        <link rel="stylesheet" href="index.css">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=640, user-scalable=0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="stylesheet" href="index.css" />
     </head>
     <body>
         <div id="interactive-area">
             <header class="header">
-                <img src="/img/avatar.png">
-                <input class="menu-btn" type="checkbox" id="menu-btn">
-                <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+                <div id="header-user-id-area">
+                    <img src="/img/avatar.png" id="user-avatar" />
+                    <p id="user-avatar-plate">A123 BCD</p>
+                </div>
+                <input class="menu-btn" type="checkbox" id="menu-btn" />
+                <label class="menu-icon" for="menu-btn"
+                    ><span class="navicon"></span
+                ></label>
                 <ul id="tab-menu" class="menu">
-                    <li><button id="tab-btn-weekly-checks" class="tab" data-tab="tab-weekly-checks">Weekly Car Checks</button></li>
-                    <li><button id="tab-btn-service-jobs" class="tab" data-tab="tab-service-jobs">Servicing Jobs</button></li>
-                    <li><button id="tab-btn-weekly-history" class="tab" data-tab="tab-weekly-history">Weekly Check History</button></li>
-                    <li><button id="tab-btn-car-stats" class="tab" data-tab="tab-car-stats">Car Stats</button></li>
-                    <li><button id="tab-btn-account" class="tab" data-tab="modal-account">Sign In</button></li>
-                    <li><button id="tab-btn-logout" class="tab" data-tab="tab-blank">Sign Out</button></li>
-                    <li><button id="tab-btn-about-app" class="tab" data-tab="tab-about-app">About App</button></li>
+                    <li>
+                        <button
+                            id="tab-btn-weekly-checks"
+                            class="tab"
+                            data-tab="tab-weekly-checks"
+                        >
+                            Weekly Car Checks
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            id="tab-btn-service-jobs"
+                            class="tab"
+                            data-tab="tab-service-jobs"
+                        >
+                            Servicing Jobs
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            id="tab-btn-weekly-history"
+                            class="tab"
+                            data-tab="tab-weekly-history"
+                        >
+                            Weekly Check History
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            id="tab-btn-car-stats"
+                            class="tab"
+                            data-tab="tab-car-stats"
+                        >
+                            Car Stats
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            id="tab-btn-settings"
+                            class="tab"
+                            data-tab="tab-settings"
+                        >
+                            Settings
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            id="tab-btn-account"
+                            class="tab"
+                            data-tab="modal-account"
+                        >
+                            Sign In
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            id="tab-btn-logout"
+                            class="tab"
+                            data-tab="tab-blank"
+                        >
+                            Sign Out
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            id="tab-btn-about-app"
+                            class="tab"
+                            data-tab="tab-about-app"
+                        >
+                            About App
+                        </button>
+                    </li>
                 </ul>
             </header>
             <div id="modal-container">
                 <div id="modal-account" class="modal">
                     <div>
                         <h2 id="modal-account-header">Sign In.</h2>
-                        <button class="close-btn" data-target="modal-account">X</button>
+                        <button class="close-btn" data-target="modal-account">
+                            X
+                        </button>
                     </div>
                     <form id="modal-account-form">
                         <label for="email">Enter email address:</label>
-                        <input type="email" name="email" placeholder="someone@something.com" required>
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="someone@something.com"
+                            required
+                        />
                         <label for="password">Enter password:</label>
-                        <input type="password" name="password" placeholder="******" required>
-                        <button id="modal-account-form-btn">Sign In with Email</button>
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="******"
+                            required
+                        />
+                        <button id="modal-account-form-btn">
+                            Sign In with Email
+                        </button>
                     </form>
                     <button id="signin-btn-google">Sign in with Google</button>
                     <div id="modal-account-switch-line">
                         <p>No account?</p>
-                        <button id="create-account-btn">Create an account</button>
+                        <button id="create-account-btn">
+                            Create an account
+                        </button>
                         <p>.</p>
                     </div>
                 </div>
                 <div id="modal-alert" class="modal">
                     <div>
                         <h2 id="modal-alert-heading">Heading.</h2>
-                        <button class="close-btn" data-target="modal-alert">X</button>
+                        <button class="close-btn" data-target="modal-alert">
+                            X
+                        </button>
                     </div>
                     <p id="modal-alert-content">Alert Modal Body</p>
                 </div>
                 <div id="modal-confirm" class="modal">
                     <div>
                         <h2 id="modal-confirm-heading">Heading.</h2>
-                        <button class="close-btn" data-target="modal-alert">X</button>
+                        <button class="close-btn" data-target="modal-alert">
+                            X
+                        </button>
                     </div>
                     <p id="modal-confirm-content">Alert Modal Body</p>
                     <div>
-                        <button class="confirm-btn" data-verdict="no">Cancel</button>
-                        <button class="confirm-btn" data-verdict="yes">OK</button>
+                        <button class="confirm-btn" data-verdict="no">
+                            Cancel
+                        </button>
+                        <button class="confirm-btn" data-verdict="yes">
+                            OK
+                        </button>
                     </div>
                 </div>
             </div>
@@ -75,9 +186,21 @@
                 <h2>Weekly Jobs</h2>
                 <form id="weekly-check-form">
                     <label for="date-field">Date:</label>
-                    <input id="date-field" type="date" name="date" placeholder="dd/mm/yyyy" required>
+                    <input
+                        id="date-field"
+                        type="date"
+                        name="date"
+                        placeholder="dd/mm/yyyy"
+                        required
+                    />
                     <label for="odo-field">Odometer Reading:</label>
-                    <input id="odo-field" type="number" name="odometer" placeholder="00000" required>
+                    <input
+                        id="odo-field"
+                        type="number"
+                        name="odometer"
+                        placeholder="00000"
+                        required
+                    />
                     <ul id="weeklies">
                         <!-- List of Weekly Check Buttons goes here -->
                     </ul>
@@ -86,7 +209,7 @@
             </section>
             <section id="tab-service-jobs" class="tabcontent">
                 <h2>Servicing Jobs</h2>
-                <input id="sj-field" type="text">
+                <input id="sj-field" type="text" />
                 <button id="sj-btn">Submit Service Job</button>
                 <ul id="jobs-list">
                     <!-- Service Jobs go here -->
@@ -127,35 +250,205 @@
                 <!-- Create Place to enter car stats like engine type,
                     tyre type, bulbs for various locations, etc. -->
             </section>
+            <section id="tab-settings" class="tabcontent">
+                <h2>Settings</h2>
+                <form id="setting-form">
+                    <h3>App</h3>
+                    <div class="setting">
+                        <p>Default Tab</p>
+                        <div
+                            id="setting-form-default-tab"
+                            class="setting-radios"
+                        >
+                            <input
+                                type="radio"
+                                id="default-tab-weekly-checks"
+                                class="default-tab-radio-button"
+                                name="default-tab"
+                                value="tab-weekly-checks"
+                                checked="checked"
+                            />
+                            <label for="default-tab-weekly-checks"
+                                >Weekly Car Checks</label
+                            >
+                            <input
+                                type="radio"
+                                id="default-tab-service-jobs"
+                                class="default-tab-radio-button"
+                                name="default-tab"
+                                value="tab-service-jobs"
+                            />
+                            <label for="default-tab-service-jobs"
+                                >Servicing Jobs</label
+                            >
+                            <input
+                                type="radio"
+                                id="default-tab-weekly-history"
+                                class="default-tab-radio-button"
+                                name="default-tab"
+                                value="tab-weekly-history"
+                            />
+                            <label for="default-tab-weekly-history"
+                                >Weekly Check History</label
+                            >
+                            <input
+                                type="radio"
+                                id="default-tab-car-stats"
+                                class="default-tab-radio-button"
+                                name="default-tab"
+                                value="tab-car-stats"
+                            />
+                            <label for="default-tab-car-stats">Car Stats</label>
+                        </div>
+                    </div>
+                    <h4>Scheduling</h4>
+                    <div class="setting">
+                        <p>Preferred Weekly Check Day & Time</p>
+                        <div>
+                            <select id="setting-wc-day" name="setting-wc-day">
+                                <option value="monday">Monday</option>
+                                <option value="tuesday">Tuesday</option>
+                                <option value="wednesday">Wednesday</option>
+                                <option value="thursday">Thursday</option>
+                                <option value="friday">Friday</option>
+                                <option value="saturday">Saturday</option>
+                                <option value="sunday" selected="selected">
+                                    Sunday
+                                </option>
+                            </select>
+                            <input
+                                type="time"
+                                id="setting-wc-time"
+                                name="setting-wc-time"
+                                value="06:00:00"
+                            />
+                        </div>
+                    </div>
+                    <div class="setting">
+                        <p>Default Notification Time for Service Jobs</p>
+                        <div>
+                            <input
+                                type="number"
+                                id="setting-sj-notif-time"
+                                name="setting-sj-notif-time"
+                                min="1"
+                                max="31"
+                                value="7"
+                            />
+                            <select
+                                id="setting-sj-notif-period"
+                                name="setting-sj-notif-period"
+                            >
+                                <option value="days" selected="selected">
+                                    Days
+                                </option>
+                                <option value="weeks">Weeks</option>
+                                <option value="months">Months</option>
+                            </select>
+                        </div>
+                    </div>
+                    <h3>Car</h3>
+                    <div class="setting">
+                        <p>Vehicle Licence Plate (2001 Onwards)</p>
+                        <div>
+                            <input
+                                type="text"
+                                id="setting-licence-plate"
+                                name="setting-licence-plate"
+                                size="7"
+                                maxlength="7"
+                                placeholder="A000BCD"
+                            />
+                        </div>
+                    </div>
+                    <div class="setting">
+                        <p>VIN Number</p>
+                        <div>
+                            <input
+                                type="text"
+                                id="setting-vin"
+                                name="setting-vin"
+                                size="17"
+                                maxlength="17"
+                                placeholder="1AABB23CDEF456789"
+                            />
+                            <!-- minlength doesn't work, add length check function to SettingsObj constructor -->
+                        </div>
+                        <button id="vin-decode-test">Test VIN Decode</button>
+                    </div>
+                    <div class="setting">
+                        <p>Date of Vehicle Purchase</p>
+                        <div>
+                            <input
+                                type="date"
+                                id="setting-vehicle-purchase-date"
+                                name="setting-vehicle-purchase-date"
+                            />
+                        </div>
+                    </div>
+                    <h4>Servicing</h4>
+                    <div class="setting">
+                        <p>Weekly Checks to Complete</p>
+                        <div>
+                            <ul id="setting-wc-job-list">
+                                <!-- Make things draggable: https://jsfiddle.net/a6tgy9so/1/ -->
+                                <!-- Example Record:
+                                <li>
+                                    <div class="setting-wc-job-item">
+                                        <div class="drag-handle"></div>
+                                        <p>Tyre Pressure</p>
+                                        <button class="setting-wc-job-list-delete">
+                                            X
+                                        </button>
+                                    </div>
+                                </li>
+                                -->
+                            </ul>
+                            <input
+                                type="text"
+                                id="setting-wc-job-list-entry-field"
+                                placeholder="Type a task to add..."
+                            />
+                            <button id="setting-wc-job-list-add">+</button>
+                        </div>
+                    </div>
+                    <button type="submit" id="setting-btn">
+                        Submit Settings
+                    </button>
+                </form>
+            </section>
             <section id="tab-about-app" class="tabcontent">
                 <h2>About App</h2>
                 <p class="about-app-body">
                     This app was born out of a need to amalgamate the processes
                     involved in keeping my car maintained - which involved many
-                    different spreadsheets and procedures - and present them
-                    in a format that allowed me to view and carry them out
+                    different spreadsheets and procedures - and present them in
+                    a format that allowed me to view and carry them out
                     anywhere.
                 </p>
                 <p class="about-app-body">
                     The focus of this app is to keep the interface responsive
                     and visually appealing, so that as my devices are upgraded
-                    the interface remains useable.  This also serves as a
+                    the interface remains useable. This also serves as a
                     demonstration of my understanding of designing apps.
                 </p>
                 <h3>Created by:</h3>
                 <p>sjs-code-foundry</p>
                 <h3>App Version:</h3>
-                <p>v0.4.3-alpha</p>
+                <p>v0.4.4-alpha</p>
             </section>
         </div>
         <script src="index.js" type="module"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
         <script src="https://raw.githubusercontent.com/codebox/moment-precise-range/master/moment-precise-range.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
     </body>
     <footer>
         <div id="footer-area">
-            <hr>
-            <h3 id="account-status-header">Not Signed In.  Sign in to view records.</h3>
+            <hr />
+            <h3 id="account-status-header">
+                Not Signed In. Sign in to view records.
+            </h3>
         </div>
     </footer>
 </html>
