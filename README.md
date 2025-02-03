@@ -60,7 +60,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 -   [x] Add Entry Field that displays on clicking add button
 -   [x] Refactor Weekly Check list to download from settings (not hardcoded)
 -   [x] Fix Weekly Checks form so that it takes the weekly check list from the firebase DB
--   [ ] Sort aesthetics of drag & drop list to look like rest of app
+-   [x] Sort aesthetics of drag & drop list to look like rest of app
 
 #### User Experience
 
