@@ -1126,7 +1126,7 @@ function weeklyJobPercent(weeklies) {
         }
     }
 
-    let wJP = (wJDone / wJTotal) * 100;
+    let wJP = Math.round((wJDone / wJTotal) * 100);
 
     return wJP;
 }

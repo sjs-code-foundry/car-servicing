@@ -67,7 +67,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 -   [x] Add picture icon for users
 -   [x] Implement colour changes to border to indicate state of firebase connection
 -   [ ] Ensure all added features scale properly for all screen sizes and orientations
--   [ ] Round percentages in Weekly Check History (Weekly Jobs column)
+-   [x] Round percentages in Weekly Check History (Weekly Jobs column)
 
 ### v0.5.0-alpha
 
