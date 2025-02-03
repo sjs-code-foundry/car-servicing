@@ -277,6 +277,8 @@ onAuthStateChanged(auth, (user) => {
 
     if (user) {
         accountStatusHeader.textContent = `Signed in as: ${user.email}.`;
+        userAvatarEl.style.borderColor = "blue";
+
         tabBtnAccount.style.display = "none";
         tabBtnLogout.style.display = "block";
 
@@ -296,52 +298,76 @@ onAuthStateChanged(auth, (user) => {
 });
 
 function fetchServiceJobsInRealTimeFromDBs(query, user) {
-    onSnapshot(query, (querySnapshot) => {
-        clearListEl(serviceTasksEl);
+    try {
+        onSnapshot(query, (querySnapshot) => {
+            clearListEl(serviceTasksEl);
 
-        let jobCount = 0;
+            let jobCount = 0;
 
-        querySnapshot.forEach((doc) => {
-            renderServiceJob(doc);
+            querySnapshot.forEach((doc) => {
+                renderServiceJob(doc);
 
-            jobCount++;
+                jobCount++;
+            });
+
+            if (jobCount > 0) {
+                tabBtnServiceJobs.textContent = `Servicing Jobs (${jobCount})`;
+            } else {
+                tabBtnServiceJobs.textContent = "Servicing Jobs";
+            }
         });
 
-        if (jobCount > 0) {
-            tabBtnServiceJobs.textContent = `Servicing Jobs (${jobCount})`;
-        } else {
-            tabBtnServiceJobs.textContent = "Servicing Jobs";
-        }
-    });
+        userAvatarEl.style.borderColor = "green";
+    } catch (error) {
+        userAvatarEl.style.borderColor = "red";
+
+        modalAlert(
+            modalAlertEl,
+            "Failed to fetch Service Jobs!",
+            `${error.message}`
+        );
+    }
 }
 
 // function fetchWeeklyCheckJobListInRealTimeFromDBs(query, user)
 
 function fetchWeeklyChecksInRealTimeFromDBs(query, user) {
-    onSnapshot(query, (querySnapshot) => {
-        clearListEl(historyEl);
+    try {
+        onSnapshot(query, (querySnapshot) => {
+            clearListEl(historyEl);
 
-        recordList = recordListClear(recordList);
+            recordList = recordListClear(recordList);
 
-        renderWeeklyCheckHeaders();
+            renderWeeklyCheckHeaders();
 
-        querySnapshot.forEach((doc) => {
-            recordList.push(new RecordListing(doc));
+            querySnapshot.forEach((doc) => {
+                recordList.push(new RecordListing(doc));
+            });
+
+            recordListCalcs(recordList);
+
+            recordListReverse(recordList);
+
+            for (let r in recordList) {
+                renderWeeklyCheck(recordList[r]);
+            }
+
+            carStatsCalcs(recordList);
+
+            weeklyJobList(weeklyJobs);
+            renderWeeklyCheckJobListInSettings(weeklyJobs);
         });
 
-        recordListCalcs(recordList);
+        userAvatarEl.style.borderColor = "green";
+    } catch (error) {
+        userAvatarEl.style.borderColor = "red";
 
-        recordListReverse(recordList);
-
-        for (let r in recordList) {
-            renderWeeklyCheck(recordList[r]);
-        }
-
-        carStatsCalcs(recordList);
-
-        weeklyJobList(weeklyJobs);
-        renderWeeklyCheckJobListInSettings(weeklyJobs);
-    });
+        modalAlert(
+            modalAlertEl,
+            "Failed to fetch Service Jobs!",
+            `${error.message}`
+        );
+    }
 }
 
 // Refactor the above two at some point to use a common function?
@@ -1300,57 +1326,72 @@ async function fetchSettingsFromDB(user) {
 
     const settingSnapshot = await getDocs(q);
 
-    if (!settingSnapshot.empty) {
-        // Fetch settings and set settings fields to the contained data
-        settingSnapshot.forEach((doc) => {
-            // Create local settings object
-            localSettingsObj = new LocalSettingsObj(doc);
+    try {
+        if (!settingSnapshot.empty) {
+            // Fetch settings and set settings fields to the contained data
+            settingSnapshot.forEach((doc) => {
+                // Create local settings object
+                localSettingsObj = new LocalSettingsObj(doc);
 
-            // Default Tab
-            setRadioOption("default-tab-radio-button", doc.data().defaultTab);
-            tabSwitch(doc.data().defaultTab);
+                // Default Tab
+                setRadioOption(
+                    "default-tab-radio-button",
+                    doc.data().defaultTab
+                );
+                tabSwitch(doc.data().defaultTab);
 
-            // Weekly Check Date/Time
-            setSelectOption("setting-wc-day", doc.data().wcDateTime[0]);
-            setTextFieldOption("setting-wc-time", doc.data().wcDateTime[1]);
+                // Weekly Check Date/Time
+                setSelectOption("setting-wc-day", doc.data().wcDateTime[0]);
+                setTextFieldOption("setting-wc-time", doc.data().wcDateTime[1]);
 
-            // Service Job Notification Warning Time
-            setTextFieldOption(
-                "setting-sj-notif-time",
-                doc.data().sjNotifTime[0]
-            );
-            setSelectOption(
-                "setting-sj-notif-period",
-                doc.data().sjNotifTime[1]
-            );
+                // Service Job Notification Warning Time
+                setTextFieldOption(
+                    "setting-sj-notif-time",
+                    doc.data().sjNotifTime[0]
+                );
+                setSelectOption(
+                    "setting-sj-notif-period",
+                    doc.data().sjNotifTime[1]
+                );
 
-            // Vehicle Licence Plate
-            setTextFieldOption(
-                "setting-licence-plate",
-                doc.data().licencePlate
-            );
-            userAvatarPlateEl.textContent = userLicencePlateFormat(
-                doc.data().licencePlate
-            );
+                // Vehicle Licence Plate
+                setTextFieldOption(
+                    "setting-licence-plate",
+                    doc.data().licencePlate
+                );
+                userAvatarPlateEl.textContent = userLicencePlateFormat(
+                    doc.data().licencePlate
+                );
 
-            // VIN Number
-            setTextFieldOption("setting-vin", doc.data().vinNumber);
+                // VIN Number
+                setTextFieldOption("setting-vin", doc.data().vinNumber);
 
-            // Date of Vehicle Purchase
-            setTextFieldOption(
-                "setting-vehicle-purchase-date",
-                doc.data().vehiclePurchaseDate
-            );
-            // Weekly Check Array of Jobs
-            weeklyJobs = doc.data().weeklyCheckArr;
-        });
-    } else {
-        // Run checkUpdateSettings to create a blank settings file
-        const settingData = new FormData(settingFormEl);
+                // Date of Vehicle Purchase
+                setTextFieldOption(
+                    "setting-vehicle-purchase-date",
+                    doc.data().vehiclePurchaseDate
+                );
+                // Weekly Check Array of Jobs
+                weeklyJobs = doc.data().weeklyCheckArr;
+            });
+        } else {
+            // Run checkUpdateSettings to create a blank settings file
+            const settingData = new FormData(settingFormEl);
 
-        const settings = new SettingsObj(settingData);
+            const settings = new SettingsObj(settingData);
 
-        checkUpdateSettings(settings, user);
+            checkUpdateSettings(settings, user);
+        }
+
+        userAvatarEl.style.borderColor = "green";
+    } catch (error) {
+        userAvatarEl.style.borderColor = "red";
+
+        modalAlert(
+            modalAlertEl,
+            "Failed to fetch Settings!",
+            `${error.message}`
+        );
     }
 }
 

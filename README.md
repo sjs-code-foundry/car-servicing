@@ -65,7 +65,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 #### User Experience
 
 -   [x] Add picture icon for users
--   [ ] Implement colour changes to border to indicate state of firebase connection
+-   [x] Implement colour changes to border to indicate state of firebase connection
 -   [ ] Ensure all added features scale properly for all screen sizes and orientations
 -   [ ] Round percentages in Weekly Check History (Weekly Jobs column)
 
