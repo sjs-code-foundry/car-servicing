@@ -52,6 +52,8 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 -   [ ] Double click copies values from Weekly Check record table
 -   [ ] Implement sorting functions for service jobs and weekly checks
 -   [ ] Implement decision modal for deleting weekly checks
+-   [ ] Add modal to inform user that settings have successfully been saved
+-   [ ] Implement decision modal (deleting weekly check history records, for example)
 
 ## Minimum Viable Product
 
