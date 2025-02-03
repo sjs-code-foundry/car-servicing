@@ -339,6 +339,7 @@ function fetchWeeklyChecksInRealTimeFromDBs(query, user) {
 
         carStatsCalcs(recordList);
 
+        weeklyJobList(weeklyJobs);
         renderWeeklyCheckJobListInSettings(weeklyJobs);
     });
 }
@@ -524,7 +525,6 @@ settingBtnEl.addEventListener("click", (e) => {
 
 let weeklyJobs = [];
 let weeklyJobsStatus = {};
-weeklyJobList();
 
 /* === Initial Variables === */
 
@@ -891,7 +891,11 @@ async function addWeeklyCheckToDB(checkDate, checkMiles, checkWeeklies, user) {
     }
 }
 
-function weeklyJobList() {
+function weeklyJobList(weeklyJobs) {
+    const weekliesListEl = document.getElementById("weeklies");
+
+    weekliesListEl.innerHTML = "";
+
     for (let job in weeklyJobs) {
         const weeklyJobAttrs = [
             ["class", "weekly-job"],
@@ -906,7 +910,7 @@ function weeklyJobList() {
             weeklyJobBtnSwitch(weeklyJobs[job]);
         });
 
-        document.getElementById("weeklies").append(newEl);
+        weekliesListEl.append(newEl);
     }
 }
 
@@ -1395,6 +1399,7 @@ async function checkUpdateSettings(settingsObj, user) {
         // Find the appropriate settings file and update
         settingSnapshot.forEach((doc) => {
             updateSettingsInDB(doc, settingsObj);
+            weeklyJobList(weeklyJobs);
         });
     } else {
         // Create new settings file if one does not exist

@@ -30,14 +30,9 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 
 -   [x] Work out what the minimum viable product will be (this will be version 1.0.0)
 
-#### Firestore
-
--   [ ] Enable offline caching
-
 #### JS Functions
 
 -   [x] Implement Age of Vehicle in Car Stats (new collection in Firestore)
--   [ ] Use Data Attributes on Weekly Checks (deleting checks, opening table of weekly checks, etc.)
 -   [x] Try to catch errors with AppCheck on desktop (open app early on Sunday morning, when you usually need it)
 -   [x] Refactor tabHeight const and setModalContainerHeight function (introduce delay to set to height of page after it has loaded)
 -   [x] Adjust date calc in Car Stats to use date of newest record
@@ -64,13 +59,15 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 -   [x] Enable add button for list of Weekly Checks in settings
 -   [x] Add Entry Field that displays on clicking add button
 -   [x] Refactor Weekly Check list to download from settings (not hardcoded)
--   [ ] Fix Weekly Checks form so that it takes the weekly check list from the firebase DB
+-   [x] Fix Weekly Checks form so that it takes the weekly check list from the firebase DB
 -   [ ] Sort aesthetics of drag & drop list to look like rest of app
 
 #### User Experience
 
 -   [x] Add picture icon for users
+-   [ ] Implement colour changes to border to indicate state of firebase connection
 -   [ ] Ensure all added features scale properly for all screen sizes and orientations
+-   [ ] Round percentages in Weekly Check History (Weekly Jobs column)
 
 ### v0.5.0-alpha
 
@@ -84,9 +81,14 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 -   [ ] Refactor Header Avatar Code for simplicity
 -   [ ] Introduce automatic capitalization for relevant entries (Licence Plate for example)
 
+#### Firestore
+
+-   [ ] Enable offline caching
+
 #### JS Functions
 
 -   [ ] Separate js code into various files pertaining to certain function groups
+-   [ ] Use Data Attributes on Weekly Checks (deleting checks, opening table of weekly checks, etc.)
 
 #### User Experience
 
