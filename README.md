@@ -24,7 +24,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 
 #### Aesthetics
 
--   [ ] Change styling of modals for neater appearance and better readability
+-   [x] Change styling of modals for neater appearance and better readability
 
 #### General Strategy
 
@@ -66,7 +66,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 
 -   [x] Add picture icon for users
 -   [x] Implement colour changes to border to indicate state of firebase connection
--   [ ] Ensure all added features scale properly for all screen sizes and orientations
+-   [x] Ensure all added features scale properly for all screen sizes and orientations
 -   [x] Round percentages in Weekly Check History (Weekly Jobs column)
 
 ### v0.5.0-alpha
@@ -74,6 +74,10 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 #### Aesthetics
 
 -   [ ] Complete overhaul of user interface for better scaling and looks
+
+#### Bugs
+
+-   [ ] Fix drag & drop not working after adding or removing weekly jobs
 
 #### CSS
 
