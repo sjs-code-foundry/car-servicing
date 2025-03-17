@@ -8,7 +8,7 @@ This is a replacement for my current practice of recording my weekly car checks 
 
 ## Current Version
 
-v0.4.4-alpha
+v0.5.0-alpha
 
 ## Dependencies
 
@@ -20,55 +20,6 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 
 ## Planned Features
 
-### v0.4.4-alpha
-
-#### Aesthetics
-
--   [x] Change styling of modals for neater appearance and better readability
-
-#### General Strategy
-
--   [x] Work out what the minimum viable product will be (this will be version 1.0.0)
-
-#### JS Functions
-
--   [x] Implement Age of Vehicle in Car Stats (new collection in Firestore)
--   [x] Try to catch errors with AppCheck on desktop (open app early on Sunday morning, when you usually need it)
--   [x] Refactor tabHeight const and setModalContainerHeight function (introduce delay to set to height of page after it has loaded)
--   [x] Adjust date calc in Car Stats to use date of newest record
-
-#### Security
-
--   [x] Implement Firestore security rules from Shopping List app to prevent frivolous entries from strangers
-
-#### Settings
-
--   [x] Implement and get data from settings form
--   [x] Firebase code for uploading settings to cloud
--   [x] Settings form defaults
--   [x] On upload button, any different elements are updated separately
--   [x] Limit VIN number to a minimum of 17 characters
--   [x] Create an editable list of weekly checks (make sure only the list is submitted in the form)
--   [x] Ensure weekly check list downloaded from settings updates list in Weekly Car Checks page
--   [x] Implement default tab option in actual app
--   [x] Display licence plate number under car logo
-
-##### Weekly Check List Editing
-
--   [x] Draggable list of Weekly Checks in settings (alter order and content of list)
--   [x] Enable add button for list of Weekly Checks in settings
--   [x] Add Entry Field that displays on clicking add button
--   [x] Refactor Weekly Check list to download from settings (not hardcoded)
--   [x] Fix Weekly Checks form so that it takes the weekly check list from the firebase DB
--   [x] Sort aesthetics of drag & drop list to look like rest of app
-
-#### User Experience
-
--   [x] Add picture icon for users
--   [x] Implement colour changes to border to indicate state of firebase connection
--   [x] Ensure all added features scale properly for all screen sizes and orientations
--   [x] Round percentages in Weekly Check History (Weekly Jobs column)
-
 ### v0.5.0-alpha
 
 #### Aesthetics
@@ -78,6 +29,7 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 #### Bugs
 
 -   [ ] Fix drag & drop not working after adding or removing weekly jobs
+-   [ ] Unravel index.js code from Test VIN Decode button so it can be safely deleted
 
 #### CSS
 
@@ -100,6 +52,8 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 -   [ ] Double click copies values from Weekly Check record table
 -   [ ] Implement sorting functions for service jobs and weekly checks
 -   [ ] Implement decision modal for deleting weekly checks
+-   [ ] Add modal to inform user that settings have successfully been saved
+-   [ ] Implement decision modal (deleting weekly check history records, for example)
 
 ## Minimum Viable Product
 
