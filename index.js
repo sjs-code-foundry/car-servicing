@@ -32,7 +32,7 @@ import {
     where,
     orderBy,
     doc,
-    updateDoc, // Keep for editing entries later on
+    updateDoc,
     deleteDoc,
 } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js";
 
@@ -1177,18 +1177,33 @@ function carStatsCalcs(recordList) {
 function getTotalTimeElapsed(recordList) {
     // Get oldest date value and subtract from today's date
 
-    const recordEnd = recordList.length - 1;
-    const dateOldest = recordList[recordEnd].date;
+    let dateToday;
+    let time;
 
-    const dateToday = recordList[0].date;
+    // Temporary fix for no when no weekly check records are present
+    if (recordList.length === 0) {
+        dateToday = new Date();
 
-    const time = new TimeElapsed(dateOldest, dateToday);
+        time = new TimeElapsed(dateToday, dateToday);
+    } else {
+        const recordEnd = recordList.length - 1;
+        const dateOldest = recordList[recordEnd].date;
+
+        dateToday = recordList[0].date;
+
+        time = new TimeElapsed(dateOldest, dateToday);
+    }
 
     return time;
 }
 
 function getTotalMilesTravelled(recordList) {
     // Subtract oldest mile value from latest one
+
+    // Temporary fix for no when no weekly check records are present
+    if (recordList.length === 0) {
+        return 0;
+    }
 
     const recordEnd = recordList.length - 1;
     const milesOldest = recordList[recordEnd].miles;
@@ -1203,9 +1218,19 @@ function getAverageMilesPerWeek(miles, weeks) {
 }
 
 function getTimeOfOwnership(purchaseDate, recordList) {
-    const dateToday = recordList[0].date;
+    let dateToday;
+    let time;
 
-    const time = new TimeElapsed(purchaseDate, dateToday);
+    // Temporary fix for no when no weekly check records are present
+    if (recordList.length === 0) {
+        dateToday = new Date();
+
+        time = new TimeElapsed(dateToday, dateToday);
+    } else {
+        dateToday = recordList[0].date;
+
+        time = new TimeElapsed(purchaseDate, dateToday);
+    }
 
     return time;
 }
