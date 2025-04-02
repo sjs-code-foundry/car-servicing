@@ -4,48 +4,49 @@
 
 ### Inputs
 
--   Cake
+-   [Blank]
 
 ### Outputs
 
--   Cake
+-   [Blank]
 
 ## Job/Check Lists
 
 ### Inputs
 
--   Cake
+-   [Blank]
 
 ### Outputs
 
--   Cake
+-   [Blank]
 
 ## Weekly Job Record Lists
 
 ### Inputs
 
--   Cake
+-   [Blank]
 
 ### Outputs
 
--   Cake
+-   [Blank]
 
 ## Car Stats
 
 ### Inputs
 
--   Cake
+-   recordList
+-   localSettingsObj
 
 ### Outputs
 
--   Cake
+-   statsArea div element
 
 ## Settings
 
 ### Inputs
 
--   Cake
+-   [Blank]
 
 ### Outputs
 
--   Cake
+-   [Blank]

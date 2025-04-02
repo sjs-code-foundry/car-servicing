@@ -1,4 +1,8 @@
-/* === Imports === */
+/* ============
+    Imports
+   ============ */
+
+/* === Firebase === */
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
 import {
@@ -40,6 +44,9 @@ import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/10.3
 import { connectAuthEmulator } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js";
 import { connectFirestoreEmulator } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js";
 
+/* === Tab Functions === */
+
+import { carStatsCalcs } from "/js/carStats.js";
 import { vinDecode } from "/js/vinDecode.js";
 
 /* === Firebase - Initialize Firebase === */
@@ -352,7 +359,9 @@ function fetchWeeklyChecksInRealTimeFromDBs(query, user) {
                 renderWeeklyCheck(recordList[r]);
             }
 
-            carStatsCalcs(recordList);
+            document
+                .getElementById("stats-area")
+                .replaceWith(carStatsCalcs(recordList, localSettingsObj));
 
             weeklyJobList(weeklyJobs);
             renderWeeklyCheckJobListInSettings(weeklyJobs);
@@ -575,51 +584,6 @@ function RecordListing(wholeDoc) {
     this.miles = docData.miles;
     this.milesTravelled = 0;
     this.weeklies = docData.weeklies;
-}
-
-function TimeElapsed(then, now) {
-    this.timeThen = moment(then);
-    this.timeNow = moment(now);
-
-    this.durMs = this.timeNow.diff(this.timeThen);
-    this.durDays = this.timeNow.diff(this.timeThen, "days", true);
-    this.durWeeks = this.timeNow.diff(this.timeThen, "weeks", true);
-    this.durMonths = this.timeNow.diff(this.timeThen, "months", true);
-    this.durYears = this.timeNow.diff(this.timeThen, "years", true);
-
-    this.durHumanTerms = new TimeHumanTerms(this);
-
-    // Moment.js homepage:  https://momentjs.com/
-}
-
-function TimeHumanTerms(elapsedObj) {
-    this.durYears = Math.floor(elapsedObj.durYears);
-
-    const dateToMonths = elapsedObj.timeThen.add(this.durYears, "years");
-    this.durMonths = elapsedObj.timeNow.diff(dateToMonths, "months");
-
-    const dateToDays = dateToMonths.add(this.durMonths, "months");
-    this.durDays = elapsedObj.timeNow.diff(dateToDays, "days");
-
-    if (this.durMonths === 0 && this.durYears === 0) {
-        this.report = `${this.durDays} days`;
-    } else if (this.durYears === 0) {
-        this.report = `${this.durMonths} months and ${this.durDays} days`;
-    } else {
-        this.report = `${this.durYears} years, ${this.durMonths} months and ${this.durDays} days`;
-    }
-}
-
-function CarStatTableRow(heading, data, roundBool) {
-    this.heading = heading;
-
-    const dataType = typeof data;
-
-    if (dataType === "number" && roundBool === true) {
-        this.data = Math.round(data);
-    } else {
-        this.data = data;
-    }
 }
 
 // Get settings from settings form:
@@ -1143,6 +1107,8 @@ function recordListClear(recordList) {
 
 /* ==  Car Stats Functions == */
 
+/*
+
 function carStatsCalcs(recordList) {
     const timeElapsed = getTotalTimeElapsed(recordList);
     const milesTravelled = getTotalMilesTravelled(recordList);
@@ -1255,6 +1221,8 @@ function renderCarStatRowEl(type, content) {
 
     return newEl;
 }
+
+*/
 
 /* ==  Settings Functions == */
 
