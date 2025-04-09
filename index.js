@@ -47,6 +47,11 @@ import { connectFirestoreEmulator } from "https://www.gstatic.com/firebasejs/10.
 /* === Tab Functions === */
 
 import { carStatsCalcs } from "/js/carStats.js";
+import {
+    SettingsFormObj,
+    fetchSettingsFromDB,
+    renderWeeklyCheckJobListInSettings,
+} from "/js/settings.js";
 import { vinDecode } from "/js/vinDecode.js";
 
 /* === Firebase - Initialize Firebase === */
@@ -289,7 +294,16 @@ onAuthStateChanged(auth, (user) => {
         tabBtnAccount.style.display = "none";
         tabBtnLogout.style.display = "block";
 
-        fetchSettingsFromDB(user);
+        localSettingsObj = fetchSettingsFromDB(
+            user,
+            database,
+            settingsCollectionName,
+            localSettingsObj,
+            userAvatarEl,
+            userAvatarPlateEl,
+            weeklyJobs,
+            modalAlertEl
+        );
 
         fetchServiceJobs(user);
         fetchWeeklyChecks(user);
@@ -364,7 +378,7 @@ function fetchWeeklyChecksInRealTimeFromDBs(query, user) {
                 .replaceWith(carStatsCalcs(recordList, localSettingsObj));
 
             weeklyJobList(weeklyJobs);
-            renderWeeklyCheckJobListInSettings(weeklyJobs);
+            renderWeeklyCheckJobListInSettings(settingWcJobList, weeklyJobs);
         });
 
         userAvatarEl.style.borderColor = "green";
@@ -551,7 +565,7 @@ settingBtnEl.addEventListener("click", (e) => {
 
     const settingData = new FormData(settingFormEl);
 
-    const settings = new SettingsObj(settingData);
+    const settings = new SettingsFormObj(settingData, weeklyJobs);
 
     checkUpdateSettings(settings, auth.currentUser);
 });
@@ -586,8 +600,10 @@ function RecordListing(wholeDoc) {
     this.weeklies = docData.weeklies;
 }
 
+/*
+
 // Get settings from settings form:
-function SettingsObj(settingData) {
+function SettingsFormObj(settingData) {
     this.defaultTab = settingData.get("default-tab");
     this.wcDateTime = [
         settingData.get("setting-wc-day"),
@@ -612,7 +628,7 @@ function SettingsObj(settingData) {
 }
 
 // Locally-stored settings object for calculations:
-function LocalSettingsObj(wholeDoc) {
+export function LocalSettingsObj(wholeDoc) {
     const docData = wholeDoc.data();
 
     this.defaultTab = docData.defaultTab;
@@ -623,6 +639,8 @@ function LocalSettingsObj(wholeDoc) {
     this.vehiclePurchaseDate = docData.vehiclePurchaseDate;
     this.weeklyCheckArr = docData.weeklyCheckArr;
 }
+
+*/
 
 /* ===  Function Declarations === */
 
@@ -642,13 +660,13 @@ function userAvatarSwitch(user) {
     }
 }
 
-function userLicencePlateFormat(plate) {
+export function userLicencePlateFormat(plate) {
     return plate.slice(0, 4) + " " + plate.slice(4);
 }
 
 /* ==  Tab Functions == */
 
-function tabSwitch(tab) {
+export function tabSwitch(tab) {
     const tabs = document.getElementsByClassName("tabcontent");
 
     allTabClose(tabs);
@@ -718,7 +736,7 @@ function modalCloseBtnTest(e, targetEl) {
 
 // }
 
-function modalAlert(targetModal, modalHeading, modalBody) {
+export function modalAlert(targetModal, modalHeading, modalBody) {
     modalDisplay(targetModal);
 
     document.getElementById("modal-alert-heading").textContent = modalHeading;
@@ -881,7 +899,7 @@ async function addWeeklyCheckToDB(checkDate, checkMiles, checkWeeklies, user) {
     }
 }
 
-function weeklyJobList(weeklyJobs) {
+export function weeklyJobList(weeklyJobs) {
     const weekliesListEl = document.getElementById("weeklies");
 
     weekliesListEl.innerHTML = "";
@@ -1105,145 +1123,11 @@ function recordListClear(recordList) {
     return recordList;
 }
 
-/* ==  Car Stats Functions == */
+/* ==  Settings Functions == */
 
 /*
 
-function carStatsCalcs(recordList) {
-    const timeElapsed = getTotalTimeElapsed(recordList);
-    const milesTravelled = getTotalMilesTravelled(recordList);
-    const milesPerWeek = getAverageMilesPerWeek(
-        milesTravelled,
-        timeElapsed.durWeeks
-    );
-    const timeOfOwnership = getTimeOfOwnership(
-        localSettingsObj.vehiclePurchaseDate,
-        recordList
-    );
-
-    const table = [
-        new CarStatTableRow(
-            "Time since first entry",
-            timeElapsed.durHumanTerms.report,
-            false
-        ),
-        new CarStatTableRow("Total miles travelled", milesTravelled, true),
-        new CarStatTableRow("Average miles per week", milesPerWeek, true),
-        new CarStatTableRow("Expected Yearly Miles", milesPerWeek * 52, true),
-        new CarStatTableRow(
-            "Duration of Vehicle Ownership",
-            timeOfOwnership.durHumanTerms.report,
-            false
-        ),
-    ];
-
-    renderCarStatTableContents(table);
-}
-
-function getTotalTimeElapsed(recordList) {
-    // Get oldest date value and subtract from today's date
-
-    let dateToday;
-    let time;
-
-    // Temporary fix for no when no weekly check records are present
-    if (recordList.length === 0) {
-        dateToday = new Date();
-
-        time = new TimeElapsed(dateToday, dateToday);
-    } else {
-        const recordEnd = recordList.length - 1;
-        const dateOldest = recordList[recordEnd].date;
-
-        dateToday = recordList[0].date;
-
-        time = new TimeElapsed(dateOldest, dateToday);
-    }
-
-    return time;
-}
-
-function getTotalMilesTravelled(recordList) {
-    // Subtract oldest mile value from latest one
-
-    // Temporary fix for no when no weekly check records are present
-    if (recordList.length === 0) {
-        return 0;
-    }
-
-    const recordEnd = recordList.length - 1;
-    const milesOldest = recordList[recordEnd].miles;
-
-    const milesNewest = recordList[0].miles;
-
-    return milesNewest - milesOldest;
-}
-
-function getAverageMilesPerWeek(miles, weeks) {
-    return miles / weeks;
-}
-
-function getTimeOfOwnership(purchaseDate, recordList) {
-    let dateToday;
-    let time;
-
-    // Temporary fix for no when no weekly check records are present
-    if (recordList.length === 0) {
-        dateToday = new Date();
-
-        time = new TimeElapsed(dateToday, dateToday);
-    } else {
-        dateToday = recordList[0].date;
-
-        time = new TimeElapsed(purchaseDate, dateToday);
-    }
-
-    return time;
-}
-
-function renderCarStatTableContents(tableArr) {
-    const statsArea = document.getElementById("stats-area");
-
-    statsArea.innerHTML = "";
-
-    for (let row in tableArr) {
-        statsArea.append(renderCarStatRowEl("h4", tableArr[row].heading));
-        statsArea.append(renderCarStatRowEl("p", tableArr[row].data));
-    }
-}
-
-function renderCarStatRowEl(type, content) {
-    let newEl = document.createElement(type);
-
-    newEl.setAttribute("class", "stats-cell");
-
-    newEl.textContent = content;
-
-    return newEl;
-}
-
-*/
-
-/* ==  Settings Functions == */
-
 function renderWeeklyCheckJobListInSettings(weeklyJobs) {
-    /*
-    For each list item in weeklyJobs:
-        Containing Div
-            Drag & Drop Handle
-
-            List Item Name
-
-            Delete Button
-    
-    Add Addition button which opens the following:
-        Text Input for new job
-
-        Add Button
-
-        Cancel Button
-    */
-
     new Sortable(settingWcJobList, {
         handle: ".drag-handle",
         animation: 500,
@@ -1284,6 +1168,10 @@ function renderWeeklyCheckJobListInSettings(weeklyJobs) {
     }
 }
 
+*/
+
+// Keep this function!
+
 function getWeeklyCheckListFromSettings(listEl) {
     let newWeeklyJobs = [];
 
@@ -1297,6 +1185,10 @@ function getWeeklyCheckListFromSettings(listEl) {
 
     return newWeeklyJobs;
 }
+
+// Keep the function above!
+
+/*
 
 function settingsMinLengthCheck(inputName, input, min) {
     if (input.length && input.length < min) {
@@ -1371,7 +1263,7 @@ async function fetchSettingsFromDB(user) {
             // Run checkUpdateSettings to create a blank settings file
             const settingData = new FormData(settingFormEl);
 
-            const settings = new SettingsObj(settingData);
+            const settings = new SettingsFormObj(settingData);
 
             checkUpdateSettings(settings, user);
         }
@@ -1422,7 +1314,7 @@ function setTextFieldOption(fieldOptionId, docData) {
     }
 }
 
-async function checkUpdateSettings(settingsObj, user) {
+async function checkUpdateSettings(SettingsFormObj, user) {
     const settingsRef = collection(database, settingsCollectionName);
 
     const q = query(settingsRef, where("uid", "==", user.uid));
@@ -1432,42 +1324,42 @@ async function checkUpdateSettings(settingsObj, user) {
     if (!settingSnapshot.empty) {
         // Find the appropriate settings file and update
         settingSnapshot.forEach((doc) => {
-            updateSettingsInDB(doc, settingsObj);
+            updateSettingsInDB(doc, SettingsFormObj);
             weeklyJobList(weeklyJobs);
         });
     } else {
         // Create new settings file if one does not exist
-        addSettingsToDB(settingsObj, user);
+        addSettingsToDB(SettingsFormObj, user);
     }
 }
 
-async function updateSettingsInDB(wholeDoc, settingsObj) {
+async function updateSettingsInDB(wholeDoc, SettingsFormObj) {
     const docRef = doc(database, settingsCollectionName, wholeDoc.id);
 
     await updateDoc(docRef, {
-        defaultTab: settingsObj.defaultTab,
-        wcDateTime: settingsObj.wcDateTime,
-        sjNotifTime: settingsObj.sjNotifTime,
-        licencePlate: settingsObj.licencePlate,
-        vinNumber: settingsObj.vinNumber,
-        vehiclePurchaseDate: settingsObj.vehiclePurchaseDate,
-        weeklyCheckArr: settingsObj.weeklyCheckArr,
+        defaultTab: SettingsFormObj.defaultTab,
+        wcDateTime: SettingsFormObj.wcDateTime,
+        sjNotifTime: SettingsFormObj.sjNotifTime,
+        licencePlate: SettingsFormObj.licencePlate,
+        vinNumber: SettingsFormObj.vinNumber,
+        vehiclePurchaseDate: SettingsFormObj.vehiclePurchaseDate,
+        weeklyCheckArr: SettingsFormObj.weeklyCheckArr,
         lastUpdated: serverTimestamp(),
     });
 }
 
-async function addSettingsToDB(settingsObj, user) {
+async function addSettingsToDB(SettingsFormObj, user) {
     try {
         const docRef = await addDoc(
             collection(database, settingsCollectionName),
             {
-                defaultTab: settingsObj.defaultTab,
-                wcDateTime: settingsObj.wcDateTime,
-                sjNotifTime: settingsObj.sjNotifTime,
-                licencePlate: settingsObj.licencePlate,
-                vinNumber: settingsObj.vinNumber,
-                vehiclePurchaseDate: settingsObj.vehiclePurchaseDate,
-                weeklyCheckArr: settingsObj.weeklyCheckArr,
+                defaultTab: SettingsFormObj.defaultTab,
+                wcDateTime: SettingsFormObj.wcDateTime,
+                sjNotifTime: SettingsFormObj.sjNotifTime,
+                licencePlate: SettingsFormObj.licencePlate,
+                vinNumber: SettingsFormObj.vinNumber,
+                vehiclePurchaseDate: SettingsFormObj.vehiclePurchaseDate,
+                weeklyCheckArr: SettingsFormObj.weeklyCheckArr,
                 uid: user.uid,
                 createdAt: serverTimestamp(),
                 lastUpdated: serverTimestamp(),
@@ -1481,3 +1373,5 @@ async function addSettingsToDB(settingsObj, user) {
         );
     }
 }
+
+*/

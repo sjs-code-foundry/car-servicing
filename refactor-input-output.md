@@ -45,8 +45,13 @@
 
 ### Inputs
 
--   [Blank]
+-   database firestore DB
+-   user
+-   settingsCollectionName
+-   settingsObj object
+-   weeklyJobs list
+-   settingWcJobList Element
 
 ### Outputs
 
--   [Blank]
+-   settingsObj object
