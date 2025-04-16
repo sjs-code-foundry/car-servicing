@@ -54,7 +54,11 @@ import {
 } from "/js/settings.js";
 import { vinDecode } from "/js/vinDecode.js";
 
-/* === Firebase - Initialize Firebase === */
+/* ============
+    Firestore
+   ============ */
+
+/* === Initialize Firestore === */
 
 const isOffline = false;
 
@@ -109,13 +113,15 @@ function getAppCheck() {
     }
 }
 
-/* == Firebase - Database Location Refs == */
+/* === Database Location Refs === */
 
 const serviceJobsCollectionName = "serviceJobs";
 const weeklyChecksCollectionName = "weeklyChecks";
 const settingsCollectionName = "settings";
 
-/* === DOM Elements === */
+/* ================
+    DOM Elements
+   ================ */
 
 const userAvatarEl = document.getElementById("user-avatar");
 const userAvatarPlateEl = document.getElementById("user-avatar-plate");
@@ -153,39 +159,9 @@ const accountFormEl = document.getElementById("modal-account-form");
 const signinBtnGoogle = document.getElementById("signin-btn-google");
 const createAccountBtn = document.getElementById("create-account-btn");
 
-/* === Firebase - Authentication === */
+/* === Firestore - Authentication === */
 
 let createAccountMode = false;
-
-tabBtnLogout.addEventListener("click", function () {
-    authSignOut();
-});
-
-signinBtnGoogle.addEventListener("click", function () {
-    authSignInWithGoogle();
-
-    modalClose(modalAccountEl);
-});
-
-accountFormEl.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    if (createAccountMode) {
-        authCreateAccountWithEmail();
-    } else {
-        authSignInWithEmail();
-    }
-
-    accountFormEl.reset();
-
-    modalClose(modalAccountEl);
-});
-
-createAccountBtn.addEventListener("click", function () {
-    console.log(createAccountMode);
-
-    accountBtnSwitch(createAccountMode);
-});
 
 function accountBtnSwitch(createAccountMode) {
     flipAccountMode();
@@ -435,7 +411,43 @@ function clearWeeklyChecksOnLogout() {
     renderWeeklyCheckHeaders();
 }
 
-/* === Event Listeners === */
+/* ====================
+    Event Listeners
+   ==================== */
+
+/* === Accounts/Firestore === */
+
+tabBtnLogout.addEventListener("click", function () {
+    authSignOut();
+});
+
+signinBtnGoogle.addEventListener("click", function () {
+    authSignInWithGoogle();
+
+    modalClose(modalAccountEl);
+});
+
+accountFormEl.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    if (createAccountMode) {
+        authCreateAccountWithEmail();
+    } else {
+        authSignInWithEmail();
+    }
+
+    accountFormEl.reset();
+
+    modalClose(modalAccountEl);
+});
+
+createAccountBtn.addEventListener("click", function () {
+    console.log(createAccountMode);
+
+    accountBtnSwitch(createAccountMode);
+});
+
+/* === Page Functions === */
 
 document.addEventListener("click", function (e) {
     if (!e.target.closest(".header") || e.target.nodeName === "BUTTON") {
@@ -476,6 +488,8 @@ tabMenuEl.addEventListener("click", function (e) {
     }
 });
 
+/* === Servicing Jobs Tab === */
+
 serviceJobEl.addEventListener("input", function () {
     if (serviceJobEl.value.length) {
         lockServiceJobButton(false);
@@ -504,6 +518,8 @@ serviceBtnEl.addEventListener("click", function () {
     lockServiceJobButton(true);
 });
 
+/* === Weekly Checks Entry Form === */
+
 weeklyCheckFormEl.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -525,6 +541,8 @@ weeklyCheckFormEl.addEventListener("submit", function (e) {
     weeklyJobBtnReset();
 });
 
+/* === Weekly Checks History === */
+
 historyEl.addEventListener("click", (e) => {
     if (e.target.nodeName === "BUTTON") {
         let recordToClear = `${e.target.id}`;
@@ -534,6 +552,8 @@ historyEl.addEventListener("click", (e) => {
         return;
     }
 });
+
+/* === Settings === */
 
 vinDecodeTestBtnEl.addEventListener("click", (e) => {
     e.preventDefault();
@@ -570,6 +590,10 @@ settingBtnEl.addEventListener("click", (e) => {
     checkUpdateSettings(settings, auth.currentUser);
 });
 
+/* ====================
+    Variables
+   ==================== */
+
 /* === Weekly Jobs List === */
 
 let weeklyJobs = [];
@@ -582,7 +606,9 @@ let localSettingsObj;
 // let deleteVerdict = false // Deletion of Weekly Checks does not go ahead by default
 lockServiceJobButton(true);
 
-/* ===  Object Constructors === */
+/* ========================
+    Object Constructors
+   ======================== */
 
 function WeeklyArray() {
     this.date = recordKeyPlaceholder(dateFieldEl, "0000-00-00");
@@ -600,51 +626,11 @@ function RecordListing(wholeDoc) {
     this.weeklies = docData.weeklies;
 }
 
-/*
+/* ========================
+    Function Declarations
+   ======================== */
 
-// Get settings from settings form:
-function SettingsFormObj(settingData) {
-    this.defaultTab = settingData.get("default-tab");
-    this.wcDateTime = [
-        settingData.get("setting-wc-day"),
-        settingData.get("setting-wc-time"),
-    ];
-    this.sjNotifTime = [
-        settingData.get("setting-sj-notif-time"),
-        settingData.get("setting-sj-notif-period"),
-    ];
-    this.licencePlate = settingsMinLengthCheck(
-        "Licence Plate",
-        settingData.get("setting-licence-plate"),
-        7
-    );
-    this.vinNumber = settingsMinLengthCheck(
-        "VIN Number",
-        settingData.get("setting-vin"),
-        17
-    );
-    this.vehiclePurchaseDate = settingData.get("setting-vehicle-purchase-date");
-    this.weeklyCheckArr = weeklyJobs;
-}
-
-// Locally-stored settings object for calculations:
-export function LocalSettingsObj(wholeDoc) {
-    const docData = wholeDoc.data();
-
-    this.defaultTab = docData.defaultTab;
-    this.wcDateTime = [docData.wcDateTime[0], docData.wcDateTime[1]];
-    this.sjNotifTime = [docData.sjNotifTime[0], docData.sjNotifTime[1]];
-    this.licencePlate = docData.licencePlate;
-    this.vinNumber = docData.vinNumber;
-    this.vehiclePurchaseDate = docData.vehiclePurchaseDate;
-    this.weeklyCheckArr = docData.weeklyCheckArr;
-}
-
-*/
-
-/* ===  Function Declarations === */
-
-/* ==  Header Functions == */
+/* ===  Header Functions === */
 
 function userAvatarSwitch(user) {
     if (user) {
@@ -664,7 +650,7 @@ export function userLicencePlateFormat(plate) {
     return plate.slice(0, 4) + " " + plate.slice(4);
 }
 
-/* ==  Tab Functions == */
+/* ===  Tab Functions === */
 
 export function tabSwitch(tab) {
     const tabs = document.getElementsByClassName("tabcontent");
@@ -680,7 +666,7 @@ function allTabClose(tabs) {
     }
 }
 
-/* ==  Modal Functions == */
+/* ===  Modal Functions === */
 
 function modalDisplay(targetModal) {
     document.getElementById("modal-container").style.display = "block";
@@ -783,7 +769,7 @@ function setModalContainerHeight(tabHeight) {
     }
 }
 
-/* ==  Job/Check List Functions == */
+/* ===  Job/Check List Functions === */
 
 function renderServiceJob(wholeDoc) {
     const serviceJobData = wholeDoc.data();
@@ -1032,7 +1018,7 @@ async function clearRecord(collection, askIfDelete, docID) {
     }
 }
 
-/* ==  Weekly Job Button Functions == */
+/* ===  Weekly Job Button Functions === */
 
 function weeklyJobBtnSwitch(jobID) {
     if (weeklyJobsStatus[`${jobID}`] === false) {
@@ -1060,7 +1046,7 @@ function weeklyJobBtnReset() {
     }
 }
 
-/* ==  Weekly Job Record List Functions == */
+/* ===  Weekly Job Record List Functions === */
 
 function recordListCalcs(recordList) {
     recordListCalculateMiles(recordList);
@@ -1123,54 +1109,7 @@ function recordListClear(recordList) {
     return recordList;
 }
 
-/* ==  Settings Functions == */
-
-/*
-
-function renderWeeklyCheckJobListInSettings(weeklyJobs) {
-    new Sortable(settingWcJobList, {
-        handle: ".drag-handle",
-        animation: 500,
-    });
-
-    settingWcJobList.innerHTML = "";
-
-    for (let job in weeklyJobs) {
-        let newEl = document.createElement("li");
-        newEl.setAttribute("data-list-jobname", `${weeklyJobs[job]}`);
-
-        let divEl = document.createElement("div");
-        divEl.setAttribute("class", "setting-wc-job-item");
-
-        let dragHandleEl = document.createElement("div");
-        dragHandleEl.setAttribute("class", "drag-handle");
-        // Implement drag handle from this:  https://jsfiddle.net/a6tgy9so/1/
-        divEl.append(dragHandleEl);
-
-        let weeklyJobNameEl = document.createElement("p");
-        weeklyJobNameEl.textContent = weeklyJobs[job];
-        divEl.append(weeklyJobNameEl);
-
-        let deleteButtonEl = document.createElement("button");
-        deleteButtonEl.textContent = "X";
-        deleteButtonEl.setAttribute("class", "setting-wc-job-list-delete");
-        deleteButtonEl.addEventListener("click", function (e) {
-            e.preventDefault();
-
-            weeklyJobs.splice(job, 1);
-
-            renderWeeklyCheckJobListInSettings(weeklyJobs);
-        });
-        divEl.append(deleteButtonEl);
-
-        newEl.append(divEl);
-        settingWcJobList.append(newEl);
-    }
-}
-
-*/
-
-// Keep this function!
+/* ===  Settings Functions === */
 
 function getWeeklyCheckListFromSettings(listEl) {
     let newWeeklyJobs = [];
@@ -1185,193 +1124,3 @@ function getWeeklyCheckListFromSettings(listEl) {
 
     return newWeeklyJobs;
 }
-
-// Keep the function above!
-
-/*
-
-function settingsMinLengthCheck(inputName, input, min) {
-    if (input.length && input.length < min) {
-        modalAlert(
-            modalAlertEl,
-            "Setting input too short!",
-            `The minimum characters for ${inputName} is ${min}, try again.`
-        );
-
-        return "";
-    } else {
-        return input;
-    }
-}
-
-async function fetchSettingsFromDB(user) {
-    const settingsRef = collection(database, settingsCollectionName);
-
-    const q = query(settingsRef, where("uid", "==", user.uid));
-
-    const settingSnapshot = await getDocs(q);
-
-    try {
-        if (!settingSnapshot.empty) {
-            // Fetch settings and set settings fields to the contained data
-            settingSnapshot.forEach((doc) => {
-                // Create local settings object
-                localSettingsObj = new LocalSettingsObj(doc);
-
-                // Default Tab
-                setRadioOption(
-                    "default-tab-radio-button",
-                    doc.data().defaultTab
-                );
-                tabSwitch(doc.data().defaultTab);
-
-                // Weekly Check Date/Time
-                setSelectOption("setting-wc-day", doc.data().wcDateTime[0]);
-                setTextFieldOption("setting-wc-time", doc.data().wcDateTime[1]);
-
-                // Service Job Notification Warning Time
-                setTextFieldOption(
-                    "setting-sj-notif-time",
-                    doc.data().sjNotifTime[0]
-                );
-                setSelectOption(
-                    "setting-sj-notif-period",
-                    doc.data().sjNotifTime[1]
-                );
-
-                // Vehicle Licence Plate
-                setTextFieldOption(
-                    "setting-licence-plate",
-                    doc.data().licencePlate
-                );
-                userAvatarPlateEl.textContent = userLicencePlateFormat(
-                    doc.data().licencePlate
-                );
-
-                // VIN Number
-                setTextFieldOption("setting-vin", doc.data().vinNumber);
-
-                // Date of Vehicle Purchase
-                setTextFieldOption(
-                    "setting-vehicle-purchase-date",
-                    doc.data().vehiclePurchaseDate
-                );
-                // Weekly Check Array of Jobs
-                weeklyJobs = doc.data().weeklyCheckArr;
-            });
-        } else {
-            // Run checkUpdateSettings to create a blank settings file
-            const settingData = new FormData(settingFormEl);
-
-            const settings = new SettingsFormObj(settingData);
-
-            checkUpdateSettings(settings, user);
-        }
-
-        userAvatarEl.style.borderColor = "green";
-    } catch (error) {
-        userAvatarEl.style.borderColor = "red";
-
-        modalAlert(
-            modalAlertEl,
-            "Failed to fetch Settings!",
-            `${error.message}`
-        );
-    }
-}
-
-function setRadioOption(radioBtnListId, docData) {
-    const radioTabEls = document.getElementsByClassName(radioBtnListId);
-
-    Array.from(radioTabEls).forEach(function (radio) {
-        radio.checked = false;
-
-        if (radio.value === docData) {
-            radio.checked = true;
-        }
-    });
-}
-
-function setSelectOption(selectId, docData) {
-    const selectEl = document.getElementById(selectId);
-
-    for (let opt of selectEl) {
-        opt.selected = false;
-
-        if (opt.value === docData) {
-            opt.selected = true;
-        }
-    }
-}
-
-function setTextFieldOption(fieldOptionId, docData) {
-    // Also works for number & date fields
-
-    const fieldEl = document.getElementById(fieldOptionId);
-
-    if (fieldEl.value != docData) {
-        fieldEl.value = docData;
-    }
-}
-
-async function checkUpdateSettings(SettingsFormObj, user) {
-    const settingsRef = collection(database, settingsCollectionName);
-
-    const q = query(settingsRef, where("uid", "==", user.uid));
-
-    const settingSnapshot = await getDocs(q);
-
-    if (!settingSnapshot.empty) {
-        // Find the appropriate settings file and update
-        settingSnapshot.forEach((doc) => {
-            updateSettingsInDB(doc, SettingsFormObj);
-            weeklyJobList(weeklyJobs);
-        });
-    } else {
-        // Create new settings file if one does not exist
-        addSettingsToDB(SettingsFormObj, user);
-    }
-}
-
-async function updateSettingsInDB(wholeDoc, SettingsFormObj) {
-    const docRef = doc(database, settingsCollectionName, wholeDoc.id);
-
-    await updateDoc(docRef, {
-        defaultTab: SettingsFormObj.defaultTab,
-        wcDateTime: SettingsFormObj.wcDateTime,
-        sjNotifTime: SettingsFormObj.sjNotifTime,
-        licencePlate: SettingsFormObj.licencePlate,
-        vinNumber: SettingsFormObj.vinNumber,
-        vehiclePurchaseDate: SettingsFormObj.vehiclePurchaseDate,
-        weeklyCheckArr: SettingsFormObj.weeklyCheckArr,
-        lastUpdated: serverTimestamp(),
-    });
-}
-
-async function addSettingsToDB(SettingsFormObj, user) {
-    try {
-        const docRef = await addDoc(
-            collection(database, settingsCollectionName),
-            {
-                defaultTab: SettingsFormObj.defaultTab,
-                wcDateTime: SettingsFormObj.wcDateTime,
-                sjNotifTime: SettingsFormObj.sjNotifTime,
-                licencePlate: SettingsFormObj.licencePlate,
-                vinNumber: SettingsFormObj.vinNumber,
-                vehiclePurchaseDate: SettingsFormObj.vehiclePurchaseDate,
-                weeklyCheckArr: SettingsFormObj.weeklyCheckArr,
-                uid: user.uid,
-                createdAt: serverTimestamp(),
-                lastUpdated: serverTimestamp(),
-            }
-        );
-    } catch (error) {
-        modalAlert(
-            modalAlertEl,
-            "Initializing Settings in DB Failed!",
-            `${error.message}`
-        );
-    }
-}
-
-*/
