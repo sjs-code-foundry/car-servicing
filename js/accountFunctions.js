@@ -18,6 +18,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js";
 
 import {
+    flipAccountMode,
     tabSwitch,
     userLicencePlateFormat,
     weeklyJobList,
@@ -30,38 +31,42 @@ import {
 
 /* === Account Modal/Tab Functions === */
 
-function accountBtnSwitch(
+export function accountBtnSwitch(
     accMode,
     signinBtnGoogleEl,
     tabBtnEl,
     createAccBtnEl
 ) {
-    accMode = flipAccountMode();
+    flipAccountMode();
+    accMode = !accMode; // Local mode flip
+
+    console.log(`accMode: ${accMode}`);
 
     const modalHeader = document.getElementById("modal-account-header");
     const formButton = document.getElementById("modal-account-form-btn");
 
-    let text = "";
+    let flipText = "";
+    let flipBackText = "";
 
     if (accMode) {
-        text = "Sign In";
-
-        formButton.textContent = "Sign In with Email";
-
-        signinBtnGoogleEl.style.display = "inline-block";
-    } else {
-        text = "Create an account";
+        flipText = "Create an account";
+        flipBackText = "Sign in";
 
         formButton.textContent = "Create Account with Email";
 
         signinBtnGoogleEl.style.display = "none";
+    } else {
+        flipText = "Sign In";
+        flipBackText = "Create an account";
+
+        formButton.textContent = "Sign In with Email";
+
+        signinBtnGoogleEl.style.display = "inline-block";
     }
 
-    console.log(`Switched to "${text}" mode.`);
-
-    modalHeader.textContent = text;
-    tabBtnEl.textContent = text;
-    createAccBtnEl.textContent = text;
+    modalHeader.textContent = flipText;
+    tabBtnEl.textContent = flipText;
+    createAccBtnEl.textContent = flipBackText;
 }
 
 function authSignInWithGoogle(auth, provider) {
@@ -125,6 +130,9 @@ function authSignOut(auth) {
 
 /* === Retrieve snapshot from DB === */
 
+// Uncomment when ready to use:
+
+/*
 onAuthStateChanged(auth, (user) => {
     const accountStatusHeader = document.getElementById(
         "account-status-header"
@@ -162,6 +170,8 @@ onAuthStateChanged(auth, (user) => {
         clearWeeklyChecksOnLogout();
     }
 });
+
+*/
 
 function fetchServiceJobsInRealTimeFromDBs(query, user) {
     try {
@@ -281,9 +291,3 @@ function clearWeeklyChecksOnLogout() {
 }
 
 /* === Internal Functions === */
-
-function flipAccountMode(accMode) {
-    accMode = !accMode;
-
-    return accMode;
-}

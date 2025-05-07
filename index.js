@@ -46,7 +46,7 @@ import { connectFirestoreEmulator } from "https://www.gstatic.com/firebasejs/10.
 
 /* === Account Functions === */
 
-// Import functions for login/logout here
+import { accountBtnSwitch } from "/js/accountFunctions.js";
 
 /* === Tab Functions === */
 
@@ -173,7 +173,11 @@ let localSettingsObj;
 // let deleteVerdict = false // Deletion of Weekly Checks does not go ahead by default
 lockServiceJobButton(true);
 
-/* === Firestore === */
+/* ====================
+    Firestore
+   ==================== */
+
+/* === Variables/Constants === */
 
 const serviceJobsCollectionName = "serviceJobs";
 const weeklyChecksCollectionName = "weeklyChecks";
@@ -181,39 +185,41 @@ const settingsCollectionName = "settings";
 
 let createAccountMode = false;
 
-/* === Firestore - Authentication === */
+/* === Functions === */
 
-function accountBtnSwitch(createAccountMode) {
-    flipAccountMode();
+// function accountBtnSwitch(createAccountMode) {
+//     flipAccountMode(createAccountMode);
 
-    const modalHeader = document.getElementById("modal-account-header");
-    const formButton = document.getElementById("modal-account-form-btn");
+//     const modalHeader = document.getElementById("modal-account-header");
+//     const formButton = document.getElementById("modal-account-form-btn");
 
-    let text = "";
+//     let text = "";
 
-    if (createAccountMode) {
-        text = "Sign In";
+//     if (createAccountMode) {
+//         text = "Sign In";
 
-        formButton.textContent = "Sign In with Email";
+//         formButton.textContent = "Sign In with Email";
 
-        signinBtnGoogle.style.display = "inline-block";
-    } else {
-        text = "Create an account";
+//         signinBtnGoogle.style.display = "inline-block";
+//     } else {
+//         text = "Create an account";
 
-        formButton.textContent = "Create Account with Email";
+//         formButton.textContent = "Create Account with Email";
 
-        signinBtnGoogle.style.display = "none";
-    }
+//         signinBtnGoogle.style.display = "none";
+//     }
 
-    console.log(`Switched to "${text}" mode.`);
+//     modalHeader.textContent = text;
+//     tabBtnAccount.textContent = text;
+//     createAccountBtn.textContent = text;
+// }
 
-    modalHeader.textContent = text;
-    tabBtnAccount.textContent = text;
-    createAccountBtn.textContent = text;
-}
-
-function flipAccountMode() {
+export function flipAccountMode() {
     createAccountMode = !createAccountMode;
+
+    console.log(createAccountMode);
+
+    return createAccountMode;
 }
 
 function authSignInWithGoogle() {
@@ -462,9 +468,12 @@ accountFormEl.addEventListener("submit", function (e) {
 });
 
 createAccountBtn.addEventListener("click", function () {
-    console.log(createAccountMode);
-
-    accountBtnSwitch(createAccountMode);
+    accountBtnSwitch(
+        createAccountMode,
+        signinBtnGoogle,
+        tabBtnAccount,
+        createAccountBtn
+    );
 });
 
 /* === Page Functions === */
