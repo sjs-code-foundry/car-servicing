@@ -40,10 +40,9 @@ export function accountBtnSwitch(
     flipAccountMode();
     accMode = !accMode; // Local mode flip
 
-    console.log(`accMode: ${accMode}`);
-
     const modalHeader = document.getElementById("modal-account-header");
     const formButton = document.getElementById("modal-account-form-btn");
+    const switchText = document.getElementById("modal-account-switch-btn-text");
 
     let flipText = "";
     let flipBackText = "";
@@ -52,6 +51,7 @@ export function accountBtnSwitch(
         flipText = "Create an account";
         flipBackText = "Sign in";
 
+        switchText.textContent = "Got an account?";
         formButton.textContent = "Create Account with Email";
 
         signinBtnGoogleEl.style.display = "none";
@@ -59,6 +59,7 @@ export function accountBtnSwitch(
         flipText = "Sign In";
         flipBackText = "Create an account";
 
+        switchText.textContent = "No account?";
         formButton.textContent = "Sign In with Email";
 
         signinBtnGoogleEl.style.display = "inline-block";

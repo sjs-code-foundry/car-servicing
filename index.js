@@ -217,8 +217,6 @@ let createAccountMode = false;
 export function flipAccountMode() {
     createAccountMode = !createAccountMode;
 
-    console.log(createAccountMode);
-
     return createAccountMode;
 }
 
