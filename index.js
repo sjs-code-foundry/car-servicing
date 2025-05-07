@@ -44,6 +44,10 @@ import { connectDatabaseEmulator } from "https://www.gstatic.com/firebasejs/10.3
 import { connectAuthEmulator } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js";
 import { connectFirestoreEmulator } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore.js";
 
+/* === Account Functions === */
+
+// Import functions for login/logout here
+
 /* === Tab Functions === */
 
 import { carStatsCalcs } from "/js/carStats.js";
@@ -113,12 +117,6 @@ function getAppCheck() {
     }
 }
 
-/* === Database Location Refs === */
-
-const serviceJobsCollectionName = "serviceJobs";
-const weeklyChecksCollectionName = "weeklyChecks";
-const settingsCollectionName = "settings";
-
 /* ================
     DOM Elements
    ================ */
@@ -159,9 +157,31 @@ const accountFormEl = document.getElementById("modal-account-form");
 const signinBtnGoogle = document.getElementById("signin-btn-google");
 const createAccountBtn = document.getElementById("create-account-btn");
 
-/* === Firestore - Authentication === */
+/* ========================
+    Variables & Constants
+   ======================== */
+
+/* === Weekly Jobs List === */
+
+let weeklyJobs = [];
+let weeklyJobsStatus = {};
+
+/* === Initial Variables === */
+
+let recordList = [];
+let localSettingsObj;
+// let deleteVerdict = false // Deletion of Weekly Checks does not go ahead by default
+lockServiceJobButton(true);
+
+/* === Firestore === */
+
+const serviceJobsCollectionName = "serviceJobs";
+const weeklyChecksCollectionName = "weeklyChecks";
+const settingsCollectionName = "settings";
 
 let createAccountMode = false;
+
+/* === Firestore - Authentication === */
 
 function accountBtnSwitch(createAccountMode) {
     flipAccountMode();
@@ -589,22 +609,6 @@ settingBtnEl.addEventListener("click", (e) => {
 
     checkUpdateSettings(settings, auth.currentUser);
 });
-
-/* ====================
-    Variables
-   ==================== */
-
-/* === Weekly Jobs List === */
-
-let weeklyJobs = [];
-let weeklyJobsStatus = {};
-
-/* === Initial Variables === */
-
-let recordList = [];
-let localSettingsObj;
-// let deleteVerdict = false // Deletion of Weekly Checks does not go ahead by default
-lockServiceJobButton(true);
 
 /* ========================
     Object Constructors
