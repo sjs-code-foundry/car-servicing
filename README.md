@@ -54,6 +54,8 @@ Visit https://github.com/sjs-code-foundry/car-servicing/releases for an updated 
 -   [ ] Implement decision modal for deleting weekly checks
 -   [ ] Add modal to inform user that settings have successfully been saved
 -   [ ] Implement decision modal (deleting weekly check history records, for example)
+-   [ ] Add indication that settings have updated successfully
+-   [ ] Implement a less intrusive alert for non-error information (pop-up banner on footer, for example)
 
 ## Minimum Viable Product
 
