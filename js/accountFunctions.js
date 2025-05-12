@@ -111,7 +111,7 @@ export function authSignInWithEmail(accountFormEl, auth) {
         });
 }
 
-function authCreateAccountWithEmail(accountFormEl, auth) {
+export function authCreateAccountWithEmail(accountFormEl, auth) {
     const email = accountFormEl.email.value;
     const password = accountFormEl.password.value;
 

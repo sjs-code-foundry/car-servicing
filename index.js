@@ -50,6 +50,7 @@ import {
     accountBtnSwitch,
     authSignInWithGoogle,
     authSignInWithEmail,
+    authCreateAccountWithEmail,
 } from "/js/accountFunctions.js";
 
 /* === Tab Functions === */
@@ -211,26 +212,26 @@ export function flipAccountMode() {
 //         });
 // }
 
-function authCreateAccountWithEmail() {
-    const email = accountFormEl.email.value;
-    const password = accountFormEl.password.value;
+// function authCreateAccountWithEmail() {
+//     const email = accountFormEl.email.value;
+//     const password = accountFormEl.password.value;
 
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            modalAlert(
-                modalAlertEl,
-                "Account Created!",
-                `Account for "${email}" created!`
-            );
-        })
-        .catch((error) => {
-            modalAlert(
-                modalAlertEl,
-                "Create Account Failed!",
-                `${error.message}`
-            );
-        });
-}
+//     createUserWithEmailAndPassword(auth, email, password)
+//         .then((userCredential) => {
+//             modalAlert(
+//                 modalAlertEl,
+//                 "Account Created!",
+//                 `Account for "${email}" created!`
+//             );
+//         })
+//         .catch((error) => {
+//             modalAlert(
+//                 modalAlertEl,
+//                 "Create Account Failed!",
+//                 `${error.message}`
+//             );
+//         });
+// }
 
 function authSignOut() {
     signOut(auth)
@@ -419,7 +420,7 @@ accountFormEl.addEventListener("submit", function (e) {
     e.preventDefault();
 
     if (createAccountMode) {
-        authCreateAccountWithEmail();
+        authCreateAccountWithEmail(accountFormEl, auth);
     } else {
         authSignInWithEmail(accountFormEl, auth);
     }
