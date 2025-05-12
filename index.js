@@ -46,7 +46,10 @@ import { connectFirestoreEmulator } from "https://www.gstatic.com/firebasejs/10.
 
 /* === Account Functions === */
 
-import { accountBtnSwitch } from "/js/accountFunctions.js";
+import {
+    accountBtnSwitch,
+    authSignInWithGoogle,
+} from "/js/accountFunctions.js";
 
 /* === Tab Functions === */
 
@@ -188,51 +191,10 @@ let createAccountMode = false;
 
 /* === Functions === */
 
-// function accountBtnSwitch(createAccountMode) {
-//     flipAccountMode(createAccountMode);
-
-//     const modalHeader = document.getElementById("modal-account-header");
-//     const formButton = document.getElementById("modal-account-form-btn");
-
-//     let text = "";
-
-//     if (createAccountMode) {
-//         text = "Sign In";
-
-//         formButton.textContent = "Sign In with Email";
-
-//         signinBtnGoogle.style.display = "inline-block";
-//     } else {
-//         text = "Create an account";
-
-//         formButton.textContent = "Create Account with Email";
-
-//         signinBtnGoogle.style.display = "none";
-//     }
-
-//     modalHeader.textContent = text;
-//     tabBtnAccount.textContent = text;
-//     createAccountBtn.textContent = text;
-// }
-
 export function flipAccountMode() {
     createAccountMode = !createAccountMode;
 
     return createAccountMode;
-}
-
-function authSignInWithGoogle() {
-    signInWithPopup(auth, provider)
-        .then((result) => {
-            tabSwitch("tab-weekly-checks");
-        })
-        .catch((error) => {
-            modalAlert(
-                modalAlertEl,
-                "Sign In with Google Failed!",
-                `${error.message}`
-            );
-        });
 }
 
 function authSignInWithEmail() {
@@ -447,7 +409,7 @@ tabBtnLogout.addEventListener("click", function () {
 });
 
 signinBtnGoogle.addEventListener("click", function () {
-    authSignInWithGoogle();
+    authSignInWithGoogle(auth, provider);
 
     modalClose(modalAccountEl);
 });

@@ -3,6 +3,16 @@
    ============ */
 
 import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged,
+    GoogleAuthProvider,
+    signInWithPopup,
+} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js";
+
+import {
     getFirestore,
     collection,
     addDoc,
@@ -70,10 +80,10 @@ export function accountBtnSwitch(
     createAccBtnEl.textContent = flipBackText;
 }
 
-function authSignInWithGoogle(auth, provider) {
+export function authSignInWithGoogle(auth, provider) {
     signInWithPopup(auth, provider)
         .then((result) => {
-            tabSwitch("tab-weekly-checks");
+            tabSwitch("tab-weekly-checks"); // Default tab when settings not created
         })
         .catch((error) => {
             modalAlert(
@@ -90,8 +100,7 @@ function authSignInWithEmail(accountFormEl, auth) {
 
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            tabSwitch("tab-weekly-checks");
-            // This should switch to default tab listed in settings!
+            tabSwitch("tab-weekly-checks"); // Default tab when settings not created
         })
         .catch((error) => {
             modalAlert(modalAlertEl, "Sign In Failed!", `${error.message}`);
