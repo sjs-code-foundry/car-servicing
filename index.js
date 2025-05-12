@@ -54,6 +54,7 @@ import { carStatsCalcs } from "/js/carStats.js";
 import {
     SettingsFormObj,
     fetchSettingsFromDB,
+    checkUpdateSettings,
     renderWeeklyCheckJobListInSettings,
 } from "/js/settings.js";
 import { vinDecode } from "/js/vinDecode.js";
@@ -614,7 +615,12 @@ settingBtnEl.addEventListener("click", (e) => {
 
     const settings = new SettingsFormObj(settingData, weeklyJobs);
 
-    checkUpdateSettings(settings, auth.currentUser);
+    checkUpdateSettings(
+        database,
+        settingsCollectionName,
+        settings,
+        auth.currentUser
+    );
 });
 
 /* ========================

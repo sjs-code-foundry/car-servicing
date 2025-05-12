@@ -159,7 +159,13 @@ export async function fetchSettingsFromDB(
     }
 }
 
-async function checkUpdateSettings(SettingsFormObj, user, weeklyJobs) {
+export async function checkUpdateSettings(
+    database,
+    settingsCollectionName,
+    SettingsFormObj,
+    user,
+    weeklyJobs
+) {
     const settingsRef = collection(database, settingsCollectionName);
 
     const q = query(settingsRef, where("uid", "==", user.uid));
@@ -169,53 +175,17 @@ async function checkUpdateSettings(SettingsFormObj, user, weeklyJobs) {
     if (!settingSnapshot.empty) {
         // Find the appropriate settings file and update
         settingSnapshot.forEach((doc) => {
-            updateSettingsInDB(doc, SettingsFormObj);
+            updateSettingsInDB(
+                database,
+                settingsCollectionName,
+                doc,
+                SettingsFormObj
+            );
             weeklyJobList(weeklyJobs);
         });
     } else {
         // Create new settings file if one does not exist
         addSettingsToDB(SettingsFormObj, user);
-    }
-}
-
-async function updateSettingsInDB(wholeDoc, SettingsFormObj) {
-    const docRef = doc(database, settingsCollectionName, wholeDoc.id);
-
-    await updateDoc(docRef, {
-        defaultTab: SettingsFormObj.defaultTab,
-        wcDateTime: SettingsFormObj.wcDateTime,
-        sjNotifTime: SettingsFormObj.sjNotifTime,
-        licencePlate: SettingsFormObj.licencePlate,
-        vinNumber: SettingsFormObj.vinNumber,
-        vehiclePurchaseDate: SettingsFormObj.vehiclePurchaseDate,
-        weeklyCheckArr: SettingsFormObj.weeklyCheckArr,
-        lastUpdated: serverTimestamp(),
-    });
-}
-
-async function addSettingsToDB(SettingsFormObj, user) {
-    try {
-        const docRef = await addDoc(
-            collection(database, settingsCollectionName),
-            {
-                defaultTab: SettingsFormObj.defaultTab,
-                wcDateTime: SettingsFormObj.wcDateTime,
-                sjNotifTime: SettingsFormObj.sjNotifTime,
-                licencePlate: SettingsFormObj.licencePlate,
-                vinNumber: SettingsFormObj.vinNumber,
-                vehiclePurchaseDate: SettingsFormObj.vehiclePurchaseDate,
-                weeklyCheckArr: SettingsFormObj.weeklyCheckArr,
-                uid: user.uid,
-                createdAt: serverTimestamp(),
-                lastUpdated: serverTimestamp(),
-            }
-        );
-    } catch (error) {
-        modalAlert(
-            modalAlertEl,
-            "Initializing Settings in DB Failed!",
-            `${error.message}`
-        );
     }
 }
 
@@ -297,6 +267,52 @@ export function settingsMinLengthCheck(inputName, input, min) {
 }
 
 /* === Internal Functions === */
+
+async function updateSettingsInDB(
+    database,
+    settingsCollectionName,
+    wholeDoc,
+    SettingsFormObj
+) {
+    const docRef = doc(database, settingsCollectionName, wholeDoc.id);
+
+    await updateDoc(docRef, {
+        defaultTab: SettingsFormObj.defaultTab,
+        wcDateTime: SettingsFormObj.wcDateTime,
+        sjNotifTime: SettingsFormObj.sjNotifTime,
+        licencePlate: SettingsFormObj.licencePlate,
+        vinNumber: SettingsFormObj.vinNumber,
+        vehiclePurchaseDate: SettingsFormObj.vehiclePurchaseDate,
+        weeklyCheckArr: SettingsFormObj.weeklyCheckArr,
+        lastUpdated: serverTimestamp(),
+    });
+}
+
+async function addSettingsToDB(SettingsFormObj, user) {
+    try {
+        const docRef = await addDoc(
+            collection(database, settingsCollectionName),
+            {
+                defaultTab: SettingsFormObj.defaultTab,
+                wcDateTime: SettingsFormObj.wcDateTime,
+                sjNotifTime: SettingsFormObj.sjNotifTime,
+                licencePlate: SettingsFormObj.licencePlate,
+                vinNumber: SettingsFormObj.vinNumber,
+                vehiclePurchaseDate: SettingsFormObj.vehiclePurchaseDate,
+                weeklyCheckArr: SettingsFormObj.weeklyCheckArr,
+                uid: user.uid,
+                createdAt: serverTimestamp(),
+                lastUpdated: serverTimestamp(),
+            }
+        );
+    } catch (error) {
+        modalAlert(
+            modalAlertEl,
+            "Initializing Settings in DB Failed!",
+            `${error.message}`
+        );
+    }
+}
 
 function setRadioOption(radioBtnListId, docData) {
     const radioTabEls = document.getElementsByClassName(radioBtnListId);
