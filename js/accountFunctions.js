@@ -132,7 +132,7 @@ export function authCreateAccountWithEmail(accountFormEl, auth) {
         });
 }
 
-function authSignOut(auth) {
+export function authSignOut(auth) {
     signOut(auth)
         .then(() => {
             // Not Needed, tab switched by tabMenuEl Event Listener

@@ -51,6 +51,7 @@ import {
     authSignInWithGoogle,
     authSignInWithEmail,
     authCreateAccountWithEmail,
+    authSignOut,
 } from "/js/accountFunctions.js";
 
 /* === Tab Functions === */
@@ -199,49 +200,15 @@ export function flipAccountMode() {
     return createAccountMode;
 }
 
-// function authSignInWithEmail() {
-//     const email = accountFormEl.email.value;
-//     const password = accountFormEl.password.value;
-
-//     signInWithEmailAndPassword(auth, email, password)
-//         .then((userCredential) => {
-//             tabSwitch("tab-weekly-checks");
+// function authSignOut() {
+//     signOut(auth)
+//         .then(() => {
+//             // Not Needed, tab switched by tabMenuEl Event Listener
 //         })
 //         .catch((error) => {
-//             modalAlert(modalAlertEl, "Sign In Failed!", `${error.message}`);
+//             modalAlert(modalAlertEl, "Sign Out Failed!", `${error.message}`);
 //         });
 // }
-
-// function authCreateAccountWithEmail() {
-//     const email = accountFormEl.email.value;
-//     const password = accountFormEl.password.value;
-
-//     createUserWithEmailAndPassword(auth, email, password)
-//         .then((userCredential) => {
-//             modalAlert(
-//                 modalAlertEl,
-//                 "Account Created!",
-//                 `Account for "${email}" created!`
-//             );
-//         })
-//         .catch((error) => {
-//             modalAlert(
-//                 modalAlertEl,
-//                 "Create Account Failed!",
-//                 `${error.message}`
-//             );
-//         });
-// }
-
-function authSignOut() {
-    signOut(auth)
-        .then(() => {
-            // Not Needed, tab switched by tabMenuEl Event Listener
-        })
-        .catch((error) => {
-            modalAlert(modalAlertEl, "Sign Out Failed!", `${error.message}`);
-        });
-}
 
 /* === Firebase - Retrieve snapshot from DB === */
 
@@ -407,7 +374,7 @@ function clearWeeklyChecksOnLogout() {
 /* === Accounts/Firestore === */
 
 tabBtnLogout.addEventListener("click", function () {
-    authSignOut();
+    authSignOut(auth);
 });
 
 signinBtnGoogle.addEventListener("click", function () {
