@@ -152,7 +152,7 @@ export async function fetchSettingsFromDB(
         userAvatarEl.style.borderColor = "red";
 
         modalAlert(
-            modalAlertEl,
+            document.getElementById("modal-alert"),
             "Failed to fetch Settings!",
             `${error.message}`
         );
@@ -255,7 +255,7 @@ export function renderWeeklyCheckJobListInSettings(
 export function settingsMinLengthCheck(inputName, input, min) {
     if (input.length && input.length < min) {
         modalAlert(
-            modalAlertEl,
+            document.getElementById("modal-alert"),
             "Setting input too short!",
             `The minimum characters for ${inputName} is ${min}, try again.`
         );
@@ -307,7 +307,7 @@ async function addSettingsToDB(SettingsFormObj, user) {
         );
     } catch (error) {
         modalAlert(
-            modalAlertEl,
+            document.getElementById("modal-alert"),
             "Initializing Settings in DB Failed!",
             `${error.message}`
         );

@@ -87,14 +87,14 @@ export function authSignInWithGoogle(auth, provider) {
         })
         .catch((error) => {
             modalAlert(
-                modalAlertEl,
+                document.getElementById("modal-alert"),
                 "Sign In with Google Failed!",
                 `${error.message}`
             );
         });
 }
 
-function authSignInWithEmail(accountFormEl, auth) {
+export function authSignInWithEmail(accountFormEl, auth) {
     const email = accountFormEl.email.value;
     const password = accountFormEl.password.value;
 
@@ -103,7 +103,11 @@ function authSignInWithEmail(accountFormEl, auth) {
             tabSwitch("tab-weekly-checks"); // Default tab when settings not created
         })
         .catch((error) => {
-            modalAlert(modalAlertEl, "Sign In Failed!", `${error.message}`);
+            modalAlert(
+                document.getElementById("modal-alert"),
+                "Sign In Failed!",
+                `${error.message}`
+            );
         });
 }
 
@@ -114,14 +118,14 @@ function authCreateAccountWithEmail(accountFormEl, auth) {
     createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             modalAlert(
-                modalAlertEl,
+                document.getElementById("modal-alert"),
                 "Account Created!",
                 `Account for "${email}" created!`
             );
         })
         .catch((error) => {
             modalAlert(
-                modalAlertEl,
+                document.getElementById("modal-alert"),
                 "Create Account Failed!",
                 `${error.message}`
             );
@@ -134,7 +138,11 @@ function authSignOut(auth) {
             // Not Needed, tab switched by tabMenuEl Event Listener
         })
         .catch((error) => {
-            modalAlert(modalAlertEl, "Sign Out Failed!", `${error.message}`);
+            modalAlert(
+                document.getElementById("modal-alert"),
+                "Sign Out Failed!",
+                `${error.message}`
+            );
         });
 }
 
@@ -165,7 +173,7 @@ onAuthStateChanged(auth, (user) => {
             userAvatarEl,
             userAvatarPlateEl,
             weeklyJobs,
-            modalAlertEl
+            document.getElementById("modal-alert")
         );
 
         fetchServiceJobs(user);
@@ -208,7 +216,7 @@ function fetchServiceJobsInRealTimeFromDBs(query, user) {
         userAvatarEl.style.borderColor = "red";
 
         modalAlert(
-            modalAlertEl,
+            document.getElementById("modal-alert"),
             "Failed to fetch Service Jobs!",
             `${error.message}`
         );
@@ -251,7 +259,7 @@ function fetchWeeklyChecksInRealTimeFromDBs(query, user) {
         userAvatarEl.style.borderColor = "red";
 
         modalAlert(
-            modalAlertEl,
+            document.getElementById("modal-alert"),
             "Failed to fetch Service Jobs!",
             `${error.message}`
         );

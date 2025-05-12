@@ -49,6 +49,7 @@ import { connectFirestoreEmulator } from "https://www.gstatic.com/firebasejs/10.
 import {
     accountBtnSwitch,
     authSignInWithGoogle,
+    authSignInWithEmail,
 } from "/js/accountFunctions.js";
 
 /* === Tab Functions === */
@@ -197,18 +198,18 @@ export function flipAccountMode() {
     return createAccountMode;
 }
 
-function authSignInWithEmail() {
-    const email = accountFormEl.email.value;
-    const password = accountFormEl.password.value;
+// function authSignInWithEmail() {
+//     const email = accountFormEl.email.value;
+//     const password = accountFormEl.password.value;
 
-    signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            tabSwitch("tab-weekly-checks");
-        })
-        .catch((error) => {
-            modalAlert(modalAlertEl, "Sign In Failed!", `${error.message}`);
-        });
-}
+//     signInWithEmailAndPassword(auth, email, password)
+//         .then((userCredential) => {
+//             tabSwitch("tab-weekly-checks");
+//         })
+//         .catch((error) => {
+//             modalAlert(modalAlertEl, "Sign In Failed!", `${error.message}`);
+//         });
+// }
 
 function authCreateAccountWithEmail() {
     const email = accountFormEl.email.value;
@@ -420,7 +421,7 @@ accountFormEl.addEventListener("submit", function (e) {
     if (createAccountMode) {
         authCreateAccountWithEmail();
     } else {
-        authSignInWithEmail();
+        authSignInWithEmail(accountFormEl, auth);
     }
 
     accountFormEl.reset();
